@@ -4,13 +4,15 @@ from django.conf import settings
 import os
 import logging
 
-from .serializers import UserSerializer, UserSerializerWithToken
+from .serializers import ArticleSerializer, UserSerializer, UserSerializerWithToken, OrderSerializer, ProfileSerializer
+from .models import Article, Order, Profile
+from django.contrib.auth.models import User
 from rest_framework import viewsets, mixins, permissions, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from django.contrib.auth.models import User
+from CodeIdeas.utils import parse_articles
 
 index_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'index.html')
 
@@ -25,6 +27,19 @@ def react(request):
     except FileNotFoundError:
         logging.exception('Production build of app not found')
 
+class InsertData(APIView):
+    """
+    Create a new user. It's called 'UserList' because normally we'd have a get
+    method here too, for retrieving a list of all User objects.
+    """
+
+    permission_classes = (permissions.AllowAny,)
+
+    def get(self, request, format=None):
+        parse_articles('devto')
+        parse_articles('medium')
+        return HttpResponse('OK')
+
 @api_view(['GET'])
 def current_user(request):
     """
@@ -32,7 +47,6 @@ def current_user(request):
     """
     
     serializer = UserSerializer(request.user)
-    print(serializer.data)
     return Response(serializer.data)
 
 class UserList(APIView):
@@ -54,3 +68,22 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     http_method_names = ['get', 'put']
+
+class ArticleViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.AllowAny,)
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+    http_method_names = ['get']
+
+class OrderViewSet(viewsets.ModelViewSet):
+    """
+    List all workkers, or create a new worker.
+    """
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+    http_method_names = ['get', 'post', 'put']
+
+class ProfileViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.AllowAny,)
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer

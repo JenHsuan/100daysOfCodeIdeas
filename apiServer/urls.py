@@ -3,17 +3,21 @@ from django.conf.urls import url
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import UserViewSet, current_user, UserList
+from .views import index, react, InsertData, UserViewSet, current_user, UserList, ArticleViewSet, OrderViewSet, UserViewSet, ProfileViewSet
 from rest_framework.routers import DefaultRouter
 from rest_framework_jwt.views import obtain_jwt_token
 
 router = DefaultRouter()
 router.register(r'user', UserViewSet)
+router.register(r'order', OrderViewSet)
+router.register(r'articles', ArticleViewSet)
+router.register(r'profile', ProfileViewSet)
 
 
 urlpatterns = [
-    path("", views.index, name = "index"),
-    path("react", views.react, name="react"),
+    path("", index, name = "index"),
+    path("react", react, name="react"),
+    path("insert", InsertData.as_view(), name="insert"),
     url(r'^api/', include(router.urls)),
     path('token-auth/', obtain_jwt_token, name='token-auth'),
     path('current_user/', current_user, name='current_user'),

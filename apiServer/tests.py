@@ -18,20 +18,22 @@ def create_user(self, url, username, password):
         
 class JwtTests(APITestCase):
 
+    #/users/
     def test_create_member(self):
         resp = create_user(self, url, username, password)
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
         self.assertTrue('token' in resp.data)
-        
+    
+    #/current_user
     def test_current_user(self):
         resp = create_user(self, url, username, password)
         token = resp.data['token']
     
-        #client = APIClient()
         self.client.credentials(HTTP_AUTHORIZATION='JWT ' + token)
         resp = self.client.get(verification_url)
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
 
+    #/token-auth
     def test_get_token(self):
         resp = create_user(self, url, username, password)
         token = resp.data['token']
@@ -40,3 +42,31 @@ class JwtTests(APITestCase):
         token_verify = token_resp.data['token']
         self.assertEqual(token, token_verify)
         self.assertEqual(token_resp.status_code, status.HTTP_200_OK)
+
+    #/api/users
+    def test_get_api_users(self):
+        resp_token = create_user(self, url, username, password)
+        token = resp_token.data['token']
+        
+        self.client.credentials(HTTP_AUTHORIZATION='JWT ' + token)
+        resp1 = self.client.get('/api/user', format='json')
+        self.assertEqual(resp1.status_code, status.HTTP_301_MOVED_PERMANENTLY)
+
+    #/api/profile
+    def test_get_api_profile(self):
+        resp_token = create_user(self, url, username, password)
+        token = resp_token.data['token']
+        
+        self.client.credentials(HTTP_AUTHORIZATION='JWT ' + token)
+        resp1 = self.client.get('/api/profile', format='json')
+        self.assertEqual(resp1.status_code, status.HTTP_301_MOVED_PERMANENTLY)
+
+    #/api/articles
+    def test_get_api_articles(self):
+        resp_token = create_user(self, url, username, password)
+        token = resp_token.data['token']
+        
+        self.client.credentials(HTTP_AUTHORIZATION='JWT ' + token)
+        resp1 = self.client.get('/api/articles', format='json')
+        self.assertEqual(resp1.status_code, status.HTTP_301_MOVED_PERMANENTLY)
+        

@@ -1,11 +1,29 @@
 from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 from django.contrib.auth.models import User
+from .models import Article, Order, Profile
 
+class ArticleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Article
+        fields = '__all__'
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ("reader", "email", "firstname", "lastname")
+
+class OrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = ("id", "reader", "articles", "created_at", "updated_at")
+        
 class UserSerializer(serializers.ModelSerializer):
+    order = OrderSerializer()
+    profile = ProfileSerializer()
     class Meta:
         model = User
-        fields = ('username',)
+        fields = ('id', 'username', 'order', 'profile')
 
 class UserSerializerWithToken(serializers.ModelSerializer):
     token = serializers.SerializerMethodField()
