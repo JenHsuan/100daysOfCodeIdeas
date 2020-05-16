@@ -35,7 +35,10 @@ class JwtTests(APITestCase):
 
     #/token-auth
     def test_get_token(self):
+        resp = create_user(self, url, username, password)
+        
         token_resp = self.client.post(token_url, {'username':'user@foo.com', 'password':'pass'}, format='json')
+        print(token_resp.data['token'])
         self.assertEqual(token_resp.status_code, status.HTTP_200_OK)
 
     #/api/users
