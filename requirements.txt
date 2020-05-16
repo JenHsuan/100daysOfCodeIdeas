@@ -7,3 +7,5 @@ djangorestframework
 djangorestframework-jwt==1.11.0
 django-cors-headers==3.2.1
 django-model-utils
+BeautifulSoup4
+requests
