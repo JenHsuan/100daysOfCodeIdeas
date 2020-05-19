@@ -17,9 +17,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 REACT_APP_DIR = os.path.join(BASE_DIR, 'ideas')
 
-STATICFILES_DIRS = [
-    os.path.join(REACT_APP_DIR, '.next', 'static'),
-]
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -29,7 +26,20 @@ SECRET_KEY = 'p=a%u61g$0x^_bl%1%fb16$k-m92j3y3l7b-36@x4tn80hg26b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1'
+]
+
+CORS_ORIGIN_WHITELIST = [
+    'http://127.0.0.1:3000',
+    'http://localhost:3000'
+]
+
+CORS_ORIGIN_REGEX_WHITELIST = [
+    'http://127.0.0.1:3000',
+    'http://localhost:3000'
+]
 
 JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'CodeIdeas.utils.my_jwt_response_handler'
@@ -66,6 +76,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware', # Note that this needs to be placed above CommonMiddleware
 ]
 
 ROOT_URLCONF = 'CodeIdeas.urls'
@@ -140,7 +151,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/_next/'
+#STATIC_ROOT = os.path.join(REACT_APP_DIR, 'out')
+#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(REACT_APP_DIR, 'out', '_next'),
+]
 
 MEDIA_ROOT = os.path.join(REACT_APP_DIR, 'src/images')
 MEDIA_URL = '/src/images/'
