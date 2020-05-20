@@ -7,7 +7,7 @@ import logging
 from .serializers import ArticleSerializer, UserSerializer, UserSerializerWithToken, OrderSerializer, ProfileSerializer
 from .models import Article, Order, Profile
 from django.contrib.auth.models import User
-from rest_framework import viewsets, mixins, permissions, status
+from rest_framework import viewsets, mixins, permissions, status, generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -81,11 +81,25 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     http_method_names = ['get', 'put']
 
+'''
 class ArticleViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.AllowAny,)
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
     http_method_names = ['get']
+'''
+
+class ArticleByCategoryViewSet(generics.ListAPIView):
+    permission_classes = (permissions.AllowAny,)
+    serializer_class = ArticleSerializer
+    http_method_names = ['get']
+
+    def get_queryset(self):
+        queryset = Article.objects.all()
+        category = self.request.query_params.get('category', None)
+        if category is not None:
+            queryset = queryset.filter(category=category)
+        return queryset
 
 class OrderViewSet(viewsets.ModelViewSet):
     """

@@ -38,7 +38,6 @@ class JwtTests(APITestCase):
         resp = create_user(self, url, username, password)
         
         token_resp = self.client.post(token_url, {'username':'user@foo.com', 'password':'pass'}, format='json')
-        print(token_resp.data['token'])
         self.assertEqual(token_resp.status_code, status.HTTP_200_OK)
 
     #/api/users
@@ -66,5 +65,14 @@ class JwtTests(APITestCase):
         
         self.client.credentials(HTTP_AUTHORIZATION='JWT ' + token)
         resp1 = self.client.get('/api/articles', format='json')
-        self.assertEqual(resp1.status_code, status.HTTP_301_MOVED_PERMANENTLY)
+        self.assertEqual(resp1.status_code, status.HTTP_200_OK)
+
+    #/api/articles?category=0
+    def test_get_api_article(self):
+        resp_token = create_user(self, url, username, password)
+        token = resp_token.data['token']
+        
+        self.client.credentials(HTTP_AUTHORIZATION='JWT ' + token)
+        resp1 = self.client.get('/api/articles?category=0', format='json')
+        self.assertEqual(resp1.status_code, status.HTTP_200_OK)
         

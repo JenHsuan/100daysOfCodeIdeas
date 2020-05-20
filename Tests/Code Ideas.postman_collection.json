@@ -350,6 +350,60 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "get article by category",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "aec5d659-550c-43bf-adac-f0cf0954495f",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					},
+					{
+						"key": "category",
+						"value": "1",
+						"disabled": true
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/articles?category=0",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"articles"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
