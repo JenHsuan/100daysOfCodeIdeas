@@ -1,52 +1,49 @@
-import { Action } from 'redux';
+import {
+    GetArticlesAction,
+    GetFilteredArticlesAction,
+    ClearFilterAction
+} 
+from '../actions/articlesAction'
 import { RootState} from '../store/store'
-import axios from 'axios';
-import { ThunkAction, ThunkDispatch } from 'redux-thunk'
-import { AnyAction } from 'redux';
-import fetch from "isomorphic-fetch";
 //Types
-import { GET_ARTICLES, ArticleType } from '../types'
-
-//Actions
-
-interface GetArticlesAction {
-    readonly type: typeof GET_ARTICLES
-    readonly payload: Array<object>
-}
-
-export interface FetchTasksAction extends Action<'GET_ARTICLES'> {
-    payload: ArticleType[];
-}
-
-export const getArticles = () => async dispatch => {
-        const res = await axios.get('/api/articles/');
-        console.log(res.data)
-        await dispatch({
-            type: GET_ARTICLES, 
-            payload: res.data})
-}
-
+import { GET_ARTICLES, GET_FILTERED_ARTICLES, CLEAR_FILTER, ArticleType } from '../types'
 
 //Selector functions
 export const selectArticlesState = (rootState: RootState) => rootState.articlesReducer.articles;
+export const selectFilteredArticlesState = (rootState: RootState) => rootState.articlesReducer.filteredArticles;
 
 //Initial state
 const initialState = {
     articles: [],
+    filteredArticles: []
 }
 
 //Reducer
 interface ArticlesState {
-    articles: Array<object>;
+    articles: Array<ArticleType>;
+    filteredArticles: Array<ArticleType>;
 }
 
-const articlesReducer = (state: ArticlesState = initialState, action: FetchTasksAction) => {
+const articlesReducer = (state: ArticlesState = initialState, action: GetArticlesAction | GetFilteredArticlesAction | ClearFilterAction) => {
     console.log(action.type)
     switch(action.type) {
         case GET_ARTICLES:
             return {
                 ...state,
                 articles: action.payload
+            }
+        case GET_FILTERED_ARTICLES:
+            return {
+                ...state,
+                filteredArticles: state.articles.filter(article => {
+                    const regex = new RegExp(`${action.payload}`, 'gi');
+                    return article.title.match(regex) || article.subtitle.match(regex);
+                })
+            }
+        case CLEAR_FILTER:
+            return {
+                ...state,
+                filtered: []
             }
         default:
             console.log(123)

@@ -2,6 +2,7 @@ import React, {useEffect, Fragment} from 'react'
 import PropTypes from 'prop-types'
 import { Card, Button} from 'react-bootstrap';
 import '.././css/article.css'
+import '.././css/card.css'
 
 const Article = ({article}) => {
     useEffect(()=> {
@@ -9,19 +10,14 @@ const Article = ({article}) => {
     }, [])
 
     return (
-        <div className="col-md-4 col-xs-4">
-            <Card>
+        <div className="col-md-6 col-xs-6">
+            <Card className="article-card">
                 <Card.Body>
-                    <Card.Title>{article.title}</Card.Title>
+                    <Card.Title className="title">{article.title}</Card.Title>
                     <Card.Img variant="top" src={`${article.image}`} />
-                    <Card.Text>
-                        <div>{article.subtitle}</div>
-                        <div>Category: {article.category}</div>
-                        <div>Author: {article.name}</div>
-                        <div>Date: {article.time}</div>
-                        <div>Read time: {article.readtime}</div>
-                    </Card.Text>
-                    <Button className="article-btn" variant="primary">Check</Button>
+                    <Card.Text className="date">{article.time}</Card.Text>
+                    <Card.Text className="readtime">{article.readtime}</Card.Text>
+                    <Button className="article-btn" variant="primary">View this topic</Button>
                 </Card.Body>
             </Card>
         </div>

@@ -1,0 +1,40 @@
+.title{
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.article-btn {
+    margin-left: 30%;
+}
+
+.subtitle {
+    font-size: 18px;
+    font-weight: 300;
+    margin-bottom: 2%;
+}
+
+.date, .readtime{
+    text-align: center;
+    font-size: 14px;
+    font-weight: 200;
+}
+
+//react transition group
+.remove-btn {
+    margin-right: 0.5rem;
+  }
+  
+  .item-enter {
+    opacity: 0;
+  }
+  .item-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+  }
+  .item-exit {
+    opacity: 1;
+  }
+  .item-exit-active {
+    opacity: 0;
+    transition: opacity 500ms ease-in;
+  }
