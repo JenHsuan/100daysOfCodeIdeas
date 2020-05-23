@@ -14,12 +14,14 @@
 * Next.js
 * ReactJS
 * React hooks
-* TypeScript
 * Redux
+* Redux hooks
+* TypeScript
 * Bootstrap
 * React-Bootstrap
 * concurrently
 * SASS
+* CSS grid
 ### CI
 * Travis-CI
 ### Testing

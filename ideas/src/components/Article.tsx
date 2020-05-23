@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
-import { Card, Button} from 'react-bootstrap';
+import { Card} from 'react-bootstrap';
 import ArticleModal from '../components/ArticleModal';
 import '.././css/article.css'
 import '.././css/card.css'
@@ -27,7 +27,11 @@ const Article = ({article}) => {
                     <img className="article-card-img" src={`${article.image}`} alt={article.title}/>
                     <div className="title">{article.title}</div>
                     <div className="date">{article.name}</div>
-                    <div className="readtime">{article.readtime}</div>
+                    <div className="date">
+                        <span className="date">{article.time}</span>
+                        <span> . </span>
+                        <span className="readtime">{article.readtime}</span>
+                    </div>
                     <button className="article-btn" onClick = {handleShow}>Add to learning plan</button>
                 </Card.Body>
             </Card>

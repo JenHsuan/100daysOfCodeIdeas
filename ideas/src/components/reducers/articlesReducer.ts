@@ -1,12 +1,20 @@
 import {
     GetArticlesAction,
     GetFilteredArticlesAction,
-    ClearFilterAction
+    ClearFilterAction,
+    SetCategoryAction,
+    ClearCategoryAction 
 } 
 from '../actions/articlesAction'
 import { RootState} from '../store/store'
 //Types
-import { GET_ARTICLES, GET_FILTERED_ARTICLES, CLEAR_FILTER, ArticleType } from '../types'
+import { 
+    GET_ARTICLES,
+    GET_FILTERED_ARTICLES,
+    CLEAR_FILTER,
+    SET_CATEGORY,
+    CLEAR_CATEGORY,
+    ArticleType } from '../types'
 
 //Selector functions
 export const selectArticlesState = (rootState: RootState) => rootState.articlesReducer.articles;
@@ -24,7 +32,8 @@ interface ArticlesState {
     filteredArticles: Array<ArticleType>;
 }
 
-const articlesReducer = (state: ArticlesState = initialState, action: GetArticlesAction | GetFilteredArticlesAction | ClearFilterAction) => {
+const articlesReducer = (state: ArticlesState = initialState,
+    action: GetArticlesAction | GetFilteredArticlesAction | ClearFilterAction | SetCategoryAction | ClearCategoryAction) => {
     console.log(action.type)
     switch(action.type) {
         case GET_ARTICLES:
@@ -43,7 +52,20 @@ const articlesReducer = (state: ArticlesState = initialState, action: GetArticle
         case CLEAR_FILTER:
             return {
                 ...state,
-                filtered: []
+                filteredArticles: []
+            }
+        case SET_CATEGORY:
+            console.log(action.payload)
+            return {
+                ...state,
+                filteredArticles: state.articles.filter(article => {
+                    return article.category == action.payload
+                })
+            }
+        case CLEAR_CATEGORY:
+            return {
+                ...state,
+                filteredArticles: []
             }
         default:
             console.log(123)

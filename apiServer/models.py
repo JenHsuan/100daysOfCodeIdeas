@@ -9,7 +9,7 @@ class Article(models.Model):
     image = models.TextField()
     url =models.TextField()
     name = models.CharField(max_length = 64)
-    time = models.CharField(max_length = 64)
+    time = models.DateField()
     readtime = models.CharField(max_length = 64)
     CATEGORY = Choices((0, 'devto', _('devto')), (1, 'medium', _('medium')))
     category = models.IntegerField(choices=CATEGORY, default=CATEGORY.devto)
