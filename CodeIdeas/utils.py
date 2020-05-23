@@ -36,7 +36,7 @@ def parse_articles(type):
         data = getMediumArtcles()
         for article in data:
             try:
-                obj = Article.objects.get(url = article['url'])
+                obj = Article.objects.get(title = article['title'])
                 print('already existed')
             except Article.DoesNotExist:
                 Article.objects.get_or_create(title = article['title'], 

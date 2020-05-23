@@ -29,17 +29,17 @@ const ArticleList = () => {
     }, [filteredArticles])
 
     return (
-        <div className="container menu-container">
+        <div className="container" id="menu-container">
             <div className="row">
             {filteredArticles.length !== 0 ? filteredArticles.map(filteredArticle=>(
                     <TransitionGroup>
-                        <CSSTransition  timeout={500} classNames="item">
-                            <Article key={filteredArticle.id} article = {filteredArticle}/>
+                        <CSSTransition key={filteredArticle.id} timeout={800} classNames="item">
+                            <Article  article = {filteredArticle}/>
                         </CSSTransition>
                     </TransitionGroup>)
             ): articles.map(article=>(
                 <TransitionGroup>
-                    <CSSTransition key={article.id} timeout={500} classNames="item">
+                    <CSSTransition key={article.id} timeout={800} classNames="item">
                         <Article article = {article}/>
                     </CSSTransition>
                 </TransitionGroup>))

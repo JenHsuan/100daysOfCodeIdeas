@@ -1,25 +1,37 @@
-import React, {useEffect, Fragment} from 'react'
+import React, {useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
 import { Card, Button} from 'react-bootstrap';
+import ArticleModal from '../components/ArticleModal';
 import '.././css/article.css'
 import '.././css/card.css'
 
 const Article = ({article}) => {
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => {
+        setShow(false);
+    }
+
+    const handleShow = () => {
+        setShow(true);
+    }
+
     useEffect(()=> {
         console.log(article)
     }, [])
 
     return (
-        <div className="col-md-6 col-xs-6">
-            <Card className="article-card">
-                <Card.Body>
-                    <Card.Title className="title">{article.title}</Card.Title>
-                    <Card.Img variant="top" src={`${article.image}`} />
-                    <Card.Text className="date">{article.time}</Card.Text>
-                    <Card.Text className="readtime">{article.readtime}</Card.Text>
-                    <Button className="article-btn" variant="primary">View this topic</Button>
+        <div >
+            <Card className="article-card" border="white">
+                <Card.Body className="article-card-body">
+                    <img className="article-card-img" src={`${article.image}`} alt={article.title}/>
+                    <div className="title">{article.title}</div>
+                    <div className="date">{article.name}</div>
+                    <div className="readtime">{article.readtime}</div>
+                    <button className="article-btn" onClick = {handleShow}>Add to learning plan</button>
                 </Card.Body>
             </Card>
+            <ArticleModal show = {show} handleClose = {handleClose} article = {article} />
         </div>
     
     )

@@ -26,10 +26,8 @@ const ArticleSearchBar = () => {
         }
     }
 
-    return (
-        <form>
-            <input className="articlesfilter" ref={text} type="text" placeholder="Filter articles..." onChange={onChange}/>
-        </form>
+    return (    
+        <input className="articlesfilter" ref={text} type="text" placeholder="Filter articles..." onChange={onChange}/>
     )
 }
 

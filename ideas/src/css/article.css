@@ -1,9 +1,37 @@
 .title {
-  font-size: 24px;
-  font-weight: 400; }
+  font-size: 20px;
+  font-weight: 400;
+  padding-top: 2%;
+  padding-bottom: 5%; }
+
+.article-card {
+  width: 400px;
+  border: none;
+  margin-top: 2%;
+  margin-bottom: 20%;
+  padding-left: 10%;
+  margin-left: 5%; }
+
+.article-card-img {
+  width: 100%; }
+
+.article-card-img-caption {
+  font-size: 1px;
+  color: whitesmoke; }
 
 .article-btn {
-  margin-left: 30%; }
+  margin-top: 15%;
+  margin-left: 15%;
+  font-size: 20px;
+  font-weight: 300;
+  background-color: royalblue;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  padding: 2% 12%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block; }
 
 .subtitle {
   font-size: 18px;
@@ -12,8 +40,12 @@
 
 .date, .readtime {
   text-align: center;
-  font-size: 14px;
-  font-weight: 200; }
+  font-size: 16px;
+  font-weight: 200;
+  color: gray; }
+
+#menu-container {
+  max-width: 90%; }
 
 .remove-btn {
   margin-right: 0.5rem; }
@@ -23,13 +55,13 @@
 
 .item-enter-active {
   opacity: 1;
-  transition: opacity 500ms ease-in; }
+  transition: opacity 800ms ease-in; }
 
 .item-exit {
   opacity: 1; }
 
 .item-exit-active {
   opacity: 0;
-  transition: opacity 500ms ease-in; }
+  transition: opacity 800ms ease-in; }
 
 /*# sourceMappingURL=article.css.map */

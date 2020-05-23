@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,oBAAoB;EAChB,SAAS,EAAE,IAAI;EACf,WAAW,EAAE,GAAG;;AAGpB,uBAAuB;EACnB,SAAS,EAAE,IAAI;EACf,WAAW,EAAE,GAAG;EAChB,WAAW,EAAE,EAAE;EACf,cAAc,EAAE,GAAG;EACnB,KAAK,EAAE,IAAI;;AAGf,mBAAmB;EACf,SAAS,EAAE,IAAI;EACf,WAAW,EAAE,GAAG;EAChB,KAAK,EAAE,IAAI;;AAGf,oBAAoB;EAChB,KAAK,EAAE,IAAI",
+"sources": ["../scss/articleModal.scss"],
+"names": [],
+"file": "articleModal.css"
+}
