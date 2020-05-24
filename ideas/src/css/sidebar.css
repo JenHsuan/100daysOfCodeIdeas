@@ -30,31 +30,38 @@
   margin-top: 5%;
   margin-left: 15%;
   margin-right: 15%;
-  opacity: 1; }
+  opacity: 1;
+  transition: 0.3s; }
 
 .sidebar-dropdown {
   grid-row-start: 3;
-  grid-row-end: 4; }
+  grid-row-end: 4;
+  transition: 0.3s; }
 
 .sidebar-dropdown-title {
   text-align: center;
   font-size: 22px;
-  font-weight: 400; }
+  font-weight: 400;
+  transition: 0.3s; }
 
 .sidebar-dropdown-content {
-  margin-left: 10%; }
+  margin-left: 10%;
+  transition: 0.3s; }
 
 .sidebar-search {
   grid-row-start: 4;
-  grid-row-end: 5; }
+  grid-row-end: 5;
+  transition: 0.3s; }
 
 .sidebar-search-title {
   text-align: center;
   font-size: 22px;
-  font-weight: 400; }
+  font-weight: 400;
+  transition: 0.3s; }
 
 .sidebar-search-content {
-  margin-left: 10%; }
+  margin-left: 10%;
+  transition: 0.3s; }
 
 .sidebar-datetimepicker {
   grid-row-start: 4;
