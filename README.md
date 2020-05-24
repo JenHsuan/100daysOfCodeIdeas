@@ -1,5 +1,12 @@
-# 100daysOfCodeIdeas
+# Learning Booster (The final project for CS50 web)
 
+## Description
+* The target of Django + Next.js + TS project is to create a learning boost. This site collects the articles I wrote before and I want to provide a service for users to learn programming easier.
+
+## Requirements
+* Your web application must be sufficiently distinct from the other projects in this course, and more complex than those.
+* Your web application must utilize at least two of Python, JavaScript, and SQL.
+* Your web application must be mobile-responsive.
 
 ## Technical stack
 ### Backend
