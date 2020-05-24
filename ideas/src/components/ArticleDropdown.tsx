@@ -22,10 +22,10 @@ const ArticleDropdown = () => {
     }
 
     return (
-        <DropdownButton className='article-dropdown' id="dropdown-basic-button" title="Select Learning Meterials" onSelect={handleSelect}>
+        <DropdownButton className='article-dropdown' id="dropdown-basic-button" title="Suggestions" onSelect={handleSelect}>
             <Dropdown.Item eventKey="-1">All</Dropdown.Item>
-            <Dropdown.Item eventKey="0">Challenges</Dropdown.Item>
-            <Dropdown.Item eventKey="1">Learning materials</Dropdown.Item>
+            <Dropdown.Item eventKey="0">100 Days Of CodeChallenges</Dropdown.Item>
+            <Dropdown.Item eventKey="1">Programming Materials</Dropdown.Item>
         </DropdownButton>
     )
 }

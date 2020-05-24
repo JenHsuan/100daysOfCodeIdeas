@@ -9,7 +9,7 @@ const ArticleModal = ({show, handleClose, article}) => {
     return (
         <Modal show = {show} onHide = {handleClose}>
             <Modal.Body>
-                <Image className='article-modal-image' src={article.image}/>
+                <Image className='article-modal-image' src={article.image} alt={article.title} title={article.title}/>
                 <div className='article-modal-title'>{`${article.title}...`}</div>
                 <div className='article-modal-subtitle'>{`${article.subtitle}...`}</div>
                 <ul>

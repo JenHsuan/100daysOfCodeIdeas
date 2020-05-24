@@ -78,7 +78,7 @@ export const resetLoading = () => dispatch => {
 
 export const setPlanner = showPlanner => dispatch => {
     dispatch({
-        type: SET_CATEGORY, 
+        type: SET_PLANNER, 
         payload: showPlanner})
 }
 

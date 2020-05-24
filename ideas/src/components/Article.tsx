@@ -24,7 +24,7 @@ const Article = ({article}) => {
         <div className="articles-row">
             <Card className="article-card" border="white">
                 <Card.Body className="article-card-body">
-                    <img className="article-card-img" src={`${article.image}`} alt={article.title}/>
+                    <img className="article-card-img" src={`${article.image}`} alt={article.title} title={article.title}/>
                     <div className="title">{article.title}</div>
                     <div className="date">{article.name}</div>
                     <div className="date">
