@@ -1,14 +1,21 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, Fragment} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import {
     selectArticlesState,
-    selectFilteredArticlesState
-    } from './reducers/articlesReducer';
-import { getArticles } from './actions/articlesAction';
+    selectFilteredArticlesState,
+    selectIsLoadingState
+} from './reducers/articlesReducer';
+
+import { 
+    getArticles
+} from './actions/articlesAction';
+
 import {
     CSSTransition,
     TransitionGroup,
-  } from 'react-transition-group';
+} from 'react-transition-group';
+
+import {Spinner} from 'react-bootstrap';
 import Article from './Article'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -16,6 +23,8 @@ const ArticleList = () => {
     const disPatch = useDispatch();
     const articles = useSelector(selectArticlesState);
     const filteredArticles = useSelector(selectFilteredArticlesState);
+    const isLoading = useSelector(selectIsLoadingState);
+    
     useEffect(()=> {
         disPatch(getArticles());
     }, [])
@@ -29,22 +38,28 @@ const ArticleList = () => {
     }, [filteredArticles])
 
     return (
-        <div className="articles">
+        <div className="articles-hide-siderbar">
         <div className="container articles" id="menu-container">
             <div className="row">
-            {filteredArticles.length !== 0 ? filteredArticles.map(filteredArticle=>(
-                    <TransitionGroup>
-                        <CSSTransition key={filteredArticle.id} timeout={500} classNames="item">
-                            <Article  article = {filteredArticle}/>
-                        </CSSTransition>
-                    </TransitionGroup>)
-            ): articles.map(article=>(
-                <TransitionGroup>
-                    <CSSTransition key={article.id} timeout={500} classNames="item">
-                        <Article article = {article}/>
-                    </CSSTransition>
-                </TransitionGroup>))
-            }
+                {isLoading === true ? (<div className='articles-spinner'>{
+                    <Spinner animation="border" role="status">
+                        <span className="sr-only">Loading...</span>
+                    </Spinner>
+                }</div>) : (
+                <Fragment>{
+                    filteredArticles.length !== 0 ? filteredArticles.map(filteredArticle=>
+                        (<TransitionGroup>
+                            <CSSTransition key={filteredArticle.id} timeout={500} classNames="item">
+                                <Article  article = {filteredArticle}/>
+                            </CSSTransition>
+                        </TransitionGroup>)
+                    ): articles.map(article=>
+                        (<TransitionGroup>
+                            <CSSTransition key={article.id} timeout={500} classNames="item">
+                                <Article article = {article}/>
+                            </CSSTransition>
+                        </TransitionGroup>))
+                }</Fragment>)}
             </div>
         </div>
         </div>

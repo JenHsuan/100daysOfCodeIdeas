@@ -9,14 +9,18 @@ const SideBar = () => {
     return (
         <div className='sidebar'>
             <div className='sidebar-grid-box'>
-                <div className='sidebar-title'>A Layman</div>
+                <div className='sidebar-title'>Learning plan</div>
                 <div className='sidebar-dropdown'>
-                    <div>Categories</div>
-                    <ArticleDropdown/>
+                    <div className='sidebar-dropdown-title'>Categories</div>
+                    <div className='sidebar-dropdown-content'>
+                        <ArticleDropdown/>
+                    </div>
                 </div>
                 <div className='sidebar-search'>
-                    <div>Search for all articles</div>
-                    <ArticleSearchBar/>
+                    <div className='sidebar-search-title'>Search for all articles</div>
+                    <div className='sidebar-search-content'>
+                        <ArticleSearchBar />
+                    </div>
                 </div>
                 <div className='sidebar-datetimepicker'>
                 </div>

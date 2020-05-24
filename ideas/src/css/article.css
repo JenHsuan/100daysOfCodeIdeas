@@ -7,6 +7,17 @@
     font-weight: 300;
     font-size: 24px; }
 
+.articles-hide-siderbar {
+  grid-column-start: 1;
+  grid-column-end: 9;
+  background-color: #FFFFFF;
+  margin-top: 1%; }
+  .articles-hide-siderbar .articles-row {
+    margin-left: 30%; }
+  .articles-hide-siderbar .step-title {
+    font-weight: 300;
+    font-size: 24px; }
+
 .title {
   font-size: 20px;
   font-weight: 400;
@@ -14,7 +25,7 @@
   padding-bottom: 5%; }
 
 .article-card {
-  width: 400px;
+  width: 500px;
   border: none;
   margin-top: 2%;
   margin-bottom: 20%;
@@ -29,18 +40,23 @@
   color: whitesmoke; }
 
 .article-btn {
-  margin-top: 15%;
-  margin-left: 15%;
-  font-size: 20px;
+  margin-top: 10%;
+  margin-left: 25%;
+  font-size: 18px;
   font-weight: 300;
   background-color: royalblue;
   border-radius: 5px;
   border: none;
   color: white;
-  padding: 2% 12%;
+  padding: 1% 10%;
   text-align: center;
   text-decoration: none;
   display: inline-block; }
+
+.articles-spinner {
+  position: relative;
+  margin-top: 20%;
+  left: 50%; }
 
 .subtitle {
   font-size: 18px;
@@ -72,5 +88,9 @@
 .item-exit-active {
   opacity: 0;
   transition: opacity 500ms ease-in; }
+
+@media only screen and (max-width: 1500px) and (min-width: 600px) {
+  .article-card {
+    width: 350px; } }
 
 /*# sourceMappingURL=article.css.map */

@@ -21,7 +21,7 @@ const Article = ({article}) => {
     }, [])
 
     return (
-        <div >
+        <div className="articles-row">
             <Card className="article-card" border="white">
                 <Card.Body className="article-card-body">
                     <img className="article-card-img" src={`${article.image}`} alt={article.title}/>
@@ -32,7 +32,7 @@ const Article = ({article}) => {
                         <span> . </span>
                         <span className="readtime">{article.readtime}</span>
                     </div>
-                    <button className="article-btn" onClick = {handleShow}>Add to learning plan</button>
+                    <button className="article-btn" onClick = {handleShow}>Add to plan</button>
                 </Card.Body>
             </Card>
             <ArticleModal show = {show} handleClose = {handleClose} article = {article} />

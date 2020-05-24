@@ -6,7 +6,10 @@ import {
     CLEAR_FILTER,
     SET_CATEGORY,
     CLEAR_CATEGORY,
-    ArticleType } from '../types'
+    RESET_LOADING,
+    SET_PLANNER,
+    ArticleType 
+} from '../types'
 
 //Actions
 export interface GetArticlesAction {
@@ -30,6 +33,15 @@ export interface SetCategoryAction {
 
 export interface ClearCategoryAction {
     readonly type: typeof CLEAR_CATEGORY
+}
+
+export interface ResetLoadingAction {
+    readonly type: typeof RESET_LOADING
+}
+
+export interface SetPlannerAction {
+    readonly type: typeof SET_PLANNER
+    readonly payload: boolean
 }
 
 export const getArticles = () => async dispatch => {
@@ -59,4 +71,15 @@ export const setCategory = category => dispatch => {
 export const clearCategory = () => dispatch => {
     dispatch({type: CLEAR_CATEGORY})
 }
+
+export const resetLoading = () => dispatch => {
+    dispatch({type: RESET_LOADING})
+}
+
+export const setPlanner = showPlanner => dispatch => {
+    dispatch({
+        type: SET_CATEGORY, 
+        payload: showPlanner})
+}
+
 

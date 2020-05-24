@@ -4,14 +4,13 @@ import { selectFilteredArticlesState} from './reducers/articlesReducer';
 import {
     getFilteredArticles,
     clearFilter } from './actions/articlesAction';
-
+import '../css/articleSearch.css'
 
 const ArticleSearchBar = () => {
     const text = createRef<HTMLInputElement>()
     const disPatch = useDispatch();
     const filteredArticles = useSelector(selectFilteredArticlesState);
-    //const text = useRef('');
-    //const {filterProducts, clearFilter, filtered} = shoppingCartContext;
+    
     useEffect(() => {
         if (filteredArticles.length === 0) {
             text.current.value = '';
@@ -27,7 +26,7 @@ const ArticleSearchBar = () => {
     }
 
     return (    
-        <input className="articlesfilter" ref={text} type="text" placeholder="Filter articles..." onChange={onChange}/>
+        <input className="article-searchbar" ref={text} type="text" placeholder="Filter articles..." onChange={onChange}/>
     )
 }
 
