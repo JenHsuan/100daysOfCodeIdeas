@@ -18,6 +18,7 @@ import {
 import {Spinner} from 'react-bootstrap';
 import Article from './Article'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Footer from '../components/Footer';
 
 const ArticleList = () => {
     const disPatch = useDispatch();
@@ -39,8 +40,7 @@ const ArticleList = () => {
 
     return (
         <div className="articles-hide-siderbar">
-        <div className="container articles" id="menu-container">
-            <div className="row">
+            <div className="articles-row row">
                 {isLoading === true ? (<div className='articles-spinner'>{
                     <Spinner animation="border" role="status">
                         <span className="sr-only">Loading...</span>
@@ -61,7 +61,7 @@ const ArticleList = () => {
                         </TransitionGroup>))
                 }</Fragment>)}
             </div>
-        </div>
+            <Footer></Footer>
         </div>
     )
 }

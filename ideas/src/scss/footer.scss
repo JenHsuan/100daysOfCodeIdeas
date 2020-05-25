@@ -1,3 +1,8 @@
+.common-footer-container-row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
 .common-footer{
     background-color: black;
     height: 80px;
@@ -5,14 +10,18 @@
     padding: 0;
     grid-column-start: 1;
     grid-column-end: 9;
-    position: fixed;
-    z-index: 2; /* Stay on top */
+    //position: fixed;
+    //z-index: 2; /* Stay on top */
     opacity: 0.8;
     left: 0;
     bottom: 0;
     width: 100%;
+    margin-left: 0;
+    margin-right: 0;
     .container{
         .common-footer-row{
+            margin-left: 0;
+            margin-right: 0;
             .copyright {
                 color: white;
                 font-weight: 300;

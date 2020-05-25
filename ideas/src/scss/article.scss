@@ -15,19 +15,15 @@
     grid-column-start: 1;
     grid-column-end: 9;
     grid-row-start: 2;
-    grid-row-end: 51;
     background-color: #FFFFFF;
     margin-top: 1%;
-    .articles-row{
-        margin-left: 30%;
-    }
-   
-    .step-title {
-        font-weight: 300;
-        font-size: 24px;
-    }
  }
  
+ .articles-row {
+    padding-left: 10%;
+    padding-right: 10%;
+ }
+
  .title{
     font-size: 20px;
     font-weight: 400;
