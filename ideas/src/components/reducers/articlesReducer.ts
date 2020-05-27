@@ -38,7 +38,7 @@ const initialState = {
     articles: [],
     filteredArticles: [],
     isLoading: true,
-    showPlanner: true
+    showPlanner: false
 }
 
 //Reducer

@@ -61,7 +61,7 @@ const ArticleList = () => {
                         </TransitionGroup>))
                 }</Fragment>)}
             </div>
-            <Footer></Footer>
+            {isLoading === false && <Footer/>}
         </div>
     )
 }
