@@ -5,6 +5,11 @@ export const SET_CATEGORY = 'SET_CATEGORY';
 export const CLEAR_CATEGORY = 'CLEAR_CATEGORY';
 export const RESET_LOADING = 'RESET_LOADING';
 export const SET_PLANNER = 'SET_PLANNER';
+export const SET_PARTIAL_ARTICLES = 'SET_PARTIAL_ARTICLES';
+export const SET_PERPAGE = 'SET_PERPAGE';
+export const SET_PAPE_COUNT = 'SET_PAPE_COUNT';
+export const SET_OFFSET = 'SET_OFFSET';
+export const SET_LOADING = 'SET_LOADING';
 
 export interface ArticleType {
     title: string;

@@ -1,21 +1,21 @@
 .sidebar {
     grid-column-start: 1;
     grid-column-end: 3;
-    width: 20%;
-    height: 100%;
+    width: 15%;
+    height: 50%;
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
     z-index: 1; /* Stay on top */
     background-color: #F2F2F2;;
     color: black;
-    opacity: 0.7;
+    top: 20%;
     overflow-x: hidden;
     transition: 0.5s;
-    .total-title {
-        font-weight: 400;
-        font-size: 28px;
-    }
+    border-radius: 5px;
  }
 
+ .sidebar:hover{
+    opacity: 0.5;
+ }
  .sidebar-grid-box {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
@@ -23,12 +23,12 @@
  }
  
  .sidebar-title {
-    grid-row-start: 2;
-    grid-row-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
     font-size: 28px;
     font-weight: 500;
     text-align: center;
-    margin-top: 5%;
+    margin-top: 20%;
     margin-left: 15%;
     margin-right: 15%;
     opacity: 1;
@@ -37,34 +37,36 @@
 
 
  .sidebar-dropdown{
-    grid-row-start: 3;
-    grid-row-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
     transition: 0.3s;
+    padding-top: 10%;
  }
 
  .sidebar-dropdown-title {
     text-align: center;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 400;
     transition: 0.3s;
  }
 
  .sidebar-dropdown-content {
-    margin-left: 10%;
+    margin-left: 20%;
     transition: 0.3s;
  }
 
  .sidebar-search {
-    grid-row-start: 4;
-    grid-row-end: 5;
+    grid-row-start: 3;
+    grid-row-end: 4;
     transition: 0.3s;
  }
 
  .sidebar-search-title {
     text-align: center;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 400;
     transition: 0.3s;
+    padding-top: 10%;
  }
 
  .sidebar-search-content {

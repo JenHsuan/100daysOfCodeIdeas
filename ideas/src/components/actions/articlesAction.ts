@@ -3,11 +3,16 @@ import axios from 'axios';
 import { 
     GET_ARTICLES,
     GET_FILTERED_ARTICLES,
+    SET_PARTIAL_ARTICLES,
     CLEAR_FILTER,
     SET_CATEGORY,
     CLEAR_CATEGORY,
     RESET_LOADING,
     SET_PLANNER,
+    SET_PERPAGE,
+    SET_PAPE_COUNT,
+    SET_OFFSET,
+    SET_LOADING,
     ArticleType 
 } from '../types'
 
@@ -20,6 +25,31 @@ export interface GetArticlesAction {
 export interface GetFilteredArticlesAction {
     readonly type: typeof GET_FILTERED_ARTICLES
     readonly payload: string
+}
+
+export interface SetPartialArticlesAction {
+    readonly type: typeof SET_PARTIAL_ARTICLES
+    readonly payload: string
+}
+
+export interface SetPerpageAction {
+    readonly type: typeof SET_PERPAGE
+    readonly payload: number
+}
+
+export interface SetPageCountAction {
+    readonly type: typeof SET_PAPE_COUNT
+    readonly payload: number
+}
+
+export interface SetOffsetAction {
+    readonly type: typeof SET_OFFSET
+    readonly payload: number
+}
+
+export interface SetLoadingAction {
+    readonly type: typeof SET_LOADING
+    readonly payload: boolean
 }
 
 export interface ClearFilterAction {
@@ -56,6 +86,30 @@ export const getFilteredArticles = text => dispatch => {
     dispatch({
         type: GET_FILTERED_ARTICLES, 
         payload: text})
+}
+
+export const setPartialArticles = articles => dispatch => {
+    dispatch({
+        type: SET_PARTIAL_ARTICLES, 
+        payload: articles})
+}
+
+export const setLoading = isLoading => dispatch => {
+    dispatch({
+        type: SET_LOADING, 
+        payload: isLoading})
+}
+
+export const setOffset = offset => dispatch => {
+    dispatch({
+        type: SET_OFFSET, 
+        payload: offset})
+}
+
+export const setPageCount = pageCount => dispatch => {
+    dispatch({
+        type: SET_PAPE_COUNT, 
+        payload: pageCount})
 }
 
 export const clearFilter = () => dispatch => {

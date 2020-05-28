@@ -1,13 +1,21 @@
-import React, {useEffect, Fragment} from 'react'
+import React, {useEffect, Fragment, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import ReactPaginate from 'react-paginate';
 import {
     selectArticlesState,
+    selectPartialArticlesState,
     selectFilteredArticlesState,
-    selectIsLoadingState
+    selectIsLoadingState,
+    selectOffsetState,
+    selectPageCountState,
+    selectPerpageState
 } from './reducers/articlesReducer';
 
 import { 
-    getArticles
+    getArticles,
+    setPartialArticles,
+    setOffset,
+    setPageCount
 } from './actions/articlesAction';
 
 import {
@@ -22,9 +30,13 @@ import Footer from '../components/Footer';
 
 const ArticleList = () => {
     const disPatch = useDispatch();
+    const isLoading = useSelector(selectIsLoadingState);
     const articles = useSelector(selectArticlesState);
     const filteredArticles = useSelector(selectFilteredArticlesState);
-    const isLoading = useSelector(selectIsLoadingState);
+    const partialArticles = useSelector(selectPartialArticlesState);
+    const perpage = useSelector(selectPerpageState);
+    const pageCount = useSelector(selectPageCountState);
+    const offset = useSelector(selectOffsetState);
     
     useEffect(()=> {
         disPatch(getArticles());
@@ -32,28 +44,49 @@ const ArticleList = () => {
 
     useEffect(()=> {
         //console.log(articles)
+        const partialData = articles.slice(offset, offset + perpage)
+        disPatch(setPartialArticles(partialData));
+        var count = Math.ceil(articles.length / perpage);
+        console.log(count)
+        disPatch(setPageCount(count));
     }, [articles])
 
     useEffect(()=> {
         console.log(filteredArticles)
+        var count = filteredArticles.length === 0 ? 
+        Math.ceil(articles.length / perpage) : Math.ceil(filteredArticles.length / perpage);
+        disPatch(setPageCount(count));
+        setPartialData();
     }, [filteredArticles])
+
+    useEffect(()=> { 
+        var count = filteredArticles.length === 0 ? 
+        Math.ceil(articles.length / perpage) : Math.ceil(filteredArticles.length / perpage);
+        disPatch(setPageCount(count));
+        setPartialData();
+        window.scrollTo(0, 0)
+    }, [offset])
+    
+    const setPartialData = () =>  {
+        const partialData = filteredArticles.length === 0 ? 
+        articles.slice(offset, offset + perpage) : filteredArticles.slice(offset, offset + perpage);
+        disPatch(setPartialArticles(partialData));
+    }
+
+    const handlePageSlected = e => {
+        disPatch(setOffset(e.selected * perpage));
+    }
 
     return (
         <div className="articles-hide-siderbar">
             <div className="articles-row row">
-                {isLoading === true ? (<div className='articles-spinner'>{
+                {articles.length === 0 ? (<div className='articles-spinner'>{
                     <Spinner animation="border" role="status">
                         <span className="sr-only">Loading...</span>
                     </Spinner>
                 }</div>) : (
                 <Fragment>{
-                    filteredArticles.length !== 0 ? filteredArticles.map(filteredArticle=>
-                        (<TransitionGroup>
-                            <CSSTransition key={filteredArticle.id} timeout={500} classNames="item">
-                                <Article  article = {filteredArticle}/>
-                            </CSSTransition>
-                        </TransitionGroup>)
-                    ): articles.map(article=>
+                    partialArticles.map(article=>
                         (<TransitionGroup>
                             <CSSTransition key={article.id} timeout={500} classNames="item">
                                 <Article article = {article}/>
@@ -61,7 +94,23 @@ const ArticleList = () => {
                         </TransitionGroup>))
                 }</Fragment>)}
             </div>
-            {isLoading === false && <Footer/>}
+            {partialArticles.length >0 && (
+                <div className="article-pagination">
+                    <ReactPaginate
+                previousLabel={"prev"}
+                nextLabel={"next"}
+                breakLabel={"..."}
+                breakClassName={"break-me"}
+                pageCount={pageCount}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={5}
+                onPageChange={handlePageSlected}
+                containerClassName={"pagination"}
+                subContainerClassName={"pages pagination"}
+                activeClassName={"active"}/>
+                </div>
+            )}
+            {partialArticles.length >0 && <Footer/>}
         </div>
     )
 }
