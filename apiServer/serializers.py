@@ -3,6 +3,10 @@ from rest_framework_jwt.settings import api_settings
 from django.contrib.auth.models import User
 from .models import Article, Order, Profile
 
+class SocialAuthSerializer(serializers.Serializer):
+    backend = serializers.CharField()
+    access_token = serializers.CharField()
+
 class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article

@@ -9,3 +9,6 @@ django-cors-headers==3.2.1
 django-model-utils
 BeautifulSoup4
 requests
+python-social-auth
+social-auth-app-django
+social-auth-core
