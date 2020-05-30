@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 from .models import Article, Order, Profile
 
 class SocialAuthSerializer(serializers.Serializer):
-    backend = serializers.CharField()
-    access_token = serializers.CharField()
+    provider = serializers.CharField(max_length=255, required=True)
+    access_token = serializers.CharField(max_length=4096, required=True, trim_whitespace=True)
 
 class ArticleSerializer(serializers.ModelSerializer):
     class Meta:

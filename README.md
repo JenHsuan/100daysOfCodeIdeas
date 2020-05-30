@@ -26,6 +26,8 @@
 * TypeScript
 * Bootstrap
 * React-Bootstrap
+* react-facebook-login
+* react-paginate
 * concurrently
 * SASS
 * CSS grid
@@ -67,3 +69,11 @@ npx concurrently "npm rum build" "sass --watch src/scss:src/css"
 * [Next.js + CSS](https://github.com/zeit/next-plugins/tree/master/packages/next-css)
 * [Next.js 配置接口跨域代理转发](https://www.jianshu.com/p/160793f57802)
 * [Question: why does the init action @@redux/INIT is being twice?](https://github.com/reduxjs/redux/issues/382)
+
+### OAuth2 [Backend]: connect Django to Facebook
+* [Simple Facebook social Login using Django Rest Framework](https://medium.com/@katherinekimetto/simple-facebook-social-login-using-django-rest-framework-e2ac10266be1)
+* [SocialLoginView](https://pastebin.com/08iLNCJc)
+* [Django Authentication With Facebook, Instagram and LinkedIn](https://www.digitalocean.com/community/tutorials/django-authentication-with-facebook-instagram-and-linkedin)
+
+### OAuth2 [Frontend]: connect ReactJS to Facebook
+* [react-facebook-login](https://www.npmjs.com/package/react-facebook-login)

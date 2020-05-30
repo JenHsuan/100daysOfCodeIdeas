@@ -404,6 +404,55 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "oauth2 get token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eae8c732-2e33-41d4-9dec-7d5d2d414aab",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.globals.set(\"token\", jsonData.token);",
+							"console.log(pm.globals.get(\"token\"))",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"provider\":\"facebook\",\n\t\"access_token\": \"\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api-social-auth/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api-social-auth",
+						""
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, MenuItem } from 'react-bootstrap';
 import '../css/navbar.css'
 import {
     selectShowPlannerState
@@ -9,6 +9,7 @@ import {
 import { 
     setPlanner
 } from './actions/articlesAction';
+import Link from 'next/link'
 
 
 const NavBar = () => {
@@ -38,16 +39,28 @@ const NavBar = () => {
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-            <Nav.Link href="#deets">About</Nav.Link>
             <NavDropdown title='Tools' id="basic-nav-dropdown">
                 <NavDropdown.Item eventKey={2} onSelect={showPlanner}>Learning Planner</NavDropdown.Item>
             </NavDropdown>
+            <NavDropdown title='About' id="basic-nav-dropdown">
+                <NavDropdown.Item >
+                    <Link href="/about">
+                    About us
+                    </Link>
+                </NavDropdown.Item>
+            </NavDropdown>
         </Nav>
         <Nav>
-      <Nav.Link href="#deets">Sing In</Nav.Link>
-      <Nav.Link eventKey={2} href="#memes">
-        Sign Up
-      </Nav.Link>
+            <Nav.Link>
+                <Link href="/signin">
+                    Sign in
+                </Link>
+            </Nav.Link>
+            <Nav.Link>
+                <Link href="/signup">
+                    Sign up
+                </Link>
+            </Nav.Link>
         </Nav>
     </Navbar.Collapse>
   </Navbar>

@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.conf import settings
 import os
 import logging
+from urllib.error import HTTPError
 
 from .serializers import SocialAuthSerializer, ArticleSerializer, UserSerializer, UserSerializerWithToken, OrderSerializer, ProfileSerializer
 from .models import Article, Order, Profile
@@ -12,8 +13,13 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.renderers import JSONRenderer
+from rest_framework_jwt.settings import api_settings
+jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
+jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 from django.core.exceptions import ImproperlyConfigured
-from social_django.utils import load_strategy
+from social_core.backends.oauth import BaseOAuth2
+from social_core.exceptions import MissingBackend, AuthTokenError, AuthForbidden
+from social_django.utils import load_strategy, load_backend
 
 from CodeIdeas.utils import parse_articles
 
@@ -117,53 +123,74 @@ class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
-class SocialAuth(APIView):
-    throttle_classes = ()
-    permission_classes = ()
-    parser_classes = (parsers.FormParser, parsers.JSONParser,)
-    renderer_classes = (JSONRenderer,)
+class SocialLoginView(generics.GenericAPIView):
+    """Log in using facebook"""
     serializer_class = SocialAuthSerializer
+    permission_classes = [permissions.AllowAny]
 
     def post(self, request):
-        serializer = self.serializer_class(data=request.DATA)
+        """Authenticate user through the provider and access_token"""
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        provider = serializer.data.get('provider', None)
+        strategy = load_strategy(request)
 
-        if serializer.is_valid():
-            backend = serializer.data['backend']
-            access_token = serializer.data['access_token']
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-        # 讀取python-social-auth strategy
-        strategy = load_strategy(request=request, backend=backend)
+        print(strategy)
 
         try:
-            kwargs = dict({(k, i) for k, i in serializer.data.items() if k != 'backend'})
-            user = request.user # 如果註冊過的使用者已登入, 則連結此使用者
-            kwargs['user'] = user.is_authenticated() and user or None
+            backend = load_backend(strategy=strategy, name=provider,
+            redirect_uri=None)
+ 
+        except MissingBackend:
+            return Response({'error': 'Please provide a valid provider'},
+            status=status.HTTP_400_BAD_REQUEST)
+        try:
+            if isinstance(backend, BaseOAuth2):
+                access_token = serializer.data.get('access_token')
+            user = backend.do_auth(access_token)
+        except HTTPError as error:
+            return Response({
+                "error": {
+                    "access_token": "Invalid token",
+                    "details": str(error)
+                }
+            }, status=status.HTTP_400_BAD_REQUEST)
+        except AuthTokenError as error:
+            return Response({
+                "error": "Invalid credentials",
+                "details": str(error)
+            }, status=status.HTTP_400_BAD_REQUEST)
 
-            # 使用者驗證
-            user = strategy.backend.do_auth(**kwargs)
+        try:
+            authenticated_user = backend.do_auth(access_token, user=user)
+        
+        except HTTPError as error:
+            return Response({
+                "error":"invalid token",
+                "details": str(error)
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        except AuthForbidden as error:
+            return Response({
+                "error":"invalid token",
+                "details": str(error)
+            }, status=status.HTTP_400_BAD_REQUEST)
 
-        except AuthAlreadyAssociated:
-            data = {
-                'error_code': 'social_already_associated',
-                'status': 'Auth associated with another user.',
+        if authenticated_user and authenticated_user.is_active:
+			#generate JWT token
+            print(authenticated_user)
+            print(request)
+            #login(request, authenticated_user)
+            data={
+                "token": jwt_encode_handler(
+                    jwt_payload_handler(user)
+                )}
+			#customize the response to your needs
+            response = {
+                "email": authenticated_user.email,
+                "username": authenticated_user.username,
+                "token": data.get('token')
             }
-            return Response(data, status=status.HTTP_403_FORBIDDEN)
+            return Response(status=status.HTTP_200_OK, data=response)
 
-        if not user:
-            data = {
-                'error_code': 'social_no_user',
-                'status': 'No associated user.',
-            }
-            return Response(data, status=status.HTTP_403_FORBIDDEN)
-
-        if not user.is_active:
-            data = {
-                'error_code': 'social_inactive',
-                'status': 'Associated user is inactive.'
-            }
-            return Response(data, status=status.HTTP_403_FORBIDDEN)
-
-        payload = jwt_payload_handler(user)
-        return Response({'token': jwt_encode_handler(payload), 'username': user.username}) # 回傳JWT token及使用者帳號
+social_auth = SocialLoginView.as_view()
