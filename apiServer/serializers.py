@@ -3,6 +3,9 @@ from rest_framework_jwt.settings import api_settings
 from django.contrib.auth.models import User
 from .models import Article, Order, Profile
 
+class SocialAuthForGitihubSerializer(serializers.Serializer):
+    code = serializers.CharField(max_length=255, required=True)
+
 class SocialAuthSerializer(serializers.Serializer):
     provider = serializers.CharField(max_length=255, required=True)
     access_token = serializers.CharField(max_length=4096, required=True, trim_whitespace=True)

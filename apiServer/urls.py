@@ -3,7 +3,7 @@ from django.conf.urls import url
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import social_auth, index, react, InsertData, UserViewSet, current_user, UserList, OrderViewSet, UserViewSet, ArticleByCategoryViewSet, ProfileViewSet
+from .views import social_auth_github,  social_auth, index, react, InsertData, UserViewSet, current_user, UserList, OrderViewSet, UserViewSet, ArticleByCategoryViewSet, ProfileViewSet
 from rest_framework.routers import DefaultRouter
 from rest_framework_jwt.views import obtain_jwt_token
 
@@ -23,7 +23,8 @@ urlpatterns = [
     path('token-auth/', obtain_jwt_token, name='token-auth'),
     path('current_user/', current_user, name='current_user'),
     path('users/', UserList.as_view(), name='users'),
-    path("api-social-auth/", social_auth)
+    path("api/social-auth/", social_auth),
+    path("api/get-github-access-token/", social_auth_github)
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

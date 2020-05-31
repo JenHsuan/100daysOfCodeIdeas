@@ -17,7 +17,6 @@ const Article = ({article}) => {
     }
 
     useEffect(()=> {
-        console.log(article)
     }, [])
 
     return (

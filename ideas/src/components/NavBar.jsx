@@ -27,13 +27,14 @@ const NavBar = () => {
 
     return (
     <Navbar bg="dark" expand="lg" variant="dark" fixed="top">
-    <Navbar.Brand href="#home">
+    <Navbar.Brand href="/">
         <img
         src="https://raw.githubusercontent.com/JenHsuan/100daysOfCodeIdeas/master/ideas/src/images/logo.png?token=ADKTL377SEGUDAIFK24VUOS62MRRE"
         width="30"
         height="30"
         className="d-inline-block align-top navbar-logo-img"
         alt="Learning Booster"
+        href="/"
         title="Learning Booster from Sean Hsieh"/>
       Learning Booster</Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -45,22 +46,20 @@ const NavBar = () => {
             <NavDropdown title='About' id="basic-nav-dropdown">
                 <NavDropdown.Item >
                     <Link href="/about">
-                    About us
+                        <a href="/about">About us</a>
                     </Link>
                 </NavDropdown.Item>
             </NavDropdown>
         </Nav>
         <Nav>
-            <Nav.Link>
-                <Link href="/signin">
+            <NavDropdown title='Account' id="basic-nav-dropdown">
+                <NavDropdown.Item href="/signin">
                     Sign in
-                </Link>
-            </Nav.Link>
-            <Nav.Link>
-                <Link href="/signup">
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/signup">
                     Sign up
-                </Link>
-            </Nav.Link>
+                </NavDropdown.Item>
+            </NavDropdown>
         </Nav>
     </Navbar.Collapse>
   </Navbar>

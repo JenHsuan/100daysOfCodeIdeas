@@ -43,16 +43,13 @@ const ArticleList = () => {
     }, [])
 
     useEffect(()=> {
-        //console.log(articles)
         const partialData = articles.slice(offset, offset + perpage)
         disPatch(setPartialArticles(partialData));
         var count = Math.ceil(articles.length / perpage);
-        console.log(count)
         disPatch(setPageCount(count));
     }, [articles])
 
     useEffect(()=> {
-        console.log(filteredArticles)
         var count = filteredArticles.length === 0 ? 
         Math.ceil(articles.length / perpage) : Math.ceil(filteredArticles.length / perpage);
         disPatch(setPageCount(count));
@@ -87,9 +84,9 @@ const ArticleList = () => {
                 }</div>) : (
                 <Fragment>{
                     partialArticles.map(article=>
-                        (<TransitionGroup>
+                        (<TransitionGroup key={article.id}>
                             <CSSTransition key={article.id} timeout={500} classNames="item">
-                                <Article article = {article}/>
+                                <Article key={article.id} article = {article}/>
                             </CSSTransition>
                         </TransitionGroup>))
                 }</Fragment>)}

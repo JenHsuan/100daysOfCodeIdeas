@@ -71,7 +71,6 @@ const articlesReducer = (state: ArticlesState = initialState,
             SetCategoryAction | ClearCategoryAction | ResetLoadingAction | 
             SetPlannerAction | SetPartialArticlesAction | SetOffsetAction |
             SetPerpageAction | SetPageCountAction | SetLoadingAction) => {
-    console.log(action.type)
     switch(action.type) {
         case GET_ARTICLES:
             return {
@@ -151,7 +150,6 @@ const articlesReducer = (state: ArticlesState = initialState,
                 perpage: action.payload
             }
         default:
-            console.log(123)
             return state; 
     }
 };

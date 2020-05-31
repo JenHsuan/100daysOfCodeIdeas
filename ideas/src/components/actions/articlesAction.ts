@@ -76,7 +76,6 @@ export interface SetPlannerAction {
 
 export const getArticles = () => async dispatch => {
         const res = await axios.get('/api/articles');
-        console.log(res.data)
         await dispatch({
             type: GET_ARTICLES, 
             payload: res.data})

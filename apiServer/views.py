@@ -5,7 +5,7 @@ import os
 import logging
 from urllib.error import HTTPError
 
-from .serializers import SocialAuthSerializer, ArticleSerializer, UserSerializer, UserSerializerWithToken, OrderSerializer, ProfileSerializer
+from .serializers import SocialAuthForGitihubSerializer, SocialAuthSerializer, ArticleSerializer, UserSerializer, UserSerializerWithToken, OrderSerializer, ProfileSerializer
 from .models import Article, Order, Profile
 from django.contrib.auth.models import User
 from rest_framework import viewsets, mixins, permissions, status, generics, parsers
@@ -20,8 +20,10 @@ from django.core.exceptions import ImproperlyConfigured
 from social_core.backends.oauth import BaseOAuth2
 from social_core.exceptions import MissingBackend, AuthTokenError, AuthForbidden
 from social_django.utils import load_strategy, load_backend
+#from django.contrib.auth import login
 
 from CodeIdeas.utils import parse_articles
+import requests
 
 index_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'index.html')
 
@@ -123,8 +125,29 @@ class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
+class SocialGithubLoginView(generics.GenericAPIView):
+    serializer_class = SocialAuthForGitihubSerializer
+    permission_classes = [permissions.AllowAny]
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        code = serializer.data.get('code', None)
+        client_id = os.getenv("SOCIAL_AUTH_GITHUB_KEY")
+        client_secret = os.getenv("SOCIAL_AUTH_GITHUB_SECRET")
+
+        url = 'https://github.com/login/oauth/access_token'
+        data = {'code': code,'client_id':client_id,'client_secret':client_secret}
+        res = requests.post(url, data = data)
+        if res.status_code == status.HTTP_200_OK:
+            print(res.text.split('=')[1].split('&')[0])
+            return Response(status=status.HTTP_200_OK, data=res.text.split('=')[1].split('&')[0])
+        else:
+            return Response(status=res.status_code, data=res.text)
+
+social_auth_github = SocialGithubLoginView.as_view()    
+
 class SocialLoginView(generics.GenericAPIView):
-    """Log in using facebook"""
     serializer_class = SocialAuthSerializer
     permission_classes = [permissions.AllowAny]
 
@@ -134,9 +157,6 @@ class SocialLoginView(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         provider = serializer.data.get('provider', None)
         strategy = load_strategy(request)
-
-        print(strategy)
-
         try:
             backend = load_backend(strategy=strategy, name=provider,
             redirect_uri=None)
@@ -178,8 +198,6 @@ class SocialLoginView(generics.GenericAPIView):
 
         if authenticated_user and authenticated_user.is_active:
 			#generate JWT token
-            print(authenticated_user)
-            print(request)
             #login(request, authenticated_user)
             data={
                 "token": jwt_encode_handler(
