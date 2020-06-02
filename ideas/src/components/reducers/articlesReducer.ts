@@ -10,7 +10,11 @@ import {
     SetPerpageAction,
     SetPageCountAction,
     SetPlannerAction,
-    SetLoadingAction
+    SetLoadingAction,
+    SetLoginAction,
+    SetLogoutAction,
+    SetAccessTokenAction,
+    SetEmailAction
 } 
 from '../actions/articlesAction'
 import { RootState} from '../store/store'
@@ -29,6 +33,10 @@ import {
     SET_PERPAGE,
     SET_OFFSET,
     SET_LOADING,
+    SET_LOGIN,
+    SET_LOGOUT,
+    SET_ACCESS_TOKEN,
+    SET_EMAIL,
     ArticleType } from '../types'
 
 //Initial state
@@ -41,6 +49,9 @@ interface ArticlesState {
     perpage: number;
     pageCount: number;
     offset: number;
+    isLogin: boolean;
+    accessToken: string;
+    email: string;
 }
 
 const initialState = {
@@ -51,7 +62,10 @@ const initialState = {
     showPlanner: false,
     perpage: 18,
     pageCount: 1,
-    offset: 0
+    offset: 0,
+    isLogin: false,
+    accessToken: '',
+    email:''
 }
 
 //Selector functions
@@ -64,13 +78,18 @@ export const selectPerpageState = (rootState: RootState) => rootState.articlesRe
 export const selectPageCountState = (rootState: RootState) => rootState.articlesReducer.pageCount;
 export const selectOffsetState = (rootState: RootState) => rootState.articlesReducer.offset;
 export const selectLoadingState = (rootState: RootState) => rootState.articlesReducer.isLoading;
+export const selectLoginState = (rootState: RootState) => rootState.articlesReducer.isLogin;
+export const selectAccessTokenState = (rootState: RootState) => rootState.articlesReducer.accessToken;
+export const selectEmailState = (rootState: RootState) => rootState.articlesReducer.email;
 
 //Reducer
 const articlesReducer = (state: ArticlesState = initialState,
     action: GetArticlesAction | GetFilteredArticlesAction | ClearFilterAction |
             SetCategoryAction | ClearCategoryAction | ResetLoadingAction | 
             SetPlannerAction | SetPartialArticlesAction | SetOffsetAction |
-            SetPerpageAction | SetPageCountAction | SetLoadingAction) => {
+            SetPerpageAction | SetPageCountAction | SetLoadingAction |
+            SetLoginAction | SetLogoutAction | SetAccessTokenAction |
+            SetEmailAction) => {
     switch(action.type) {
         case GET_ARTICLES:
             return {
@@ -106,12 +125,15 @@ const articlesReducer = (state: ArticlesState = initialState,
                 filteredArticles: []
             }
         case SET_CATEGORY:
-            console.log(action.payload)
             return {
                 ...state,
                 isLoading: false,
                 filteredArticles: state.articles.filter(article => {
                     return article.category == action.payload
+                }),
+                partialArticles: state.filteredArticles.filter(article => {
+                    const regex = new RegExp(`${action.payload}`, 'gi');
+                    return article.title.match(regex) || article.subtitle.match(regex);
                 })
             }
         case CLEAR_CATEGORY:
@@ -148,6 +170,26 @@ const articlesReducer = (state: ArticlesState = initialState,
             return {
                 ...state,
                 perpage: action.payload
+            }
+        case SET_LOGIN:
+            return {
+                ...state,
+                isLogin: true
+            }
+        case SET_LOGOUT:
+            return {
+                ...state,
+                isLogin: false
+            }
+        case SET_ACCESS_TOKEN:
+            return {
+                ...state,
+                accessToken:action.payload
+            }
+        case SET_EMAIL:
+            return {
+                ...state,
+                email:action.payload
             }
         default:
             return state; 

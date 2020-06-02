@@ -26,11 +26,27 @@ from CodeIdeas.utils import parse_articles
 import requests
 
 index_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'index.html')
+signin_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'signin.html')
 
 # Create your views here.
 def index(request):
     try:
         with open(index_file_path) as f:
+            return HttpResponse(f.read())
+    except FileNotFoundError:
+        logging.exception('Production build of app not found')
+        return HttpResponse(
+            """
+                This URL is only used when you have built the production
+                version of the app. Visit http://localhost:3000/ instead after
+                running `yarn start` on the frontend/ directory
+                """,
+            status=501,
+        )
+
+def signin(request):
+    try:
+        with open(signin_file_path) as f:
             return HttpResponse(f.read())
     except FileNotFoundError:
         logging.exception('Production build of app not found')

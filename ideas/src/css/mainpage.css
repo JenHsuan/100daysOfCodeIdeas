@@ -4,13 +4,4 @@
   grid-auto-rows: 200px;
   border-radius: 5px; }
 
-.articles {
-  grid-column-start: 2;
-  grid-column-end: 9;
-  background-color: #FFFFFF;
-  margin-top: 1%; }
-  .articles .step-title {
-    font-weight: 300;
-    font-size: 24px; }
-
 /*# sourceMappingURL=mainpage.css.map */

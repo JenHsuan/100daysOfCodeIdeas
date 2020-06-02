@@ -21,7 +21,7 @@ const Article = ({article}) => {
 
     return (
         <div className="articles-row">
-            <Card className="article-card" border="white">
+            <Card className="article-card" border="light">
                 <Card.Body className="article-card-body">
                     <img className="article-card-img" src={`${article.image}`} alt={article.title} title={article.title}/>
                     <div className="title">{article.title}</div>

@@ -1,5 +1,4 @@
 import ArticleList from '../components/ArticleList'
-import ArticleListSearchBar from '../components/ArticleSearchBar'
 import { Provider } from 'react-redux';
 import store from '../components/store/store'
 import SideBar from '../components/SideBar';

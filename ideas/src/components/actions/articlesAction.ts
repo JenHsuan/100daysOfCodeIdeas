@@ -13,6 +13,10 @@ import {
     SET_PAPE_COUNT,
     SET_OFFSET,
     SET_LOADING,
+    SET_LOGIN,
+    SET_LOGOUT,
+    SET_ACCESS_TOKEN,
+    SET_EMAIL,
     ArticleType 
 } from '../types'
 
@@ -56,6 +60,19 @@ export interface ClearFilterAction {
     readonly type: typeof CLEAR_FILTER
 }
 
+export interface SetLoginAction {
+    readonly type: typeof SET_LOGIN
+}
+
+export interface SetLogoutAction {
+    readonly type: typeof SET_LOGOUT
+}
+
+export interface SetAccessTokenAction {
+    readonly type: typeof SET_ACCESS_TOKEN
+    readonly payload: string
+}
+
 export interface SetCategoryAction {
     readonly type: typeof SET_CATEGORY
     readonly payload: string
@@ -74,11 +91,23 @@ export interface SetPlannerAction {
     readonly payload: boolean
 }
 
+export interface SetEmailAction {
+    readonly type: typeof SET_EMAIL
+    readonly payload: string
+}
+
 export const getArticles = () => async dispatch => {
-        const res = await axios.get('/api/articles');
+    var res = {data:[]};
+    try {
+        res = await axios.get('/api/articles');
         await dispatch({
-            type: GET_ARTICLES, 
-            payload: res.data})
+                type: GET_ARTICLES, 
+                payload: res.data})
+    } catch (error) {
+        //res.data = error;
+        console.log(error);
+    
+    }
 }
 
 export const getFilteredArticles = text => dispatch => {
@@ -115,6 +144,20 @@ export const clearFilter = () => dispatch => {
     dispatch({type: CLEAR_FILTER})
 }
 
+export const setLogin = () => dispatch => {
+    dispatch({type: SET_LOGIN})
+}
+
+export const setLogout = () => dispatch => {
+    dispatch({type: SET_LOGOUT})
+}
+
+export const setAccessToken = token => dispatch => {
+    dispatch({
+        type: SET_ACCESS_TOKEN, 
+        payload: token})
+}
+
 export const setCategory = category => dispatch => {
     dispatch({
         type: SET_CATEGORY, 
@@ -135,4 +178,9 @@ export const setPlanner = showPlanner => dispatch => {
         payload: showPlanner})
 }
 
+export const setEmail = email => dispatch => {
+    dispatch({
+        type: SET_EMAIL, 
+        payload: email})
+}
 

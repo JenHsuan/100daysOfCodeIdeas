@@ -43,6 +43,7 @@ const ArticleList = () => {
     }, [])
 
     useEffect(()=> {
+        console.log('articles updated')
         const partialData = articles.slice(offset, offset + perpage)
         disPatch(setPartialArticles(partialData));
         var count = Math.ceil(articles.length / perpage);
@@ -50,6 +51,7 @@ const ArticleList = () => {
     }, [articles])
 
     useEffect(()=> {
+        console.log('filtered articles updated')
         var count = filteredArticles.length === 0 ? 
         Math.ceil(articles.length / perpage) : Math.ceil(filteredArticles.length / perpage);
         disPatch(setPageCount(count));
@@ -111,17 +113,4 @@ const ArticleList = () => {
         </div>
     )
 }
-
-ArticleList.getInitialProps = async () => {
-    let news;
-    try {
-        const disPatch = useDispatch();    
-    } catch (err) {
-      news = [];
-    }
-  
-    return {
-        news
-    }
-  }
 export default ArticleList;

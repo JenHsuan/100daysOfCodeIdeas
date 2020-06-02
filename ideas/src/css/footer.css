@@ -38,7 +38,7 @@
     font-size: 16px;
     font-weight: 300; }
   .common-footer-grid-box .subscribe-social-btn {
-    grid-column-start: 7;
+    grid-column-start: 6;
     grid-column-end: 12;
     grid-row-start: 8;
     grid-row-end: 9; }

@@ -18,7 +18,7 @@ class ArticleSerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ("reader", "email", "firstname", "lastname")
+        fields = ("reader", "email")
 
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
@@ -37,7 +37,7 @@ class UserSerializerWithToken(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     class Meta:
         model = User
-        fields = ('token', 'username', 'password')
+        fields = ('id', 'token', 'username', 'password')
 
     def get_token(self, obj):
         jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER

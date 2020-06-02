@@ -10,6 +10,10 @@ export const SET_PERPAGE = 'SET_PERPAGE';
 export const SET_PAPE_COUNT = 'SET_PAPE_COUNT';
 export const SET_OFFSET = 'SET_OFFSET';
 export const SET_LOADING = 'SET_LOADING';
+export const SET_LOGIN = 'SET_LOGIN';
+export const SET_LOGOUT = 'SET_LOGOUT';
+export const SET_ACCESS_TOKEN = 'SET_ACCESS_TOKEN';
+export const SET_EMAIL = 'SET_EMAIL';
 
 export interface ArticleType {
     title: string;

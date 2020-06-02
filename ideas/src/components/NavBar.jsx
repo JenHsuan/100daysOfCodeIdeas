@@ -29,7 +29,7 @@ const NavBar = () => {
     <Navbar bg="dark" expand="lg" variant="dark" fixed="top">
     <Navbar.Brand href="/">
         <img
-        src="https://raw.githubusercontent.com/JenHsuan/100daysOfCodeIdeas/master/ideas/src/images/logo.png?token=ADKTL377SEGUDAIFK24VUOS62MRRE"
+        src="https://raw.githubusercontent.com/JenHsuan/ALayman/master/views/images/alaymanicon.png"
         width="30"
         height="30"
         className="d-inline-block align-top navbar-logo-img"
