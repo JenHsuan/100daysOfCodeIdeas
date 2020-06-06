@@ -6,6 +6,7 @@ import SideBar from '../components/SideBar';
 import NavBar from '../components/NavBar';
 import '../css/mainpage.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../css/sidebar.css'
 
 const Index = () => (
     <div>
@@ -13,8 +14,8 @@ const Index = () => (
             <title>ALayman Learning Booster - Topics</title>
             <link rel="icon" href="https://raw.githubusercontent.com/JenHsuan/ALayman/master/views/images/alaymanicon.png" type="image/x-icon" />
         </Head>
-    <   Provider store = {store}>
-        <NavBar></NavBar>
+        <Provider store = {store}>
+            <NavBar></NavBar>
             <div className='grid-box'>
                 <SideBar></SideBar>
                 <ArticleList></ArticleList>

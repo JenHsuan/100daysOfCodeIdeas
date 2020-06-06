@@ -13,6 +13,7 @@ const signin = () => {
         <div>
             <Head>
                 <title>ALayman Learning Booster - Sign in</title>
+                <link rel="icon" href="https://raw.githubusercontent.com/JenHsuan/ALayman/master/views/images/alaymanicon.png" type="image/x-icon" />
             </Head>
             <Provider store = {store}>
                 <NavBar></NavBar>

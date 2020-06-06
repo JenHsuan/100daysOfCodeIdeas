@@ -78,6 +78,15 @@ const ArticleList = () => {
     }
 
     return (
+        <Fragment>
+        <div className="articles-hide-siderbar-head">
+            <div className="title">
+            Learning materials
+            </div>
+            <div className="subtitle">
+                Add the next free article for skills you want to learn to your plan
+            </div>
+        </div>
         <div className="articles-hide-siderbar">
             <div className="articles-row row">
                 {articles.length === 0 ? (<div className='articles-spinner'>{
@@ -112,6 +121,8 @@ const ArticleList = () => {
             )}
             {partialArticles.length >0 && <Footer/>}
         </div>
+
+        </Fragment>
     )
 }
 export default ArticleList;

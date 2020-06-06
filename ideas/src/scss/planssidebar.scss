@@ -1,0 +1,24 @@
+.plans-sidebar {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    background-color: #F2F2F2;
+    color: black;
+    height: 100%;
+    width: 15%;
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+ }
+
+ .plans-sidebar-grid-box {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-auto-rows: 100px;
+ }
+
+ .plans-sidebar-bookmart {
+    grid-row-start: 2;
+    grid-row-end: 3;
+    font-size: 18px;
+    font-weight: 300;
+    margin-left: 10%;
+ }

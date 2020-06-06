@@ -92,6 +92,9 @@ const NavBar = () => {
     const handleLogout = () => {
         disPatch(setLogout());
         SetLogoutForLocalSorage();
+        if (router.pathname !== 'signin' || router.pathname !== 'signup') {
+            Router.push(`/signin`)
+        }
     }
 
     return (
