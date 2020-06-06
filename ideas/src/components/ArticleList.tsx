@@ -42,6 +42,7 @@ const ArticleList = () => {
         disPatch(getArticles());
     }, [])
 
+    
     useEffect(()=> {
         console.log('articles updated')
         const partialData = articles.slice(offset, offset + perpage)
@@ -86,7 +87,7 @@ const ArticleList = () => {
                 }</div>) : (
                 <Fragment>{
                     partialArticles.map(article=>
-                        (<TransitionGroup key={article.id}>
+                        (<TransitionGroup>
                             <CSSTransition key={article.id} timeout={500} classNames="item">
                                 <Article key={article.id} article = {article}/>
                             </CSSTransition>

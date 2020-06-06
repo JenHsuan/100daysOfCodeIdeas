@@ -49,12 +49,18 @@ python manage.py migrate
 ```
 npx concurrently "npm rum build" "sass --watch src/scss:src/css"
 ```
+* SCSS
+```
+sass --watch src/scss:src/css
+```
+
 
 ## References
 ### Test
 * [Set global variables on Postman](https://learning.postman.com/docs/postman/scripts/test-examples/)
 
 ### Django
+* [Django_Social_Login_Tutorial](https://github.com/twtrubiks/django_social_login_tutorial)
 * [how to catch the MultipleObjectsReturned error in django](https://stackoverflow.com/questions/32172934/how-to-catch-the-multipleobjectsreturned-error-in-django)
 * [解决“The STATICFILES_DIRS setting should not contain the STATIC_ROOT setting”](https://blog.csdn.net/lezeqe/article/details/95026726)
 * [Managing static files (e.g. images, JavaScript, CSS)](https://docs.djangoproject.com/en/3.0/howto/static-files/)

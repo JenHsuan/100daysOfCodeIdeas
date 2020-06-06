@@ -1,3 +1,12 @@
+.messages{
+    grid-column-start: 3;
+    grid-column-end: 7;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    color: red;
+    text-align: center;
+}
+
 .signinform {
     grid-column-start: 3;
     grid-column-end: 7;
@@ -17,7 +26,11 @@
             grid-column-start: 1;
             grid-column-end: 7;
             grid-row-start: 4;
-            grid-row-end: 6;
+            grid-row-end: 7;
+            .username{
+                margin-left:5%;
+                width: 90%;
+            }
             .email{
                 margin-left:5%;
                 width: 90%;
@@ -26,18 +39,17 @@
                 margin-left:5%;
                 width: 90%;
             }
+            .btn-submit{
+                width: 90%;
+                margin-left:5%;
+                padding-top:1%;
+                padding-bottom: 1%;
+                border-radius: 5px;
+                font-size: 18px;
+                font-weight: 300;
+            }
         }
-        .btn-submit{
-            grid-column-start: 1;
-            grid-column-end: 7;
-            grid-row-start: 6;
-            grid-row-end: 7;
-            width: 90%;
-            margin-left:5%;
-            border-radius: 5px;
-            font-size: 18px;
-            font-weight: 300;
-        }
+        
         .title{
             grid-column-start: 1;
             grid-column-end: 7;
@@ -46,7 +58,7 @@
             text-align: center;
             font-size: 32px;
             font-weight: 400;
-            margin-top: 2%;
+            margin-top: 1%;
             margin-bottom: 2%;
         }
         .github-btn{
@@ -62,6 +74,7 @@
             margin-left: 10%;
             margin-right: 2%;
             margin-top: 5%;
+            height: 90%;
         }
         .fb-btn {
             color: white;
@@ -76,6 +89,7 @@
             margin-left: 2%;
             margin-right: 10%;
             margin-top: 5%;
+            height: 90%;
         }
         .split-line{
             grid-column-start: 1;
@@ -83,8 +97,8 @@
             grid-row-start: 3;
             grid-row-end: 4;
             text-align: center;
-            margin-top: 5%;
-            margin-bottom: 5%;
+            margin-top: 3%;
+            font-size: 18px;
         }
      }
  }

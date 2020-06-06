@@ -8,6 +8,8 @@ from urllib.error import HTTPError
 from .serializers import SocialAuthForGitihubSerializer, SocialAuthSerializer, ArticleSerializer, UserSerializer, UserSerializerWithToken, OrderSerializer, ProfileSerializer
 from .models import Article, Order, Profile
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 from rest_framework import viewsets, mixins, permissions, status, generics, parsers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -21,9 +23,12 @@ from social_core.backends.oauth import BaseOAuth2
 from social_core.exceptions import MissingBackend, AuthTokenError, AuthForbidden
 from social_django.utils import load_strategy, load_backend
 #from django.contrib.auth import login
+import json
 
 from CodeIdeas.utils import parse_articles
 import requests
+
+from django.core.mail import send_mail
 
 index_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'index.html')
 signin_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'signin.html')
@@ -101,7 +106,9 @@ class UserList(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        msg = {"error": serializer.errors}
+        return Response(data=msg)
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -136,10 +143,29 @@ class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
     http_method_names = ['get', 'post', 'put']
 
-class ProfileViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.AllowAny,)
+class ProfileViewSet(generics.GenericAPIView):
+    #permission_classes = (permissions.AllowAny,)
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
+
+    def post(self, request):
+        try:
+            serializer = self.serializer_class(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                #email = serializer.data.get('email', None)
+                #send_mail('Django mail', 'This e-mail was sent with Django.','alaymangogo@gmail.com', [email], fail_silently=False)
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            
+            msg = {"error": serializer.errors}
+            return Response(data=msg)
+        except ValidationError as e:
+            msg = {"error": e.messages}
+            print(msg)
+            return Response(data=msg) 
+        
+
+profile_view = ProfileViewSet.as_view()         
 
 class SocialGithubLoginView(generics.GenericAPIView):
     serializer_class = SocialAuthForGitihubSerializer
@@ -154,8 +180,10 @@ class SocialGithubLoginView(generics.GenericAPIView):
 
         url = 'https://github.com/login/oauth/access_token'
         data = {'code': code,'client_id':client_id,'client_secret':client_secret}
+        print(data)
         res = requests.post(url, data = data)
         if res.status_code == status.HTTP_200_OK:
+            print(res.text)
             print(res.text.split('=')[1].split('&')[0])
             return Response(status=status.HTTP_200_OK, data=res.text.split('=')[1].split('&')[0])
         else:

@@ -1,3 +1,11 @@
+.messages {
+  grid-column-start: 3;
+  grid-column-end: 7;
+  grid-row-start: 4;
+  grid-row-end: 5;
+  color: red;
+  text-align: center; }
+
 .signinform {
   grid-column-start: 3;
   grid-column-end: 7;
@@ -17,23 +25,24 @@
       grid-column-start: 1;
       grid-column-end: 7;
       grid-row-start: 4;
-      grid-row-end: 6; }
+      grid-row-end: 7; }
+      .signinform .grid-box .signin-form .username {
+        margin-left: 5%;
+        width: 90%; }
       .signinform .grid-box .signin-form .email {
         margin-left: 5%;
         width: 90%; }
       .signinform .grid-box .signin-form .password {
         margin-left: 5%;
         width: 90%; }
-    .signinform .grid-box .btn-submit {
-      grid-column-start: 1;
-      grid-column-end: 7;
-      grid-row-start: 6;
-      grid-row-end: 7;
-      width: 90%;
-      margin-left: 5%;
-      border-radius: 5px;
-      font-size: 18px;
-      font-weight: 300; }
+      .signinform .grid-box .signin-form .btn-submit {
+        width: 90%;
+        margin-left: 5%;
+        padding-top: 1%;
+        padding-bottom: 1%;
+        border-radius: 5px;
+        font-size: 18px;
+        font-weight: 300; }
     .signinform .grid-box .title {
       grid-column-start: 1;
       grid-column-end: 7;
@@ -42,7 +51,7 @@
       text-align: center;
       font-size: 32px;
       font-weight: 400;
-      margin-top: 2%;
+      margin-top: 1%;
       margin-bottom: 2%; }
     .signinform .grid-box .github-btn {
       color: white;
@@ -56,7 +65,8 @@
       grid-row-end: 3;
       margin-left: 10%;
       margin-right: 2%;
-      margin-top: 5%; }
+      margin-top: 5%;
+      height: 90%; }
     .signinform .grid-box .fb-btn {
       color: white;
       background-color: cornflowerblue;
@@ -69,14 +79,15 @@
       grid-row-end: 3;
       margin-left: 2%;
       margin-right: 10%;
-      margin-top: 5%; }
+      margin-top: 5%;
+      height: 90%; }
     .signinform .grid-box .split-line {
       grid-column-start: 1;
       grid-column-end: 7;
       grid-row-start: 3;
       grid-row-end: 4;
       text-align: center;
-      margin-top: 5%;
-      margin-bottom: 5%; }
+      margin-top: 3%;
+      font-size: 18px; }
 
 /*# sourceMappingURL=signinform.css.map */

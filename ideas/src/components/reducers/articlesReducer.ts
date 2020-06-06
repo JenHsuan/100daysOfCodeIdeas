@@ -14,7 +14,8 @@ import {
     SetLoginAction,
     SetLogoutAction,
     SetAccessTokenAction,
-    SetEmailAction
+    SetEmailAction,
+    SetUsernameAction
 } 
 from '../actions/articlesAction'
 import { RootState} from '../store/store'
@@ -37,6 +38,7 @@ import {
     SET_LOGOUT,
     SET_ACCESS_TOKEN,
     SET_EMAIL,
+    SET_USERNAME,
     ArticleType } from '../types'
 
 //Initial state
@@ -52,6 +54,7 @@ interface ArticlesState {
     isLogin: boolean;
     accessToken: string;
     email: string;
+    username: string;
 }
 
 const initialState = {
@@ -65,7 +68,8 @@ const initialState = {
     offset: 0,
     isLogin: false,
     accessToken: '',
-    email:''
+    email:'',
+    username:''
 }
 
 //Selector functions
@@ -81,6 +85,7 @@ export const selectLoadingState = (rootState: RootState) => rootState.articlesRe
 export const selectLoginState = (rootState: RootState) => rootState.articlesReducer.isLogin;
 export const selectAccessTokenState = (rootState: RootState) => rootState.articlesReducer.accessToken;
 export const selectEmailState = (rootState: RootState) => rootState.articlesReducer.email;
+export const selectUsernameState = (rootState: RootState) => rootState.articlesReducer.username;
 
 //Reducer
 const articlesReducer = (state: ArticlesState = initialState,
@@ -89,7 +94,7 @@ const articlesReducer = (state: ArticlesState = initialState,
             SetPlannerAction | SetPartialArticlesAction | SetOffsetAction |
             SetPerpageAction | SetPageCountAction | SetLoadingAction |
             SetLoginAction | SetLogoutAction | SetAccessTokenAction |
-            SetEmailAction) => {
+            SetEmailAction | SetUsernameAction) => {
     switch(action.type) {
         case GET_ARTICLES:
             return {
@@ -130,10 +135,6 @@ const articlesReducer = (state: ArticlesState = initialState,
                 isLoading: false,
                 filteredArticles: state.articles.filter(article => {
                     return article.category == action.payload
-                }),
-                partialArticles: state.filteredArticles.filter(article => {
-                    const regex = new RegExp(`${action.payload}`, 'gi');
-                    return article.title.match(regex) || article.subtitle.match(regex);
                 })
             }
         case CLEAR_CATEGORY:
@@ -190,6 +191,11 @@ const articlesReducer = (state: ArticlesState = initialState,
             return {
                 ...state,
                 email:action.payload
+            }
+        case SET_USERNAME:
+            return {
+                ...state,
+                username:action.payload
             }
         default:
             return state; 

@@ -17,6 +17,7 @@ import {
     SET_LOGOUT,
     SET_ACCESS_TOKEN,
     SET_EMAIL,
+    SET_USERNAME,
     ArticleType 
 } from '../types'
 
@@ -93,6 +94,11 @@ export interface SetPlannerAction {
 
 export interface SetEmailAction {
     readonly type: typeof SET_EMAIL
+    readonly payload: string
+}
+
+export interface SetUsernameAction {
+    readonly type: typeof SET_USERNAME
     readonly payload: string
 }
 
@@ -182,5 +188,11 @@ export const setEmail = email => dispatch => {
     dispatch({
         type: SET_EMAIL, 
         payload: email})
+}
+
+export const setUsername = username => dispatch => {
+    dispatch({
+        type: SET_USERNAME, 
+        payload: username})
 }
 

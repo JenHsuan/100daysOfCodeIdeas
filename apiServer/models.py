@@ -20,7 +20,7 @@ class Article(models.Model):
 
 class Profile(models.Model):
     reader = models.OneToOneField(User, on_delete=models.CASCADE, blank = True, related_name="profile")
-    email = models.CharField(max_length = 64)
+    email = models.EmailField(max_length = 64)
     
 class Order(models.Model):
     reader = models.OneToOneField(User, on_delete=models.CASCADE, blank = True, related_name="order") 
