@@ -6,14 +6,13 @@ import ArticleDateTimePicker from './ArticleDateTimePicker';
 import '../css/sidebar.css'
 import {
     selectShowPlannerState
-} from './reducers/articlesReducer';
+} from './states/states';
 
 const SideBar = () => {
     const showPlanner = useSelector(selectShowPlannerState);
     return (
         <div className='sidebar' style={{width: showPlanner == true ? '20%' : '0%'}}>
             <div className='sidebar-grid-box'>
-                <div className='sidebar-title'>Learning plan</div>
                 <div className='sidebar-dropdown'>
                     <div className='sidebar-dropdown-title'>Choose Materials</div>
                     <div className='sidebar-dropdown-content'>

@@ -6,7 +6,7 @@ import {
     selectShowPlannerState,
     selectLoginState,
     selectUsernameState
-} from './reducers/articlesReducer';
+} from './states/states';
 
 import { 
     setPlanner,

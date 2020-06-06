@@ -9,7 +9,7 @@ import {
     selectOffsetState,
     selectPageCountState,
     selectPerpageState
-} from './reducers/articlesReducer';
+} from './states/states';
 
 import { 
     getArticles,

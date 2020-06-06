@@ -3,7 +3,7 @@ from django.conf.urls import url
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import profile_view, social_auth_github,  social_auth, signin, index, react, InsertData, UserViewSet, current_user, UserList, OrderViewSet, UserViewSet, ArticleByCategoryViewSet, ProfileViewSet
+from .views import plans, signup, profile_view, social_auth_github,  social_auth, signin, index, react, InsertData, UserViewSet, current_user, UserList, OrderViewSet, UserViewSet, ArticleByCategoryViewSet, ProfileViewSet
 from rest_framework.routers import DefaultRouter
 from rest_framework_jwt.views import obtain_jwt_token
 
@@ -17,6 +17,8 @@ router.register(r'order', OrderViewSet)
 urlpatterns = [
     path("", index, name = "index"),
     path("signin", signin, name = "signin"),
+    path("signup", signup, name = "signup"),
+    path("plans", plans, name = "plans"),
     path("react", react, name="react"),
     path("insert", InsertData.as_view(), name="insert"),
     url(r'^api/', include(router.urls)),

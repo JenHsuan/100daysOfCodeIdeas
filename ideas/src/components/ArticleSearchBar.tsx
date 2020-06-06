@@ -1,6 +1,6 @@
 import React, {useEffect, createRef} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { selectFilteredArticlesState} from './reducers/articlesReducer';
+import { selectFilteredArticlesState} from './states/states';
 import {
     getFilteredArticles,
     clearFilter } from './actions/articlesAction';

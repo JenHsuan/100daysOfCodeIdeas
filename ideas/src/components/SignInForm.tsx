@@ -10,7 +10,7 @@ import Router from 'next/router'
 import { useDispatch, useSelector } from 'react-redux';
 import {
     selectLoginState
-} from './reducers/articlesReducer';
+} from './states/states';
 
 import { 
     setLogin,
