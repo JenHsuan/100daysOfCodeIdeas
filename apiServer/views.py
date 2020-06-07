@@ -130,14 +130,18 @@ class UserList(APIView):
     Create a new user. It's called 'UserList' because normally we'd have a get
     method here too, for retrieving a list of all User objects.
     """
-
+    # use empty authentication classes 
+    authentication_classes = []
     permission_classes = (permissions.AllowAny,)
 
     def post(self, request, format=None):
         serializer = UserSerializerWithToken(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            print(serializer.data['token'])
+            response = Response(serializer.data, status=status.HTTP_201_CREATED)
+            response.set_cookie('token', serializer.data['token'], httponly=True)
+            return response
         
         msg = {"error": serializer.errors}
         return Response(data=msg)
@@ -156,6 +160,8 @@ class ArticleViewSet(viewsets.ModelViewSet):
 '''
 
 class ArticleByCategoryViewSet(generics.ListAPIView):
+    # use empty authentication classes 
+    authentication_classes = []
     permission_classes = (permissions.AllowAny,)
     serializer_class = ArticleSerializer
     http_method_names = ['get']
@@ -177,6 +183,8 @@ class OrderViewSet(viewsets.ModelViewSet):
 
 class ProfileViewSet(generics.GenericAPIView):
     #permission_classes = (permissions.AllowAny,)
+    #authentication_classes = []
+    # use default authentication classes 
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 

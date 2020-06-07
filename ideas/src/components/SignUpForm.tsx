@@ -19,6 +19,7 @@ import {
     setEmail,
     setUsername
 } from './actions/articlesAction';
+import Cookies from 'js-cookie';
 
 const SignUpForm = () => {
     const disPatch = useDispatch();
@@ -86,7 +87,7 @@ const SignUpForm = () => {
 
             //local storage
             localStorage.setItem("login", "true");
-            localStorage.setItem("token", token);
+            //localStorage.setItem("token", token);
 
             if (email !== null && email !== undefined && email.length >0 ) {
                 disPatch(setEmail(email));
@@ -144,13 +145,11 @@ const SignUpForm = () => {
                 const id = createUserRes["data"]["id"];
                 const token = createUserRes["data"]["token"];
                 const headers = {
-                    Authorization: `JWT ${token}`
+                    'Authorization': `JWT ${token}`
                 }
                 const updateProfileRes = await axios.post('/api/profile/', {
                     email: email,
                     reader: id
-                },{
-                    headers: headers
                 });
                 
                 console.log(updateProfileRes)
@@ -160,6 +159,10 @@ const SignUpForm = () => {
                         ['messages']: `${Object.keys(err)[0]} : ${Object.values(err)[0]}`})
                 }
                 if (updateProfileRes !== undefined && updateProfileRes["data"]["email"] === email) {
+                    const loginRes = await axios.post('/api/token-auth/', {
+                        username: username,
+                        password: password
+                    });
                     SetLogin(token, email, username);
                 }
             }
