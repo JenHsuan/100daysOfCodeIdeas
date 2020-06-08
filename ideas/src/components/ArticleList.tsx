@@ -8,14 +8,16 @@ import {
     selectIsLoadingState,
     selectOffsetState,
     selectPageCountState,
-    selectPerpageState
+    selectPerpageState,
+    selectShowPlannerState,
 } from './states/states';
 
 import { 
     getArticles,
     setPartialArticles,
     setOffset,
-    setPageCount
+    setPageCount,
+    setLogout
 } from './actions/articlesAction';
 
 import {
@@ -27,9 +29,12 @@ import {Spinner} from 'react-bootstrap';
 import Article from './Article'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Footer from '../components/Footer';
+import axios from 'axios';
+import Router, { useRouter } from 'next/router'
 
 const ArticleList = () => {
     const disPatch = useDispatch();
+    const router = useRouter()
     const isLoading = useSelector(selectIsLoadingState);
     const articles = useSelector(selectArticlesState);
     const filteredArticles = useSelector(selectFilteredArticlesState);
@@ -37,12 +42,32 @@ const ArticleList = () => {
     const perpage = useSelector(selectPerpageState);
     const pageCount = useSelector(selectPageCountState);
     const offset = useSelector(selectOffsetState);
+    const showPlanner = useSelector(selectShowPlannerState);
     
     useEffect(()=> {
+        const fetchData = async () => {
+            try {
+                const res = await axios.get('api/renew-token/');
+            } catch(error) {
+                console.log(error)
+                /*
+                disPatch(setLogout());
+                SetLogoutForLocalSorage();
+                Router.push(`/signin`)
+                */
+            }
+        };
+        
+        fetchData();
         disPatch(getArticles());
     }, [])
 
-    
+    const SetLogoutForLocalSorage = () => {
+        localStorage.setItem("login", 'false');
+        localStorage.setItem("username", '');
+        localStorage.setItem("email", '');
+    }
+
     useEffect(()=> {
         console.log('articles updated')
         const partialData = articles.slice(offset, offset + perpage)
@@ -79,16 +104,16 @@ const ArticleList = () => {
 
     return (
         <Fragment>
-        <div className="articles-hide-siderbar-head">
+        <div className={`${showPlanner === true ? 'articles-hide-siderbar-head' : 'articles-hide-siderbar-head articles-hide-siderbar-head-remove-left'}`}>
             <div className="title">
-            Learning materials
+                Learning materials
             </div>
             <div className="subtitle">
                 Add the next free article for skills you want to learn to your plan
             </div>
         </div>
         <div className="articles-hide-siderbar">
-            <div className="articles-row row">
+            <div className={`${showPlanner === true ? 'articles-row row' : 'articles-row row articles-row-remove-left'}`}>
                 {articles.length === 0 ? (<div className='articles-spinner'>{
                     <Spinner animation="border" role="status">
                         <span className="sr-only">Loading...</span>

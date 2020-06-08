@@ -30,6 +30,7 @@ import requests
 
 from django.core.mail import send_mail
 
+
 index_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'index.html')
 signin_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'signin.html')
 signup_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'signup.html')
@@ -207,8 +208,30 @@ class ProfileViewSet(generics.GenericAPIView):
 
 profile_view = ProfileViewSet.as_view()         
 
+
+class RefreshTokenView(generics.GenericAPIView):
+    authentication_classes = []
+    permission_classes = (permissions.AllowAny,)
+    def get(self, request):
+        token = request.COOKIES.get('token')
+        data = {'token':token}
+        scheme = request.is_secure() and "https" or "http"
+        url = scheme + "://" + request.get_host() + '/api/refresh-token-auth/'
+        res = requests.post(url, data = data)
+        if res.status_code == status.HTTP_200_OK:
+            print(json.loads(res.text)["token"])
+            response = Response(status=status.HTTP_200_OK)
+            response.set_cookie('token', json.loads(res.text)["token"], httponly=True)
+            return response
+        else:
+            return Response(status=res.status_code)
+
+renew_token= RefreshTokenView.as_view()   
+        
 class SocialGithubLoginView(generics.GenericAPIView):
     serializer_class = SocialAuthForGitihubSerializer
+    # use empty authentication classes 
+    authentication_classes = []
     permission_classes = [permissions.AllowAny]
 
     def post(self, request):
@@ -233,6 +256,9 @@ social_auth_github = SocialGithubLoginView.as_view()
 
 class SocialLoginView(generics.GenericAPIView):
     serializer_class = SocialAuthSerializer
+
+    # use empty authentication classes 
+    authentication_classes = []
     permission_classes = [permissions.AllowAny]
 
     def post(self, request):
@@ -293,6 +319,8 @@ class SocialLoginView(generics.GenericAPIView):
                 "username": authenticated_user.username,
                 "token": data.get('token')
             }
-            return Response(status=status.HTTP_200_OK, data=response)
+            response = Response(status=status.HTTP_200_OK, data=response)
+            response.set_cookie('token', data.get('token'), httponly=True)
+            return response
 
 social_auth = SocialLoginView.as_view()

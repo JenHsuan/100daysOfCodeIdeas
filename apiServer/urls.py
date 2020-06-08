@@ -3,7 +3,7 @@ from django.conf.urls import url
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import plans, signup, profile_view, social_auth_github,  social_auth, signin, index, react, InsertData, UserViewSet, current_user, UserList, OrderViewSet, UserViewSet, ArticleByCategoryViewSet, ProfileViewSet
+from .views import renew_token, plans, signup, profile_view, social_auth_github,  social_auth, signin, index, react, InsertData, UserViewSet, current_user, UserList, OrderViewSet, UserViewSet, ArticleByCategoryViewSet, ProfileViewSet
 from rest_framework.routers import DefaultRouter
 from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework_jwt.views import refresh_jwt_token
@@ -27,6 +27,7 @@ urlpatterns = [
     path("api/profile/", profile_view),
     path('api/token-auth/', obtain_jwt_token, name='token-auth'),
     path('api/refresh-token-auth/', refresh_jwt_token, name='refresh-token-auth'),
+    path('api/renew-token/', renew_token, name='renew-token'),
     path('api/current_user/', current_user, name='current_user'),
     path('api/users/', UserList.as_view(), name='users'),
     path("api/social-auth", social_auth),
