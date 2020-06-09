@@ -6,7 +6,6 @@ import {
     clearCategory,
     resetLoading
 } from './actions/articlesAction';
-import '../css/articleDropdown.css'
 
 const ArticleDropdown = () => {
     const disPatch = useDispatch();

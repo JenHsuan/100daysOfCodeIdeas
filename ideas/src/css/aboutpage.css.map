@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,mBAAoB;EAChB,OAAO,EAAE,IAAI;EACb,qBAAqB,EAAE,cAAc;EACrC,cAAc,EAAE,KAAK;EACrB,aAAa,EAAE,GAAG;EAClB,gCAAa;IACT,cAAc,EAAE,CAAC;IACjB,YAAY,EAAE,CAAC;IACf,iBAAiB,EAAE,CAAC;IACpB,eAAe,EAAE,CAAC;IAClB,gBAAgB,EAAE,OAAO;EAE7B,2BAAO;IACH,cAAc,EAAE,CAAC;IACjB,iBAAiB,EAAE,CAAC;IACpB,eAAe,EAAE,CAAC",
+"sources": ["../scss/aboutpage.scss"],
+"names": [],
+"file": "aboutpage.css"
+}

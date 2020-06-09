@@ -50,6 +50,8 @@ const ArticleList = () => {
                 const res = await axios.get('api/renew-token/');
             } catch(error) {
                 console.log(error)
+                disPatch(setLogout());
+                SetLogoutForLocalSorage();
                 /*
                 disPatch(setLogout());
                 SetLogoutForLocalSorage();

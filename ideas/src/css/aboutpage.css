@@ -1,0 +1,17 @@
+.aboutpage-grid-box {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: 200px;
+  border-radius: 5px; }
+  .aboutpage-grid-box .column-left {
+    grid-row-start: 1;
+    grid-row-end: 5;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    background-color: #F2F2F2; }
+  .aboutpage-grid-box .footer {
+    grid-row-start: 5;
+    grid-column-start: 1;
+    grid-column-end: 7; }
+
+/*# sourceMappingURL=aboutpage.css.map */

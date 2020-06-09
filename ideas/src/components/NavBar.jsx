@@ -42,40 +42,33 @@ const NavBar = () => {
         localStorage.setItem("login", 'false');
         localStorage.setItem("username", '');
         localStorage.setItem("email", '');
-        localStorage.setItem("token", '');
     }
 
-    const SetLogin = (token, email, username) => {
-        if (token !== null && token !== undefined && token.length >0 ) {
-            disPatch(setLogin());
-            disPatch(setAccessToken(token));
-
+    const SetLogin = (email, username) => {
+        if (email !== null && email !== undefined && email.length >0 ) {
+            disPatch(setEmail(email));
             //local storage
-            localStorage.setItem("login", "true");
-            localStorage.setItem("token", token);
-
-            if (email !== null && email !== undefined && email.length >0 ) {
-                disPatch(setEmail(email));
-
-                //local storage
-                localStorage.setItem("email", email);
-            }
-            if (username !== null && username !== undefined && username.length >0 ) {
-                disPatch(setUsername(username));
-
-                //local storage
-                localStorage.setItem("username", username);
-            }
+            localStorage.setItem("email", email);
         }
+        if (username !== null && username !== undefined && username.length >0 ) {
+            disPatch(setUsername(username));
+            //local storage
+            localStorage.setItem("username", username);
+        }
+        
+        disPatch(setLogin());
+        //local storage
+        localStorage.setItem("login", "true");
     }
 
     useEffect(()=> {
         const login = localStorage.getItem("login");
+        console.log(login)
         if (login !== null && login === 'true') {
-            const token = localStorage.getItem("token");
+            //const token = localStorage.getItem("token");
             const email = localStorage.getItem("email");
             const username = localStorage.getItem("username");
-            SetLogin(token, email, username);
+            SetLogin(email, username);
         }
     }, [])
 

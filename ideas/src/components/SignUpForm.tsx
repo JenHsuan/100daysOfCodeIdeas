@@ -81,27 +81,21 @@ const SignUpForm = () => {
     }
 
     const SetLogin = (token, email, username) => {
-        if (token !== null && token !== undefined && token.length >0 ) {
-            disPatch(setLogin());
-            disPatch(setAccessToken(token));
-
+        if (email !== null && email !== undefined && email.length >0 ) {
+            disPatch(setEmail(email));
             //local storage
-            localStorage.setItem("login", "true");
-            //localStorage.setItem("token", token);
-
-            if (email !== null && email !== undefined && email.length >0 ) {
-                disPatch(setEmail(email));
-
-                //local storage
-                localStorage.setItem("email", email);
-            }
-            if (username !== null && username !== undefined && username.length >0 ) {
-                disPatch(setUsername(username));
-
-                //local storage
-                localStorage.setItem("username", username);
-            }
+            localStorage.setItem("email", email);
         }
+        if (username !== null && username !== undefined && username.length >0 ) {
+            disPatch(setUsername(username));
+            //local storage
+            localStorage.setItem("username", username);
+        }
+
+        disPatch(setLogin());
+        disPatch(setAccessToken(token));
+        //local storage
+        localStorage.setItem("login", "true");
     }
 
     const ResponseGithubOnSuccess = async response => {
