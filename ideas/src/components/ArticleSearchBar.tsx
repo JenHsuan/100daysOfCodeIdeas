@@ -1,32 +1,39 @@
 import React, {useEffect, createRef} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { selectFilteredArticlesState} from './states/states';
+import { 
+    selectFilterTextState
+} from './states/states';
 import {
     getFilteredArticles,
     clearFilter } from './actions/articlesAction';
-import '../css/articleSearch.css'
+import Router, { useRouter } from 'next/router'
 
 const ArticleSearchBar = () => {
     const text = createRef<HTMLInputElement>()
+    const router = useRouter()
     const disPatch = useDispatch();
-    const filteredArticles = useSelector(selectFilteredArticlesState);
+    const filterText = useSelector(selectFilterTextState)
     
     useEffect(() => {
-        if (filteredArticles.length === 0) {
-            text.current.value = '';
+        if (filterText.length !== 0) {
+            text.current.value = filterText;
         }
-    });
+    },[]);
 
     const onChange = e => {
+        console.log(e.target.value)
         if (text.current.value !== '') {
             disPatch(getFilteredArticles(e.target.value));
+            if (router.pathname !== '/') {
+                Router.push(`/`)
+            }
         } else {
             disPatch(clearFilter());
         }
     }
 
     return (    
-        <input className="article-searchbar" ref={text} type="text" placeholder="Filter articles..." onChange={onChange}/>
+        <input className="article-searchbar" ref={text} type="text" placeholder="ex, ReactJS, next.js, Golang..." onChange={onChange}/>
     )
 }
 

@@ -16,7 +16,7 @@ const Index = () => (
         </Head>
         <Provider store = {store}>
             <NavBar></NavBar>
-            <div className='grid-box'>
+            <div className='mainpage-grid-box'>
                 <SideBar></SideBar>
                 <ArticleList></ArticleList>
             </div>

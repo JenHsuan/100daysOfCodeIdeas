@@ -7,6 +7,8 @@ import SignUpForm from '../components/SignUpForm';
 import '../css/signinpage.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Footer from '../components/Footer';
+import SideBar from '../components/SideBar';
+import '../css/sidebar.css'
 
 const signup = () => {
     return (
@@ -18,6 +20,7 @@ const signup = () => {
             <Provider store = {store}>
                 <NavBar></NavBar>
                 <div className='grid-box'>
+                    <SideBar></SideBar>
                     <SignUpForm></SignUpForm>
                     <div className="signin-footer">
                     <Footer/>

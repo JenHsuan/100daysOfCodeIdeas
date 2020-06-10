@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,kBAAkB;EACd,KAAK,EAAE,GAAG;EACV,aAAa,EAAE,GAAG;EAClB,UAAU,EAAE,EAAE;EACd,OAAO,EAAE,KAAK",
-"sources": ["../scss/articleSearch.scss"],
-"names": [],
-"file": "articleSearch.css"
-}

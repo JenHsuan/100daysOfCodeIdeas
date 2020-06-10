@@ -5,8 +5,10 @@ import store from '../components/store/store'
 import NavBar from '../components/NavBar';
 import SignInForm from '../components/SignInForm';
 import '../css/signinpage.css';
+import '../css/sidebar.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Footer from '../components/Footer';
+import SideBar from '../components/SideBar';
 
 const signin = () => {
     return (
@@ -18,6 +20,7 @@ const signin = () => {
             <Provider store = {store}>
                 <NavBar></NavBar>
                 <div className='grid-box'>
+                    <SideBar></SideBar>
                     <SignInForm></SignInForm>
                     <div className="signin-footer">
                     <Footer/>

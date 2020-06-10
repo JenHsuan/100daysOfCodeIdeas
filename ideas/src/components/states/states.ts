@@ -18,6 +18,8 @@ export interface ArticlesState {
     accessToken: string;
     email: string;
     username: string;
+    filterText: string;
+    category: number;
 }
 
 export const initialState = {
@@ -32,7 +34,9 @@ export const initialState = {
     isLogin: false,
     accessToken: '',
     email:'',
-    username:''
+    username:'',
+    filterText:'',
+    category: -1
 }
 
 //Selector functions
@@ -49,3 +53,5 @@ export const selectLoginState = (rootState: RootState) => rootState.articlesRedu
 export const selectAccessTokenState = (rootState: RootState) => rootState.articlesReducer.accessToken;
 export const selectEmailState = (rootState: RootState) => rootState.articlesReducer.email;
 export const selectUsernameState = (rootState: RootState) => rootState.articlesReducer.username;
+export const selectFilterTextState = (rootState: RootState) => rootState.articlesReducer.filterText;
+export const selectCategoryState = (rootState: RootState) => rootState.articlesReducer.category;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import ArticleSearchBar from './ArticleSearchBar';
 import ArticleDropdown from './ArticleDropdown';
 import ArticleDateTimePicker from './ArticleDateTimePicker';
@@ -30,36 +30,41 @@ const SideBar = () => {
         }
     }
     return (
-        <div className='sidebar' style={{width: showPlannerFlag == true ? '20%' : '0%'}}>
+        <div className='sidebar' style={{width: showPlannerFlag == true ? '23%' : '2%'}}>
             <div className='sidebar-grid-box'>
-                {!isLogin && (
-                    <div className="sidebar-getstarted">
-                    <button className="sidebar-getstarted-btn">
-                        <Link href="/signup">
-                            <a href="/signup">Get Started</a>
-                        </Link>
-                    </button>
-                </div>
+                {showPlannerFlag == true && (
+                    <Fragment>
+                    <div className='sidebar-title'>Let's Create Your Learnng Plan
+                        <div className="sidebar-subtitle">Choose the topics about Software development, Testing, DevOps, or 100DaysOfCode to build the personal learning plan</div>
+                    </div>
+                    <div className='sidebar-dropdown'>
+                        <div className='sidebar-dropdown-content'>
+                            <ArticleDropdown/>
+                        </div>
+                    </div>
+                    <div className='sidebar-search'>
+                        <div className='sidebar-search-content'>
+                            <ArticleSearchBar />
+                        </div>
+                    </div>
+                    </Fragment>
                 )}
-                <div className={isLogin ? 'sidebar-dropdown-after-login' : 'sidebar-dropdown'}>
-                    <div className='sidebar-dropdown-title'>Choose Materials</div>
-                    <div className='sidebar-dropdown-content'>
-                        <ArticleDropdown/>
+                {showPlannerFlag == true ? (   
+                    <div className='sidebar-remove-left'>
+                        <span className="btn-o" onClick = {showPlanner}>
+                            <a href="#">
+                                <img src="https://raw.githubusercontent.com/JenHsuan/ALayman/master/views/images/move-left.png" alt="Hide" title="Hide"/>
+                            </a>
+                        </span>
                     </div>
-                </div>
-                <div className={isLogin ? 'sidebar-search-after-login' : 'sidebar-search'}>
-                    <div className='sidebar-search-title'>Search for all articles</div>
-                    <div className='sidebar-search-content'>
-                        <ArticleSearchBar />
-                    </div>
-                </div>
-                <div className='sidebar-remove-left'>
-                    <span className="btn-o" onClick = {showPlanner}>
-                        <a href="#">
-                            <img src="https://raw.githubusercontent.com/JenHsuan/ALayman/master/views/images/move-left.png" alt="Hide" title="Hide"/>
-                        </a>
-                    </span>
-                </div>
+                ) : (
+                    <div className='sidebar-remove-right'>
+                        <span className="btn-o" onClick = {showPlanner}>
+                            <a href="#">
+                                <img src="https://raw.githubusercontent.com/JenHsuan/ALayman/master/views/images/move-right.png" alt="Show" title="Show"/>
+                            </a>
+                        </span>
+                    </div>)}
             </div>
         </div>
     )

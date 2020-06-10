@@ -45,23 +45,21 @@ const ArticleList = () => {
     const showPlanner = useSelector(selectShowPlannerState);
     
     useEffect(()=> {
-        const fetchData = async () => {
+        const refreshToken = async () => {
             try {
                 const res = await axios.get('api/renew-token/');
             } catch(error) {
                 console.log(error)
                 disPatch(setLogout());
                 SetLogoutForLocalSorage();
-                /*
-                disPatch(setLogout());
-                SetLogoutForLocalSorage();
-                Router.push(`/signin`)
-                */
             }
         };
         
-        fetchData();
-        disPatch(getArticles());
+        refreshToken();
+        if (articles.length === 0) {
+            console.log('fetch articles')
+            disPatch(getArticles());
+        }
     }, [])
 
     const SetLogoutForLocalSorage = () => {
@@ -114,21 +112,21 @@ const ArticleList = () => {
                 Add the next free article for skills you want to learn to your plan
             </div>
         </div>
-        <div className="articles-hide-siderbar">
-            <div className={`${showPlanner === true ? 'articles-row row' : 'articles-row row articles-row-remove-left'}`}>
-                {articles.length === 0 ? (<div className='articles-spinner'>{
+        <div className={`${showPlanner !== true ? 'articles-hide-siderbar' : 'articles-hide-siderbar articles-hide-siderbar-remove-left'}`}>
+            <div className="articles-row row">
+                {articles.length === 0 ? (
+                <div className='articles-spinner'>{
                     <Spinner animation="border" role="status">
                         <span className="sr-only">Loading...</span>
                     </Spinner>
                 }</div>) : (
-                <Fragment>{
                     partialArticles.map(article=>
                         (<TransitionGroup>
                             <CSSTransition key={article.id} timeout={500} classNames="item">
                                 <Article key={article.id} article = {article}/>
                             </CSSTransition>
                         </TransitionGroup>))
-                }</Fragment>)}
+                )}
             </div>
             {partialArticles.length >0 && (
                 <div className="article-pagination">

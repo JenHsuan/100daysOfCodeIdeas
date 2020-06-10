@@ -3,15 +3,78 @@
   grid-template-columns: repeat(6, 1fr);
   grid-auto-rows: 200px;
   border-radius: 5px; }
-  .aboutpage-grid-box .column-left {
-    grid-row-start: 1;
-    grid-row-end: 5;
-    grid-column-start: 1;
-    grid-column-end: 4;
-    background-color: #F2F2F2; }
   .aboutpage-grid-box .footer {
-    grid-row-start: 5;
+    grid-row-start: 6;
     grid-column-start: 1;
     grid-column-end: 7; }
+  .aboutpage-grid-box .column-left-grid-box {
+    grid-row-start: 1;
+    grid-row-end: 6;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    background-color: #F2F2F2;
+    grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: 50px;
+    display: grid; }
+    .aboutpage-grid-box .column-left-grid-box .about-website-title {
+      grid-row-start: 3;
+      grid-row-end: 5;
+      grid-column-start: 2;
+      grid-column-end: 7;
+      text-align: center;
+      font-size: 32px;
+      font-weight: 400;
+      color: cornflowerblue; }
+    .aboutpage-grid-box .column-left-grid-box .about-website-subtitle-1 {
+      grid-row-start: 5;
+      grid-row-end: 6;
+      grid-column-start: 2;
+      grid-column-end: 7;
+      text-align: center;
+      font-size: 26px;
+      font-weight: 300; }
+    .aboutpage-grid-box .column-left-grid-box .about-website-content-1 {
+      margin-top: 1%;
+      grid-row-start: 6;
+      grid-row-end: 10;
+      grid-column-start: 2;
+      grid-column-end: 7;
+      font-size: 18px;
+      font-weight: 200;
+      color: gray; }
+    .aboutpage-grid-box .column-left-grid-box .about-website-subtitle-2 {
+      grid-row-start: 10;
+      grid-row-end: 11;
+      grid-column-start: 1;
+      grid-column-end: 8;
+      text-align: center;
+      font-size: 26px;
+      font-weight: 300; }
+    .aboutpage-grid-box .column-left-grid-box .about-website-content-2 {
+      margin-top: 1%;
+      grid-row-start: 11;
+      grid-row-end: 15;
+      grid-column-start: 2;
+      grid-column-end: 7;
+      font-size: 18px;
+      font-weight: 200;
+      color: gray; }
+    .aboutpage-grid-box .column-left-grid-box .about-website-subtitle-3 {
+      grid-row-start: 15;
+      grid-row-end: 16;
+      grid-column-start: 1;
+      grid-column-end: 8;
+      text-align: center;
+      font-size: 26px;
+      font-weight: 300; }
+    .aboutpage-grid-box .column-left-grid-box .about-website-content-3 {
+      margin-top: 1%;
+      grid-row-start: 16;
+      grid-row-end: 25;
+      grid-column-start: 2;
+      grid-column-end: 7;
+      font-size: 18px;
+      font-weight: 200;
+      color: gray; }
 
 /*# sourceMappingURL=aboutpage.css.map */

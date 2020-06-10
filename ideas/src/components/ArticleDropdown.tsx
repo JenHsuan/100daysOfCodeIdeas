@@ -6,25 +6,42 @@ import {
     clearCategory,
     resetLoading
 } from './actions/articlesAction';
+import {
+    selectCategoryState
+} from './states/states';
+import Router, { useRouter } from 'next/router'
 
 const ArticleDropdown = () => {
     const disPatch = useDispatch();
+    const router = useRouter()
+    const category = useSelector(selectCategoryState);
     const handleSelect=(e)=>{
         if (e != "-1") {
             console.log(e);
-            disPatch(resetLoading());
             disPatch(setCategory(e));
+            if (router.pathname !== '/') {
+                Router.push(`/`)
+            }
         } else {
-            disPatch(resetLoading());
             disPatch(clearCategory());
         }
     }
 
+    const getTitle = () => {
+        if (category == -1) {
+            return 'All articles'
+        } else if (category == 0) {
+            return 'Challenges'
+        }  else if (category == 1) {
+            return 'Programming'
+        } 
+    }
+
     return (
-        <DropdownButton className='article-dropdown' id="dropdown-basic-button" title="Suggestions" onSelect={handleSelect}>
+        <DropdownButton className='article-dropdown' id="dropdown-basic-button" title={getTitle()} onSelect={handleSelect}>
             <Dropdown.Item eventKey="-1">All</Dropdown.Item>
-            <Dropdown.Item eventKey="0">100 Days Of CodeChallenges</Dropdown.Item>
-            <Dropdown.Item eventKey="1">Programming Materials</Dropdown.Item>
+            <Dropdown.Item eventKey="0">Challenges</Dropdown.Item>
+            <Dropdown.Item eventKey="1">Programming</Dropdown.Item>
         </DropdownButton>
     )
 }

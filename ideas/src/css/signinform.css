@@ -1,59 +1,66 @@
-.messages {
-  grid-column-start: 3;
-  grid-column-end: 7;
-  grid-row-start: 4;
-  grid-row-end: 5;
-  color: red;
-  text-align: center; }
-
 .signinform {
   grid-column-start: 3;
   grid-column-end: 7;
   grid-row-start: 2;
-  grid-row-end: 4;
-  background-color: #FFFFFF;
+  grid-row-end: 8;
+  overflow-x: hidden;
+  transition: 0.8s;
+  background-color: #F2F2F2;
   margin-top: 1%;
-  border-width: 1px;
-  border-style: solid;
-  border-radius: 5px; }
-  .signinform .grid-box {
+  border-radius: 5px;
+  box-shadow: 0 5px 10px gray; }
+  .signinform .signinform-grid-box {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-auto-rows: 60px;
     border-radius: 5px; }
-    .signinform .grid-box .signin-form {
+    .signinform .signinform-grid-box .signinform-spinner {
+      grid-column-start: 4;
+      grid-column-end: 5;
+      grid-row-start: 5;
+      grid-row-end: 6; }
+    .signinform .signinform-grid-box .messages {
       grid-column-start: 1;
       grid-column-end: 7;
-      grid-row-start: 4;
-      grid-row-end: 7; }
-      .signinform .grid-box .signin-form .username {
+      grid-row-start: 10;
+      grid-row-end: 11;
+      color: red;
+      text-align: center; }
+    .signinform .signinform-grid-box .signin-form {
+      grid-column-start: 1;
+      grid-column-end: 7;
+      grid-row-start: 6;
+      grid-row-end: 8; }
+      .signinform .signinform-grid-box .signin-form .username {
         margin-left: 5%;
         width: 90%; }
-      .signinform .grid-box .signin-form .email {
+      .signinform .signinform-grid-box .signin-form .email {
         margin-left: 5%;
         width: 90%; }
-      .signinform .grid-box .signin-form .password {
+      .signinform .signinform-grid-box .signin-form .password {
         margin-left: 5%;
         width: 90%; }
-      .signinform .grid-box .signin-form .btn-submit {
+      .signinform .signinform-grid-box .signin-form .btn-submit {
         width: 90%;
         margin-left: 5%;
         padding-top: 1%;
         padding-bottom: 1%;
         border-radius: 5px;
-        font-size: 18px;
-        font-weight: 300; }
-    .signinform .grid-box .title {
+        font-size: 20px;
+        font-weight: 400;
+        background-color: #FFC844;
+        border-style: none; }
+    .signinform .signinform-grid-box .title {
       grid-column-start: 1;
       grid-column-end: 7;
       grid-row-start: 1;
-      grid-row-end: 2;
+      grid-row-end: 3;
       text-align: center;
-      font-size: 32px;
+      font-size: 28px;
       font-weight: 400;
-      margin-top: 1%;
+      margin-top: 7%;
       margin-bottom: 2%; }
-    .signinform .grid-box .github-btn {
+    .signinform .signinform-grid-box .github-btn {
       color: white;
       background-color: black;
       font-size: 18px;
@@ -61,13 +68,14 @@
       border-radius: 5px;
       grid-column-start: 1;
       grid-column-end: 4;
-      grid-row-start: 2;
-      grid-row-end: 3;
-      margin-left: 10%;
+      grid-row-start: 3;
+      grid-row-end: 4;
+      margin-left: 15%;
       margin-right: 2%;
       margin-top: 5%;
-      height: 90%; }
-    .signinform .grid-box .fb-btn {
+      height: 90%;
+      border-style: none; }
+    .signinform .signinform-grid-box .fb-btn {
       color: white;
       background-color: cornflowerblue;
       font-size: 18px;
@@ -75,19 +83,26 @@
       border-radius: 5px;
       grid-column-start: 4;
       grid-column-end: 7;
-      grid-row-start: 2;
-      grid-row-end: 3;
-      margin-left: 2%;
-      margin-right: 10%;
-      margin-top: 5%;
-      height: 90%; }
-    .signinform .grid-box .split-line {
-      grid-column-start: 1;
-      grid-column-end: 7;
       grid-row-start: 3;
       grid-row-end: 4;
+      margin-left: 2%;
+      margin-right: 15%;
+      margin-top: 5%;
+      height: 90%;
+      border-style: none; }
+    .signinform .signinform-grid-box .split-line {
+      grid-column-start: 1;
+      grid-column-end: 7;
+      grid-row-start: 4;
+      grid-row-end: 6;
       text-align: center;
-      margin-top: 3%;
-      font-size: 18px; }
+      margin-top: 8%;
+      font-size: 16px; }
+
+.signinform-move-left {
+  grid-column-start: 4;
+  grid-column-end: 8;
+  overflow-x: hidden;
+  transition: 0.8s; }
 
 /*# sourceMappingURL=signinform.css.map */

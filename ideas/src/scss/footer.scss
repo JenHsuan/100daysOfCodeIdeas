@@ -25,17 +25,6 @@
     grid-auto-rows: 50px;
     border-radius: 5px;
 
-    .stuff-we-do {
-        grid-column-start: 3;
-        grid-column-end: 5;
-        grid-row-start: 4;
-        grid-row-end: 5;
-        font-size: 20px;
-        font-weight: 300;
-        color: white;
-        text-align: center;
-    }
-
     .subscribe-copyright{
         grid-column-start: 7;
         grid-column-end: 12;
@@ -93,25 +82,55 @@
         margin-top: 10%;
     }
 
-    .author {
-        grid-column-start: 6;
-        grid-column-end: 11;
+    
+ }
+
+ .common-footer-grid-box-move-left{
+    .slogon {
+        grid-column-start: 8;
+        grid-column-end: 13;
+    }
+    .subscribe-copyright{
+        grid-column-start: 9;
+        grid-column-end: 14;
+        grid-row-start: 10;
+        grid-row-end: 11;
+        color: white;
+        font-size: 16px;
+        font-weight: 300;
+    }
+    .subscribe-email {
+        grid-column-start: 8;
+        grid-column-end: 13;
         grid-row-start: 5;
+        grid-row-end: 6;
+        font-size: 28px;
+        font-weight: 300;
+        color: white;
+    }
+    .subscribe-btn {
+        grid-column-start: 10;
+        grid-column-end: 13;
+        grid-row-start: 6;
         grid-row-end: 7;
-        span {
-            a {
+        font-size: 28px;
+        font-weight: 300;
+        color: white;
+    }
+    .subscribe-social-btn {
+        grid-column-start: 8;
+        grid-column-end: 14;
+        grid-row-start: 8;
+        grid-row-end: 9;
+        span{
+            margin-right: 5%;
+            a{
                 img{
-                    width: 40px;
-                    margin-left: 10%;
-                    margin-top: 2%;
+                    background-color: white;
+                    width: 30px;
+                    border-radius: 3px;
                 }
             }
-        }
-        .name {
-            font-size: 16px;
-            font-weight: 300;
-            margin-left: 2%;
-            color: white;
         }
     }
  }

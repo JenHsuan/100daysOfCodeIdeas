@@ -9,7 +9,8 @@ import Router from 'next/router'
 
 import { useDispatch, useSelector } from 'react-redux';
 import {
-    selectLoginState
+    selectLoginState,
+    selectShowPlannerState
 } from './states/states';
 
 import { 
@@ -24,6 +25,7 @@ import Cookies from 'js-cookie';
 const SignUpForm = () => {
     const disPatch = useDispatch();
     const isLogin = useSelector(selectLoginState);
+    const showPlanner = useSelector(selectShowPlannerState);
 
     useEffect(()=> {
         if (isLogin) {
@@ -170,8 +172,8 @@ const SignUpForm = () => {
 
     return (
         <Fragment>
-        <div className="signinform">
-            <div className="grid-box">
+        <div className={`${showPlanner === true ? 'signinform-move-left signinform' : 'signinform'}`} >
+            <div className="signinform-grid-box">
                 <div className="title">Create Your Free Account</div>
             <FacebookLogin
                 cssClass="fb-btn"
@@ -208,9 +210,9 @@ const SignUpForm = () => {
                 </button>
                     </Form>
                 </div>
+        <div className="messages">{messages}</div>
             </div>
         </div>
-        <div className="messages">{messages}</div>
         </Fragment>    
     )
 }

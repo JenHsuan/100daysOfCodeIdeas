@@ -35,6 +35,7 @@ index_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'index.html')
 signin_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'signin.html')
 signup_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'signup.html')
 plans_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'plans.html')
+about_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'about.html')
 
 # Create your views here.
 def index(request):
@@ -85,6 +86,21 @@ def signup(request):
 def plans(request):
     try:
         with open(plans_file_path) as f:
+            return HttpResponse(f.read())
+    except FileNotFoundError:
+        logging.exception('Production build of app not found')
+        return HttpResponse(
+            """
+                This URL is only used when you have built the production
+                version of the app. Visit http://localhost:3000/ instead after
+                running `yarn start` on the frontend/ directory
+                """,
+            status=501,
+        )
+
+def about(request):
+    try:
+        with open(about_file_path) as f:
             return HttpResponse(f.read())
     except FileNotFoundError:
         logging.exception('Production build of app not found')

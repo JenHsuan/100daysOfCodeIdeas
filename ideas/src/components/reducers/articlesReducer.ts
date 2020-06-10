@@ -68,6 +68,7 @@ const articlesReducer = (state: ArticlesState = initialState,
             return {
                 ...state,
                 isLoading: false,
+                filterText: action.payload,
                 filteredArticles: state.articles.filter(article => {
                     const regex = new RegExp(`${action.payload}`, 'gi');
                     return article.title.match(regex) || article.subtitle.match(regex);
@@ -87,12 +88,14 @@ const articlesReducer = (state: ArticlesState = initialState,
         case CLEAR_FILTER:
             return {
                 ...state,
+                category: -1,
                 filteredArticles: []
             }
         case SET_CATEGORY:
             return {
                 ...state,
                 isLoading: false,
+                category: action.payload,
                 filteredArticles: state.articles.filter(article => {
                     return article.category == action.payload
                 })

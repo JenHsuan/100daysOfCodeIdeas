@@ -1,8 +1,13 @@
 import React from 'react';
 import FooterItem from '../components/FooterItem';
 import '../css/footer.css';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    selectShowPlannerState
+} from './states/states';
 
 const Footer = () => {
+    const showPlanner = useSelector(selectShowPlannerState);
     const twitter = 'https://raw.githubusercontent.com/JenHsuan/ALayman/master/views/images/twitter.png';
     const twitterUrl = 'https://twitter.com/JenHsuanHsieh';
     
@@ -30,7 +35,7 @@ const Footer = () => {
     const copyrightText = "@2020 Jen-Hsuan Hsieh. All right reserved."
     return (
         <div className="common-footer">
-            <div className="common-footer-grid-box">
+            <div className={`${showPlanner !== true ? 'common-footer-grid-box' : 'common-footer-grid-box common-footer-grid-box-move-left'}`}>
                 <div className="slogon">
                     Learn, Think, and Improve 
                 </div>

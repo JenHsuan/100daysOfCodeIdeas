@@ -15,7 +15,7 @@
   grid-column-start: 1;
   grid-column-end: 9;
   grid-row-start: 1;
-  padding-left: 23%;
+  padding-left: 25%;
   padding-top: 5%;
   width: 100%;
   background-color: #FFFFFF;
@@ -29,30 +29,30 @@
     font-weight: 300; }
 
 .articles-hide-siderbar-head-remove-left {
-  padding-left: 12%; }
+  padding-left: 5%; }
 
 .articles-hide-siderbar {
   grid-column-start: 1;
   grid-column-end: 9;
   grid-row-start: 2;
   background-color: #FFFFFF;
-  margin-top: 1%; }
+  margin-top: 1%;
+  transition: 0.5s; }
+
+.articles-hide-siderbar-remove-left {
+  padding-left: 23%;
+  transition: 0.5s; }
 
 .articles-row {
-  padding-left: 15%;
-  padding-right: 10%;
   overflow-x: hidden;
   transition: 0.5s; }
 
-.articles-row-remove-left {
-  padding-left: 10%; }
-
 .article-card {
-  width: 500px;
+  width: 400px;
   border: none;
   margin-top: 2%;
   margin-bottom: 20%;
-  padding-left: 10%;
+  padding-left: 5%;
   margin-left: 5%; }
 
 .article-card-img {

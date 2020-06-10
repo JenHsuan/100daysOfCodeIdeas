@@ -101,22 +101,15 @@ const NavBar = () => {
         alt="Learning Booster"
         href="/"
         title="Learning Booster from Sean Hsieh"/>
-      Learning Booster</Navbar.Brand>
+      Daily Learning</Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-            {router.pathname === '/' && (
-            <NavDropdown title='Tools' id="basic-nav-dropdown">
-                <NavDropdown.Item eventKey={2} onSelect={showPlanner}>Learning Planner</NavDropdown.Item>
-            </NavDropdown>
-            )}
-            <NavDropdown title='About' id="basic-nav-dropdown">
-                <NavDropdown.Item >
-                    <Link href="/about">
-                        <a href="/about">About us</a>
-                    </Link>
-                </NavDropdown.Item>
-            </NavDropdown>
+            <Nav.Link href="About"> 
+                <Link href="/about">
+                    <a href="/about">About</a>
+                </Link>
+            </Nav.Link>
         </Nav>
         <Nav>
         {!isLogin && (

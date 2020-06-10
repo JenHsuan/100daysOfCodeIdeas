@@ -1,32 +1,40 @@
-.messages{
-    grid-column-start: 3;
-    grid-column-end: 7;
-    grid-row-start: 4;
-    grid-row-end: 5;
-    color: red;
-    text-align: center;
-}
+
 
 .signinform {
     grid-column-start: 3;
     grid-column-end: 7;
     grid-row-start: 2;
-    grid-row-end: 4;
-    background-color: #FFFFFF;
+    grid-row-end: 8;
+    overflow-x: hidden;
+    transition: 0.8s;
+    background-color: #F2F2F2;
     margin-top: 1%;
-    border-width: 1px;
-    border-style: solid;
     border-radius: 5px;
-    .grid-box {
+    box-shadow: 0 5px 10px gray;
+    .signinform-grid-box {
         display: grid;
         grid-template-columns: repeat(6, 1fr);
         grid-auto-rows: 60px;
         border-radius: 5px;
+        .signinform-spinner{
+            grid-column-start: 4;
+            grid-column-end: 5;
+            grid-row-start: 5;
+            grid-row-end: 6;
+        }
+        .messages{
+            grid-column-start: 1;
+            grid-column-end: 7;
+            grid-row-start: 10;
+            grid-row-end: 11;
+            color: red;
+            text-align: center;
+        }
         .signin-form{
             grid-column-start: 1;
             grid-column-end: 7;
-            grid-row-start: 4;
-            grid-row-end: 7;
+            grid-row-start: 6;
+            grid-row-end: 8;
             .username{
                 margin-left:5%;
                 width: 90%;
@@ -45,8 +53,10 @@
                 padding-top:1%;
                 padding-bottom: 1%;
                 border-radius: 5px;
-                font-size: 18px;
-                font-weight: 300;
+                font-size: 20px;
+                font-weight: 400;
+                background-color: #FFC844;
+                border-style: none;
             }
         }
         
@@ -54,11 +64,11 @@
             grid-column-start: 1;
             grid-column-end: 7;
             grid-row-start: 1;
-            grid-row-end: 2;
+            grid-row-end: 3;
             text-align: center;
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 400;
-            margin-top: 1%;
+            margin-top: 7%;
             margin-bottom: 2%;
         }
         .github-btn{
@@ -69,12 +79,13 @@
             border-radius: 5px;
             grid-column-start: 1;
             grid-column-end: 4;
-            grid-row-start: 2;
-            grid-row-end: 3;
-            margin-left: 10%;
+            grid-row-start: 3;
+            grid-row-end: 4;
+            margin-left: 15%;
             margin-right: 2%;
             margin-top: 5%;
             height: 90%;
+            border-style: none;
         }
         .fb-btn {
             color: white;
@@ -84,21 +95,31 @@
             border-radius: 5px;
             grid-column-start: 4;
             grid-column-end: 7;
-            grid-row-start: 2;
-            grid-row-end: 3;
+            grid-row-start: 3;
+            grid-row-end: 4;
             margin-left: 2%;
-            margin-right: 10%;
+            margin-right: 15%;
             margin-top: 5%;
             height: 90%;
+            border-style: none;
         }
         .split-line{
             grid-column-start: 1;
             grid-column-end: 7;
-            grid-row-start: 3;
-            grid-row-end: 4;
+            grid-row-start: 4;
+            grid-row-end: 6;
             text-align: center;
-            margin-top: 3%;
-            font-size: 18px;
+            margin-top: 8%;
+            font-size: 16px;
         }
      }
  }
+
+
+.signinform-move-left {
+    grid-column-start: 4;
+    grid-column-end: 8;
+    overflow-x: hidden;
+    transition: 0.8s;
+}
+
