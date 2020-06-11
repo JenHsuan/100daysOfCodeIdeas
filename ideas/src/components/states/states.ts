@@ -20,6 +20,7 @@ export interface ArticlesState {
     username: string;
     filterText: string;
     category: number;
+    errorMessage: string;
 }
 
 export const initialState = {
@@ -36,7 +37,8 @@ export const initialState = {
     email:'',
     username:'',
     filterText:'',
-    category: -1
+    category: -1,
+    errorMessage: ''
 }
 
 //Selector functions
@@ -55,3 +57,4 @@ export const selectEmailState = (rootState: RootState) => rootState.articlesRedu
 export const selectUsernameState = (rootState: RootState) => rootState.articlesReducer.username;
 export const selectFilterTextState = (rootState: RootState) => rootState.articlesReducer.filterText;
 export const selectCategoryState = (rootState: RootState) => rootState.articlesReducer.category;
+export const selectErrorMessageState = (rootState: RootState) => rootState.articlesReducer.errorMessage;

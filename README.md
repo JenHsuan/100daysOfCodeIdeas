@@ -1,4 +1,4 @@
-# Learning Booster (The final project for CS50 web)
+# Daily Learning (The final project for CS50 web)
 
 ## Description
 * The target of Django + Next.js + TS project is to create a learning boost. This site collects the articles I wrote before and I want to provide a service for users to learn programming easier.

@@ -15,7 +15,8 @@ import {
     SetLogoutAction,
     SetAccessTokenAction,
     SetEmailAction,
-    SetUsernameAction
+    SetUsernameAction,
+    SetErrorMessageAction
 } 
 from '../actions/articlesAction'
 import { RootState} from '../store/store'
@@ -39,6 +40,7 @@ import {
     SET_ACCESS_TOKEN,
     SET_EMAIL,
     SET_USERNAME,
+    SET_ERRORMESSAGE,
     ArticleType } from '../types'
 
 //States
@@ -54,7 +56,7 @@ const articlesReducer = (state: ArticlesState = initialState,
             SetPlannerAction | SetPartialArticlesAction | SetOffsetAction |
             SetPerpageAction | SetPageCountAction | SetLoadingAction |
             SetLoginAction | SetLogoutAction | SetAccessTokenAction |
-            SetEmailAction | SetUsernameAction) => {
+            SetEmailAction | SetUsernameAction | SetErrorMessageAction) => {
     switch(action.type) {
         case GET_ARTICLES:
             return {
@@ -159,6 +161,11 @@ const articlesReducer = (state: ArticlesState = initialState,
             return {
                 ...state,
                 username:action.payload
+            }
+        case SET_ERRORMESSAGE:
+            return {
+                ...state,
+                errorMessage:action.payload
             }
         default:
             return state; 

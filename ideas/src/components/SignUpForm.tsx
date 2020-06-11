@@ -4,28 +4,32 @@ import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props
 import GitHubLogin from 'react-github-login';
 import '.././css/signinform.css'
 import axios from 'axios';
-import {Form} from 'react-bootstrap';
+import {Form, Spinner} from 'react-bootstrap';
 import Router from 'next/router'
 
 import { useDispatch, useSelector } from 'react-redux';
 import {
     selectLoginState,
-    selectShowPlannerState
+    selectShowPlannerState,
+    selectErrorMessageState,
+    selectLoadingState
 } from './states/states';
 
 import { 
-    setLogin,
-    setLogout,
-    setAccessToken,
-    setEmail,
-    setUsername
+    setErrorMessage,
+    setLoading
 } from './actions/articlesAction';
-import Cookies from 'js-cookie';
+import FormWrapper from '../components/FormWrapper'
 
-const SignUpForm = () => {
+const SignUpForm = ({responseFacebook,
+    ResponseGithubOnSuccess,
+    ResponseGithubOnFailure,
+    SetLogin}) => {
     const disPatch = useDispatch();
     const isLogin = useSelector(selectLoginState);
     const showPlanner = useSelector(selectShowPlannerState);
+    const errorMessage = useSelector(selectErrorMessageState);
+    const isLoading = useSelector(selectLoadingState);
 
     useEffect(()=> {
         if (isLogin) {
@@ -36,107 +40,29 @@ const SignUpForm = () => {
     const [value, setValue] = useState({
         username:'',
         email:'',
-        password:'',
-        messages:''
+        password:''
     })
 
-    const {username, email, password, messages} = value;
+    const {username, email, password} = value;
 
     const handleChange = name => e => {
       setValue({...value, [name]: e.target.value.trim()})
     }
-
-    const passAccessToken = async (provider, access_token) => {
-        const res = await axios.post('/api/social-auth', {
-            provider: provider,
-            access_token: access_token
-        });
-        return res;
-    }
-
-    const createUser = async (username, password) => {
-        const res = await axios.post('/api/users', {
-            username: username,
-            password: password
-        });
-        return res;
-    }
-
-    const responseFacebook = async response => {
-        try {
-            const responseFromDjango = await passAccessToken('facebook', response["accessToken"]);
-            console.log(responseFromDjango);
-            const token = responseFromDjango["data"]["token"];
-            const username = responseFromDjango["data"]["username"];
-            const email = response["email"];
-            SetLogin(token, email, username);
-        } catch (error) {
-            //res.data = error;
-            setValue({...value, ['messages']: error.message})
-            console.log(error);
-            disPatch(setLogout());
-        }
-    }
-
-    const responseGoogle = (response) => {
-        console.log(response);
-    }
-
-    const SetLogin = (token, email, username) => {
-        if (email !== null && email !== undefined && email.length >0 ) {
-            disPatch(setEmail(email));
-            //local storage
-            localStorage.setItem("email", email);
-        }
-        if (username !== null && username !== undefined && username.length >0 ) {
-            disPatch(setUsername(username));
-            //local storage
-            localStorage.setItem("username", username);
-        }
-
-        disPatch(setLogin());
-        disPatch(setAccessToken(token));
-        //local storage
-        localStorage.setItem("login", "true");
-    }
-
-    const ResponseGithubOnSuccess = async response => {
-        try {
-            const responseFromGithub = await axios.post('/api/get-github-access-token', {
-                code: response['code']
-            });
-            console.log(responseFromGithub['data']);
-            
-            const responseFromDjango = await passAccessToken('github', responseFromGithub['data']);
-            console.log(responseFromDjango);
-            const token = responseFromDjango["data"]["token"];
-            const email = responseFromDjango["data"]["email"];
-            const username = responseFromDjango["data"]["username"];
-            SetLogin(token, email, username);
-        } catch (error) {
-            //res.data = error;
-            console.log(error);
-            setValue({...value, ['messages']: error.message})
-            disPatch(setLogout());
-        }
-    }
-
-    const ResponseGithubOnFailure = response => console.error(response);  
-
+    
     const handleSubmit = async e => {
         // Check if the form is invalid
         // null or empty 
         // email format
         e.preventDefault();
         try {
+            disPatch(setLoading(true));
             const createUserRes = await axios.post('/api/users/', {
                 username: username,
                 password: password
             });
             if (createUserRes["data"]["error"] !== undefined) {
                 var err = createUserRes["data"]["error"]
-                setValue({...value, 
-                    ['messages']: `${Object.keys(err)[0]} : ${Object.values(err)[0]}`})
+                disPatch(setErrorMessage(`${Object.keys(err)[0]} : ${Object.values(err)[0]}`))
             } else  {
                 const id = createUserRes["data"]["id"];
                 const token = createUserRes["data"]["token"];
@@ -151,8 +77,7 @@ const SignUpForm = () => {
                 console.log(updateProfileRes)
                 var err = updateProfileRes["data"]["error"]
                 if (err !== undefined) {
-                    setValue({...value, 
-                        ['messages']: `${Object.keys(err)[0]} : ${Object.values(err)[0]}`})
+                    disPatch(setErrorMessage(`${Object.keys(err)[0]} : ${Object.values(err)[0]}`))
                 }
                 if (updateProfileRes !== undefined && updateProfileRes["data"]["email"] === email) {
                     const loginRes = await axios.post('/api/token-auth/', {
@@ -162,10 +87,12 @@ const SignUpForm = () => {
                     SetLogin(token, email, username);
                 }
             }
+            disPatch(setLoading(false));
             
         } catch (error) {
             //res.data = error;
-            setValue({...value, ['messages']: error.message})
+            disPatch(setLoading(false));
+            disPatch(setErrorMessage(error.message))
             console.log(error);
         }
     }
@@ -173,48 +100,58 @@ const SignUpForm = () => {
     return (
         <Fragment>
         <div className={`${showPlanner === true ? 'signinform-move-left signinform' : 'signinform'}`} >
-            <div className="signinform-grid-box">
-                <div className="title">Create Your Free Account</div>
-            <FacebookLogin
-                cssClass="fb-btn"
-                appId="240314257268798"
-                autoLoad={false}
-                fields="name,email,picture"
-                callback={responseFacebook}
-                render={renderProps => (
-                    <button onClick={renderProps.onClick} className="fb-btn">Facebook</button>
-                  )}/>
-            <GitHubLogin 
-                className="github-btn"
-                clientId="51b1a8ee5b7cad1e6a85"
-                redirectUri="http://localhost:3000/signin" 
-                onSuccess={ResponseGithubOnSuccess}
-                onFailure={ResponseGithubOnFailure}
-                buttonText="Github"/>
-                <div className="split-line">
-                    Or signup by email
+            {isLoading === true ? (
+                <div className="signinform-grid-box">
+                <div className="signinform-spinner">
+                    <Spinner animation="border" role="status">
+                        <span className="sr-only">Loading...</span>
+                    </Spinner>
                 </div>
-                <div className="signin-form">
-                    <Form onSubmit = {handleSubmit}>
-                        <Form.Group controlId="formBasicEmail">
-                            <Form.Control type="text" placeholder="Enter Username" className="username" onChange={handleChange('username')} />
-                        </Form.Group>
-                        <Form.Group controlId="formBasicPassword">
-                            <Form.Control type="text" placeholder="Enter Email" className="email" onChange={handleChange('email')}/>
-                        </Form.Group>
-                        <Form.Group controlId="formBasicPassword">
-                            <Form.Control type="password" placeholder="Password" className="password" onChange={handleChange('password')}/>
-                        </Form.Group>
-                <button className="btn-submit">
-                Get Started
-                </button>
-                    </Form>
-                </div>
-        <div className="messages">{messages}</div>
             </div>
-        </div>
+            ):(
+                <div className="signinform-grid-box">
+                    <div className="title">Create Your Free Account</div>
+                <FacebookLogin
+                    cssClass="fb-btn"
+                    appId="240314257268798"
+                    autoLoad={false}
+                    fields="name,email,picture"
+                    callback={responseFacebook}
+                    render={renderProps => (
+                        <button onClick={renderProps.onClick} className="fb-btn">Facebook</button>
+                      )}/>
+                <GitHubLogin 
+                    className="github-btn"
+                    clientId="51b1a8ee5b7cad1e6a85"
+                    redirectUri="http://localhost:3000/signin" 
+                    onSuccess={ResponseGithubOnSuccess}
+                    onFailure={ResponseGithubOnFailure}
+                    buttonText="Github"/>
+                    <div className="split-line">
+                        Or signup by email
+                    </div>
+                    <div className="signin-form">
+                        <Form onSubmit = {handleSubmit}>
+                            <Form.Group controlId="formBasicEmail">
+                                <Form.Control type="text" placeholder="Enter Username" className="username" onChange={handleChange('username')} />
+                            </Form.Group>
+                            <Form.Group controlId="formBasicPassword">
+                                <Form.Control type="text" placeholder="Enter Email" className="email" onChange={handleChange('email')}/>
+                            </Form.Group>
+                            <Form.Group controlId="formBasicPassword">
+                                <Form.Control type="password" placeholder="Password" className="password" onChange={handleChange('password')}/>
+                            </Form.Group>
+                    <button className="btn-submit">
+                    Get Started
+                    </button>
+                        </Form>
+                    </div>
+            <div className="messages">{errorMessage}</div>
+                </div>
+            )}
+            </div>
         </Fragment>    
     )
 }
 
-export default SignUpForm
+export default FormWrapper(SignUpForm)

@@ -18,6 +18,7 @@ import {
     SET_ACCESS_TOKEN,
     SET_EMAIL,
     SET_USERNAME,
+    SET_ERRORMESSAGE,
     ArticleType 
 } from '../types'
 
@@ -99,6 +100,11 @@ export interface SetEmailAction {
 
 export interface SetUsernameAction {
     readonly type: typeof SET_USERNAME
+    readonly payload: string
+}
+
+export interface SetErrorMessageAction {
+    readonly type: typeof SET_ERRORMESSAGE
     readonly payload: string
 }
 
@@ -194,5 +200,11 @@ export const setUsername = username => dispatch => {
     dispatch({
         type: SET_USERNAME, 
         payload: username})
+}
+
+export const setErrorMessage = message => dispatch => {
+    dispatch({
+        type: SET_ERRORMESSAGE, 
+        payload: message})
 }
 
