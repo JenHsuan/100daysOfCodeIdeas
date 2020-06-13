@@ -28,7 +28,9 @@ import json
 from CodeIdeas.utils import parse_articles
 import requests
 
+from CodeIdeas.settings import EMAIL_HOST_USER
 from django.core.mail import send_mail
+from datetime import datetime
 
 
 index_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'index.html')
@@ -155,7 +157,6 @@ class UserList(APIView):
         serializer = UserSerializerWithToken(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            print(serializer.data['token'])
             response = Response(serializer.data, status=status.HTTP_201_CREATED)
             response.set_cookie('token', serializer.data['token'], httponly=True)
             return response
@@ -199,17 +200,29 @@ class OrderViewSet(viewsets.ModelViewSet):
     http_method_names = ['get', 'post', 'put']
 
 class ProfileViewSet(generics.GenericAPIView):
-    #permission_classes = (permissions.AllowAny,)
-    #authentication_classes = []
+    # permission_classes = (permissions.AllowAny,)
+    # authentication_classes = []
     # use default authentication classes 
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
+    
     def post(self, request):
         try:
             serializer = self.serializer_class(data=request.data)
             if serializer.is_valid():
                 serializer.save()
+                print(serializer.data)
+
+                now = datetime.now()
+                dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+
+                send_mail('[Daily Learning] Thanks for registration!', 
+                'You login to Daily Learning successfully on ' + dt_string, 
+                EMAIL_HOST_USER, 
+                [serializer.data['email']], 
+                fail_silently = False)
+            
                 #email = serializer.data.get('email', None)
                 #send_mail('Django mail', 'This e-mail was sent with Django.','alaymangogo@gmail.com', [email], fail_silently=False)
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -335,8 +348,19 @@ class SocialLoginView(generics.GenericAPIView):
                 "username": authenticated_user.username,
                 "token": data.get('token')
             }
+            print(response)
             response = Response(status=status.HTTP_200_OK, data=response)
             response.set_cookie('token', data.get('token'), httponly=True)
+
+            now = datetime.now()
+            dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+
+            send_mail('[Daily Learning] Welcome Back!', 
+            'Hi ' + authenticated_user.username + ', you login to Daily Learning successfully on ' + dt_string, 
+            EMAIL_HOST_USER, 
+            [authenticated_user.email], 
+            fail_silently = False)
+
             return response
 
 social_auth = SocialLoginView.as_view()
