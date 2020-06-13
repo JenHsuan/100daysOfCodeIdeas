@@ -18,7 +18,7 @@ class ArticleSerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ("reader", "email")
+        fields = ("reader", "email", "hasSubscribed")
 
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:

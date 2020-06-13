@@ -21,6 +21,7 @@ class Article(models.Model):
 class Profile(models.Model):
     reader = models.OneToOneField(User, on_delete=models.CASCADE, blank = True, related_name="profile")
     email = models.EmailField(max_length = 64)
+    hasSubscribed = models.BooleanField(default=True)
     
 class Order(models.Model):
     reader = models.OneToOneField(User, on_delete=models.CASCADE, blank = True, related_name="order") 
