@@ -64,6 +64,27 @@
     margin-bottom: 20%;
     padding-left: 5%;
     margin-left: 5%;
+    z-index: 1;
+    position: relative;
+    .article-bookmark{
+      position: absolute;
+      z-index: 2;
+      left: 80%;
+      width: 7%;
+      font-size: 6px;
+      span{
+        a{
+          img{
+            width: 100%;
+          }
+          img:hover{
+             width: 120%;
+             color: white;
+             opacity: 0.5;
+          }
+        }
+      }
+    }   
 }
 
 .article-card-img {

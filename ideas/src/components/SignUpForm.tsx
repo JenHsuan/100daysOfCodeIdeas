@@ -20,6 +20,7 @@ import {
     setLoading
 } from './actions/articlesAction';
 import FormWrapper from '../components/FormWrapper'
+import PropTypes from 'prop-types'
 
 const SignUpForm = ({responseFacebook,
     ResponseGithubOnSuccess,
@@ -152,6 +153,13 @@ const SignUpForm = ({responseFacebook,
             </div>
         </Fragment>    
     )
+}
+
+SignUpForm.propTypes = {
+    responseFacebook: PropTypes.func.isRequired,
+    ResponseGithubOnSuccess: PropTypes.func.isRequired,
+    ResponseGithubOnFailure: PropTypes.func.isRequired,
+    SetLogin: PropTypes.func.isRequired
 }
 
 export default FormWrapper(SignUpForm)

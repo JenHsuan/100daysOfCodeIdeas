@@ -1,7 +1,7 @@
 
 import { RootState} from '../store/store'
 //Types
-import {ArticleType } from '../types'
+import { ArticleType } from '../types'
 
     
 //Initial state
@@ -21,6 +21,7 @@ export interface ArticlesState {
     filterText: string;
     category: number;
     errorMessage: string;
+    bookmarks:Array<number>;
 }
 
 export const initialState = {
@@ -38,7 +39,8 @@ export const initialState = {
     username:'',
     filterText:'',
     category: -1,
-    errorMessage: ''
+    errorMessage: '',
+    bookmarks: []
 }
 
 //Selector functions
@@ -58,3 +60,4 @@ export const selectUsernameState = (rootState: RootState) => rootState.articlesR
 export const selectFilterTextState = (rootState: RootState) => rootState.articlesReducer.filterText;
 export const selectCategoryState = (rootState: RootState) => rootState.articlesReducer.category;
 export const selectErrorMessageState = (rootState: RootState) => rootState.articlesReducer.errorMessage;
+export const selectBookmarksState = (rootState: RootState) => rootState.articlesReducer.bookmarks;

@@ -19,6 +19,9 @@ import {
     SET_EMAIL,
     SET_USERNAME,
     SET_ERRORMESSAGE,
+    ADD_BOOKMARK,
+    REMOVE_BOOKMARK,
+    SET_BOOKMARKS,
     ArticleType 
 } from '../types'
 
@@ -106,6 +109,21 @@ export interface SetUsernameAction {
 export interface SetErrorMessageAction {
     readonly type: typeof SET_ERRORMESSAGE
     readonly payload: string
+}
+
+export interface AddBookmarkAction {
+    readonly type: typeof ADD_BOOKMARK
+    readonly payload: number
+}
+
+export interface RemoveBookmarkAction {
+    readonly type: typeof REMOVE_BOOKMARK
+    readonly payload: number
+}
+
+export interface SetBookmarksAction {
+    readonly type: typeof SET_BOOKMARKS
+    readonly payload: Array<number>
 }
 
 export const getArticles = () => async dispatch => {
@@ -206,5 +224,23 @@ export const setErrorMessage = message => dispatch => {
     dispatch({
         type: SET_ERRORMESSAGE, 
         payload: message})
+}
+
+export const addBookmark = id => dispatch => {
+    dispatch({
+        type: ADD_BOOKMARK, 
+        payload: id})
+}
+
+export const removeBookmark = id => dispatch => {
+    dispatch({
+        type: REMOVE_BOOKMARK, 
+        payload: id})
+}
+
+export const setBookmarks = bookmarks => dispatch => {
+    dispatch({
+        type: SET_BOOKMARKS, 
+        payload: bookmarks})
 }
 

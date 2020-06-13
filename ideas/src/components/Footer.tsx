@@ -1,5 +1,4 @@
 import React from 'react';
-import FooterItem from '../components/FooterItem';
 import '../css/footer.css';
 import { useDispatch, useSelector } from 'react-redux';
 import {

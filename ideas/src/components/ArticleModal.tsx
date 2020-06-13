@@ -35,9 +35,6 @@ const ArticleModal = ({show, handleClose, article}) => {
             <Button variant="primary" onClick = {openArticle}>
                 Open the article
             </Button>
-            <Button variant="primary" >
-                Save to your learning plan
-            </Button>
             </Modal.Footer>
         </Modal>
     )

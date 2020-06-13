@@ -16,7 +16,8 @@ import {
     setEmail,
     setUsername,
     setErrorMessage,
-    getArticles
+    getArticles,
+    setPlanner
 } from './actions/articlesAction';
 import { useMediaPredicate } from "react-media-hook";
 
@@ -24,13 +25,16 @@ const FormWrapper = (WrappedComponent) => ()=> {
     const disPatch = useDispatch();
     const isLogin = useSelector(selectLoginState);
     const articles = useSelector(selectArticlesState);
-    const biggerThan400 = useMediaPredicate("(min-width: 400px)");
+    const smallerThan600 = useMediaPredicate("(max-width: 600px)");
     //const [isLoading, setLoading] = useState(false);
 
     useEffect(()=> {
         if (articles.length === 0) {
             console.log('fetch articles')
             disPatch(getArticles());
+        }
+        if (smallerThan600) {
+            disPatch(setPlanner(false));
         }
     }, [])
 

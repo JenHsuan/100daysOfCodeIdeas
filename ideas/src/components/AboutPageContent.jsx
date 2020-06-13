@@ -8,8 +8,19 @@ import {
 const AboutPageContent = () => {
     const disPatch = useDispatch();
     useEffect(()=> {
-        disPatch(setPlanner(false));
+        const refreshToken = async () => {
+            try {
+                const res = await axios.get('api/renew-token/');
+            } catch(error) {
+                console.log(error)
+                disPatch(setLogout());
+                SetLogoutForLocalSorage();
+            }
+        };
+        
+        refreshToken();
     }, [])
+
     return (
         <div className='column-left-grid-box'>
             <div className="about-website-title">

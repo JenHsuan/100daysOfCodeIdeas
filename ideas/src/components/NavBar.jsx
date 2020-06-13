@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, Fragment} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Navbar, Nav, NavDropdown, MenuItem } from 'react-bootstrap';
 import '../css/navbar.css'
@@ -22,7 +22,7 @@ import Router, { useRouter } from 'next/router'
 
 
 const NavBar = () => {
-    const router = useRouter()
+    const router = useRouter();
     const disPatch = useDispatch();
     const showPlannerFlag = useSelector(selectShowPlannerState);
     const isLogin = useSelector(selectLoginState);
@@ -105,11 +105,20 @@ const NavBar = () => {
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-            <Nav.Link href="About"> 
+            <Nav.Link href="about"> 
                 <Link href="/about">
                     <a href="/about">About</a>
                 </Link>
             </Nav.Link>
+            {isLogin && (
+                <Fragment>
+                <Nav.Link href="bookmarks"> 
+                    <Link href="/bookmarks">
+                        <a href="/bookmarks">Plans</a>
+                    </Link>
+                </Nav.Link>
+                </Fragment>
+            )}
         </Nav>
         <Nav>
         {!isLogin && (
@@ -124,9 +133,6 @@ const NavBar = () => {
         )}
         {isLogin && (
             <NavDropdown title={username} id="basic-nav-dropdown">
-                <NavDropdown.Item href="/plans">
-                    Your plans
-                </NavDropdown.Item>
                 <NavDropdown.Item eventKey={2} onSelect={handleLogout}>
                     Sign out
                 </NavDropdown.Item>

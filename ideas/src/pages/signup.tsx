@@ -19,7 +19,7 @@ const signup = () => {
             </Head>
             <Provider store = {store}>
                 <NavBar></NavBar>
-                <div className='grid-box'>
+                <div className='signin-ggrid-box'>
                     <SideBar></SideBar>
                     <SignUpForm></SignUpForm>
                     <div className="signin-footer">

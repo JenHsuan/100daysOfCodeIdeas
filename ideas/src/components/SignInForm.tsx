@@ -114,10 +114,9 @@ const SignInForm = ({responseFacebook,
 }
 
 SignInForm.propTypes = {
-    passAccessToken: PropTypes.func.isRequired,
     responseFacebook: PropTypes.func.isRequired,
-            ResponseGithubOnSuccess: PropTypes.func.isRequired,
-            ResponseGithubOnFailure: PropTypes.func.isRequired,
-            SetLogin: PropTypes.func.isRequired
+    ResponseGithubOnSuccess: PropTypes.func.isRequired,
+    ResponseGithubOnFailure: PropTypes.func.isRequired,
+    SetLogin: PropTypes.func.isRequired
 }
 export default FormWrapper(SignInForm)

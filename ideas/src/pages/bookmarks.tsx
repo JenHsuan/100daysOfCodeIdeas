@@ -4,7 +4,7 @@ import Head from 'next/head';
 import store from '../components/store/store'
 import NavBar from '../components/NavBar';
 import SideBar from '../components/SideBar';
-import '../css/planspage.css';
+import '../css/bookmarkspage.css';
 import '../css/sidebar.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Footer from '../components/Footer';
@@ -12,10 +12,10 @@ import Footer from '../components/Footer';
 import { 
     setPlanner,
 } from '../components/actions/articlesAction';
-import PlansPageContent from '../components/PlansPageContent'
+import BookmarksContent from '../components/BookmarksContent';
 
-const plans = () => {
 
+const bookmarks = () => {
     return (
         <div>
             <Head>
@@ -24,13 +24,13 @@ const plans = () => {
             </Head>
             <Provider store = {store}>
                 <NavBar></NavBar>
-                <div className='planspage-grid-box'>
+                <div className='bookmarkspage-grid-box'>
                 <SideBar></SideBar>
-                <PlansPageContent></PlansPageContent>
+                <BookmarksContent></BookmarksContent>
                 </div>
             </Provider>
         </div>
     )
 }
 
-export default plans
+export default bookmarks

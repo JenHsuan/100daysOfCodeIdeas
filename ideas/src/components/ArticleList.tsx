@@ -17,7 +17,8 @@ import {
     setPartialArticles,
     setOffset,
     setPageCount,
-    setLogout
+    setLogout,
+    setBookmarks
 } from './actions/articlesAction';
 
 import {
@@ -59,6 +60,13 @@ const ArticleList = () => {
         if (articles.length === 0) {
             console.log('fetch articles')
             disPatch(getArticles());
+        }
+
+        var bookmarksJson = localStorage.getItem("bookmarks");
+        if (bookmarksJson !== null) {
+            var bookmarks = JSON.parse(bookmarksJson);
+            console.log(bookmarks)
+            disPatch(setBookmarks(bookmarks))
         }
     }, [])
 

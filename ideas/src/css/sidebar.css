@@ -25,7 +25,7 @@
 
 .sidebar-title {
   grid-row-start: 1;
-  grid-row-end: 2;
+  grid-row-end: 4;
   grid-column-start: 1;
   grid-column-end: 10;
   font-size: 24px;
@@ -35,8 +35,8 @@
   transition: 0.3s;
   margin-left: 10%; }
   .sidebar-title .sidebar-subtitle {
-    grid-row-start: 1;
-    grid-row-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 4;
     grid-column-start: 1;
     grid-column-end: 10;
     font-size: 16px;
@@ -71,13 +71,23 @@
     width: 80%;
     margin-top: 10%; }
 
-.sidebar-dropdown {
+.sidebar-bookmark {
   grid-row-start: 6;
   grid-row-end: 7;
   grid-column-start: 1;
   grid-column-end: 10;
-  transition: 0.3s;
+  font-size: 18px;
+  font-weight: 400;
   margin-left: 10%; }
+
+.sidebar-dropdown {
+  grid-row-start: 5;
+  grid-row-end: 6;
+  grid-column-start: 1;
+  grid-column-end: 10;
+  transition: 0.3s;
+  margin-left: 10%;
+  margin-top: 5%; }
 
 .sidebar-dropdown-after-login {
   grid-row-start: 1;
@@ -137,6 +147,10 @@
   .sidebar-remove-left span a img {
     width: 15px;
     margin-left: 90%; }
+  .sidebar-remove-left span a img:hover {
+    width: 20px;
+    color: white;
+    opacity: 0.5; }
 
 .sidebar-remove-right {
   grid-row-start: 4;
@@ -147,6 +161,10 @@
   margin-top: 15%; }
   .sidebar-remove-right span a img {
     width: 15px; }
+  .sidebar-remove-right span a img:hover {
+    width: 20px;
+    color: white;
+    opacity: 0.5; }
 
 .article-searchbar {
   width: 90%;
