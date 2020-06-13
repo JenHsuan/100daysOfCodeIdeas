@@ -17,9 +17,10 @@ import {
     SetEmailAction,
     SetUsernameAction,
     SetErrorMessageAction,
-    AddBookmarkAction,
     SetBookmarksAction,
-    RemoveBookmarkAction
+    RemoveBookmarkAction,
+    SetFinishedArticlesAction,
+    RemoveFinishedArticleAction
 } 
 from '../actions/articlesAction'
 import { RootState} from '../store/store'
@@ -44,9 +45,10 @@ import {
     SET_EMAIL,
     SET_USERNAME,
     SET_ERRORMESSAGE,
-    ADD_BOOKMARK,
     REMOVE_BOOKMARK,
     SET_BOOKMARKS,
+    SET_MARKASFINISHED,
+    SET_UNMARKASFINISHED,
     ArticleType } from '../types'
 
 //States
@@ -63,7 +65,8 @@ const articlesReducer = (state: ArticlesState = initialState,
             SetPerpageAction | SetPageCountAction | SetLoadingAction |
             SetLoginAction | SetLogoutAction | SetAccessTokenAction |
             SetEmailAction | SetUsernameAction | SetErrorMessageAction |
-            AddBookmarkAction | RemoveBookmarkAction | SetBookmarksAction) => {
+            RemoveBookmarkAction | SetBookmarksAction | SetFinishedArticlesAction |
+            RemoveFinishedArticleAction) => {
     switch(action.type) {
         case GET_ARTICLES:
             return {
@@ -181,15 +184,22 @@ const articlesReducer = (state: ArticlesState = initialState,
                     return bookmark !== action.payload
                 })
             }
-        case ADD_BOOKMARK:
-            return {
-                ...state,
-                bookmarks: state.bookmarks.push(action.payload)
-            }
         case SET_BOOKMARKS:
             return {
                 ...state,
                 bookmarks: action.payload
+            }
+        case SET_MARKASFINISHED:
+            return {
+                ...state,
+                finishedArticles: action.payload
+            }
+        case SET_UNMARKASFINISHED:
+            return {
+                ...state,
+                finishedArticles: state.finishedArticles.filter(finishedArticle => {
+                    return finishedArticle !== action.payload
+                })
             }
         default:
             return state; 

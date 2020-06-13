@@ -12,7 +12,9 @@ import {
 
 import { 
     setBookmarks,
-    removeBookmark
+    removeBookmark,
+    setFinishedArticles,
+    removeFinishedArticle
 } from './actions/articlesAction';
 import Router, { useRouter } from 'next/router'
 
@@ -21,15 +23,15 @@ const Article = ({article}) => {
     const disPatch = useDispatch();
     const [show, setShow] = useState(false);
     const [isBookmarked, setBookmark] = useState(false);
+    const [isChecked, setChecked] = useState(false);
     const isLogin = useSelector(selectLoginState);
     const bookmarks = useSelector(selectBookmarksState)
 
     useEffect(()=> {
         if (bookmarks.find(bookmark => bookmark === article.id) !== undefined ) {
-            console.log(1)
             setBookmark(true);
         }
-    }, [])
+    }, [article])
 
     const handleClose = () => {
         setShow(false);
@@ -39,9 +41,34 @@ const Article = ({article}) => {
         setShow(true);
     }
 
+    const onCheckedClick = () => {
+        var finishedArticlesJson = localStorage.getItem("finishedArticles");
+        if (isChecked) {
+            if (finishedArticlesJson !== null) {
+                var finishedArticles = JSON.parse(finishedArticlesJson);
+                var newFinishedArticles = finishedArticles.filter(finishedArticle => finishedArticle !== article.id);
+                localStorage.setItem("finishedArticle", JSON.stringify(newFinishedArticles));
+                setChecked(false);
+            }
+            disPatch(removeFinishedArticle(article.id));
+        } else {
+            console.log(finishedArticlesJson)
+            if (finishedArticlesJson === null) {
+                localStorage.setItem("finishedArticles", `[${article.id}]`);
+                disPatch(setFinishedArticles([article.id]));
+            } else {
+                var finishedArticles = JSON.parse(finishedArticlesJson);
+                finishedArticles.indexOf(article.id) === -1 ? finishedArticles.push(article.id) : console.log("This item already exists");
+                localStorage.setItem("finishedArticles", JSON.stringify(finishedArticles));
+                disPatch(setFinishedArticles(finishedArticles));
+                setChecked(true);
+            }
+        }
+    }
+
     const onBookmarkClick = () => {
+        var bookmarksJson = localStorage.getItem("bookmarks");
         if (isBookmarked) {
-            var bookmarksJson = localStorage.getItem("bookmarks");
             if (bookmarksJson !== null) {
                 var bookmarks = JSON.parse(bookmarksJson);
                 var newBookmarks = bookmarks.filter(bookmark => bookmark !== article.id);
@@ -50,7 +77,6 @@ const Article = ({article}) => {
             }
             disPatch(removeBookmark(article.id));
         } else {
-            var bookmarksJson = localStorage.getItem("bookmarks");
             console.log(bookmarksJson)
             if (bookmarksJson === null) {
                 localStorage.setItem("bookmarks", `[${article.id}]`);
@@ -74,7 +100,7 @@ const Article = ({article}) => {
     return (
         <div className="articles-row">
             <Card className="article-card" border="light">
-                {isLogin && (
+                {isLogin && router.pathname !== '/bookmarks' && (
                 <div className="article-bookmark">
                     <span className="btn-o">
                         <a href='#' onClick={()=>{onBookmarkClick(); return false;}}>
@@ -82,6 +108,18 @@ const Article = ({article}) => {
                             ? <img src="https://raw.githubusercontent.com/JenHsuan/ALayman/master/views/images/bookmark-yellow.png" alt="Add this article to the bookmark" title="Add this article to the bookmark"/>
                             : <img src="https://raw.githubusercontent.com/JenHsuan/ALayman/master/views/images/bookmark-white.png" alt="Add this article to the bookmark" title="Add this article to the bookmark"/>
                             }
+                        </a>
+                    </span>
+                </div>
+                )}
+                {router.pathname === '/bookmarks' && (
+                <div className="article-checked">
+                    <span className="btn-o">
+                        <a href='#' onClick={()=>{onCheckedClick(); return false;}}>
+                            {isChecked
+                            ? <img src="https://raw.githubusercontent.com/JenHsuan/ALayman/master/views/images/check.png" alt="Marked as unfinished" title="Marked as unfinished"/>
+                            : <img src="https://raw.githubusercontent.com/JenHsuan/ALayman/master/views/images/uncheck.png" alt="Marked as finished" title="Marked as finished"/>
+                        }
                         </a>
                     </span>
                 </div>

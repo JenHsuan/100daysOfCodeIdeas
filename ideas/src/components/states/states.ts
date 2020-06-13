@@ -22,6 +22,7 @@ export interface ArticlesState {
     category: number;
     errorMessage: string;
     bookmarks:Array<number>;
+    finishedArticles:Array<number>;
 }
 
 export const initialState = {
@@ -40,7 +41,8 @@ export const initialState = {
     filterText:'',
     category: -1,
     errorMessage: '',
-    bookmarks: []
+    bookmarks: [],
+    finishedArticles: []
 }
 
 //Selector functions
@@ -61,3 +63,4 @@ export const selectFilterTextState = (rootState: RootState) => rootState.article
 export const selectCategoryState = (rootState: RootState) => rootState.articlesReducer.category;
 export const selectErrorMessageState = (rootState: RootState) => rootState.articlesReducer.errorMessage;
 export const selectBookmarksState = (rootState: RootState) => rootState.articlesReducer.bookmarks;
+export const selectFinishedArticlessState = (rootState: RootState) => rootState.articlesReducer.finishedArticles;

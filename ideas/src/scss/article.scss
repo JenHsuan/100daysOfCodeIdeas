@@ -6,12 +6,6 @@
     background-color: #FFFFFF;
     margin-top: 1%;
  }
-
- .articles-hide-siderbar-head {
-  grid-column-start: 1;
-  grid-column-end: 9;
-  grid-row-start: 1;
- }
  
  .articles-hide-siderbar-head {
   grid-column-start: 1;
@@ -69,7 +63,26 @@
     .article-bookmark{
       position: absolute;
       z-index: 2;
-      left: 80%;
+      left: 70%;
+      width: 7%;
+      font-size: 6px;
+      span{
+        a{
+          img{
+            width: 100%;
+          }
+          img:hover{
+             width: 120%;
+             color: white;
+             opacity: 0.5;
+          }
+        }
+      }
+    }
+    .article-checked{
+      position: absolute;
+      z-index: 2;
+      left: 85%;
       width: 7%;
       font-size: 6px;
       span{

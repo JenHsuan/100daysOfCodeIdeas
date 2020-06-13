@@ -16,9 +16,10 @@ export const SET_ACCESS_TOKEN = 'SET_ACCESS_TOKEN';
 export const SET_EMAIL = 'SET_EMAIL';
 export const SET_USERNAME = 'SET_USERNAME';
 export const SET_ERRORMESSAGE = 'SET_ERRORMESSAGE';
-export const ADD_BOOKMARK = 'ADD_BOOKMARK';
 export const REMOVE_BOOKMARK = 'REMOVE_BOOKMARK';
 export const SET_BOOKMARKS = 'SET_BOOKMARKS';
+export const SET_MARKASFINISHED = 'SET_MARKASFINISHED';
+export const SET_UNMARKASFINISHED = 'SET_UNMARKASFINISHED';
 
 export interface ArticleType {
     title: string;

@@ -19,9 +19,10 @@ import {
     SET_EMAIL,
     SET_USERNAME,
     SET_ERRORMESSAGE,
-    ADD_BOOKMARK,
     REMOVE_BOOKMARK,
     SET_BOOKMARKS,
+    SET_MARKASFINISHED,
+    SET_UNMARKASFINISHED,
     ArticleType 
 } from '../types'
 
@@ -111,11 +112,6 @@ export interface SetErrorMessageAction {
     readonly payload: string
 }
 
-export interface AddBookmarkAction {
-    readonly type: typeof ADD_BOOKMARK
-    readonly payload: number
-}
-
 export interface RemoveBookmarkAction {
     readonly type: typeof REMOVE_BOOKMARK
     readonly payload: number
@@ -124,6 +120,16 @@ export interface RemoveBookmarkAction {
 export interface SetBookmarksAction {
     readonly type: typeof SET_BOOKMARKS
     readonly payload: Array<number>
+}
+
+export interface SetFinishedArticlesAction {
+    readonly type: typeof SET_MARKASFINISHED
+    readonly payload: Array<number>
+}
+
+export interface RemoveFinishedArticleAction {
+    readonly type: typeof SET_UNMARKASFINISHED
+    readonly payload: number
 }
 
 export const getArticles = () => async dispatch => {
@@ -226,12 +232,6 @@ export const setErrorMessage = message => dispatch => {
         payload: message})
 }
 
-export const addBookmark = id => dispatch => {
-    dispatch({
-        type: ADD_BOOKMARK, 
-        payload: id})
-}
-
 export const removeBookmark = id => dispatch => {
     dispatch({
         type: REMOVE_BOOKMARK, 
@@ -242,5 +242,17 @@ export const setBookmarks = bookmarks => dispatch => {
     dispatch({
         type: SET_BOOKMARKS, 
         payload: bookmarks})
+}
+
+export const setFinishedArticles = finishedArticles => dispatch => {
+    dispatch({
+        type: SET_MARKASFINISHED, 
+        payload: finishedArticles})
+}
+
+export const removeFinishedArticle = finishedArticle => dispatch => {
+    dispatch({
+        type: SET_UNMARKASFINISHED, 
+        payload: finishedArticle})
 }
 
