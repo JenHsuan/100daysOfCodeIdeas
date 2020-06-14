@@ -34,6 +34,7 @@ def parse_articles(type):
 
     if type == 'medium':
         data = getMediumArtcles()
+        print(data)
         for article in data:
             try:
                 obj = Article.objects.get(title = article['title'])
@@ -56,37 +57,21 @@ def getDevArtcles():
     r = requests.get(os.getenv("DEV_BASE_URL") + os.getenv("DEVTO_ACCOUNT"))
     print(dev_base_url +os.getenv("DEVTO_ACCOUNT"))
     soup = BS(''.join(r.text), 'html.parser')
-    title_list = soup.select('.crayons-story__title')
-    subtitle_list = soup.select('time')
-    tags = soup.select('.crayons-story__tags')
-    name = soup.select('.crayons-story__secondary')
-    readtime = soup.select('small')
-
+    data = []
+    title_list = soup.select('.crayons-story')
     for title in title_list:
         data.append({
-            'title': title.text.split('\n')[2].split('        ')[1],
-            'image': title.a["data-preload-image"]})
-        
-    i = 0
-    for title in subtitle_list:
-        data[i]['time'] = title['datetime'].split('T')[0]
-        i = i + 1
-        
-    i = 0
-    for title in title_list:
-        data[i]['url'] = dev_base_url + title.a['href']
-        i = i +1
-        
-    for i in range(0, len(tags)):
-        tag_list = [tags[i].select('a')[0]["href"].split('/')[2], tags[i].select('a')[1]["href"].split('/')[2], tags[i].select('a')[2]["href"].split('/')[2], tags[i].select('a')[3]["href"].split('/')[2]]
-        data[i]['tags'] = tag_list
-
-    for i in range(0, len(name)):
-        data[i]['name'] = name[i].text.split('       ') [2].split('\n')[0]
-
-    for i in range(0, len(readtime)):
-        data[i]['readtime'] = readtime[i].text.split('            ')[1].split('\n')[0]
-
+        'title': title.select('a')[3].text.split('\n')[1].split('        ')[1],
+        'image': title.select('a')[3]['data-preload-image'],
+        'time': title.select('time')[0]['datetime'].split('T')[0],
+        'url': title.select('a')[3]['href'],
+        'tags': [title.select('.crayons-tag')[0]["href"].split('/')[2],
+                 title.select('.crayons-tag')[1]["href"].split('/')[2],
+                 title.select('.crayons-tag')[2]["href"].split('/')[2],
+                 title.select('.crayons-tag')[3]["href"].split('/')[2]],
+        'name': title.select('a')[1].text.split('       ')[2].split('\n')[0],
+        'readtime': title.select('.crayons-story__save')[0].select('small')[0].text.split('            ')[1].split('\n')[0]})
+    
     return data
 
 def getMediumArtcles():
