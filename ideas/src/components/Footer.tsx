@@ -42,8 +42,8 @@ const Footer = () => {
                 </div>
                 <div className="footer-author">
                     <span className="btn-o">
-                        <a href={githubUrl}>
-                            <img src="https://raw.githubusercontent.com/JenHsuan/ALayman/master/views/images/JenHsuan.png" alt="A Layman's Facebook" title="A Layman's Facebook"/>
+                        <a href="https://jenhsuan.github.io/ALayman/profile.html">
+                            <img src="https://raw.githubusercontent.com/JenHsuan/ALayman/master/views/images/JenHsuan.png" alt="Sean Hsieh's website" title="Sean Hsieh's website"/>
                         </a>
                     </span>
                     <span className="author-name">

@@ -33,7 +33,7 @@ const SideBar = () => {
             <div className='sidebar-grid-box'>
                 {showPlannerFlag == true && (
                     <Fragment>
-                    <div className='sidebar-title'>Let's Create Your Learnng Plan
+                    <div className='sidebar-title'>Let's Create Your Learning Plan
                         <div className="sidebar-subtitle">Choose the topics about Software development, Testing, DevOps, or 100DaysOfCode to build the personal learning plan</div>
                     </div>
                     <div className='sidebar-dropdown'>
