@@ -122,17 +122,18 @@ def react(request):
     except FileNotFoundError:
         logging.exception('Production build of app not found')
 
-class InsertData(APIView):
-    """
-    Create a new user. It's called 'UserList' because normally we'd have a get
-    method here too, for retrieving a list of all User objects.
-    """
+class InsertDataMedium(APIView):
+    permission_classes = (permissions.AllowAny,)
 
+    def get(self, request, format=None):
+        parse_articles('medium')
+        return HttpResponse('OK')
+
+class InsertDataDev(APIView):
     permission_classes = (permissions.AllowAny,)
 
     def get(self, request, format=None):
         parse_articles('devto')
-        parse_articles('medium')
         return HttpResponse('OK')
 
 @api_view(['GET'])
@@ -200,12 +201,19 @@ class OrderViewSet(viewsets.ModelViewSet):
     http_method_names = ['get', 'post', 'put']
 
 class ProfileViewSet(generics.GenericAPIView):
-    # permission_classes = (permissions.AllowAny,)
-    # authentication_classes = []
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = []
     # use default authentication classes 
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
+    def put(self, request):
+        reader_id = self.request.query_params.get('reader_id', None)
+        hasSubscribed = self.request.query_params.get('hasSubscribed', None)
+        p = Profile.objects.get(reader_id = reader_id)
+        p.hasSubscribed = hasSubscribed
+        p.save()
+        return Response(status=status.HTTP_200_OK)
     
     def post(self, request):
         try:
