@@ -114,7 +114,7 @@ const ArticleList = () => {
         <Fragment>
         <div className={`${showPlanner === true ? 'articles-hide-siderbar-head' : 'articles-hide-siderbar-head articles-hide-siderbar-head-remove-left'}`}>
             <div className="title">
-                Learning materials
+                {`Learning materials (${filteredArticles.length === 0 ? articles.length : filteredArticles.length})`}
             </div>
             <div className="subtitle">
                 Add the next free article for skills you want to learn to your plan
