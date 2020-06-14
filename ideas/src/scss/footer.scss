@@ -35,7 +35,7 @@
         font-weight: 300;
     }
     .subscribe-social-btn {
-        grid-column-start: 6;
+        grid-column-start: 7;
         grid-column-end: 12;
         grid-row-start: 8;
         grid-row-end: 9;
@@ -50,14 +50,25 @@
             }
         }
     }
-    .subscribe-email {
-        grid-column-start: 6;
-        grid-column-end: 11;
-        grid-row-start: 5;
-        grid-row-end: 6;
-        font-size: 28px;
-        font-weight: 300;
-        color: white;
+    .footer-author {
+        grid-column-start: 7;
+        grid-column-end: 14;
+        grid-row-start: 4;
+        grid-row-end: 5;
+        .author-name{
+            margin-left: 3%;
+            color: white;
+            font-size: 16px;
+            font-weight: 300;
+        }
+        span{
+            a{
+                img{
+                    width: 80px;
+                    border-radius: 3px;
+                }
+            }
+        }
     }
 
     .subscribe-btn {
@@ -65,9 +76,17 @@
         grid-column-end: 11;
         grid-row-start: 6;
         grid-row-end: 7;
-        font-size: 28px;
-        font-weight: 300;
-        color: white;
+        button{
+            background-color: gray;
+            color: white;
+            font-size: 20px;
+            font-weight: 400;
+            border-radius: 5px;
+            padding-left: 5%;
+            padding-right: 5%;
+            padding-bottom: 1%;
+            padding-top: 1%;
+        }
     }
 
     .slogon {
@@ -75,7 +94,7 @@
         grid-column-end: 11;
         grid-row-start: 1;
         grid-row-end: 4;
-        font-size: 32px;
+        font-size: 36px;
         font-weight: 300;
         color: white;
         text-align: center;
@@ -118,7 +137,7 @@
         color: white;
     }
     .subscribe-social-btn {
-        grid-column-start: 6;
+        grid-column-start: 7;
         grid-column-end: 14;
         grid-row-start: 8;
         grid-row-end: 9;

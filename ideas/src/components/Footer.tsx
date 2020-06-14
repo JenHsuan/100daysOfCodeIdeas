@@ -5,6 +5,8 @@ import {
     selectShowPlannerState
 } from './states/states';
 
+import Router from 'next/router'
+
 const Footer = () => {
     const showPlanner = useSelector(selectShowPlannerState);
     const twitter = 'https://raw.githubusercontent.com/JenHsuan/ALayman/master/views/images/twitter.png';
@@ -38,11 +40,21 @@ const Footer = () => {
                 <div className="slogon">
                     Learn, Think, and Improve 
                 </div>
-                <div className="subscribe-email form-group">
-                        <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com"/>
+                <div className="footer-author">
+                    <span className="btn-o">
+                        <a href={githubUrl}>
+                            <img src="https://raw.githubusercontent.com/JenHsuan/ALayman/master/views/images/JenHsuan.png" alt="A Layman's Facebook" title="A Layman's Facebook"/>
+                        </a>
+                    </span>
+                    <span className="author-name">
+                        Jen-Hsuan Hsieh(Sean Hsieh)
+                    </span>
                 </div>
                 <div className="subscribe-btn">
-                        <button type="submit" className="btn btn-primary">Subscribe</button>
+                    <button type="submit" onClick={() => {
+                        Router.push(`/signup`)
+                        window.scrollTo(0, 0)
+                    }}>Get Statred</button>
                 </div>
                 <div className="subscribe-social-btn">
                     <span className="btn-o">
@@ -74,16 +86,6 @@ const Footer = () => {
                     <span className="btn-o">
                         <a href={linkedinUrl}>
                             <img src={linkedin} alt="Sean Hsieh's Linkedin" title="Sean Hsieh's Linkedin"/>
-                        </a>
-                    </span>
-                    <span className="btn-o">
-                        <a href={devtoUrl}>
-                            <img src={devto} alt="Sean Hsieh's Dev.to" title="Sean Hsieh's Dev.to"/>
-                        </a>
-                    </span>
-                    <span className="btn-o">
-                        <a href={instagramUrl}>
-                            <img src={instagram} alt="A Layman's Facebook" title="A Layman's Facebook"/>
                         </a>
                     </span>
                 </div>
