@@ -1,8 +1,9 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, Fragment} from 'react'
 import { Provider, useDispatch} from 'react-redux';
 
 import { 
     setPlanner,
+    setLogout
 } from '../components/actions/articlesAction';
 
 const AboutPageContent = () => {
@@ -21,8 +22,18 @@ const AboutPageContent = () => {
         refreshToken();
     }, [])
 
+    const SetLogoutForLocalSorage = () => {
+        localStorage.setItem("login", 'false');
+        localStorage.setItem("username", '');
+        localStorage.setItem("email", '');
+    }
+
     return (
-        <div className='column-left-grid-box'>
+        <Fragment>
+        <div className="column-top-grid-box">
+            <img src="https://raw.githubusercontent.com/JenHsuan/ALayman/master/views/images/code-cover-min.png" alt=""/>
+        </div>
+        <div className="column-right-grid-box">
             <div className="about-website-title">
                 About Daily Learning  
             <hr/>
@@ -38,13 +49,7 @@ const AboutPageContent = () => {
                 About the author
             </div>
             <div className="about-website-content-2">
-                Jen-Hsuan Hsieh (Sean Hsieh) is also a self-learner, writer, and developer. You can feel free to check the following references.
-                <ul>
-                    <li>Website</li>
-                    <li>Linkedin</li>
-                    <li>Medium</li>
-                    <li>Github</li>
-                </ul>
+                Jen-Hsuan Hsieh (Sean Hsieh) is also a self-learner, writer, and developer. He is a senior web developer with front-end JavaScript framework's experiences. He is familiar with React.js, Knockout.js, server-side languages like NodeJS and ASP.NET MVC
             </div>
             <div className="about-website-subtitle-3">
             Get In Touch
@@ -53,6 +58,7 @@ const AboutPageContent = () => {
             For any general questions, email alaymangogo@gmail.com and we'll get back to you ASAP.    
             </div>
         </div>
+        </Fragment>
     )
 }
 
