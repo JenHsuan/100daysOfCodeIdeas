@@ -20,7 +20,9 @@ import {
     SetBookmarksAction,
     RemoveBookmarkAction,
     SetFinishedArticlesAction,
-    RemoveFinishedArticleAction
+    RemoveFinishedArticleAction,
+    SetUserIdAction,
+    SetProviderAction
 } 
 from '../actions/articlesAction'
 import { RootState} from '../store/store'
@@ -49,6 +51,8 @@ import {
     SET_BOOKMARKS,
     SET_MARKASFINISHED,
     SET_UNMARKASFINISHED,
+    SET_PROVIDER,
+    SET_USERID,
     ArticleType } from '../types'
 
 //States
@@ -66,7 +70,7 @@ const articlesReducer = (state: ArticlesState = initialState,
             SetLoginAction | SetLogoutAction | SetAccessTokenAction |
             SetEmailAction | SetUsernameAction | SetErrorMessageAction |
             RemoveBookmarkAction | SetBookmarksAction | SetFinishedArticlesAction |
-            RemoveFinishedArticleAction) => {
+            RemoveFinishedArticleAction | SetProviderAction | SetUserIdAction) => {
     switch(action.type) {
         case GET_ARTICLES:
             return {
@@ -200,6 +204,16 @@ const articlesReducer = (state: ArticlesState = initialState,
                 finishedArticles: state.finishedArticles.filter(finishedArticle => {
                     return finishedArticle !== action.payload
                 })
+            }
+        case SET_PROVIDER:
+            return {
+                ...state,
+                provider: action.payload
+            }
+        case SET_USERID:
+            return {
+                ...state,
+                userId: action.payload
             }
         default:
             return state; 

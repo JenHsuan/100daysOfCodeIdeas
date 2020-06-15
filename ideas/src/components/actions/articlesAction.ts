@@ -23,6 +23,8 @@ import {
     SET_BOOKMARKS,
     SET_MARKASFINISHED,
     SET_UNMARKASFINISHED,
+    SET_PROVIDER,
+    SET_USERID,
     ArticleType 
 } from '../types'
 
@@ -129,6 +131,16 @@ export interface SetFinishedArticlesAction {
 
 export interface RemoveFinishedArticleAction {
     readonly type: typeof SET_UNMARKASFINISHED
+    readonly payload: number
+}
+
+export interface SetProviderAction {
+    readonly type: typeof SET_PROVIDER
+    readonly payload: string
+}
+
+export interface SetUserIdAction {
+    readonly type: typeof SET_USERID
     readonly payload: number
 }
 
@@ -254,5 +266,17 @@ export const removeFinishedArticle = finishedArticle => dispatch => {
     dispatch({
         type: SET_UNMARKASFINISHED, 
         payload: finishedArticle})
+}
+
+export const setProvider = provider => dispatch => {
+    dispatch({
+        type: SET_PROVIDER, 
+        payload: provider})
+}
+
+export const setUserId = userId => dispatch => {
+    dispatch({
+        type: SET_USERID, 
+        payload: userId})
 }
 

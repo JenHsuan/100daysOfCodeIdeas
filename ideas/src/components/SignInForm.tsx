@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react'
+import React, {Fragment, useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 //import { GoogleLogin } from 'react-google-login';
@@ -9,14 +9,19 @@ import {Form, Spinner} from 'react-bootstrap';
 import {
     selectShowPlannerState,
     selectErrorMessageState,
-    selectLoadingState
+    selectLoadingState,
+    selectUserIdState,
+    selectLoginState
 } from './states/states';
 
 import FormWrapper from '../components/FormWrapper'
 import PropTypes from 'prop-types'
 import { 
     setErrorMessage,
-    setLoading
+    setLoading,
+    setUserId,
+    setBookmarks,
+    setFinishedArticles
 } from './actions/articlesAction';
 
 const SignInForm = ({responseFacebook,
@@ -28,6 +33,8 @@ const SignInForm = ({responseFacebook,
     const showPlanner = useSelector(selectShowPlannerState);
     const errorMessage = useSelector(selectErrorMessageState);
     const isLoading = useSelector(selectLoadingState);
+    const userId = useSelector(selectUserIdState);
+    const login = useSelector(selectLoginState);
     
     const [value, setValue] = useState({
         username:'',
@@ -50,16 +57,45 @@ const SignInForm = ({responseFacebook,
                 username: username,
                 password: password
             });
+            console.log(res)
             console.log(res["data"]["user"]["profile"])
             const token = res["data"]["token"];
             const email = res["data"]["user"]["profile"]["email"];
-            SetLogin(token, email, username);
+            const id = res["data"]["user"]["id"];
+            SetLogin(token, email, username, "normal");
+            disPatch(setUserId(id))
             disPatch(setLoading(false));
         } catch (error) {
             disPatch(setLoading(false));
             disPatch(setErrorMessage(error.message))
         }
     }
+
+    useEffect(()=> {
+        const fetchProfile = async () => {
+            try {
+                const res = await axios.get(`api/profile/?reader=${userId}`);
+                if (res['error'] === undefined) {
+                    console.log(res)
+                    const bookmarksList = res['data']['bookmarks'].split(',');
+                    console.log(bookmarksList.filter(bookmark => bookmark !== ''))
+                    disPatch(setBookmarks(bookmarksList.filter(bookmark => bookmark !== '')))
+                    localStorage.setItem("bookmarks", res['data']['bookmarks'].trim());
+                    
+                    const finishedArticlesList = res['data']['finishedArticles'].split(',');
+                    disPatch(setBookmarks(finishedArticlesList.filter(finishedArticle => finishedArticle !== '')))
+                    localStorage.setItem("finishedArticles", res['data']['finishedArticles'].trim());
+                
+                }
+            } catch(error) {
+                console.log(error)
+            }
+        };
+        
+        if (login) {
+            fetchProfile();
+        }
+    }, [userId, login])
 
     return (
         <Fragment>

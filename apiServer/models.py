@@ -22,9 +22,13 @@ class Profile(models.Model):
     reader = models.OneToOneField(User, on_delete=models.CASCADE, blank = True, related_name="profile")
     email = models.EmailField(max_length = 64)
     hasSubscribed = models.BooleanField(default=True)
-    
-class Order(models.Model):
-    reader = models.OneToOneField(User, on_delete=models.CASCADE, blank = True, related_name="order") 
-    articles = models.ManyToManyField(Article, blank = True, related_name="articles")
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    bookmarks = models.CharField(max_length = 500, default='')
+    finishedArticles = models.CharField(max_length = 500, default='')
+
+class ProfileSocial(models.Model):
+    email = models.EmailField(max_length = 64)
+    hasSubscribed = models.BooleanField(default=True)
+    provider = models.CharField(max_length = 500, default='')
+    bookmarks = models.CharField(max_length = 500, default='')
+    finishedArticles = models.CharField(max_length = 500, default='')
+

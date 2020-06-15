@@ -66,11 +66,17 @@ sass --watch src/scss:src/css
 * [Managing static files (e.g. images, JavaScript, CSS)](https://docs.djangoproject.com/en/3.0/howto/static-files/)
 * [How can I enable CORS on Django REST Framework](https://stackoverflow.com/questions/35760943/how-can-i-enable-cors-on-django-rest-framework)
 * [Django Tutorial for Programmers: 4. 執行專案](https://ithelp.ithome.com.tw/articles/10157659)
+* [Django, get scheme (http or https), pre request.scheme implementation](https://stackoverflow.com/questions/36817625/django-get-scheme-http-or-https-pre-request-scheme-implementation)
+* [Django status code](https://www.django-rest-framework.org/api-guide/status-codes/)
+* [Chaining multiple filter() in Django, is this a bug?](https://stackoverflow.com/questions/8164675/chaining-multiple-filter-in-django-is-this-a-bug)
 
 ### Redux
 * [Example with Typescript, react-redux, and redux-thunk](https://github.com/reduxjs/redux-thunk/issues/213)
 * [Actions must be plain objects. Use custom middleware for async actions.](https://github.com/reduxjs/redux-thunk/issues/146)
 * [How to await a useDispatch value in React?](https://stackoverflow.com/questions/58825977/how-to-await-a-usedispatch-value-in-react)
+
+### ReactJS HOC
+* [React.js: Higher-Order Components (HOC)](https://cythilya.github.io/2018/05/20/react-hoc/?fbclid=IwAR0Gm1QWQ72CBEIdMII7rSoqvbHLQsIPYfGdO8y90_OlD24azemdrNT-nN8)
 
 ### Next.js
 * [Next.js - import css file does not work](https://stackoverflow.com/questions/50149729/next-js-import-css-file-does-not-work)
@@ -100,3 +106,10 @@ sass --watch src/scss:src/css
 * [Day30 : Django 第三方登入 - 以Github為例](https://ithelp.ithome.com.tw/articles/10206389)
 * [使用social_django进行github第三方登陆](https://www.cnblogs.com/wcleonard/p/10977093.html)
 * [Authorizing OAuth Apps](https://developer.github.com/apps/building-oauth-apps/authorizing-oauth-apps/)
+
+### JWT
+* [React Authentication: How to Store JWT in a Cookie](https://medium.com/@ryanchenkie_40935/react-authentication-how-to-store-jwt-in-a-cookie-346519310e81)
+* [Django REST framework 之JWT认证](https://www.cnblogs.com/freely/p/10328011.html)
+
+### Front-end design
+* [20 Creative Search Bar Design Inspirations with HTML/CSS/ Bootstrap](https://www.mockplus.com/blog/post/search-bar-design)

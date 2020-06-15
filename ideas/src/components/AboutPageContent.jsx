@@ -3,7 +3,13 @@ import { Provider, useDispatch} from 'react-redux';
 
 import { 
     setPlanner,
-    setLogout
+    setLogout,
+    setUsername,
+    setProvider,
+    setEmail,
+    setFinishedArticles,
+    setBookmarks,
+    setAccessToken
 } from '../components/actions/articlesAction';
 
 const AboutPageContent = () => {
@@ -14,7 +20,7 @@ const AboutPageContent = () => {
                 const res = await axios.get('api/renew-token/');
             } catch(error) {
                 console.log(error)
-                disPatch(setLogout());
+                SetLogout();
                 SetLogoutForLocalSorage();
             }
         };
@@ -22,10 +28,24 @@ const AboutPageContent = () => {
         refreshToken();
     }, [])
 
+    const SetLogout = () => {
+        disPatch(setLogout());
+        disPatch(setUsername(''));
+        disPatch(setEmail(''));
+        disPatch(setFinishedArticles([]));
+        disPatch(setAccessToken(''));
+        disPatch(setProvider(''));
+        disPatch(setBookmarks([]));
+    }
+
     const SetLogoutForLocalSorage = () => {
-        localStorage.setItem("login", 'false');
-        localStorage.setItem("username", '');
-        localStorage.setItem("email", '');
+        localStorage.removeItem('login');
+        localStorage.removeItem('username');
+        localStorage.removeItem('email');
+        localStorage.removeItem('finishedArticles');
+        localStorage.removeItem('bookmarks');
+        localStorage.removeItem('token');
+        localStorage.removeItem('provider');
     }
 
     return (

@@ -9,11 +9,18 @@ import {
 import {
     setLogout,
     getArticles,
-    setBookmarks
+    setBookmarks,
+    setUsername,
+    setAccessToken,
+    setEmail,
+    setProvider,
+    setFinishedArticles,
+    setUserId
 } from './actions/articlesAction';
 
 import {
-    selectBookmarksState
+    selectBookmarksState,
+    selectFinishedArticlessState
 } from './states/states';
 
 import '.././css/article.css'
@@ -35,6 +42,7 @@ const BookmarksContent = () => {
     //const [bookmarks, setBookmarks] = useState([]);
     const [bookmarkedArticles, setBookmarkedArticles] = useState([]);
     const bookmarks = useSelector(selectBookmarksState)
+    const finishedArticles = useSelector(selectFinishedArticlessState);
 
     useEffect(()=> {
         const refreshToken = async () => {
@@ -42,7 +50,7 @@ const BookmarksContent = () => {
                 const res = await axios.get('api/renew-token/');
             } catch(error) {
                 console.log(error)
-                disPatch(setLogout());
+                SetLogout();
                 SetLogoutForLocalSorage();
                 Router.push(`/signin`)
             }
@@ -56,16 +64,23 @@ const BookmarksContent = () => {
 
         var bookmarksJson = localStorage.getItem("bookmarks");
         if (bookmarksJson !== null) {
-            var bookmarks = JSON.parse(bookmarksJson);
+            var bookmarks = bookmarksJson.split(',');
             console.log(bookmarks)
             disPatch(setBookmarks(bookmarks))
+        }
+
+        var finishedAriclesJson = localStorage.getItem("finishedArticles");
+        if (finishedAriclesJson !== null) {
+            var finishedAricles = finishedAriclesJson.split(',');
+            console.log(finishedAricles)
+            disPatch(setFinishedArticles(finishedAricles))
         }
     }, [])
 
     
     useEffect(()=> {
         console.log(bookmarks);
-        var tmp = articles.filter(article => -1 !== bookmarks.indexOf(article.id))
+        var tmp = articles.filter(article => -1 !== bookmarks.indexOf(String(article.id)))
         console.log(tmp)
         setBookmarkedArticles(tmp)
     }, [bookmarks, articles])
@@ -74,12 +89,30 @@ const BookmarksContent = () => {
         console.log(bookmarkedArticles);
     }, [bookmarkedArticles])
 
+    useEffect(()=> {
+        console.log(finishedArticles);
+    }, [finishedArticles])
+
     const SetLogoutForLocalSorage = () => {
-        localStorage.setItem("login", 'false');
-        localStorage.setItem("username", '');
-        localStorage.setItem("email", '');
+        localStorage.removeItem('login');
+        localStorage.removeItem('username');
+        localStorage.removeItem('email');
+        localStorage.removeItem('finishedArticles');
+        localStorage.removeItem('bookmarks');
+        localStorage.removeItem('token');
+        localStorage.removeItem('provider');
     }
 
+    const SetLogout = () => {
+        disPatch(setLogout());
+        disPatch(setUsername(''));
+        disPatch(setEmail(''));
+        disPatch(setFinishedArticles([]));
+        disPatch(setAccessToken(''));
+        disPatch(setProvider(''));
+        disPatch(setBookmarks([]));
+        disPatch(setUserId(-1));
+    }
 
     return (
         <Fragment>

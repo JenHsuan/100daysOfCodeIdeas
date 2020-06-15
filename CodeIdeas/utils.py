@@ -2,7 +2,7 @@ from apiServer.serializers import UserSerializer
 from bs4 import BeautifulSoup as BS
 import requests
 import os
-from apiServer.models import Article, Order, Profile
+from apiServer.models import Article
 
 dev_base_url = 'https://dev.to'    
 

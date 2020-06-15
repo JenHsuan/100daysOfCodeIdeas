@@ -14,7 +14,11 @@ import {
     setUsername,
     setAccessToken,
     setEmail,
-    setLogin
+    setLogin,
+    setFinishedArticles,
+    setBookmarks,
+    setProvider,
+    setUserId
 } from './actions/articlesAction';
 import Link from 'next/link'
 
@@ -39,9 +43,24 @@ const NavBar = () => {
     }
 
     const SetLogoutForLocalSorage = () => {
-        localStorage.setItem("login", 'false');
-        localStorage.setItem("username", '');
-        localStorage.setItem("email", '');
+        localStorage.removeItem('bookmarks');
+        localStorage.removeItem('login');
+        localStorage.removeItem('username');
+        localStorage.removeItem('email');
+        localStorage.removeItem('finishedArticles');
+        localStorage.removeItem('token');
+        localStorage.removeItem('provider');
+    }
+
+    const SetLogout = () => {
+        disPatch(setLogout());
+        disPatch(setUsername(''));
+        disPatch(setUserId(-1));
+        disPatch(setEmail(''));
+        disPatch(setFinishedArticles([]));
+        disPatch(setAccessToken(''));
+        disPatch(setProvider(''));
+        disPatch(setBookmarks([]));
     }
 
     const SetLogin = (email, username) => {
@@ -83,7 +102,7 @@ const NavBar = () => {
     }, [isLogin])
 
     const handleLogout = () => {
-        disPatch(setLogout());
+        SetLogout();
         SetLogoutForLocalSorage();
         if (router.pathname !== 'signin' || router.pathname !== 'signup') {
             Router.push(`/signin`)

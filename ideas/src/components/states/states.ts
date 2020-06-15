@@ -23,6 +23,8 @@ export interface ArticlesState {
     errorMessage: string;
     bookmarks:Array<number>;
     finishedArticles:Array<number>;
+    provider: string;
+    userId: number;
 }
 
 export const initialState = {
@@ -42,7 +44,9 @@ export const initialState = {
     category: -1,
     errorMessage: '',
     bookmarks: [],
-    finishedArticles: []
+    finishedArticles: [],
+    provider: '',
+    userId: -1
 }
 
 //Selector functions
@@ -64,3 +68,5 @@ export const selectCategoryState = (rootState: RootState) => rootState.articlesR
 export const selectErrorMessageState = (rootState: RootState) => rootState.articlesReducer.errorMessage;
 export const selectBookmarksState = (rootState: RootState) => rootState.articlesReducer.bookmarks;
 export const selectFinishedArticlessState = (rootState: RootState) => rootState.articlesReducer.finishedArticles;
+export const selectProviderState = (rootState: RootState) => rootState.articlesReducer.provider;
+export const selectUserIdState = (rootState: RootState) => rootState.articlesReducer.userId;

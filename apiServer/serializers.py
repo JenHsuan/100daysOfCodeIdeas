@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 from django.contrib.auth.models import User
-from .models import Article, Order, Profile
+from .models import Article, Profile, ProfileSocial
 
 class SocialAuthForGitihubSerializer(serializers.Serializer):
     code = serializers.CharField(max_length=255, required=True)
@@ -9,6 +9,7 @@ class SocialAuthForGitihubSerializer(serializers.Serializer):
 class SocialAuthSerializer(serializers.Serializer):
     provider = serializers.CharField(max_length=255, required=True)
     access_token = serializers.CharField(max_length=4096, required=True, trim_whitespace=True)
+    email = serializers.CharField(max_length=255)
 
 class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,19 +19,18 @@ class ArticleSerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ("reader", "email", "hasSubscribed")
+        fields = ("reader", "email", "hasSubscribed", "bookmarks", "finishedArticles")
 
-class OrderSerializer(serializers.ModelSerializer):
+class ProfileSocialSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Order
-        fields = ("id", "reader", "articles", "created_at", "updated_at")
-        
+        model = ProfileSocial
+        fields = ("provider", "email", "hasSubscribed", "bookmarks", "finishedArticles")
+
 class UserSerializer(serializers.ModelSerializer):
-    order = OrderSerializer()
     profile = ProfileSerializer()
     class Meta:
         model = User
-        fields = ('id', 'username', 'order', 'profile')
+        fields = ('id', 'username', 'profile')
 
 class UserSerializerWithToken(serializers.ModelSerializer):
     token = serializers.SerializerMethodField()

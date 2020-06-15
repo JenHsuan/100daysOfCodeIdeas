@@ -20,6 +20,8 @@ export const REMOVE_BOOKMARK = 'REMOVE_BOOKMARK';
 export const SET_BOOKMARKS = 'SET_BOOKMARKS';
 export const SET_MARKASFINISHED = 'SET_MARKASFINISHED';
 export const SET_UNMARKASFINISHED = 'SET_UNMARKASFINISHED';
+export const SET_PROVIDER = 'SET_PROVIDER';
+export const SET_USERID = 'SET_USERID';
 
 export interface ArticleType {
     title: string;

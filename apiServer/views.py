@@ -5,8 +5,8 @@ import os
 import logging
 from urllib.error import HTTPError
 
-from .serializers import SocialAuthForGitihubSerializer, SocialAuthSerializer, ArticleSerializer, UserSerializer, UserSerializerWithToken, OrderSerializer, ProfileSerializer
-from .models import Article, Order, Profile
+from .serializers import ProfileSocialSerializer, SocialAuthForGitihubSerializer, SocialAuthSerializer, ArticleSerializer, UserSerializer, UserSerializerWithToken, ProfileSerializer
+from .models import Article, Profile, ProfileSocial
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
@@ -31,7 +31,7 @@ import requests
 from CodeIdeas.settings import EMAIL_HOST_USER
 from django.core.mail import send_mail
 from datetime import datetime
-
+from django.forms.models import model_to_dict
 
 index_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'index.html')
 signin_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'signin.html')
@@ -192,14 +192,6 @@ class ArticleByCategoryViewSet(generics.ListAPIView):
             queryset = queryset.filter(category=category)
         return queryset
 
-class OrderViewSet(viewsets.ModelViewSet):
-    """
-    List all workkers, or create a new worker.
-    """
-    queryset = Order.objects.all()
-    serializer_class = OrderSerializer
-    http_method_names = ['get', 'post', 'put']
-
 class ProfileViewSet(generics.GenericAPIView):
     permission_classes = (permissions.AllowAny,)
     authentication_classes = []
@@ -207,12 +199,51 @@ class ProfileViewSet(generics.GenericAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
+    def get(self, request):
+        reader = self.request.query_params.get('reader', None)
+        p = Profile.objects.filter(reader=reader).first()
+        if p:
+            return Response(data=model_to_dict(p), status=status.HTTP_200_OK)
+        else:
+            return Response(data={'error':'No reader'}, status=status.HTTP_400_BAD_REQUEST)
+
     def put(self, request):
         reader_id = self.request.query_params.get('reader_id', None)
         hasSubscribed = self.request.query_params.get('hasSubscribed', None)
-        p = Profile.objects.get(reader_id = reader_id)
-        p.hasSubscribed = hasSubscribed
-        p.save()
+        bookmarks = self.request.query_params.get('bookmarks', None)
+        finishedArticles = self.request.query_params.get('finishedArticles', None)
+        if reader_id != None:
+            if hasSubscribed != None:
+                if hasSubscribed != 'True' or hasSubscribed != 'False':
+                    return Response(data={'error':'hasSubscribed is invalid'}, status=status.HTTP_400_BAD_REQUEST)
+            
+                p = Profile.objects.get(reader_id = reader_id)
+                p.hasSubscribed = hasSubscribed
+                p.save()
+                return Response(status=status.HTTP_200_OK)
+
+            if bookmarks != None:
+                bookmarkList = bookmarks.split(',')
+                for bookmark in bookmarkList:
+                    if bookmark.isnumeric() == False:
+                        return Response(data={'error':'bookmarks is invalid'}, status=status.HTTP_400_BAD_REQUEST)
+            
+                p = Profile.objects.get(reader_id = reader_id)
+                p.bookmarks = bookmarks
+                p.save()
+                return Response(status=status.HTTP_200_OK)
+
+            if finishedArticles != None:
+                finishedArticleList = finishedArticles.split(',')
+                for finishedArticle in finishedArticleList:
+                    if finishedArticle.isnumeric() == False:
+                        return Response(data={'error':'finishedArticles is invalid'}, status=status.HTTP_400_BAD_REQUEST)
+            
+                p = Profile.objects.get(reader_id = reader_id)
+                p.finishedArticles = finishedArticles
+                p.save()
+                return Response(status=status.HTTP_200_OK)
+
         return Response(status=status.HTTP_200_OK)
     
     def post(self, request):
@@ -244,6 +275,96 @@ class ProfileViewSet(generics.GenericAPIView):
         
 
 profile_view = ProfileViewSet.as_view()         
+
+class ProfileSocialViewSet(generics.GenericAPIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = []
+    # use default authentication classes 
+    queryset = ProfileSocial.objects.all()
+    serializer_class = ProfileSocialSerializer
+
+    def get(self, request):
+        provider = self.request.query_params.get('provider', None)
+        email = self.request.query_params.get('email', None)
+        p = ProfileSocial.objects.filter(email=email).filter(provider=provider).first()
+        if p:
+            return Response(data=model_to_dict(p), status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_200_OK)
+                
+    def put(self, request):
+        provider = self.request.query_params.get('provider', None)
+        email = self.request.query_params.get('email', None)
+        hasSubscribed = self.request.query_params.get('hasSubscribed', None)
+        bookmarks = self.request.query_params.get('bookmarks', None)
+        finishedArticles = self.request.query_params.get('finishedArticles', None)
+        if email != None and provider != None:
+            if hasSubscribed != None:
+                if hasSubscribed != 'True' or hasSubscribed != 'False':
+                    return Response(data={'error':'hasSubscribed is invalid'}, status=status.HTTP_400_BAD_REQUEST)
+            
+                p = ProfileSocial.objects.filter(email=email).filter(provider=provider).first()
+                p.hasSubscribed = hasSubscribed
+                p.save()
+                return Response(status=status.HTTP_200_OK)
+
+            if bookmarks != None:
+                bookmarkList = bookmarks.split(',')
+                for bookmark in bookmarkList:
+                    if bookmark.isnumeric() == False:
+                        return Response(data={'error':'bookmarks is invalid'}, status=status.HTTP_400_BAD_REQUEST)
+
+                print(email)
+                print(provider)
+                p = ProfileSocial.objects.filter(email=email).filter(provider=provider).first()
+                p.bookmarks = bookmarks
+                p.save()
+                return Response(status=status.HTTP_200_OK)
+
+            if finishedArticles != None:
+                finishedArticleList = finishedArticles.split(',')
+                for finishedArticle in finishedArticleList:
+                    if finishedArticle.isnumeric() == False:
+                        return Response(data={'error':'finishedArticles is invalid'}, status=status.HTTP_400_BAD_REQUEST)
+            
+                print(email)
+                print(provider)
+                p = ProfileSocial.objects.filter(email=email).filter(provider=provider).first()
+                p.finishedArticles = finishedArticles
+                p.save()
+                return Response(status=status.HTTP_200_OK)
+
+        return Response(status=status.HTTP_200_OK)
+    
+    def post(self, request):
+        try:
+            serializer = self.serializer_class(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                print(serializer.data)
+
+                now = datetime.now()
+                dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+
+                send_mail('[Daily Learning] Thanks for registration!', 
+                'You login to Daily Learning successfully on ' + dt_string, 
+                EMAIL_HOST_USER, 
+                [serializer.data['email']], 
+                fail_silently = False)
+            
+                #email = serializer.data.get('email', None)
+                #send_mail('Django mail', 'This e-mail was sent with Django.','alaymangogo@gmail.com', [email], fail_silently=False)
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            
+            msg = {"error": serializer.errors}
+            return Response(data=msg)
+        except ValidationError as e:
+            msg = {"error": e.messages}
+            print(msg)
+            return Response(data=msg) 
+        
+
+profile_socail_view = ProfileSocialViewSet.as_view()         
 
 
 class RefreshTokenView(generics.GenericAPIView):
@@ -303,6 +424,8 @@ class SocialLoginView(generics.GenericAPIView):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         provider = serializer.data.get('provider', None)
+        email = serializer.data.get('email', None)
+        print(email)
         strategy = load_strategy(request)
         try:
             backend = load_backend(strategy=strategy, name=provider,
@@ -350,13 +473,34 @@ class SocialLoginView(generics.GenericAPIView):
                 "token": jwt_encode_handler(
                     jwt_payload_handler(user)
                 )}
-			#customize the response to your needs
+            # create pofile social
+
+            scheme = request.is_secure() and "https" or "http"
+            url = scheme + "://" + request.get_host() + '/api/profilesocial/'
+            res = requests.get(url)
+            print(res)
+            print(res.text)
+            print("auth: " + authenticated_user.email)
+            if authenticated_user.email == "":
+                authenticated_user.email = email
+
+            print("auth: " + authenticated_user.email)
+            
+            if res.text == "":
+                res = requests.post(url, data = {
+                    "provider": provider,
+                    "email": authenticated_user.email
+                })
+                print(res.text)
+			
+            #customize the response to your needs
             response = {
                 "email": authenticated_user.email,
                 "username": authenticated_user.username,
-                "token": data.get('token')
+                "token": data.get('token'),
+                "provider": provider
             }
-            print(response)
+            print(authenticated_user)
             response = Response(status=status.HTTP_200_OK, data=response)
             response.set_cookie('token', data.get('token'), httponly=True)
 

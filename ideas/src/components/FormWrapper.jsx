@@ -4,7 +4,9 @@ import Router from 'next/router'
 import { useDispatch, useSelector } from 'react-redux';
 import {
     selectLoginState,
-    selectArticlesState
+    selectArticlesState,
+    selectProviderState,
+    selectEmailState
 } from './states/states';
 
 import axios from 'axios';
@@ -17,7 +19,11 @@ import {
     setUsername,
     setErrorMessage,
     getArticles,
-    setPlanner
+    setPlanner,
+    setProvider,
+    setUserId,
+    setBookmarks,
+    setFinishedArticles
 } from './actions/articlesAction';
 import { useMediaPredicate } from "react-media-hook";
 
@@ -25,16 +31,14 @@ const FormWrapper = (WrappedComponent) => ()=> {
     const disPatch = useDispatch();
     const isLogin = useSelector(selectLoginState);
     const articles = useSelector(selectArticlesState);
-    const smallerThan600 = useMediaPredicate("(max-width: 600px)");
+    const provider = useSelector(selectProviderState);
+    const email = useSelector(selectEmailState);
     //const [isLoading, setLoading] = useState(false);
 
     useEffect(()=> {
         if (articles.length === 0) {
             console.log('fetch articles')
             disPatch(getArticles());
-        }
-        if (smallerThan600) {
-            disPatch(setPlanner(false));
         }
     }, [])
 
@@ -44,13 +48,18 @@ const FormWrapper = (WrappedComponent) => ()=> {
         }
     }, [isLogin])
 
-    const passAccessToken = async (provider, access_token) => {
+    const passAccessToken = async (provider, access_token, email = 'none') => {
         console.log(access_token)
         console.log(provider)
-        const res = await axios.post('/api/social-auth', {
+        console.log(email)
+        const data = {
             provider: provider,
-            access_token: access_token
-        });
+            access_token: access_token,
+            email: email
+        }
+        console.log(data)
+
+        const res = await axios.post('/api/social-auth', data);
         return res;
     }
 
@@ -59,13 +68,16 @@ const FormWrapper = (WrappedComponent) => ()=> {
             disPatch(setLoading(true));
             console.log(response["accessToken"])
             console.log(response)
-            const responseFromDjango = await passAccessToken('facebook', response["accessToken"]);
+            const email = response["email"];
+            const responseFromDjango = await passAccessToken('facebook', response["accessToken"], email);
             console.log(responseFromDjango);
             const token = responseFromDjango["data"]["token"];
             const username = responseFromDjango["data"]["username"];
-            const email = response["email"];
-            SetLogin(token, email, username);
+            const provider = responseFromDjango["data"]["provider"];
+            SetLogin(token, email, username, provider);
             disPatch(setLoading(false));
+            disPatch(setEmail(email));
+            disPatch(setProvider(provider));
         } catch (error) {
             //res.data = error;
             //setMessage(error.message)
@@ -73,11 +85,22 @@ const FormWrapper = (WrappedComponent) => ()=> {
             disPatch(setLoading(false));
             disPatch(setErrorMessage(error.message))
             console.log(error);
-            disPatch(setLogout());
+            SetLogout();
         }
     }
 
-    const SetLogin = (token, email, username) => {
+    const SetLogout = () => {
+        disPatch(setLogout());
+        disPatch(setUsername(''));
+        disPatch(setEmail(''));
+        disPatch(setFinishedArticles([]));
+        disPatch(setAccessToken(''));
+        disPatch(setProvider(''));
+        disPatch(setBookmarks([]));
+        disPatch(setUserId(-1));
+    }
+
+    const SetLogin = (token, email, username, provider) => {
         if (email !== null && email !== undefined && email.length >0 ) {
             disPatch(setEmail(email));
             //local storage
@@ -89,11 +112,43 @@ const FormWrapper = (WrappedComponent) => ()=> {
             localStorage.setItem("username", username);
         }
 
+        if (provider !== null && provider !== undefined && provider.length >0 ) {
+            disPatch(setProvider(provider));
+            //local storage
+            localStorage.setItem("provider", provider);
+        }
+
         disPatch(setLogin());
         disPatch(setAccessToken(token));
         //local storage
         localStorage.setItem("login", "true");
     }
+
+    useEffect(()=> {
+        const fetchProfile = async () => {
+            try {
+                const res = await axios.get(`api/profilesocial/?provider=${provider}&email=${email}`);
+                if (res['error'] === undefined) {
+                    console.log(res)
+                    const bookmarksList = res['data']['bookmarks'].split(',');
+                    console.log(bookmarksList.filter(bookmark => bookmark !== ''))
+                    disPatch(setBookmarks(bookmarksList.filter(bookmark => bookmark !== '')))
+                    localStorage.setItem("bookmarks", res['data']['bookmarks'].trim());
+                    
+                    const finishedArticlesList = res['data']['finishedArticles'].split(',');
+                    disPatch(setBookmarks(finishedArticlesList.filter(finishedArticle => finishedArticle !== '')))
+                    localStorage.setItem("finishedArticles", res['data']['finishedArticles'].trim());
+                    
+                }
+            } catch(error) {
+                console.log(error)
+            }
+        };
+        
+        if (isLogin) {
+            fetchProfile();
+        }
+    }, [provider, email, isLogin])
 
     const ResponseGithubOnSuccess = async (response, setMessage) => {
         try {
@@ -107,16 +162,19 @@ const FormWrapper = (WrappedComponent) => ()=> {
             console.log(responseFromDjango);
             const token = responseFromDjango["data"]["token"];
             const email = responseFromDjango["data"]["email"];
+            const provider = responseFromDjango["data"]["provider"];
             const username = responseFromDjango["data"]["username"];
-            SetLogin(token, email, username);
+            SetLogin(token, email, username, provider);
             disPatch(setLoading(false));
+            disPatch(setEmail(email));
+            disPatch(setProvider(provider));
         } catch (error) {
             //res.data = error;
             //setValue({...value, ['messages']: error.message})
             disPatch(setLoading(false));
             disPatch(setErrorMessage(error.message))
             console.log(error);
-            disPatch(setLogout());
+            SetLogout();
         }
     }
 

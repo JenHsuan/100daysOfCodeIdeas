@@ -85,7 +85,7 @@ const SignUpForm = ({responseFacebook,
                         username: username,
                         password: password
                     });
-                    SetLogin(token, email, username);
+                    SetLogin(token, email, username, "normal");
                 }
             }
             disPatch(setLoading(false));

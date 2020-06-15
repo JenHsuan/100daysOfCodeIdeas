@@ -7,7 +7,11 @@ import '.././css/article.css'
 import '.././css/card.css'
 import {
     selectLoginState,
-    selectBookmarksState
+    selectBookmarksState,
+    selectProviderState,
+    selectUserIdState,
+    selectEmailState,
+    selectFinishedArticlessState
 } from './states/states';
 
 import { 
@@ -17,6 +21,7 @@ import {
     removeFinishedArticle
 } from './actions/articlesAction';
 import Router, { useRouter } from 'next/router'
+import axios from 'axios';
 
 const Article = ({article}) => {
     const router = useRouter();
@@ -25,13 +30,25 @@ const Article = ({article}) => {
     const [isBookmarked, setBookmark] = useState(false);
     const [isChecked, setChecked] = useState(false);
     const isLogin = useSelector(selectLoginState);
-    const bookmarks = useSelector(selectBookmarksState)
+    const bookmarks = useSelector(selectBookmarksState);
+    const userId = useSelector(selectUserIdState);
+    const provider = useSelector(selectProviderState);
+    const email = useSelector(selectEmailState);
+    const finishedArticles = useSelector(selectFinishedArticlessState);
 
     useEffect(()=> {
-        if (bookmarks.find(bookmark => bookmark === article.id) !== undefined ) {
+        if (bookmarks.find(bookmark => bookmark == article.id) !== undefined ) {
+            console.log('bookmark')
             setBookmark(true);
         }
-    }, [article])
+    }, [bookmarks])
+
+    useEffect(()=> {
+        if (finishedArticles.find(finishedArticle => finishedArticle == article.id) !== undefined ) {
+            console.log('finishedArticle')
+            setChecked(true);
+        }
+    }, [finishedArticles])
 
     const handleClose = () => {
         setShow(false);
@@ -41,57 +58,107 @@ const Article = ({article}) => {
         setShow(true);
     }
 
-    const onCheckedClick = () => {
-        var finishedArticlesJson = localStorage.getItem("finishedArticles");
+    const onCheckedClick = async() => {
+        let finishedArticlesString = localStorage.getItem("finishedArticles");
+        let finishedArticlesList;
+        let localfinishedArticles;
         if (isChecked) {
-            if (finishedArticlesJson !== null) {
-                var finishedArticles = JSON.parse(finishedArticlesJson);
-                var newFinishedArticles = finishedArticles.filter(finishedArticle => finishedArticle !== article.id);
-                localStorage.setItem("finishedArticle", JSON.stringify(newFinishedArticles));
-                setChecked(false);
+            if (finishedArticlesString !== null) {
+                finishedArticlesList = finishedArticlesString.split(',');
+                finishedArticlesList = finishedArticlesList.filter(finishedArticle => Number(finishedArticle) !== article.id);
             }
-            disPatch(removeFinishedArticle(article.id));
+            //set bookmarks to local state
+            setChecked(false);
         } else {
-            console.log(finishedArticlesJson)
-            if (finishedArticlesJson === null) {
-                localStorage.setItem("finishedArticles", `[${article.id}]`);
-                disPatch(setFinishedArticles([article.id]));
+            console.log(finishedArticlesString)
+            if (finishedArticlesString === '') {
+                console.log(999)
+                localfinishedArticles = `${article.id}`;
+                finishedArticlesList = [article.id];
             } else {
-                var finishedArticles = JSON.parse(finishedArticlesJson);
-                finishedArticles.indexOf(article.id) === -1 ? finishedArticles.push(article.id) : console.log("This item already exists");
-                localStorage.setItem("finishedArticles", JSON.stringify(finishedArticles));
-                disPatch(setFinishedArticles(finishedArticles));
-                setChecked(true);
+                finishedArticlesList = finishedArticlesString.split(',');
+                finishedArticlesList.indexOf(article.id) === -1 ? finishedArticlesList.push(article.id) : console.log("This item already exists");
+            }
+            //set bookmarks to local state
+            setChecked(true);
+        }
+
+        let newfinishedArticlesString = finishedArticlesList.join();
+        //set bookmarks to localStorage
+        localStorage.setItem("finishedArticles", newfinishedArticlesString);
+        //set bookmarks to global state
+        disPatch(setFinishedArticles(finishedArticlesList));
+        //update server
+        if (provider === 'normal') {
+            try {
+                const res = await axios.put(`api/profile/?finishedArticles=${newfinishedArticlesString}&reader_id=${userId}`);
+            } catch(error) {
+                console.log(error)
+            }
+        } else {
+            try {
+                const res = await axios.put(`api/profilesocial/?finishedArticles=${newfinishedArticlesString}&email=${email}&provider=${provider}`);
+            } catch(error) {
+                console.log(error)
             }
         }
     }
 
-    const onBookmarkClick = () => {
-        var bookmarksJson = localStorage.getItem("bookmarks");
-        if (isBookmarked) {
-            if (bookmarksJson !== null) {
-                var bookmarks = JSON.parse(bookmarksJson);
-                var newBookmarks = bookmarks.filter(bookmark => bookmark !== article.id);
-                localStorage.setItem("bookmarks", JSON.stringify(newBookmarks));
-                setBookmark(false);
+    const setBookmarksState = async (bookmarksList) => { 
+        let newbookmarksString = bookmarksList.join();
+        //set bookmarks to localStorage
+        localStorage.setItem("bookmarks", newbookmarksString);
+        //set bookmarks to global state
+        disPatch(setBookmarks(bookmarksList));
+        //update server
+        if (provider === 'normal') {
+            try {
+                const res = await axios.put(`api/profile/?bookmarks=${newbookmarksString}&reader_id=${userId}`);
+            } catch(error) {
+                console.log(error)
             }
-            disPatch(removeBookmark(article.id));
         } else {
-            console.log(bookmarksJson)
-            if (bookmarksJson === null) {
-                localStorage.setItem("bookmarks", `[${article.id}]`);
-                disPatch(setBookmarks([article.id]));
-            } else {
-                var bookmarks = JSON.parse(bookmarksJson);
-                bookmarks.indexOf(article.id) === -1 ? bookmarks.push(article.id) : console.log("This item already exists");
-                localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
-                disPatch(setBookmarks(bookmarks));
-                setBookmark(true);
+            try {
+                const res = await axios.put(`api/profilesocial/?bookmarks=${newbookmarksString}&email=${email}&provider=${provider}`);
+            } catch(error) {
+                console.log(error)
             }
+        }
+    }
+    const onBookmarkClick = async () => {
+        let bookmarksString = localStorage.getItem("bookmarks");
+        let localBookmarks;
+        let bookmarksList;
+        if (isBookmarked) {
+            if (bookmarksString !== null) {
+                bookmarksList = bookmarksString.split(',');
+                bookmarksList = bookmarksList.filter(bookmark => Number(bookmark) !== article.id);
+            }
+            //set bookmarks to local state
+            setBookmark(false);
+
+            await setBookmarksState(bookmarksList);
+        } else {
+            console.log(bookmarksString)
+            if (bookmarksString === '') {
+                console.log(999)
+                localBookmarks = `${article.id}`;
+                bookmarksList = [article.id];
+            } else {
+                bookmarksList = bookmarksString.split(',');
+                bookmarksList.indexOf(article.id) === -1 ? bookmarksList.push(article.id) : console.log("This item already exists");
+            }
+            //set bookmarks to local state
+            setBookmark(true);
+
+            await  setBookmarksState(bookmarksList);
+            //redirect
             if (router.pathname !== 'bookmarks') {
                 Router.push(`/bookmarks`)
             }
         }
+        
+        
     }
 
     useEffect(()=> {
