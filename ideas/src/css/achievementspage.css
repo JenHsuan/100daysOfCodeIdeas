@@ -1,0 +1,82 @@
+.achievementspage-grid-box {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-auto-rows: 200px;
+  border-radius: 5px; }
+
+.achievementspage-head {
+  grid-column-start: 1;
+  grid-column-end: 9;
+  grid-row-start: 1;
+  padding-left: 25%;
+  padding-top: 8%;
+  width: 100%;
+  background-color: #FFFFFF;
+  overflow-x: hidden;
+  transition: 0.5s; }
+  .achievementspage-head .title {
+    font-size: 30px;
+    font-weight: 400; }
+  .achievementspage-head .subtitle {
+    font-size: 18px;
+    font-weight: 300; }
+
+.achievementspage-head-remove-left {
+  padding-left: 5%; }
+
+.achievementspage-hide-siderbar {
+  grid-column-start: 2;
+  grid-column-end: 9;
+  grid-row-start: 2;
+  grid-row-end: 5;
+  background-color: #FFFFFF;
+  margin-top: 1%;
+  transition: 0.5s; }
+  .achievementspage-hide-siderbar .achievementspage-content-grid-box {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-auto-rows: 60px;
+    border-radius: 5px;
+    border-radius: 5px; }
+    .achievementspage-hide-siderbar .achievementspage-content-grid-box .achievementspage-hide-siderbar-labels {
+      grid-column-start: 1;
+      grid-column-end: 4;
+      grid-row-start: 1;
+      grid-row-end: 4;
+      transition: 0.8s;
+      border-radius: 5px;
+      box-shadow: 0 5px 10px gray;
+      text-align: center;
+      font-size: 28;
+      font-weight: 400;
+      padding-top: 15%; }
+      .achievementspage-hide-siderbar .achievementspage-content-grid-box .achievementspage-hide-siderbar-labels .bookmarks {
+        color: blue; }
+      .achievementspage-hide-siderbar .achievementspage-content-grid-box .achievementspage-hide-siderbar-labels .finished {
+        color: green; }
+      .achievementspage-hide-siderbar .achievementspage-content-grid-box .achievementspage-hide-siderbar-labels .remained {
+        color: gray; }
+    .achievementspage-hide-siderbar .achievementspage-content-grid-box .achievementspage-piechart {
+      padding-left: 10%;
+      grid-column-start: 1;
+      grid-column-end: 8;
+      grid-row-start: 2;
+      grid-row-end: 4; }
+
+.achievementspage-hide-siderbar-remove-left {
+  grid-column-start: 1;
+  grid-column-end: 4; }
+
+.achievementspage-footer {
+  grid-column-start: 2;
+  grid-column-end: 10;
+  grid-row-start: 5;
+  grid-row-end: 7; }
+
+.achievementspage-footer-move-left {
+  grid-column-start: 1;
+  grid-column-end: 9;
+  grid-row-start: 7;
+  grid-row-end: 9; }
+
+/*# sourceMappingURL=achievementspage.css.map */

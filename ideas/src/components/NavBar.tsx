@@ -1,6 +1,6 @@
 import React, {useEffect, Fragment} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Navbar, Nav, NavDropdown, MenuItem } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown} from 'react-bootstrap';
 import '../css/navbar.css'
 import {
     selectShowPlannerState,
@@ -104,7 +104,7 @@ const NavBar = () => {
     const handleLogout = () => {
         SetLogout();
         SetLogoutForLocalSorage();
-        if (router.pathname !== 'signin' || router.pathname !== 'signup') {
+        if (router.pathname !== 'signin') {
             Router.push(`/signin`)
         }
     }
@@ -118,7 +118,6 @@ const NavBar = () => {
         height="30"
         className="d-inline-block align-top navbar-logo-img"
         alt="Learning Booster"
-        href="/"
         title="Learning Booster from Sean Hsieh"/>
       Daily Learning</Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -131,11 +130,16 @@ const NavBar = () => {
             </Nav.Link>
             {isLogin && (
                 <Fragment>
-                <Nav.Link href="bookmarks"> 
-                    <Link href="/bookmarks">
-                        <a href="/bookmarks">Plans</a>
-                    </Link>
-                </Nav.Link>
+                    <Nav.Link href="bookmarks"> 
+                        <Link href="/bookmarks">
+                            <a href="/bookmarks">Plans</a>
+                        </Link>
+                    </Nav.Link>
+                    <Nav.Link href="achievements"> 
+                        <Link href="/achievements">
+                            <a href="/achievements">Achievements</a>
+                        </Link>
+                    </Nav.Link>
                 </Fragment>
             )}
         </Nav>
@@ -152,7 +156,7 @@ const NavBar = () => {
         )}
         {isLogin && (
             <NavDropdown title={username} id="basic-nav-dropdown">
-                <NavDropdown.Item eventKey={2} onSelect={handleLogout}>
+                <NavDropdown.Item onSelect={handleLogout}>
                     Sign out
                 </NavDropdown.Item>
             </NavDropdown>

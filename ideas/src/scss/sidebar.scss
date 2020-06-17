@@ -1,3 +1,18 @@
+
+.articles-hide-siderbar {
+   grid-column-start: 1;
+   grid-column-end: 9;
+   grid-row-start: 2;
+   background-color: #FFFFFF;
+   margin-top: 1%;
+   transition: 0.5s;
+}
+ 
+.articles-hide-siderbar-remove-left {
+   padding-left: 23%;
+   transition: 0.5s;
+}
+  
 .sidebar {
     grid-column-start: 1;
     grid-column-end: 3;

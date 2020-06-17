@@ -3,29 +3,29 @@ import { Provider, useDispatch} from 'react-redux';
 import Head from 'next/head';
 import store from '../components/store/store'
 import NavBar from '../components/NavBar';
-import '../css/aboutpage.css';
+import '../css/achievementspage.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Footer from '../components/Footer';
-import AboutPageContent from '../components/AboutPageContent';
+import AchievementsContent from '../components/AchievementsContent';
+import '../css/sidebar.css'
+import SideBar from '../components/SideBar';
+import SignFooter from '../components/SignFooter';
 
-const about = () => {
+const achievements = () => {
     return (
         <div>
             <Head>
-                <title>ALayman Learning Booster - About</title>
+                <title>ALayman Learning Booster - Achievements</title>
                 <link rel="icon" href="https://raw.githubusercontent.com/JenHsuan/ALayman/master/views/images/alaymanicon.png" type="image/x-icon" />
             </Head>
             <Provider store = {store}>
                 <NavBar></NavBar>
-                <div className='aboutpage-grid-box '>
-                    <AboutPageContent/>
-                    <div className="footer">
-                        <Footer></Footer>
-                    </div>
+                <div className='achievementspage-grid-box'>
+                    <SideBar></SideBar>
+                    <AchievementsContent></AchievementsContent>
                 </div>
             </Provider>
         </div>
     )
 }
 
-export default about
+export default achievements

@@ -1,5 +1,5 @@
 .articles {
-  grid-column-start: 2;
+  grid-column-start: 3;
   grid-column-end: 9;
   grid-row-start: 1;
   grid-row-end: 50;
@@ -11,7 +11,7 @@
   grid-column-end: 9;
   grid-row-start: 1;
   padding-left: 25%;
-  padding-top: 5%;
+  padding-top: 8%;
   width: 100%;
   background-color: #FFFFFF;
   overflow-x: hidden;

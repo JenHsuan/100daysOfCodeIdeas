@@ -10,7 +10,8 @@ import {
     setFinishedArticles,
     setBookmarks,
     setAccessToken
-} from '../components/actions/articlesAction';
+} from './actions/articlesAction';
+import axios from 'axios';
 
 const AboutPageContent = () => {
     const disPatch = useDispatch();
