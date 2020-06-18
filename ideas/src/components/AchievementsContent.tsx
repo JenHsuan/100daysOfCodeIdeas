@@ -124,13 +124,13 @@ const AchievementsContent = () => {
                 <div className="achievementspage-content-grid-box">
                     <div className="achievementspage-hide-siderbar-labels">
                         <div>
-                            Bookmarked: <span className="bookmarks">{bookmarks.length}</span>
+                            <span className="bookmarks">{bookmarks.length}</span> Bookmarked Topics
                         </div>
                         <div>
-                            Completed: <span className="finished">{finishedArticles.length}</span>
+                            <span className="finished">{finishedArticles.length} </span> Completed Topics
                         </div>
                         <div>
-                        Unfinished: <span className="unfinished">{articles.length}</span>
+                            <span className="unfinished">{articles.length}</span> Unfinished Topics
                         </div>
                     </div>
                     <div className="achievementspage-piechart">
@@ -139,13 +139,14 @@ const AchievementsContent = () => {
                         data={data}
                         innerRadius={20}
                         labelRadius={30}
-                        style={{ labels: { fill: "white", fontSize: 1}} }
+                        style={{ labels: { fill: "white", fontSize: 1}}}
+                        radius={({ datum }) => 0.5 + datum.y * 1.3}
                     />
                     </div>
                 </div>
             </div>
             <div className={`${showPlanner === true ? 'achievementspage-footer' : 'achievementspage-footer achievementspage-footer-move-left'}`}>
-                        <Footer/>
+                <Footer/>
             </div>
         </Fragment>
     )

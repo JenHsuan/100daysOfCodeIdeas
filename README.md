@@ -29,6 +29,7 @@
 * React-Bootstrap
 * react-facebook-login
 * react-paginate
+* Victory
 * concurrently
 * SASS
 * CSS grid
