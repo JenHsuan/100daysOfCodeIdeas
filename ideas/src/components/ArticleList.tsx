@@ -42,6 +42,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Footer from '../components/Footer';
 import axios from 'axios';
 import Router, { useRouter } from 'next/router'
+import ArticleSearchBar from './ArticleSearchBar';
+import { useMediaPredicate } from "react-media-hook";
 
 const ArticleList = () => {
     const disPatch = useDispatch();
@@ -54,6 +56,7 @@ const ArticleList = () => {
     const pageCount = useSelector(selectPageCountState);
     const offset = useSelector(selectOffsetState);
     const showPlanner = useSelector(selectShowPlannerState);
+    const smallerThan800 = useMediaPredicate("(max-width: 800px)");
 
     useEffect(()=> {
         //Refresh JWT token or logout
@@ -153,8 +156,9 @@ const ArticleList = () => {
                 {`Learning materials (${filteredArticles.length === 0 ? articles.length : filteredArticles.length})`}
             </div>
             <div className="subtitle">
-                Add the next free article for skills you want to learn to your plan
+                Add next articles for skills you want to learn to your plan
             </div>
+            {smallerThan800 && <ArticleSearchBar/>}
         </div>
         <div className={`${showPlanner !== true ? 'articles-hide-siderbar' : 'articles-hide-siderbar articles-hide-siderbar-remove-left'}`}>
             <div className="articles-row row">

@@ -153,3 +153,113 @@
         }
     }
  }
+
+ @media screen and (max-width: 1000px) and (min-width: 500px){
+     
+    .common-footer-grid-box, .common-footer-grid-box-move-left{
+        .slogon {
+            font-size: 24px;
+            grid-column-start: 1;
+            grid-column-end: 15;
+            margin-left: 10%;
+        }
+        .footer-author {
+            grid-column-start: 1;
+            grid-column-end: 13;
+            margin-left: 48%;
+            .author-name{
+                font-size: 14px;
+            }
+            span{
+                a{
+                    img{
+                        width: 50px;
+                        border-radius: 3px;
+                    }
+                }
+            }
+        }
+        .subscribe-btn {
+            grid-column-start: 1;
+            grid-column-end: 13;
+            margin-left: 55%;
+            button{
+                font-size: 16px;
+                font-weight: 200;
+            }
+        }
+        .subscribe-social-btn {
+            grid-column-start: 7;
+            grid-column-end: 14;
+            span{
+                a{
+                    img{
+                        background-color: white;
+                        width: 20px;
+                        border-radius: 3px;
+                    }
+                }
+            }
+        }
+        .subscribe-copyright{
+            grid-column-start: 6;
+            grid-column-end: 14;
+        }
+    }
+ }
+
+ @media screen and (max-width: 500px){
+    .common-footer-grid-box, .common-footer-grid-box-move-left{
+        
+        grid-column-start: 1;
+        grid-column-end: 15;
+        .slogon {
+            font-size: 24px;
+            grid-column-start: 1;
+            grid-column-end: 15;
+            margin-left: 10%;
+        }
+        .footer-author {
+            grid-column-start: 1;
+            grid-column-end: 13;
+            margin-left: 40%;
+            .author-name{
+                font-size: 14px;
+            }
+            span{
+                a{
+                    img{
+                        width: 50px;
+                        border-radius: 3px;
+                    }
+                }
+            }
+        }
+        .subscribe-btn {
+            grid-column-start: 7;
+            grid-column-end: 13;
+            button{
+                font-size: 16px;
+                font-weight: 200;
+            }
+        }
+        .subscribe-social-btn {
+            grid-column-start: 6;
+            grid-column-end: 14;
+            span{
+                a{
+                    img{
+                        background-color: white;
+                        width: 20px;
+                        border-radius: 3px;
+                    }
+                }
+            }
+        }
+        .subscribe-copyright{
+            grid-column-start: 4;
+            grid-column-end: 17;
+            font-size: 12px;
+        }
+    }
+ }

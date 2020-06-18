@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import ArticleSearchBar from './ArticleSearchBar';
 import ArticleDropdown from './ArticleDropdown';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,11 +13,19 @@ import {
 } from './actions/articlesAction';
 
 import Link from 'next/link'
+import { useMediaPredicate } from "react-media-hook";
 
 const SideBar = () => {
     const disPatch = useDispatch();
     const showPlannerFlag = useSelector(selectShowPlannerState);
     const isLogin = useSelector(selectLoginState);
+    const smallerThan800 = useMediaPredicate("(max-width: 800px)");
+    
+    useEffect(()=> {
+        if (smallerThan800) {
+            disPatch(setPlanner(false))
+        }
+    }, [])
 
     const showPlanner = () => {
         if (showPlannerFlag === true) {

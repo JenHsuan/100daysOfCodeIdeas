@@ -123,3 +123,9 @@
     transition: 0.8s;
 }
 
+@media screen and (max-width: 800px){
+    .signinform {
+        grid-column-start: 2;
+        grid-column-end: 8;
+    }
+ }

@@ -194,4 +194,14 @@ input[type="text"]::placeholder {
 input[type="password"]::placeholder {
   color: #e16868; }
 
+@media screen and (max-width: 1000px) and (min-width: 800px) {
+  .sidebar-title {
+    margin-top: 15%;
+    font-size: 20px; }
+    .sidebar-title .sidebar-subtitle {
+      font-size: 14px; } }
+@media screen and (max-width: 800px) {
+  .sidebar {
+    display: none; } }
+
 /*# sourceMappingURL=sidebar.css.map */

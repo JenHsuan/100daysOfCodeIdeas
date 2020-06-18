@@ -117,4 +117,72 @@
       width: 30px;
       border-radius: 3px; }
 
+@media screen and (max-width: 1000px) and (min-width: 500px) {
+  .common-footer-grid-box .slogon, .common-footer-grid-box-move-left .slogon {
+    font-size: 24px;
+    grid-column-start: 1;
+    grid-column-end: 15;
+    margin-left: 10%; }
+  .common-footer-grid-box .footer-author, .common-footer-grid-box-move-left .footer-author {
+    grid-column-start: 1;
+    grid-column-end: 13;
+    margin-left: 48%; }
+    .common-footer-grid-box .footer-author .author-name, .common-footer-grid-box-move-left .footer-author .author-name {
+      font-size: 14px; }
+    .common-footer-grid-box .footer-author span a img, .common-footer-grid-box-move-left .footer-author span a img {
+      width: 50px;
+      border-radius: 3px; }
+  .common-footer-grid-box .subscribe-btn, .common-footer-grid-box-move-left .subscribe-btn {
+    grid-column-start: 1;
+    grid-column-end: 13;
+    margin-left: 55%; }
+    .common-footer-grid-box .subscribe-btn button, .common-footer-grid-box-move-left .subscribe-btn button {
+      font-size: 16px;
+      font-weight: 200; }
+  .common-footer-grid-box .subscribe-social-btn, .common-footer-grid-box-move-left .subscribe-social-btn {
+    grid-column-start: 7;
+    grid-column-end: 14; }
+    .common-footer-grid-box .subscribe-social-btn span a img, .common-footer-grid-box-move-left .subscribe-social-btn span a img {
+      background-color: white;
+      width: 20px;
+      border-radius: 3px; }
+  .common-footer-grid-box .subscribe-copyright, .common-footer-grid-box-move-left .subscribe-copyright {
+    grid-column-start: 6;
+    grid-column-end: 14; } }
+@media screen and (max-width: 500px) {
+  .common-footer-grid-box, .common-footer-grid-box-move-left {
+    grid-column-start: 1;
+    grid-column-end: 15; }
+    .common-footer-grid-box .slogon, .common-footer-grid-box-move-left .slogon {
+      font-size: 24px;
+      grid-column-start: 1;
+      grid-column-end: 15;
+      margin-left: 10%; }
+    .common-footer-grid-box .footer-author, .common-footer-grid-box-move-left .footer-author {
+      grid-column-start: 1;
+      grid-column-end: 13;
+      margin-left: 40%; }
+      .common-footer-grid-box .footer-author .author-name, .common-footer-grid-box-move-left .footer-author .author-name {
+        font-size: 14px; }
+      .common-footer-grid-box .footer-author span a img, .common-footer-grid-box-move-left .footer-author span a img {
+        width: 50px;
+        border-radius: 3px; }
+    .common-footer-grid-box .subscribe-btn, .common-footer-grid-box-move-left .subscribe-btn {
+      grid-column-start: 7;
+      grid-column-end: 13; }
+      .common-footer-grid-box .subscribe-btn button, .common-footer-grid-box-move-left .subscribe-btn button {
+        font-size: 16px;
+        font-weight: 200; }
+    .common-footer-grid-box .subscribe-social-btn, .common-footer-grid-box-move-left .subscribe-social-btn {
+      grid-column-start: 6;
+      grid-column-end: 14; }
+      .common-footer-grid-box .subscribe-social-btn span a img, .common-footer-grid-box-move-left .subscribe-social-btn span a img {
+        background-color: white;
+        width: 20px;
+        border-radius: 3px; }
+    .common-footer-grid-box .subscribe-copyright, .common-footer-grid-box-move-left .subscribe-copyright {
+      grid-column-start: 4;
+      grid-column-end: 17;
+      font-size: 12px; } }
+
 /*# sourceMappingURL=footer.css.map */

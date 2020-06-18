@@ -21,7 +21,8 @@ import {
     setLoading,
     setUserId,
     setBookmarks,
-    setFinishedArticles
+    setFinishedArticles,
+    setPlanner
 } from './actions/articlesAction';
 
 const SignInForm = ({responseFacebook,
@@ -35,6 +36,12 @@ const SignInForm = ({responseFacebook,
     const isLoading = useSelector(selectLoadingState);
     const userId = useSelector(selectUserIdState);
     const login = useSelector(selectLoginState);
+    const [redirectUri, setRedirectUri] = useState('')
+    
+
+    useEffect(()=> {
+        setRedirectUri(window.location.href)
+    }, [])
     
     const [value, setValue] = useState({
         username:'',
@@ -72,6 +79,7 @@ const SignInForm = ({responseFacebook,
     }
 
     useEffect(()=> {
+        console.log(window.location.hostname)
         const fetchProfile = async () => {
             try {
                 const res = await axios.get(`api/profile/?reader=${userId}`);
@@ -123,7 +131,7 @@ const SignInForm = ({responseFacebook,
                         <GitHubLogin 
                             className="github-btn"
                             clientId="51b1a8ee5b7cad1e6a85"
-                            redirectUri="http://localhost:3000/signin" 
+                            redirectUri={redirectUri}
                             onSuccess={ResponseGithubOnSuccess}
                             onFailure={ResponseGithubOnFailure}
                             buttonText="Github"/>

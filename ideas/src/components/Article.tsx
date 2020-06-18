@@ -58,30 +58,20 @@ const Article = ({article}) => {
         setShow(true);
     }
 
-    const onCheckedClick = async() => {
+    const handleCheckingTrue = async () => {
         let finishedArticlesString = localStorage.getItem("finishedArticles");
         let finishedArticlesList;
         let localfinishedArticles;
-        if (isChecked) {
-            if (finishedArticlesString !== null) {
-                finishedArticlesList = finishedArticlesString.split(',');
-                finishedArticlesList = finishedArticlesList.filter(finishedArticle => Number(finishedArticle) !== article.id);
-            }
-            //set bookmarks to local state
-            setChecked(false);
+        if (finishedArticlesString === '') {
+            console.log(999)
+            localfinishedArticles = `${article.id}`;
+            finishedArticlesList = [article.id];
         } else {
-            console.log(finishedArticlesString)
-            if (finishedArticlesString === '') {
-                console.log(999)
-                localfinishedArticles = `${article.id}`;
-                finishedArticlesList = [article.id];
-            } else {
-                finishedArticlesList = finishedArticlesString.split(',');
-                finishedArticlesList.indexOf(article.id) === -1 ? finishedArticlesList.push(article.id) : console.log("This item already exists");
-            }
-            //set bookmarks to local state
-            setChecked(true);
+            finishedArticlesList = finishedArticlesString.split(',');
+            finishedArticlesList.indexOf(article.id) === -1 ? finishedArticlesList.push(article.id) : console.log("This item already exists");
         }
+        //set bookmarks to local state
+        setChecked(true);
 
         let newfinishedArticlesString = finishedArticlesList.join();
         //set bookmarks to localStorage
@@ -102,6 +92,39 @@ const Article = ({article}) => {
                 console.log(error)
             }
         }
+    }
+
+    const handleCheckingFalse = async() => {
+        let finishedArticlesString = localStorage.getItem("finishedArticles");
+        if (isChecked) {
+            if (finishedArticlesString !== null) {
+                let finishedArticlesList = finishedArticlesString.split(',');
+                finishedArticlesList = finishedArticlesList.filter(finishedArticle => Number(finishedArticle) !== article.id);
+                let newfinishedArticlesString = finishedArticlesList.join();
+                //set bookmarks to localStorage
+                localStorage.setItem("finishedArticles", newfinishedArticlesString);
+                //set bookmarks to global state
+                disPatch(setFinishedArticles(finishedArticlesList));
+                //update server
+                if (provider === 'normal') {
+                    try {
+                        const res = await axios.put(`api/profile/?finishedArticles=${newfinishedArticlesString}&reader_id=${userId}`);
+                    } catch(error) {
+                        console.log(error)
+                    }
+                } else {
+                    try {
+                        const res = await axios.put(`api/profilesocial/?finishedArticles=${newfinishedArticlesString}&email=${email}&provider=${provider}`);
+                    } catch(error) {
+                        console.log(error)
+                    }
+                }
+            }
+            //set bookmarks to local state
+            setChecked(false);
+        }
+
+        
     }
 
     const setBookmarksState = async (bookmarksList) => { 
@@ -182,7 +205,7 @@ const Article = ({article}) => {
                 {router.pathname === '/bookmarks' && (
                 <div className="article-checked">
                     <span className="btn-o">
-                        <a href='#' onClick={()=>{onCheckedClick(); return false;}}>
+                        <a href='#' onClick={()=>{handleCheckingFalse(); return false;}}>
                             {isChecked
                             ? <img src="https://raw.githubusercontent.com/JenHsuan/ALayman/master/views/images/check.png" alt="Marked as unfinished" title="Marked as unfinished"/>
                             : <img src="https://raw.githubusercontent.com/JenHsuan/ALayman/master/views/images/uncheck.png" alt="Marked as finished" title="Marked as finished"/>
@@ -203,7 +226,7 @@ const Article = ({article}) => {
                     <button className="article-btn" onClick = {handleShow}>Details</button>
                 </Card.Body>
             </Card>
-            <ArticleModal show = {show} handleClose = {handleClose} article = {article} />
+            <ArticleModal show = {show} handleClose = {handleClose} article = {article} handleOpen={handleCheckingTrue}/>
         </div>
     
     )

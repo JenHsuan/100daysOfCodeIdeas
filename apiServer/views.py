@@ -122,20 +122,6 @@ def react(request):
     except FileNotFoundError:
         logging.exception('Production build of app not found')
 
-class InsertDataMedium(APIView):
-    permission_classes = (permissions.AllowAny,)
-
-    def get(self, request, format=None):
-        parse_articles('medium')
-        return HttpResponse('OK')
-
-class InsertDataDev(APIView):
-    permission_classes = (permissions.AllowAny,)
-
-    def get(self, request, format=None):
-        parse_articles('devto')
-        return HttpResponse('OK')
-
 @api_view(['GET'])
 def current_user(request):
     """
@@ -177,6 +163,18 @@ class ArticleViewSet(viewsets.ModelViewSet):
     serializer_class = ArticleSerializer
     http_method_names = ['get']
 '''
+
+class InsertDataMedium(APIView):
+
+    def get(self, request, format=None):
+        parse_articles('medium')
+        return HttpResponse('OK')
+
+class InsertDataDev(APIView):
+
+    def get(self, request, format=None):
+        parse_articles('devto')
+        return HttpResponse('OK')
 
 class ArticleByCategoryViewSet(generics.ListAPIView):
     # use empty authentication classes 

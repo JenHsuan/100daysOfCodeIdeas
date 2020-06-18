@@ -12,12 +12,14 @@ const about = () => {
     return (
         <div>
             <Head>
-                <title>ALayman Learning Booster - About</title>
+                <title>ALayman Daily Learning  - About Daily Learning</title>
                 <link rel="icon" href="https://raw.githubusercontent.com/JenHsuan/ALayman/master/views/images/alaymanicon.png" type="image/x-icon" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                <meta property="og:title" content="New Technologies Studies - Jen-Hsuan Hsieh (Sean Hsieh)" />
             </Head>
             <Provider store = {store}>
                 <NavBar></NavBar>
-                <div className='aboutpage-grid-box '>
+                <div className='aboutpage-grid-box'>
                     <AboutPageContent/>
                     <div className="footer">
                         <Footer></Footer>

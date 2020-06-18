@@ -118,10 +118,10 @@ const BookmarksContent = () => {
         <Fragment>
             <div className={`${showPlanner === true ? 'bookmarkspage-head' : 'bookmarkspage-head bookmarkspage-head-remove-left'}`}>
                 <div className="title">
-                    Your Bookmarks
+                    {`Your Bookmarks (${finishedArticles.length}/${bookmarks.length})`}
                 </div>
                 <div className="subtitle">
-                    Read articles you have bookmarked
+                    Read articles you have bookmarked. Open articles to clean your todo list!
                 </div>
             </div>
 

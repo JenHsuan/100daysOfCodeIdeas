@@ -2,9 +2,11 @@ import React from 'react'
 import { Modal, Button, Image } from 'react-bootstrap';
 import '.././css/articleModal.css'
 
-const ArticleModal = ({show, handleClose, article}) => {
-    const openArticle = () => {
+const ArticleModal = ({show, handleClose, article, handleOpen}) => {
+    const openArticle = () => {    
+        handleOpen();
         window.open(article.url, '_blank');
+        handleClose();
     }
     return (
         <Modal show = {show} onHide = {handleClose}>

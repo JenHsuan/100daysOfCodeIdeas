@@ -26,18 +26,6 @@
 .articles-hide-siderbar-head-remove-left {
   padding-left: 5%; }
 
-.articles-hide-siderbar {
-  grid-column-start: 1;
-  grid-column-end: 9;
-  grid-row-start: 2;
-  background-color: #FFFFFF;
-  margin-top: 1%;
-  transition: 0.5s; }
-
-.articles-hide-siderbar-remove-left {
-  padding-left: 23%;
-  transition: 0.5s; }
-
 .articles-row {
   overflow-x: hidden;
   transition: 0.5s; }
@@ -133,9 +121,6 @@
   opacity: 0;
   transition: opacity 500ms ease-in; }
 
-@media only screen and (max-width: 1500px) and (min-width: 600px) {
-  .article-card {
-    width: 350px; } }
 .article-pagination {
   margin-left: 45%; }
 
@@ -167,5 +152,41 @@
 
 .pagination > li:first-child > a, .pagination > li:first-child > span, .pagination > li:last-child > a, .pagination > li:last-child > span {
   border-radius: unset; }
+
+@media only screen and (max-width: 1500px) and (min-width: 800px) {
+  .article-card {
+    width: 350px; } }
+@media only screen and (max-width: 800px) and (min-width: 500px) {
+  .article-card {
+    width: 350px; }
+
+  .articles-hide-siderbar-head, .articles-hide-siderbar-head-remove-left {
+    padding-left: 10%;
+    padding-top: 10%; }
+    .articles-hide-siderbar-head .article-searchbar, .articles-hide-siderbar-head-remove-left .article-searchbar {
+      width: 80%;
+      border-radius: 5px;
+      padding: 2% 10%;
+      box-shadow: 0 10px 10px gray, 0 0 0 10px #ffffffeb; } }
+@media only screen and (max-width: 500px) {
+  .articles-hide-siderbar-head, .articles-hide-siderbar-head-remove-left {
+    padding-left: 10%;
+    padding-top: 15%; }
+    .articles-hide-siderbar-head .title, .articles-hide-siderbar-head-remove-left .title {
+      font-size: 24px; }
+    .articles-hide-siderbar-head .subtitle, .articles-hide-siderbar-head-remove-left .subtitle {
+      font-size: 16px; }
+    .articles-hide-siderbar-head .article-searchbar, .articles-hide-siderbar-head-remove-left .article-searchbar {
+      width: 80%;
+      height: 30px;
+      border-radius: 5px;
+      padding: 2% 10%;
+      box-shadow: 0 5px 5px gray, 0 0 0 5px #ffffffeb; }
+
+  .article-pagination {
+    margin-left: 25%; }
+
+  .article-card {
+    width: 350px; } }
 
 /*# sourceMappingURL=article.css.map */

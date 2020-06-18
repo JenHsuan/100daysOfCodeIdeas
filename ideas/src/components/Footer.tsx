@@ -47,7 +47,7 @@ const Footer = () => {
                         </a>
                     </span>
                     <span className="author-name">
-                        Jen-Hsuan Hsieh(Sean Hsieh)
+                        Jen-Hsuan Hsieh
                     </span>
                 </div>
                 <div className="subscribe-btn">
