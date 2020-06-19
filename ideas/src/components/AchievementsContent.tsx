@@ -76,8 +76,8 @@ const AchievementsContent = () => {
     useEffect(()=> {
         //Fetch articles
         var dataList = []
-        if (articles.length !== 0) {
-            dataList.push({ y: articles.length })
+        if ((articles.length -finishedArticles.length ) !== 0) {
+            dataList.push({ y: articles.length - finishedArticles.length})
         }
         if (finishedArticles.length !== 0) {
             dataList.push({ y: finishedArticles.length })
@@ -124,13 +124,13 @@ const AchievementsContent = () => {
                 <div className="achievementspage-content-grid-box">
                     <div className="achievementspage-hide-siderbar-labels">
                         <div>
-                            <span className="bookmarks">{bookmarks.length}</span> Bookmarked Topics
+                            <span className="bookmarks">{bookmarks.length}</span> Bookmarked
                         </div>
                         <div>
-                            <span className="finished">{finishedArticles.length} </span> Completed Topics
+                            <span className="finished">{finishedArticles.length} </span> Completed 
                         </div>
                         <div>
-                            <span className="unfinished">{articles.length}</span> Unfinished Topics
+                            <span className="unfinished">{articles.length - finishedArticles.length}</span> Unfinished 
                         </div>
                     </div>
                     <div className="achievementspage-piechart">
