@@ -249,7 +249,6 @@ class ProfileViewSet(generics.GenericAPIView):
             serializer = self.serializer_class(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                print(serializer.data)
 
                 now = datetime.now()
                 dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
@@ -312,8 +311,6 @@ class ProfileSocialViewSet(generics.GenericAPIView):
                     if bookmark.isnumeric() == False:
                         return Response(data={'error':'bookmarks is invalid'}, status=status.HTTP_400_BAD_REQUEST)
 
-                print(email)
-                print(provider)
                 p = ProfileSocial.objects.filter(email=email).filter(provider=provider).first()
                 p.bookmarks = bookmarks
                 p.save()
@@ -325,8 +322,6 @@ class ProfileSocialViewSet(generics.GenericAPIView):
                     if finishedArticle.isnumeric() == False:
                         return Response(data={'error':'finishedArticles is invalid'}, status=status.HTTP_400_BAD_REQUEST)
             
-                print(email)
-                print(provider)
                 p = ProfileSocial.objects.filter(email=email).filter(provider=provider).first()
                 p.finishedArticles = finishedArticles
                 p.save()
@@ -339,8 +334,7 @@ class ProfileSocialViewSet(generics.GenericAPIView):
             serializer = self.serializer_class(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                print(serializer.data)
-
+                
                 now = datetime.now()
                 dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
 
@@ -375,7 +369,6 @@ class RefreshTokenView(generics.GenericAPIView):
         url = scheme + "://" + request.get_host() + '/api/refresh-token-auth/'
         res = requests.post(url, data = data)
         if res.status_code == status.HTTP_200_OK:
-            print(json.loads(res.text)["token"])
             response = Response(status=status.HTTP_200_OK)
             response.set_cookie('token', json.loads(res.text)["token"], httponly=True)
             return response
@@ -399,11 +392,8 @@ class SocialGithubLoginView(generics.GenericAPIView):
 
         url = 'https://github.com/login/oauth/access_token'
         data = {'code': code,'client_id':client_id,'client_secret':client_secret}
-        print(data)
         res = requests.post(url, data = data)
         if res.status_code == status.HTTP_200_OK:
-            print(res.text)
-            print(res.text.split('=')[1].split('&')[0])
             return Response(status=status.HTTP_200_OK, data=res.text.split('=')[1].split('&')[0])
         else:
             return Response(status=res.status_code, data=res.text)
@@ -423,7 +413,6 @@ class SocialLoginView(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         provider = serializer.data.get('provider', None)
         email = serializer.data.get('email', None)
-        print(email)
         strategy = load_strategy(request)
         try:
             backend = load_backend(strategy=strategy, name=provider,
@@ -476,20 +465,14 @@ class SocialLoginView(generics.GenericAPIView):
             scheme = request.is_secure() and "https" or "http"
             url = scheme + "://" + request.get_host() + '/api/profilesocial/'
             res = requests.get(url)
-            print(res)
-            print(res.text)
-            print("auth: " + authenticated_user.email)
             if authenticated_user.email == "":
                 authenticated_user.email = email
 
-            print("auth: " + authenticated_user.email)
-            
             if res.text == "":
                 res = requests.post(url, data = {
                     "provider": provider,
                     "email": authenticated_user.email
                 })
-                print(res.text)
 			
             #customize the response to your needs
             response = {
@@ -498,7 +481,6 @@ class SocialLoginView(generics.GenericAPIView):
                 "token": data.get('token'),
                 "provider": provider
             }
-            print(authenticated_user)
             response = Response(status=status.HTTP_200_OK, data=response)
             response.set_cookie('token', data.get('token'), httponly=True)
 

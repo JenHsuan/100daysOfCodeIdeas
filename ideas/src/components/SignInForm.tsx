@@ -56,16 +56,12 @@ const SignInForm = ({responseFacebook,
 
     const handleSubmit = async e => {
         e.preventDefault();
-        console.log(username)
-        console.log(password)
         try {
             disPatch(setLoading(true));
             const res = await axios.post('/api/token-auth/', {
                 username: username,
                 password: password
             });
-            console.log(res)
-            console.log(res["data"]["user"]["profile"])
             const token = res["data"]["token"];
             const email = res["data"]["user"]["profile"]["email"];
             const id = res["data"]["user"]["id"];
@@ -79,14 +75,11 @@ const SignInForm = ({responseFacebook,
     }
 
     useEffect(()=> {
-        console.log(window.location.hostname)
         const fetchProfile = async () => {
             try {
                 const res = await axios.get(`api/profile/?reader=${userId}`);
                 if (res['error'] === undefined) {
-                    console.log(res)
                     const bookmarksList = res['data']['bookmarks'].split(',');
-                    console.log(bookmarksList.filter(bookmark => bookmark !== ''))
                     disPatch(setBookmarks(bookmarksList.filter(bookmark => bookmark !== '')))
                     localStorage.setItem("bookmarks", res['data']['bookmarks'].trim());
                     

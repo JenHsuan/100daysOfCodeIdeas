@@ -63,7 +63,6 @@ const Article = ({article}) => {
         let finishedArticlesList;
         let localfinishedArticles;
         if (finishedArticlesString === '') {
-            console.log(999)
             localfinishedArticles = `${article.id}`;
             finishedArticlesList = [article.id];
         } else {
@@ -162,7 +161,6 @@ const Article = ({article}) => {
 
             await setBookmarksState(bookmarksList);
         } else {
-            console.log(bookmarksString)
             if (bookmarksString === '') {
                 console.log(999)
                 localBookmarks = `${article.id}`;

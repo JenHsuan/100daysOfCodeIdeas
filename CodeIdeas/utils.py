@@ -15,11 +15,9 @@ def my_jwt_response_handler(token, user=None, request=None):
 def parse_articles(type):
     if type == 'devto':
         data = getDevArtcles()
-        print(data)
         for article in data:
             try:
                 obj = Article.objects.get(url = article['url'])
-                print('already existed')
             except Article.DoesNotExist:
                 Article.objects.get_or_create(
                     title = article['title'], 
@@ -34,11 +32,9 @@ def parse_articles(type):
 
     if type == 'medium':
         data = getMediumArtcles()
-        print(data)
         for article in data:
             try:
                 obj = Article.objects.get(title = article['title'])
-                print('already existed')
             except Article.DoesNotExist:
                 Article.objects.get_or_create(title = article['title'], 
                 subtitle = article['subtitle'], 
@@ -55,7 +51,6 @@ def getDevArtcles():
     data = []
 
     r = requests.get(os.getenv("DEV_BASE_URL") + os.getenv("DEVTO_ACCOUNT"))
-    print(dev_base_url +os.getenv("DEVTO_ACCOUNT"))
     soup = BS(''.join(r.text), 'html.parser')
     data = []
     title_list = soup.select('.crayons-story')

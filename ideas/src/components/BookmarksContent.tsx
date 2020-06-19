@@ -65,14 +65,12 @@ const BookmarksContent = () => {
         var bookmarksJson = localStorage.getItem("bookmarks");
         if (bookmarksJson !== null) {
             var bookmarks = bookmarksJson.split(',');
-            console.log(bookmarks)
             disPatch(setBookmarks(bookmarks))
         }
 
         var finishedAriclesJson = localStorage.getItem("finishedArticles");
         if (finishedAriclesJson !== null) {
             var finishedAricles = finishedAriclesJson.split(',');
-            console.log(finishedAricles)
             disPatch(setFinishedArticles(finishedAricles))
         }
     }, [])

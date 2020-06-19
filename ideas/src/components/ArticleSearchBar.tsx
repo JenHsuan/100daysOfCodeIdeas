@@ -21,7 +21,6 @@ const ArticleSearchBar = () => {
     },[]);
 
     const onChange = e => {
-        console.log(e.target.value)
         if (text.current.value !== '') {
             disPatch(getFilteredArticles(e.target.value));
             if (router.pathname !== '/') {

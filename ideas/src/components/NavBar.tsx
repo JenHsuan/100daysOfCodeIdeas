@@ -82,9 +82,7 @@ const NavBar = () => {
 
     useEffect(()=> {
         const login = localStorage.getItem("login");
-        console.log(login)
         if (login !== null && login === 'true') {
-            //const token = localStorage.getItem("token");
             const email = localStorage.getItem("email");
             const username = localStorage.getItem("username");
             SetLogin(email, username);
@@ -93,7 +91,6 @@ const NavBar = () => {
 
     useEffect(()=> {
         if (isLogin === false) {
-            console.log('false')
             disPatch(setUsername(''));
         } else {
             const username = localStorage.getItem("username");

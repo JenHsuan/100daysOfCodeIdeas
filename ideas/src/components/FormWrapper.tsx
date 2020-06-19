@@ -53,16 +53,12 @@ const FormWrapper = (WrappedComponent) => ()=> {
     }, [isLogin])
 
     const passAccessToken = async (provider, access_token, email = 'none') => {
-        console.log(access_token)
-        console.log(provider)
-        console.log(email)
         const data = {
             provider: provider,
             access_token: access_token,
             email: email
         }
-        console.log(data)
-
+        
         const res = await axios.post('/api/social-auth', data);
         return res;
     }
@@ -70,11 +66,8 @@ const FormWrapper = (WrappedComponent) => ()=> {
     const responseFacebook = async (response, setMessage) => {
         try {
             disPatch(setLoading(true));
-            console.log(response["accessToken"])
-            console.log(response)
             const email = response["email"];
             const responseFromDjango = await passAccessToken('facebook', response["accessToken"], email);
-            console.log(responseFromDjango);
             const token = responseFromDjango["data"]["token"];
             const username = responseFromDjango["data"]["username"];
             const provider = responseFromDjango["data"]["provider"];
@@ -133,9 +126,7 @@ const FormWrapper = (WrappedComponent) => ()=> {
             try {
                 const res = await axios.get(`api/profilesocial/?provider=${provider}&email=${email}`);
                 if (res['error'] === undefined) {
-                    console.log(res)
                     const bookmarksList = res['data']['bookmarks'].split(',');
-                    console.log(bookmarksList.filter(bookmark => bookmark !== ''))
                     disPatch(setBookmarks(bookmarksList.filter(bookmark => bookmark !== '')))
                     localStorage.setItem("bookmarks", res['data']['bookmarks'].trim());
                     
@@ -160,10 +151,8 @@ const FormWrapper = (WrappedComponent) => ()=> {
             const responseFromGithub = await axios.post('/api/get-github-access-token', {
                 code: response['code']
             });
-            console.log(response);
             
             const responseFromDjango = await passAccessToken('github', responseFromGithub['data']);
-            console.log(responseFromDjango);
             const token = responseFromDjango["data"]["token"];
             const email = responseFromDjango["data"]["email"];
             const provider = responseFromDjango["data"]["provider"];
