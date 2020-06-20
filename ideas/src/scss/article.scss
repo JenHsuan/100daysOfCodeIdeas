@@ -157,7 +157,7 @@
 
 
   .article-pagination {
-      margin-left: 45%;
+      margin-left: 40%;
   }
 
   .pagination {
@@ -191,6 +191,11 @@
   }
 
 
+  @media only screen and (min-width: 1500px){
+    .articles-hide-siderbar-head {
+      padding-top: 5%; 
+    }    
+  }
 
   @media only screen and (max-width: 1500px) and (min-width: 800px){
     .article-card {

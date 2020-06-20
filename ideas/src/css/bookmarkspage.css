@@ -24,4 +24,16 @@
 .bookmarkspage-head-remove-left {
   padding-left: 5%; }
 
+@media only screen and (min-width: 1500px) {
+  .bookmarkspage-head {
+    padding-top: 5%; } }
+@media only screen and (max-width: 500px) {
+  .bookmarkspage-head {
+    padding-left: 10%;
+    padding-top: 15%; }
+    .bookmarkspage-head .title {
+      font-size: 24px; }
+    .bookmarkspage-head .subtitle {
+      font-size: 16px; } }
+
 /*# sourceMappingURL=bookmarkspage.css.map */

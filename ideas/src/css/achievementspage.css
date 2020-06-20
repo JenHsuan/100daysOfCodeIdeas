@@ -78,4 +78,35 @@
   grid-row-start: 7;
   grid-row-end: 9; }
 
+@media only screen and (min-width: 1500px) {
+  .achievementspage-head {
+    padding-top: 5%; }
+
+  .achievementspage-footer {
+    grid-row-start: 8;
+    grid-row-end: 10; } }
+@media only screen and (max-width: 550px) {
+  .achievementspage-head {
+    padding-left: 10%;
+    padding-top: 15%; }
+    .achievementspage-head .title {
+      font-size: 24px; }
+    .achievementspage-head .subtitle {
+      font-size: 16px; }
+
+  .achievementspage-hide-siderbar-labels {
+    font-size: 10px;
+    grid-row-start: 1;
+    grid-row-end: 2; }
+    .achievementspage-hide-siderbar-labels div {
+      margin-bottom: 5%; }
+
+  .achievementspage-hide-sider {
+    grid-column-start: 1;
+    grid-column-end: 9; }
+
+  .achievementspage-footer {
+    grid-row-start: 6;
+    grid-row-end: 8; } }
+
 /*# sourceMappingURL=achievementspage.css.map */

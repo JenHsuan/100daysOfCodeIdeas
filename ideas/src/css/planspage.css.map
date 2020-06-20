@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,mBAAoB;EAChB,OAAO,EAAE,IAAI;EACb,qBAAqB,EAAE,cAAc;EACrC,cAAc,EAAE,KAAK;EACrB,aAAa,EAAE,GAAG;;AAIrB,WAAY;EACT,iBAAiB,EAAE,CAAC;EACpB,eAAe,EAAE,CAAC;EAClB,cAAc,EAAE,CAAC;EACjB,gBAAgB,EAAE,OAAO;EACzB,UAAU,EAAE,EAAE",
-"sources": ["../scss/planspage.scss"],
-"names": [],
-"file": "planspage.css"
-}

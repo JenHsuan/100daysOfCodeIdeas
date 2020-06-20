@@ -154,6 +154,18 @@
     }
  }
 
+ @media only screen and (min-width: 1500px){
+    .common-footer-grid-box, .common-footer-grid-box-move-left{
+        .footer-author {
+            grid-column-start: 1;
+            grid-column-end: 13;
+            margin-left: 55%;
+            margin-top: 1%;
+        }
+    }    
+  }
+
+
  @media screen and (max-width: 1000px) and (min-width: 500px){
      
     .common-footer-grid-box, .common-footer-grid-box-move-left{
