@@ -123,7 +123,7 @@ const SignInForm = ({responseFacebook,
                             )}/>
                         <GitHubLogin 
                             className="github-btn"
-                            clientId="51b1a8ee5b7cad1e6a85"
+                            clientId="Iv1.ca8ab67c0ba860ab"
                             redirectUri={redirectUri}
                             onSuccess={ResponseGithubOnSuccess}
                             onFailure={ResponseGithubOnFailure}

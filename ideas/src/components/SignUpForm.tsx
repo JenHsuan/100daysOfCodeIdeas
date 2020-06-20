@@ -34,6 +34,11 @@ const SignUpForm = ({responseFacebook,
     const showPlanner = useSelector(selectShowPlannerState);
     const errorMessage = useSelector(selectErrorMessageState);
     const isLoading = useSelector(selectLoadingState);
+    const [redirectUri, setRedirectUri] = useState('')
+
+    useEffect(()=> {
+        setRedirectUri(window.location.href)
+    }, [])
 
     useEffect(()=> {
         if (isLogin) {
@@ -136,8 +141,8 @@ const SignUpForm = ({responseFacebook,
                       )}/>
                 <GitHubLogin 
                     className="github-btn"
-                    clientId="51b1a8ee5b7cad1e6a85"
-                    redirectUri="http://localhost:3000/signin" 
+                    clientId="Iv1.ca8ab67c0ba860ab"
+                    redirectUri={redirectUri}
                     onSuccess={ResponseGithubOnSuccess}
                     onFailure={ResponseGithubOnFailure}
                     buttonText="Github"/>
