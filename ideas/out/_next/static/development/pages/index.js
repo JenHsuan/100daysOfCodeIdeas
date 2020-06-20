@@ -4829,7 +4829,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* WEBPACK VAR INJECTION */(f
 
 /***/ }),
 
-/***/ 1:
+/***/ 2:
 /*!*****************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2F&absolutePagePath=%2FUsers%2Fseanhsieh%2Fgithub%2F100daysOfCodeIdeas%2Fideas%2Fsrc%2Fpages%2Findex.tsx ***!
   \*****************************************************************************************************************************************************/
@@ -4852,4 +4852,4 @@ eval("module.exports = dll_2adc2403d89adc16ead0;//# sourceURL=[module]\n//# sour
 
 /***/ })
 
-},[[1,"static/runtime/webpack.js","styles"]]]);
+},[[2,"static/runtime/webpack.js","styles"]]]);
