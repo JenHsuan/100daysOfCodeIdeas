@@ -36,6 +36,6 @@ urlpatterns = [
     path('api/users/', UserList.as_view(), name='users'),
     path("api/social-auth", social_auth),
     path("api/get-github-access-token", social_auth_github)
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
