@@ -11,7 +11,7 @@ import GaLayout from '../components/GaLayout';
 import CommonHead from '../components/CommonHead';
 
 const Index = () => {
-    const title = "ALayman Daily Learning - Topics";
+    const title = "ALayman Daily Learning";
     const keywords = "Software Development, Tesing, DveOps, SRE, Inteviews, Data Sciences";
     const url = "";
     const description = "Daily learning provides articles, challenges, or videos to people who are also self-learner for programming.";
