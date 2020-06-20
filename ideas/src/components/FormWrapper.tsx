@@ -33,7 +33,7 @@ const FormWrapper = (WrappedComponent) => ()=> {
     const articles = useSelector(selectArticlesState);
     const provider = useSelector(selectProviderState);
     const email = useSelector(selectEmailState);
-    const smallerThan800 = useMediaPredicate("(max-width: 800px)");
+    const smallerThan700 = useMediaPredicate("(max-width: 700px)");
     //const [isLoading, setLoading] = useState(false);
 
     useEffect(()=> {
@@ -41,7 +41,7 @@ const FormWrapper = (WrappedComponent) => ()=> {
             console.log('fetch articles')
             disPatch(getArticles());
         }
-        if (smallerThan800) {
+        if (smallerThan700) {
             disPatch(setPlanner(false))
         }
     }, [])

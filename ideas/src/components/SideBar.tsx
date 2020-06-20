@@ -19,10 +19,10 @@ const SideBar = () => {
     const disPatch = useDispatch();
     const showPlannerFlag = useSelector(selectShowPlannerState);
     const isLogin = useSelector(selectLoginState);
-    const smallerThan800 = useMediaPredicate("(max-width: 800px)");
+    const smallerThan700 = useMediaPredicate("(max-width: 700px)");
     
     useEffect(()=> {
-        if (smallerThan800) {
+        if (smallerThan700) {
             disPatch(setPlanner(false))
         }
     }, [])

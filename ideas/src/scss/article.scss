@@ -197,24 +197,32 @@
     }    
   }
 
-  @media only screen and (max-width: 1500px) and (min-width: 800px){
+  @media only screen and (max-width: 1500px) and (min-width: 700px){
     .article-card {
         width: 350px;
-    }    
+    }   
+    .article-searchbar{
+      display: none;
+    } 
   }
 
-  @media only screen and (max-width: 800px) and (min-width: 500px){
+  @media only screen and (max-width: 700px) and (min-width: 500px){
     .article-card {
         width: 350px;
     }
     .articles-hide-siderbar-head, .articles-hide-siderbar-head-remove-left  {
       padding-left: 10%;
       padding-top: 10%;
+      .title{
+        font-size: 16px;
+      }
+      .subtitle{
+        font-size: 12px;
+      }
       .article-searchbar{
         width: 80%;
         border-radius: 5px;
-        padding: 2% 10%;
-        box-shadow: 0 10px 10px gray, 0 0 0 10px #ffffffeb;
+        box-shadow: 0 5px 5px gray, 0 0 0 5px #ffffffeb;
      }
     }    
   }
@@ -222,12 +230,12 @@
   @media only screen and (max-width: 500px){
     .articles-hide-siderbar-head, .articles-hide-siderbar-head-remove-left  {
         padding-left: 10%;
-        padding-top: 15%;
+        padding-top: 20%;
         .title{
-          font-size: 24px;
+          font-size: 18px;
         }
         .subtitle{
-          font-size: 16px;
+          font-size: 12px;
         }
         .article-searchbar{
           width: 80%;

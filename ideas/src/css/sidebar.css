@@ -200,7 +200,7 @@ input[type="password"]::placeholder {
     font-size: 20px; }
     .sidebar-title .sidebar-subtitle {
       font-size: 14px; } }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 700px) {
   .sidebar {
     display: none; } }
 
