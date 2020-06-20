@@ -13,7 +13,8 @@ import {
     selectProviderState,
     selectUserIdState,
     selectEmailState,
-    selectAccessTokenState
+    selectAccessTokenState,
+    selectLoginState
 } from './states/states';
 
 import { 
@@ -57,19 +58,10 @@ const ArticleList = () => {
     const offset = useSelector(selectOffsetState);
     const showPlanner = useSelector(selectShowPlannerState);
     const smallerThan800 = useMediaPredicate("(max-width: 800px)");
+    const isLogin = useSelector(selectLoginState);
 
     useEffect(()=> {
         //Refresh JWT token or logout
-        const refreshToken = async () => {
-            try {
-                const res = await axios.get('api/renew-token/');
-            } catch(error) {
-                console.log(error)
-                SetLogout();
-                SetLogoutForLocalSorage();
-            }
-        };
-        
         refreshToken();
 
         //Fetch articles
@@ -82,14 +74,12 @@ const ArticleList = () => {
         var bookmarksJson = localStorage.getItem("bookmarks");
         if (bookmarksJson !== null) {
             var bookmarksList = bookmarksJson.split(',');
-            console.log(bookmarksList.filter(bookmark => bookmark !== ''))
             disPatch(setBookmarks(bookmarksList.filter(bookmark => bookmark !== '')))
         }
 
         var filterArticlesJson = localStorage.getItem("filterArticles");
         if (filterArticlesJson !== null) {
             var filterArticlesList = filterArticlesJson.split(',');
-            console.log(filterArticlesList.filter(filterArticle => filterArticle !== ''))
             disPatch(setFinishedArticles(filterArticlesList.filter(filterArticle => filterArticle !== '')))
         }
     }, [])
@@ -128,6 +118,16 @@ const ArticleList = () => {
         window.scrollTo(0, 0)
     }, [offset])
     
+    const refreshToken = async () => {
+        try {
+            const res = await axios.get('api/renew-token/');
+        } catch(error) {
+            console.log(error)
+            SetLogout();
+            SetLogoutForLocalSorage();
+        }
+    };
+    
     const SetLogout = () => {
         disPatch(setLogout());
         disPatch(setUsername(''));
@@ -146,6 +146,9 @@ const ArticleList = () => {
     }
 
     const handlePageSlected = e => {
+        //Refresh JWT token or logout
+        refreshToken();
+
         disPatch(setOffset(e.selected * perpage));
     }
 
@@ -155,9 +158,14 @@ const ArticleList = () => {
             <div className="title">
                 {`Learning materials (${filteredArticles.length === 0 ? articles.length : filteredArticles.length})`}
             </div>
-            <div className="subtitle">
-                Add next articles for skills you want to learn to your plan
-            </div>
+            {isLogin ? (
+                <div className="subtitle">
+                    Click the details button to check the article.
+                </div>) : (
+                <div className="subtitle">
+                    <a href="/signin">Login </a>
+                    to add articles or skills in your learning plan or open them directly.
+                </div>)}
             {smallerThan800 && <ArticleSearchBar/>}
         </div>
         <div className={`${showPlanner !== true ? 'articles-hide-siderbar' : 'articles-hide-siderbar articles-hide-siderbar-remove-left'}`}>
