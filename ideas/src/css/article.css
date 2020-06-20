@@ -160,7 +160,7 @@
   .article-card {
     width: 350px; }
 
-  .article-searchbar {
+  .articles-hide-siderbar-head .article-searchbar, .articles-hide-siderbar-head-remove-left .article-searchbar {
     display: none; } }
 @media only screen and (max-width: 700px) and (min-width: 500px) {
   .article-card {

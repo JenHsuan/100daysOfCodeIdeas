@@ -201,9 +201,11 @@
     .article-card {
         width: 350px;
     }   
-    .article-searchbar{
-      display: none;
-    } 
+    .articles-hide-siderbar-head, .articles-hide-siderbar-head-remove-left  {
+      .article-searchbar{
+        display: none;
+      } 
+    }   
   }
 
   @media only screen and (max-width: 700px) and (min-width: 500px){
