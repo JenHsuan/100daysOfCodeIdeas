@@ -3,7 +3,7 @@ from django.conf.urls import url
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import profile_socail_view, InsertDataDev, about, renew_token, plans, signup, profile_view, social_auth_github,  social_auth, signin, index, react, InsertDataMedium, UserViewSet, current_user, UserList, UserViewSet, ArticleByCategoryViewSet, ProfileViewSet
+from .views import achievements, profile_socail_view, InsertDataDev, about, renew_token, plans, signup, profile_view, social_auth_github,  social_auth, signin, index, react, InsertDataMedium, UserViewSet, current_user, UserList, UserViewSet, ArticleByCategoryViewSet, ProfileViewSet
 from rest_framework.routers import DefaultRouter
 from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework_jwt.views import refresh_jwt_token
@@ -21,6 +21,7 @@ urlpatterns = [
     path("signup", signup, name = "signup"),
     path("plans", plans, name = "plans"),
     path("about", plans, name = "about"),
+    path("achievements", achievements, name="achievements"),
     path("react", react, name="react"),
     path("insertmedium", InsertDataMedium.as_view(), name="insertmedium"),
     path("insertdev", InsertDataDev.as_view(), name="insertdev"),
