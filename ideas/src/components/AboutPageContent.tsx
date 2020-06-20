@@ -60,14 +60,14 @@ const AboutPageContent = () => {
             <hr/>
             </div>
             <div className="about-website-subtitle-1">
-                Read an article a day 
+                Read an Article a Day 
             </div>
             <div className="about-website-content-1">
-            There many information around us today. To improve ourselves, we just need to move a further move every day.
+            There are many information around us today. To improve ourselves, we just need to move a further move every day.
             Daily learning provides articles, challenges, or videos for people who are also self-learner. 
             </div>
             <div className="about-website-subtitle-2">
-                About the author
+                About the Author
             </div>
             <div className="about-website-content-2">
                 Jen-Hsuan Hsieh (Sean Hsieh) is also a self-learner, writer, and developer. He is a senior web developer with front-end JavaScript framework's experiences. He is familiar with React.js, Knockout.js, server-side languages like NodeJS and ASP.NET MVC
@@ -76,7 +76,8 @@ const AboutPageContent = () => {
             Get In Touch
             </div>
             <div className="about-website-content-3">
-            For any general questions, email alaymangogo@gmail.com and we'll get back to you ASAP.    
+            For any general questions, email to <a href="ofalpha@gmail.com">ofalpha@gmail.com</a>
+            . We'll get back to you ASAP.    
             </div>
         </div>
         </Fragment>
