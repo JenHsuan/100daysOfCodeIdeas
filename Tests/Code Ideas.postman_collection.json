@@ -406,7 +406,7 @@
 			"response": []
 		},
 		{
-			"name": "oauth2 get token",
+			"name": "oauth2 get JWT token",
 			"event": [
 				{
 					"listen": "test",
@@ -448,6 +448,128 @@
 					"port": "8000",
 					"path": [
 						"api-social-auth",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "oauth2 get JWT token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1105fca0-f935-41d1-8a33-9e46712720d1",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.globals.set(\"token\", jsonData.token);",
+							"console.log(pm.globals.get(\"token\"))",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"provider\":\"github\",\n\t\"access_token\": \"\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/social-auth/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"social-auth",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Github access token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "code",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/get-github-access-token/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"get-github-access-token",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "oath2 get token from Google",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"provider\":\"google\",\n\t\"access_token\": \"\"\n}\n\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/social-auth/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"social-auth",
 						""
 					]
 				}
