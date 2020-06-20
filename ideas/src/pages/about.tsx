@@ -12,7 +12,7 @@ import CommonHead from '../components/CommonHead';
 const about = () => {
     const title = "ALayman Daily Learning - About Daily Learning";
     const keywords = "about,contacts,learning";
-    const url = "";
+    const url = "https://daily-learning.herokuapp.com/";
     const description = "Daily learning provides articles, challenges, or videos to people who are also self-learner for programming.";
     return (
         <GaLayout>

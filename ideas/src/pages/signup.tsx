@@ -15,7 +15,7 @@ import CommonHead from '../components/CommonHead';
 const signup = () => {
     const title = "ALayman Daily Learning - Signup";
     const keywords = "signup";
-    const url = "";
+    const url = "https://daily-learning.herokuapp.com/";
     const description = "Daily learning provides articles, challenges, or videos to people who are also self-learner for programming.";
 
     return (

@@ -13,7 +13,7 @@ import CommonHead from '../components/CommonHead';
 const achievements = () => {
     const title = "ALayman Daily Learning - Achievements";
     const keywords = "achievements,pie chart";
-    const url = "";
+    const url = "https://daily-learning.herokuapp.com/";
     const description = "Daily learning provides articles, challenges, or videos to people who are also self-learner for programming.";
 
     return (
