@@ -7,13 +7,22 @@ import NavBar from '../components/NavBar';
 import '../css/mainpage.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/sidebar.css'
+import GaLayout from '../components/GaLayout';
+import CommonHead from '../components/CommonHead';
 
-const Index = () => (
-    <div>
-        <Head>
-            <title>ALayman Learning Booster - Topics</title>
-            <link rel="icon" href="https://raw.githubusercontent.com/JenHsuan/ALayman/master/views/images/alaymanicon.png" type="image/x-icon" />
-        </Head>
+const Index = () => {
+    const title = "ALayman Daily Learning - Topics";
+    const keywords = "Software Development, Tesing, DveOps, SRE, Inteviews, Data Sciences";
+    const url = "";
+    const description = "Daily learning provides articles, challenges, or videos to people who are also self-learner for programming.";
+
+    return (
+    <GaLayout>
+        <CommonHead
+                title={title}
+                keywords={keywords}
+                url={url}
+                description={description}/>
         <Provider store = {store}>
             <NavBar></NavBar>
             <div className='mainpage-grid-box'>
@@ -21,6 +30,9 @@ const Index = () => (
                 <ArticleList></ArticleList>
             </div>
         </Provider>
-    </div>
-)
+    </GaLayout>
+    )
+}
+
+    
 export default Index;

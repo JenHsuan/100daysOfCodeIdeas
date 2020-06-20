@@ -8,14 +8,22 @@ import '../css/sidebar.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SignFooter from '../components/SignFooter';
 import SideBar from '../components/SideBar';
+import GaLayout from '../components/GaLayout';
+import CommonHead from '../components/CommonHead';
 
 const signin = () => {
+    const title = "ALayman Daily Learning - Signin";
+    const keywords = "signin";
+    const url = "";
+    const description = "Daily learning provides articles, challenges, or videos to people who are also self-learner for programming.";
+
     return (
-        <div>
-            <Head>
-                <title>ALayman Learning Booster - Sign in</title>
-                <link rel="icon" href="https://raw.githubusercontent.com/JenHsuan/ALayman/master/views/images/alaymanicon.png" type="image/x-icon" />
-            </Head>
+        <GaLayout>
+            <CommonHead
+                title={title}
+                keywords={keywords}
+                url={url}
+                description={description}/>
             <Provider store = {store}>
                 <NavBar></NavBar>
                 <div className='signin-grid-box'>
@@ -24,7 +32,7 @@ const signin = () => {
                     <SignFooter/>
                 </div>
             </Provider>
-        </div>
+        </GaLayout>
     )
 }
 

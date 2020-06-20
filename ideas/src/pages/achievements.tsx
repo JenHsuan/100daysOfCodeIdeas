@@ -1,6 +1,5 @@
-import React, {useEffect} from 'react'
-import { Provider, useDispatch} from 'react-redux';
-import Head from 'next/head';
+import React from 'react';
+import {Provider} from 'react-redux';
 import store from '../components/store/store'
 import NavBar from '../components/NavBar';
 import '../css/achievementspage.css';
@@ -8,15 +7,22 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import AchievementsContent from '../components/AchievementsContent';
 import '../css/sidebar.css'
 import SideBar from '../components/SideBar';
-import SignFooter from '../components/SignFooter';
+import GaLayout from '../components/GaLayout';
+import CommonHead from '../components/CommonHead';
 
 const achievements = () => {
+    const title = "ALayman Daily Learning - Achievements";
+    const keywords = "achievements,pie chart";
+    const url = "";
+    const description = "Daily learning provides articles, challenges, or videos to people who are also self-learner for programming.";
+
     return (
-        <div>
-            <Head>
-                <title>ALayman Learning Booster - Achievements</title>
-                <link rel="icon" href="https://raw.githubusercontent.com/JenHsuan/ALayman/master/views/images/alaymanicon.png" type="image/x-icon" />
-            </Head>
+        <GaLayout>
+            <CommonHead
+                title={title}
+                keywords={keywords}
+                url={url}
+                description={description}/>
             <Provider store = {store}>
                 <NavBar></NavBar>
                 <div className='achievementspage-grid-box'>
@@ -24,7 +30,7 @@ const achievements = () => {
                     <AchievementsContent></AchievementsContent>
                 </div>
             </Provider>
-        </div>
+        </GaLayout>
     )
 }
 
