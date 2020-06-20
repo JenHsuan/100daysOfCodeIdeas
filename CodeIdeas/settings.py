@@ -30,17 +30,20 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
-    '127.0.0.1'
+    '127.0.0.1',
+    'daily-learning.herokuapp.com'
 ]
 
 CORS_ORIGIN_WHITELIST = [
     'http://127.0.0.1:3000',
-    'http://localhost:3000'
+    'http://localhost:3000',
+    'https://daily-learning.herokuapp.com'
 ]
 
 CORS_ORIGIN_REGEX_WHITELIST = [
     'http://127.0.0.1:3000',
-    'http://localhost:3000'
+    'http://localhost:3000',
+    'https://daily-learning.herokuapp.com'
 ]
 
 JWT_AUTH = {
