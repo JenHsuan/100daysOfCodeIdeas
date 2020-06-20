@@ -122,7 +122,11 @@
     grid-column-start: 1;
     grid-column-end: 13;
     margin-left: 55%;
-    margin-top: 1%; } }
+    margin-top: 1%; }
+  .common-footer-grid-box .subscribe-copyright, .common-footer-grid-box-move-left .subscribe-copyright {
+    text-align: center;
+    grid-column-start: 5;
+    grid-column-end: 12; } }
 @media screen and (max-width: 1000px) and (min-width: 500px) {
   .common-footer-grid-box .slogon, .common-footer-grid-box-move-left .slogon {
     font-size: 24px;
