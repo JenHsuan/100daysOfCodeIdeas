@@ -22,7 +22,7 @@ REACT_APP_DIR = os.path.join(BASE_DIR, 'ideas')
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'p=a%u61g$0x^_bl%1%fb16$k-m92j3y3l7b-36@x4tn80hg26b'
+SECRET_KEY = os.getenv("SECRET_KEY") 
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
