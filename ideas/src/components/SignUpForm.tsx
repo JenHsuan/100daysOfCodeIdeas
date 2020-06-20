@@ -17,7 +17,10 @@ import {
 
 import { 
     setErrorMessage,
-    setLoading
+    setLoading,
+    setBookmarks,
+    setFinishedArticles,
+    setUserId
 } from './actions/articlesAction';
 import FormWrapper from '../components/FormWrapper'
 import PropTypes from 'prop-types'
@@ -74,8 +77,7 @@ const SignUpForm = ({responseFacebook,
                     email: email,
                     reader: id
                 });
-                
-                console.log(updateProfileRes)
+  
                 var err = updateProfileRes["data"]["error"]
                 if (err !== undefined) {
                     disPatch(setErrorMessage(`${Object.keys(err)[0]} : ${Object.values(err)[0]}`))
@@ -86,6 +88,17 @@ const SignUpForm = ({responseFacebook,
                         password: password
                     });
                     SetLogin(token, email, username, "normal");
+                    disPatch(setUserId(id))
+                    if (updateProfileRes['error'] === undefined) {
+                        const bookmarksList = updateProfileRes['data']['bookmarks'].split(',');
+                        disPatch(setBookmarks(bookmarksList.filter(bookmark => bookmark !== '')))
+                        localStorage.setItem("bookmarks", updateProfileRes['data']['bookmarks'].trim());
+                        
+                        const finishedArticlesList = updateProfileRes['data']['finishedArticles'].split(',');
+                        disPatch(setBookmarks(finishedArticlesList.filter(finishedArticle => finishedArticle !== '')))
+                        localStorage.setItem("finishedArticles", updateProfileRes['data']['finishedArticles'].trim());
+                    
+                    }
                 }
             }
             disPatch(setLoading(false));
