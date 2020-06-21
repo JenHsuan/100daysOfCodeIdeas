@@ -73,8 +73,6 @@ const FormWrapper = (WrappedComponent) => ()=> {
             const provider = responseFromDjango["data"]["provider"];
             SetLogin(token, email, username, provider);
             disPatch(setLoading(false));
-            disPatch(setEmail(email));
-            disPatch(setProvider(provider));
         } catch (error) {
             //res.data = error;
             //setMessage(error.message)
@@ -159,8 +157,6 @@ const FormWrapper = (WrappedComponent) => ()=> {
             const username = responseFromDjango["data"]["username"];
             SetLogin(token, email, username, provider);
             disPatch(setLoading(false));
-            disPatch(setEmail(email));
-            disPatch(setProvider(provider));
         } catch (error) {
             //res.data = error;
             //setValue({...value, ['messages']: error.message})
