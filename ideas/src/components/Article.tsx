@@ -141,7 +141,7 @@ const Article = ({article}) => {
             }
         } else {
             try {
-                const res = await axios.put(`api/profilesocial/?bookmarks=${newbookmarksString}&email=${email}&provider=${provider}`);
+                const res = await axios.put(`api/profilesocial/?bookmarks=${newbookmarksString}&email=${email}&provider=${localStorage.getItem("provider")}`);
             } catch(error) {
                 console.log(error)
             }
@@ -172,7 +172,7 @@ const Article = ({article}) => {
             //set bookmarks to local state
             setBookmark(true);
 
-            await  setBookmarksState(bookmarksList);
+            await setBookmarksState(bookmarksList);
             //redirect
             if (router.pathname !== 'bookmarks') {
                 Router.push(`/bookmarks`)
