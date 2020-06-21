@@ -36,7 +36,7 @@ urlpatterns = [
     path("achievements", achievements, name="achievements"),
     path("react", react, name="react"),
     path("google1f1b6096ed030c21.html", googleValidation, name="googleValidation"),
-    path("robot.txt", robot, name='robot'),
+    path("robots.txt", robot, name='robot'),
     path("insertmedium", InsertDataMedium.as_view(), name="insertmedium"),
     path("insertdev", InsertDataDev.as_view(), name="insertdev"),
     url(r'^api/', include(router.urls)),
