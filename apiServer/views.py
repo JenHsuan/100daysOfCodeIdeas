@@ -256,9 +256,10 @@ class ProfileViewSet(generics.GenericAPIView):
 
             if finishedArticles != None:
                 finishedArticleList = finishedArticles.split(',')
-                for finishedArticle in finishedArticleList:
-                    if finishedArticle.isnumeric() == False:
-                        return Response(data={'error':'finishedArticles is invalid'}, status=status.HTTP_400_BAD_REQUEST)
+                if len(finishedArticleList) > 0:
+                    for finishedArticle in finishedArticleList:
+                        if finishedArticle.isnumeric() == False:
+                            return Response(data={'error':'finishedArticles is invalid'}, status=status.HTTP_400_BAD_REQUEST)
             
                 p = Profile.objects.get(reader_id = reader_id)
                 p.finishedArticles = finishedArticles
@@ -330,9 +331,10 @@ class ProfileSocialViewSet(generics.GenericAPIView):
 
             if bookmarks != None:
                 bookmarkList = bookmarks.split(',')
-                for bookmark in bookmarkList:
-                    if bookmark.isnumeric() == False:
-                        return Response(data={'error':'bookmarks is invalid'}, status=status.HTTP_400_BAD_REQUEST)
+                if len(bookmarkList) > 0:
+                    for bookmark in bookmarkList:
+                        if bookmark.isnumeric() == False:
+                            return Response(data={'error':'bookmarks is invalid'}, status=status.HTTP_400_BAD_REQUEST)
 
                 p = ProfileSocial.objects.filter(email=email).filter(provider=provider).first()
                 p.bookmarks = bookmarks
@@ -341,9 +343,10 @@ class ProfileSocialViewSet(generics.GenericAPIView):
 
             if finishedArticles != None:
                 finishedArticleList = finishedArticles.split(',')
-                for finishedArticle in finishedArticleList:
-                    if finishedArticle.isnumeric() == False:
-                        return Response(data={'error':'finishedArticles is invalid'}, status=status.HTTP_400_BAD_REQUEST)
+                if len(finishedArticleList) > 0:
+                    for finishedArticle in finishedArticleList:
+                        if finishedArticle.isnumeric() == False:
+                            return Response(data={'error':'finishedArticles is invalid'}, status=status.HTTP_400_BAD_REQUEST)
             
                 p = ProfileSocial.objects.filter(email=email).filter(provider=provider).first()
                 p.finishedArticles = finishedArticles
