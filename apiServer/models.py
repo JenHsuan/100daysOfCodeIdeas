@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from model_utils import Choices
 from django.utils.translation import gettext as _
 
+from django.urls import reverse
+from django.utils.text import slugify
+
 class Article(models.Model):
     title = models.CharField(max_length = 200)
     subtitle = models.CharField(max_length = 200)
@@ -32,3 +35,21 @@ class ProfileSocial(models.Model):
     bookmarks = models.CharField(max_length = 500, default='')
     finishedArticles = models.CharField(max_length = 500, default='')
 
+class Entry(models.Model):
+    title = models.CharField(max_length=255,
+                             unique=True)
+    slug = models.SlugField(max_length=50,
+                            unique=True,
+                            default='')
+    modified = models.DateTimeField(auto_now=True)
+    pub_date = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse(self.slug)

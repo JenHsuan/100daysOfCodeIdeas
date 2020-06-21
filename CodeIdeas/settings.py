@@ -68,8 +68,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'social.apps.django_app.default',
-    'social_django'
+    'social_django',
+    'django.contrib.sites',
+    'django.contrib.sitemaps'
 ]
+
+SITE_ID = 1
 
 AUTHENTICATION_BACKENDS = [
     'social_core.backends.open_id.OpenIdAuth',
@@ -121,7 +125,7 @@ ROOT_URLCONF = 'CodeIdeas.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

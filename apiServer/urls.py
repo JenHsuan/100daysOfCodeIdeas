@@ -8,14 +8,26 @@ from rest_framework.routers import DefaultRouter
 from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework_jwt.views import refresh_jwt_token
 
+from django.contrib.sitemaps import GenericSitemap
+from django.contrib.sitemaps.views import sitemap
+from django.contrib.sitemaps import views as sitemaps_views
+from django.views.decorators.cache import cache_page
+from .models import Entry
+
 router = DefaultRouter()
 router.register(r'user', UserViewSet)
 #router.register(r'order', OrderViewSet)
 # router.register(r'articles', ArticleViewSet)
-#router.register(r'profile', ProfileViewSet)
+#router.register(r'profile', ProfileViewSet) 
 
+sitemaps = {
+    'codeideas': GenericSitemap({'queryset': Entry.objects.get_queryset().order_by('id'), 'date_field': 'pub_date'}, priority=1.0),
+}
 
 urlpatterns = [
+    path('sitemap.xml', sitemap,
+         {'sitemaps': sitemaps},
+         name='django.contrib.sitemaps.views.sitemap'),
     path("", index, name = "index"),
     path("signin", signin, name = "signin"),
     path("signup", signup, name = "signup"),
