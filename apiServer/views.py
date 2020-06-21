@@ -41,6 +41,9 @@ about_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'about.html')
 achievement_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'achievement.html')
 
 # Create your views here.
+def robot(request):
+    return HttpResponse('User-agent: *\nAllow: /')
+
 def googleValidation(request):
     return HttpResponse('google-site-verification: google1f1b6096ed030c21.html')
 
