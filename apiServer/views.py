@@ -244,9 +244,10 @@ class ProfileViewSet(generics.GenericAPIView):
 
             if bookmarks != None:
                 bookmarkList = bookmarks.split(',')
-                for bookmark in bookmarkList:
-                    if bookmark.isnumeric() == False:
-                        return Response(data={'error':'bookmarks is invalid'}, status=status.HTTP_400_BAD_REQUEST)
+                if len(bookmarkList) > 0:
+                    for bookmark in bookmarkList:
+                        if bookmark.isnumeric() == False:
+                            return Response(data={'error':'bookmarks is invalid'}, status=status.HTTP_400_BAD_REQUEST)
             
                 p = Profile.objects.get(reader_id = reader_id)
                 p.bookmarks = bookmarks
