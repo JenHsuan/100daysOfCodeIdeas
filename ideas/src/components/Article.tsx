@@ -43,6 +43,7 @@ const Article = ({article}) => {
             && bookmarks.find(bookmark => bookmark == article.id) !== undefined) {
             console.log('bookmark')
             console.log(article.id)
+            console.log(bookmarks)
             setBookmark(true);
         }
     }, [bookmarks])
