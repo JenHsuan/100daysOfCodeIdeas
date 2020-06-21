@@ -244,12 +244,9 @@ class ProfileViewSet(generics.GenericAPIView):
 
             if bookmarks != None:
                 bookmarkList = bookmarks.split(',')
-                if len(bookmarkList) > 1:
-                    for bookmark in bookmarkList:
-                        if bookmark.isnumeric() == False:
-                            return Response(data={'error':'bookmarks is invalid'}, status=status.HTTP_400_BAD_REQUEST)
-                elif len(bookmarkList) == 1 and bookmarkList[0] != '':
-                    return Response(data={'error':'bookmarks is invalid'}, status=status.HTTP_400_BAD_REQUEST)
+                for bookmark in bookmarkList:
+                    if bookmark != '' and bookmark.isnumeric() == False:
+                        return Response(data={'error':'bookmarks is invalid'}, status=status.HTTP_400_BAD_REQUEST)
 
                 p = Profile.objects.get(reader_id = reader_id)
                 p.bookmarks = bookmarks
@@ -258,12 +255,9 @@ class ProfileViewSet(generics.GenericAPIView):
 
             if finishedArticles != None:
                 finishedArticleList = finishedArticles.split(',')
-                if len(finishedArticleList) > 1:
-                    for finishedArticle in finishedArticleList:
-                        if finishedArticle.isnumeric() == False:
-                            return Response(data={'error':'finishedArticles is invalid'}, status=status.HTTP_400_BAD_REQUEST)
-                elif len(finishedArticleList) == 1 and finishedArticleList[0] != '':
-                    return Response(data={'error':'bookmarks is invalid'}, status=status.HTTP_400_BAD_REQUEST)
+                for finishedArticle in finishedArticleList:
+                    if finishedArticle != '' and finishedArticle.isnumeric() == False:
+                        return Response(data={'error':'finishedArticles is invalid'}, status=status.HTTP_400_BAD_REQUEST)
                 
                 p = Profile.objects.get(reader_id = reader_id)
                 p.finishedArticles = finishedArticles
@@ -335,12 +329,9 @@ class ProfileSocialViewSet(generics.GenericAPIView):
 
             if bookmarks != None:
                 bookmarkList = bookmarks.split(',')
-                if len(bookmarkList) > 1:
-                    for bookmark in bookmarkList:
-                        if bookmark.isnumeric() == False:
-                            return Response(data={'error':'bookmarks is invalid'}, status=status.HTTP_400_BAD_REQUEST)
-                elif len(bookmarkList) == 1 and bookmarkList[0] != '':
-                    return Response(data={'error':'bookmarks is invalid'}, status=status.HTTP_400_BAD_REQUEST)
+                for bookmark in bookmarkList:
+                    if bookmark != '' and bookmark.isnumeric() == False:
+                        return Response(data={'error':'bookmarks is invalid'}, status=status.HTTP_400_BAD_REQUEST)
 
                 print(bookmarkList)
                 print(len(bookmarkList))
@@ -351,12 +342,9 @@ class ProfileSocialViewSet(generics.GenericAPIView):
 
             if finishedArticles != None:
                 finishedArticleList = finishedArticles.split(',')
-                if len(finishedArticleList) > 1:
-                    for finishedArticle in finishedArticleList:
-                        if finishedArticle.isnumeric() == False:
-                            return Response(data={'error':'finishedArticles is invalid'}, status=status.HTTP_400_BAD_REQUEST)
-                elif len(finishedArticleList) == 1 and finishedArticleList[0] != '':
-                    return Response(data={'error':'bookmarks is invalid'}, status=status.HTTP_400_BAD_REQUEST)
+                for finishedArticle in finishedArticleList:
+                    if finishedArticle != '' and finishedArticle.isnumeric() == False:
+                        return Response(data={'error':'finishedArticles is invalid'}, status=status.HTTP_400_BAD_REQUEST)
                 
                 p = ProfileSocial.objects.filter(email=email).filter(provider=provider).first()
                 p.finishedArticles = finishedArticles
