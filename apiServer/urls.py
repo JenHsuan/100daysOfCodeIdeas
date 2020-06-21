@@ -13,6 +13,7 @@ from django.contrib.sitemaps.views import sitemap
 from django.contrib.sitemaps import views as sitemaps_views
 from django.views.decorators.cache import cache_page
 from .models import Entry
+from django.utils.functional import wraps
 
 router = DefaultRouter()
 router.register(r'user', UserViewSet)
@@ -24,8 +25,16 @@ sitemaps = {
     'codeideas': GenericSitemap({'queryset': Entry.objects.get_queryset().order_by('id'), 'date_field': 'pub_date'}, priority=1.0),
 }
 
+def x_robots_tag(func):
+    def inner(request, *args, **kwargs):
+        responce = func(request, *args, **kwargs)
+        responce['X-Robots-Tag'] = 'noodp, noarchive'
+        return responce
+    return wraps(func)(inner)
+
 urlpatterns = [
-    path('sitemap.xml', sitemap,
+    path('sitemap.xml', x_robots_tag(sitemap),
+    
          {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap'),
     path("", index, name = "index"),
