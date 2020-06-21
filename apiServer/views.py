@@ -41,6 +41,9 @@ about_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'about.html')
 achievement_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'achievement.html')
 
 # Create your views here.
+def googleValidation(request):
+    return HttpResponse('google-site-verification: google1f1b6096ed030c21.html')
+
 def index(request):
     try:
         with open(index_file_path) as f:
