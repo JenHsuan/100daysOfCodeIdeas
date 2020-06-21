@@ -37,7 +37,10 @@ const Article = ({article}) => {
     const finishedArticles = useSelector(selectFinishedArticlessState);
 
     useEffect(()=> {
-        if (bookmarks.find(bookmark => bookmark === article.id) !== undefined ) {
+
+        if (bookmarks.length >= 1 
+            && bookmarks[0] != '' 
+            && bookmarks.find(bookmark => bookmark == article.id) !== undefined) {
             console.log('bookmark')
             console.log(article.id)
             setBookmark(true);
