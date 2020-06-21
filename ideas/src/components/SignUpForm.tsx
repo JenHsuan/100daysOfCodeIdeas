@@ -100,7 +100,7 @@ const SignUpForm = ({responseFacebook,
                         localStorage.setItem("bookmarks", updateProfileRes['data']['bookmarks'].trim());
                         
                         const finishedArticlesList = updateProfileRes['data']['finishedArticles'].split(',');
-                        disPatch(setBookmarks(finishedArticlesList.filter(finishedArticle => finishedArticle !== '')))
+                        disPatch(setFinishedArticles(finishedArticlesList.filter(finishedArticle => finishedArticle !== '')))
                         localStorage.setItem("finishedArticles", updateProfileRes['data']['finishedArticles'].trim());
                     
                     }

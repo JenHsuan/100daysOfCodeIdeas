@@ -129,7 +129,7 @@ const FormWrapper = (WrappedComponent) => ()=> {
                     localStorage.setItem("bookmarks", res['data']['bookmarks'].trim());
                     
                     const finishedArticlesList = res['data']['finishedArticles'].split(',');
-                    disPatch(setBookmarks(finishedArticlesList.filter(finishedArticle => finishedArticle !== '')))
+                    disPatch(setFinishedArticles(finishedArticlesList.filter(finishedArticle => finishedArticle !== '')))
                     localStorage.setItem("finishedArticles", res['data']['finishedArticles'].trim());
                     
                 }
