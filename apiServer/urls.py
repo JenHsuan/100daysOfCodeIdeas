@@ -33,8 +33,8 @@ def x_robots_tag(func):
     return wraps(func)(inner)
 
 urlpatterns = [
+    path('sitemap.xml', x_robots_tag(sitemap),
     
-    path('sitemap.xml', 
          {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap'),
     path("", index, name = "index"),
