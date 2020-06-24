@@ -9,8 +9,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/sidebar.css'
 import GaLayout from '../components/GaLayout';
 import CommonHead from '../components/CommonHead';
+import axios from 'axios';
+import {getJsonId} from '../components/jsonLd';
 
-const Index = () => {
+const Index = ({jsonLdData}) => {
     const title = "ALayman Daily Learning";
     const keywords = "Software Development, Tesing, DveOps, SRE, Inteviews, Data Sciences";
     const url = "https://daily-learning.herokuapp.com/";
@@ -22,7 +24,8 @@ const Index = () => {
                 title={title}
                 keywords={keywords}
                 url={url}
-                description={description}/>
+                description={description}
+                jsonLd={jsonLdData}/>
         <Provider store = {store}>
             <NavBar></NavBar>
             <div className='mainpage-grid-box'>
@@ -34,5 +37,17 @@ const Index = () => {
     )
 }
 
+Index.getInitialProps = async(query) => {
+    let jsonLdData = {};
+    try {
+        var res = await axios.get('https://daily-learning.herokuapp.com/api/articles');
+        jsonLdData = getJsonId(res);
+    } catch (err) {
+        console.log(err);
+    }
+    console.log(JSON.stringify(jsonLdData))
+    return {jsonLdData: JSON.stringify(jsonLdData)};
+  }
     
 export default Index;
+

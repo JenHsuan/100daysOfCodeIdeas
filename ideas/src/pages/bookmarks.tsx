@@ -9,8 +9,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import BookmarksContent from '../components/BookmarksContent';
 import GaLayout from '../components/GaLayout';
 import CommonHead from '../components/CommonHead';
+import axios from 'axios';
+import {getJsonId} from '../components/jsonLd';
 
-const bookmarks = () => {
+const bookmarks = ({jsonLdData}) => {
     const title = "ALayman Daily Learning - Learning Plans";
     const keywords = "achievements,pie chart";
     const url = "https://daily-learning.herokuapp.com/";
@@ -22,7 +24,8 @@ const bookmarks = () => {
                 title={title}
                 keywords={keywords}
                 url={url}
-                description={description}/>
+                description={description}
+                jsonLd={jsonLdData}/>
             <Provider store = {store}>
                 <NavBar></NavBar>
                 <div className='bookmarkspage-grid-box'>
@@ -33,5 +36,17 @@ const bookmarks = () => {
         </GaLayout>
     )
 }
+
+bookmarks.getInitialProps = async (query) => {
+    let jsonLdData = {};
+    try {
+        var res = await axios.get('/api/articles');
+        jsonLdData = getJsonId(res);
+    } catch (err) {
+        console.log(err);
+    }
+    console.log(JSON.stringify(jsonLdData))
+    return {jsonLdData: JSON.stringify(jsonLdData)};
+  }
 
 export default bookmarks

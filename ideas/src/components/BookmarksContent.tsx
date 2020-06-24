@@ -77,8 +77,8 @@ const BookmarksContent = () => {
 
     
     useEffect(()=> {
-        console.log(bookmarks);
-        var tmp = articles.filter(article => -1 !== bookmarks.indexOf(String(article.id)))
+        console.log((bookmarks as Number[]));
+        var tmp = articles.filter(article => -1 !== bookmarks.map(Number).indexOf((article.id)))
         console.log(tmp)
         setBookmarkedArticles(tmp)
     }, [bookmarks, articles])

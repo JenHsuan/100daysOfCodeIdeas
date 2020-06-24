@@ -8,8 +8,10 @@ import Footer from '../components/Footer';
 import AboutPageContent from '../components/AboutPageContent';
 import GaLayout from '../components/GaLayout';
 import CommonHead from '../components/CommonHead';
+import axios from 'axios';
+import {getJsonId} from '../components/jsonLd';
 
-const about = () => {
+const about = ({jsonLdData}) => {
     const title = "ALayman Daily Learning - About Daily Learning";
     const keywords = "about,contacts,learning";
     const url = "https://daily-learning.herokuapp.com/";
@@ -20,7 +22,8 @@ const about = () => {
                 title={title}
                 keywords={keywords}
                 url={url}
-                description={description}/>
+                description={description}
+                jsonLd={jsonLdData}/>
             <Provider store = {store}>
                 <NavBar></NavBar>
                 <div className='aboutpage-grid-box'>
@@ -33,5 +36,17 @@ const about = () => {
         </GaLayout>
     )
 }
+
+about.getInitialProps = async (query) => {
+    let jsonLdData = {};
+    try {
+        var res = await axios.get('/api/articles');
+        jsonLdData = getJsonId(res);
+    } catch (err) {
+        console.log(err);
+    }
+    console.log(JSON.stringify(jsonLdData))
+    return {jsonLdData: JSON.stringify(jsonLdData)};
+  }
 
 export default about

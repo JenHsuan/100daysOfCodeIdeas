@@ -10,8 +10,11 @@ import SignFooter from '../components/SignFooter';
 import SideBar from '../components/SideBar';
 import GaLayout from '../components/GaLayout';
 import CommonHead from '../components/CommonHead';
+import axios from 'axios';
+import {getJsonId} from '../components/jsonLd';
+import { sign } from 'crypto';
 
-const signin = () => {
+const signin = ({jsonLdData}) => {
     const title = "ALayman Daily Learning - Signin";
     const keywords = "signin";
     const url = "https://daily-learning.herokuapp.com/";
@@ -23,7 +26,8 @@ const signin = () => {
                 title={title}
                 keywords={keywords}
                 url={url}
-                description={description}/>
+                description={description}
+                jsonLd={jsonLdData}/>
             <Provider store = {store}>
                 <NavBar></NavBar>
                 <div className='signin-grid-box'>
@@ -35,5 +39,17 @@ const signin = () => {
         </GaLayout>
     )
 }
+
+signin.getInitialProps = async (query) => {
+    let jsonLdData = {};
+    try {
+        var res = await axios.get('/api/articles');
+        jsonLdData = getJsonId(res);
+    } catch (err) {
+        console.log(err);
+    }
+    console.log(JSON.stringify(jsonLdData))
+    return {jsonLdData: JSON.stringify(jsonLdData)};
+  }
 
 export default signin

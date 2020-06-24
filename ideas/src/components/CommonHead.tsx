@@ -1,7 +1,7 @@
 import React from 'react'
 import Head from 'next/head';
 
-const CommonHead = ({title, url, description, keywords}) => {
+const CommonHead = ({title, url, description, keywords, jsonLd}) => {
     return (
         <Head>
             <title>{title}</title>
@@ -15,6 +15,10 @@ const CommonHead = ({title, url, description, keywords}) => {
             <meta name="author" content="Jen-Hsuan Hsieh (Sean Hsieh)"/>
             <link rel="dns-fetch" href="https://raw.githubusercontent.com/"/>
             <link rel="canonical" href={url}/>
+            <script
+            type='application/ld+json'
+            dangerouslySetInnerHTML={{ __html: jsonLd }}
+        />
         </Head>
     )
 }

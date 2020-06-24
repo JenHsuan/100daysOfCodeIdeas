@@ -45,6 +45,7 @@ import axios from 'axios';
 import Router, { useRouter } from 'next/router'
 import ArticleSearchBar from './ArticleSearchBar';
 import { useMediaPredicate } from "react-media-hook";
+import { ArticleType } from './types';
 
 const ArticleList = () => {
     const disPatch = useDispatch();
@@ -176,7 +177,7 @@ const ArticleList = () => {
                         <span className="sr-only">Loading...</span>
                     </Spinner>
                 }</div>) : (
-                    partialArticles.map(article=>
+                    (partialArticles as ArticleType[]).map(article=>
                         (<TransitionGroup>
                             <CSSTransition key={article.id} timeout={500} classNames="item">
                                 <Article key={article.id} article = {article}/>
