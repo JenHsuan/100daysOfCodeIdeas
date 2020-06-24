@@ -45,7 +45,7 @@ Index.getInitialProps = async(query) => {
     } catch (err) {
         console.log(err);
     }
-    console.log(JSON.stringify(jsonLdData))
+    //console.log(JSON.stringify(jsonLdData))
     return {jsonLdData: JSON.stringify(jsonLdData)};
   }
     

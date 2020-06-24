@@ -1,6 +1,6 @@
 export const getJsonId = articles => {
     var JsonIdData = [];
-    console.log(articles.data)
+    //console.log(articles.data)
     articles.data.forEach(article => {
         JsonIdData.push({ 
             "@context": "http://schema.org",  
