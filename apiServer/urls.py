@@ -3,7 +3,7 @@ from django.conf.urls import url
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import robot, googleValidation, achievements, profile_socail_view, InsertDataDev, about, renew_token, plans, signup, profile_view, social_auth_github,  social_auth, signin, index, react, InsertDataMedium, UserViewSet, current_user, UserList, UserViewSet, ArticleByCategoryViewSet, ProfileViewSet
+from .views import RSSFeed, robot, googleValidation, achievements, profile_socail_view, InsertDataDev, about, renew_token, plans, signup, profile_view, social_auth_github,  social_auth, signin, index, react, InsertDataMedium, UserViewSet, current_user, UserList, UserViewSet, ArticleByCategoryViewSet, ProfileViewSet
 from rest_framework.routers import DefaultRouter
 from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework_jwt.views import refresh_jwt_token
@@ -58,7 +58,8 @@ urlpatterns = [
     path('api/current_user/', current_user, name='current_user'),
     path('api/users/', UserList.as_view(), name='users'),
     path("api/social-auth", social_auth),
-    path("api/get-github-access-token", social_auth_github)
+    path("api/get-github-access-token", social_auth_github),
+    url(r'^feed/$', RSSFeed(), name = "RSS")
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 

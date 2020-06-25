@@ -12,7 +12,7 @@ class Article(models.Model):
     image = models.TextField()
     url =models.TextField()
     name = models.CharField(max_length = 64)
-    time = models.DateField()
+    time = models.DateTimeField()
     readtime = models.CharField(max_length = 64)
     CATEGORY = Choices((0, 'devto', _('devto')), (1, 'medium', _('medium')))
     category = models.IntegerField(choices=CATEGORY, default=CATEGORY.devto)
@@ -20,6 +20,8 @@ class Article(models.Model):
 
     def __str__(self):
         return f"{self.id} - {self.title}, {self.subtitle}, {self.image}, {self.name}, {self.url}, {self.time}, {self.readtime}, {self.category}"
+    def get_absolute_url(self):
+        return self.url
 
 class Profile(models.Model):
     reader = models.OneToOneField(User, on_delete=models.CASCADE, blank = True, related_name="profile")

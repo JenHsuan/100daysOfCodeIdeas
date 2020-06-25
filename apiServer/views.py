@@ -33,6 +33,8 @@ from django.core.mail import send_mail
 from datetime import datetime
 from django.forms.models import model_to_dict
 
+from django.contrib.syndication.views import Feed
+
 index_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'index.html')
 signin_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'signin.html')
 signup_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'signup.html')
@@ -40,6 +42,26 @@ plans_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'bookmarks.html')
 about_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'about.html')
 achievement_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'achievement.html')
 
+class RSSFeed(Feed) :
+    title = "Daily Learning"
+    link = "https://daily-learning.herokuapp.com/feeds"
+    description = "RSS feed - articles"
+
+    def items(self):
+        return Article.objects.order_by('-time')
+
+    def item_title(self, item):
+        return item.title
+
+    def item_pubdate(self, item):
+        return item.time
+
+    def item_description(self, item):
+        return item.description
+    
+    def item_link(self, item):
+        return item.url
+         
 # Create your views here.
 def robot(request):
     return HttpResponse('User-agent: *\nAllow: /')
