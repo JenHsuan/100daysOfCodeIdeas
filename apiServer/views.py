@@ -43,18 +43,7 @@ plans_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'bookmarks.html')
 about_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'about.html')
 achievement_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'achievement.html')
 
-class RssFooFeedGenerator(Rss201rev2Feed):
-    def add_item_elements(self, handler, item):
-        super(RssFooFeedGenerator, self).add_item_elements(handler, item)
-        handler.addQuickElement(u"image", '',
-            {
-                 'url': item.image,
-                 'title': item.title,
-                 'link': item.title, 
-             }) 
-
 class RSSFeed(Feed):
-    feed_type = RssFooFeedGenerator
     title = "Daily Learning"
     link = "https://daily-learning.herokuapp.com/feeds"
     description = "RSS feed - articles"
