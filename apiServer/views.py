@@ -60,7 +60,7 @@ class RSSFeed(Feed):
     description = "RSS feed - articles"
 
     def items(self):
-        return Article.objects.order_by('-time').order_by('-category')
+        return Article.objects.all().order_by('-category', '-time')
 
     def item_title(self, item):
         return item.title
