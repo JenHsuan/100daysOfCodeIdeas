@@ -22,7 +22,7 @@ const ArticleModal = ({show, handleClose, article, handleOpen}) => {
                         <div className="article-modal-item d-flex">Category: {article.category === 0 ? '100 days of code' : 'Learning materials'}</div>
                     </li>
                     <li>
-                        <div className="article-modal-item d-flex">Date: {article.time}</div>
+                        <div className="article-modal-item d-flex">DateTime: {article.time}</div>
                     </li>
                     <li>
                         <div className="article-modal-item d-flex">Read time: {article.readtime}</div>

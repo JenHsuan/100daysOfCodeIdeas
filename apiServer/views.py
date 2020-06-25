@@ -34,6 +34,7 @@ from datetime import datetime
 from django.forms.models import model_to_dict
 
 from django.contrib.syndication.views import Feed
+from django.utils.feedgenerator import Rss201rev2Feed
 
 index_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'index.html')
 signin_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'signin.html')
@@ -42,7 +43,18 @@ plans_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'bookmarks.html')
 about_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'about.html')
 achievement_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'achievement.html')
 
-class RSSFeed(Feed) :
+class RssFooFeedGenerator(Rss201rev2Feed):
+    def add_item_elements(self, handler, item):
+        super(RssFooFeedGenerator, self).add_item_elements(handler, item)
+        handler.addQuickElement(u"image", '',
+            {
+                 'url': item.image,
+                 'title': item.title,
+                 'link': item.title, 
+             }) 
+
+class RSSFeed(Feed):
+    feed_type = RssFooFeedGenerator
     title = "Daily Learning"
     link = "https://daily-learning.herokuapp.com/feeds"
     description = "RSS feed - articles"
@@ -57,10 +69,19 @@ class RSSFeed(Feed) :
         return item.time
 
     def item_description(self, item):
-        return item.description
+        return item.subtitle
     
     def item_link(self, item):
         return item.url
+
+    def item_extra_kwargs(self, item):
+
+        item = {
+            'thumbnail_url': item.image,
+            'thumbnail_width': 300,
+            'thumbnail_height': 150
+        }
+        return item
          
 # Create your views here.
 def robot(request):
