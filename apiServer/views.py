@@ -249,7 +249,7 @@ class ArticleByCategoryViewSet(generics.ListAPIView):
     http_method_names = ['get']
 
     def get_queryset(self):
-        queryset = Article.objects.all().order_by('-time').order_by('-category')
+        queryset = Article.objects.all().order_by('-time','-category')
         category = self.request.query_params.get('category', None)
         if category is not None:
             queryset = queryset.filter(category=category)
