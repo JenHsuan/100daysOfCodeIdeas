@@ -141,9 +141,9 @@ const NavBar = () => {
             )}
         </Nav>
         <Nav>
-                <Nav.Link href="feed"> 
-                    <a href="/feed/">RSS</a>
-                </Nav.Link>
+            <Nav.Link href="feed"> 
+                <a href="/feed/">RSS</a>
+            </Nav.Link>
         </Nav>
         <Nav>
         {!isLogin && (
