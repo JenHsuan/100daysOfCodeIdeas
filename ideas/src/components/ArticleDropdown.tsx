@@ -40,7 +40,7 @@ const ArticleDropdown = () => {
     return (
         <DropdownButton className='article-dropdown' id="dropdown-basic-button" title={getTitle()} onSelect={handleSelect}>
             <Dropdown.Item eventKey="-1">All</Dropdown.Item>
-            <Dropdown.Item eventKey="0">Challenges</Dropdown.Item>
+            <Dropdown.Item eventKey="0">100DaysOfCode</Dropdown.Item>
             <Dropdown.Item eventKey="1">Programming</Dropdown.Item>
         </DropdownButton>
     )
