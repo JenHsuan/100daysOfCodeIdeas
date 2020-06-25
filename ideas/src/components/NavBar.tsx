@@ -139,11 +139,11 @@ const NavBar = () => {
                     </Nav.Link>
                 </Fragment>
             )}
-            <Fragment>
+        </Nav>
+        <Nav>
                 <Nav.Link href="feed"> 
-                    <a href="/feed/">RSS Feed</a>
+                    <a href="/feed/">RSS</a>
                 </Nav.Link>
-            </Fragment>
         </Nav>
         <Nav>
         {!isLogin && (
