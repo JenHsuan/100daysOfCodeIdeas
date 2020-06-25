@@ -125,6 +125,11 @@ const NavBar = () => {
                     <a href="/about">About</a>
                 </Link>
             </Nav.Link>
+            <Nav.Link href="feed"> 
+                <Link href="/feed">
+                    <a href="/feed">RSS Feed</a>
+                </Link>
+            </Nav.Link>
             {isLogin && (
                 <Fragment>
                     <Nav.Link href="bookmarks"> 
