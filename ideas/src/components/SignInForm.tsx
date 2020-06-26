@@ -24,11 +24,12 @@ import {
     setFinishedArticles,
     setPlanner
 } from './actions/articlesAction';
+import { SignInFormProp } from '../components/types'
 
 const SignInForm = ({responseFacebook,
     ResponseGithubOnSuccess,
     ResponseGithubOnFailure,
-    SetLogin}) => {
+    SetLogin}: SignInFormProp) => {
     
     const disPatch = useDispatch();
     const showPlanner = useSelector(selectShowPlannerState);
@@ -156,4 +157,4 @@ SignInForm.propTypes = {
     ResponseGithubOnFailure: PropTypes.func.isRequired,
     SetLogin: PropTypes.func.isRequired
 }
-export default FormWrapper(SignInForm)
+export default FormWrapper({WrappedComponent:SignInForm})

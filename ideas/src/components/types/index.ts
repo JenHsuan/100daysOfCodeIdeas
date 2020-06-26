@@ -1,3 +1,5 @@
+import {FunctionComponent} from 'react'
+
 export const GET_ARTICLES = 'GET_ARTICLES';
 export const GET_FILTERED_ARTICLES = 'GET_FILTERED_ARTICLES';
 export const CLEAR_FILTER = 'CLEAR_FILTER';
@@ -35,3 +37,42 @@ export interface ArticleType {
     category: string;
     descrption: string;
 }
+
+export interface ArticleProp{
+    article: ArticleType
+}
+
+export interface ArticleModalProp{
+    show: Boolean;
+    handleClose: () => void;
+    article: ArticleType;
+    handleOpen: () => void;
+}
+
+export interface CommandHeadProp{
+    title: string;
+    url: string;
+    description: string;
+    keywords: string;
+    jsonLd: string
+}
+
+export interface SignInFormProp {
+    responseFacebook: () => void;
+    ResponseGithubOnSuccess: () => void;
+    ResponseGithubOnFailure: () => void;
+    SetLogin: (token: string, email: string, username: string, provider: string) => void;
+}
+
+export interface FormWrapperProp{
+    WrappedComponent: FunctionComponent<{
+        responseFacebook: Function,
+        ResponseGithubOnSuccess: Function,
+        ResponseGithubOnFailure: Function,
+        SetLogin: Function }>
+}
+
+export interface PageWrapperProp{
+    WrappedComponent: FunctionComponent
+}
+

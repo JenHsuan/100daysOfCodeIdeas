@@ -1,7 +1,9 @@
 import React from 'react'
 import Head from 'next/head';
+import {CommandHeadProp } from '../components/types'
+import PropTypes from 'prop-types'
 
-const CommonHead = ({title, url, description, keywords, jsonLd}) => {
+const CommonHead = ({title, url, description, keywords, jsonLd}: CommandHeadProp) => {
     return (
         <Head>
             <title>{title}</title>
@@ -21,6 +23,14 @@ const CommonHead = ({title, url, description, keywords, jsonLd}) => {
         />
         </Head>
     )
+}
+
+CommonHead.propTypes ={
+    title: PropTypes.string.isRequired, 
+    url: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    keywords: PropTypes.string.isRequired,
+    jsonLd: PropTypes.string.isRequired
 }
 
 export default CommonHead

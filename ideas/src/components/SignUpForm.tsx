@@ -24,11 +24,12 @@ import {
 } from './actions/articlesAction';
 import FormWrapper from '../components/FormWrapper'
 import PropTypes from 'prop-types'
+import { SignInFormProp } from '../components/types'
 
 const SignUpForm = ({responseFacebook,
     ResponseGithubOnSuccess,
     ResponseGithubOnFailure,
-    SetLogin}) => {
+    SetLogin}: SignInFormProp) => {
     const disPatch = useDispatch();
     const isLogin = useSelector(selectLoginState);
     const showPlanner = useSelector(selectShowPlannerState);
@@ -180,4 +181,4 @@ SignUpForm.propTypes = {
     SetLogin: PropTypes.func.isRequired
 }
 
-export default FormWrapper(SignUpForm)
+export default FormWrapper({WrappedComponent: SignUpForm})

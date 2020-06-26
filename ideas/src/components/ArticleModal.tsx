@@ -1,8 +1,10 @@
 import React from 'react'
 import { Modal, Button, Image } from 'react-bootstrap';
 import '.././css/articleModal.css'
+import { ArticleModalProp } from '../components/types'
+import PropTypes from 'prop-types'
 
-const ArticleModal = ({show, handleClose, article, handleOpen}) => {
+const ArticleModal = ({show, handleClose, article, handleOpen}: ArticleModalProp) => {
     const openArticle = () => {    
         handleOpen();
         window.open(article.url, '_blank');
@@ -19,7 +21,7 @@ const ArticleModal = ({show, handleClose, article, handleOpen}) => {
                         <div className="article-modal-item d-flex">Author: {article.name}</div>
                     </li>
                     <li>
-                        <div className="article-modal-item d-flex">Category: {article.category === 0 ? '100 days of code' : 'Learning materials'}</div>
+                        <div className="article-modal-item d-flex">Category: {Number(article.category) === 0 ? '100 days of code' : 'Learning materials'}</div>
                     </li>
                     <li>
                         <div className="article-modal-item d-flex">DateTime: {article.time}</div>
@@ -40,6 +42,13 @@ const ArticleModal = ({show, handleClose, article, handleOpen}) => {
             </Modal.Footer>
         </Modal>
     )
+}
+
+ArticleModal.propTypes ={
+    show: PropTypes.bool.isRequired,
+    handleClose: PropTypes.func.isRequired,
+    article: PropTypes.func.isRequired,
+    handleOpen: PropTypes.func.isRequired,
 }
 
 export default ArticleModal

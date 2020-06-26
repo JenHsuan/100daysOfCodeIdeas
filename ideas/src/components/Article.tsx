@@ -22,8 +22,11 @@ import {
 } from './actions/articlesAction';
 import Router, { useRouter } from 'next/router'
 import axios from 'axios';
-
-const Article = ({article}) => {
+import { 
+    ArticleProp
+ } from '../components/types'
+ 
+const Article = ({article}: ArticleProp) => {
     const router = useRouter();
     const disPatch = useDispatch();
     const [show, setShow] = useState(false);
@@ -208,7 +211,7 @@ const Article = ({article}) => {
                             {isChecked
                             ? <img src="https://raw.githubusercontent.com/JenHsuan/ALayman/master/views/images/check.png" alt="Marked as unfinished" title="Marked as unfinished"/>
                             : <img src="https://raw.githubusercontent.com/JenHsuan/ALayman/master/views/images/uncheck.png" alt="Marked as finished" title="Marked as finished"/>
-                        }
+                            }
                         </a>
                     </span>
                 </div>
