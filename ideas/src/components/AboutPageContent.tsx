@@ -1,54 +1,7 @@
-import React, {useEffect, Fragment} from 'react'
-import { Provider, useDispatch} from 'react-redux';
-
-import { 
-    setPlanner,
-    setLogout,
-    setUsername,
-    setProvider,
-    setEmail,
-    setFinishedArticles,
-    setBookmarks,
-    setAccessToken
-} from './actions/articlesAction';
-import axios from 'axios';
+import React, {Fragment} from 'react'
+import PageWrapper from '../components/PageWrapper'
 
 const AboutPageContent = () => {
-    const disPatch = useDispatch();
-    useEffect(()=> {
-        const refreshToken = async () => {
-            try {
-                const res = await axios.get('api/renew-token/');
-            } catch(error) {
-                console.log(error)
-                SetLogout();
-                SetLogoutForLocalSorage();
-            }
-        };
-        
-        refreshToken();
-    }, [])
-
-    const SetLogout = () => {
-        disPatch(setLogout());
-        disPatch(setUsername(''));
-        disPatch(setEmail(''));
-        disPatch(setFinishedArticles([]));
-        disPatch(setAccessToken(''));
-        disPatch(setProvider(''));
-        disPatch(setBookmarks([]));
-    }
-
-    const SetLogoutForLocalSorage = () => {
-        localStorage.removeItem('login');
-        localStorage.removeItem('username');
-        localStorage.removeItem('email');
-        localStorage.removeItem('finishedArticles');
-        localStorage.removeItem('bookmarks');
-        localStorage.removeItem('token');
-        localStorage.removeItem('provider');
-    }
-
     return (
         <Fragment>
         <div className="column-top-grid-box">
@@ -64,7 +17,7 @@ const AboutPageContent = () => {
             </div>
             <div className="about-website-content-1">
             There are many information around us today. To improve ourselves, we just need to move a further move every day.
-            Daily learning provides articles, challenges, or videos for people who are also self-learner. 
+            Daily learning provides articles, challenges, or videos to people who are also self-learner for programming. 
             </div>
             <div className="about-website-subtitle-2">
                 About the Author
@@ -84,4 +37,4 @@ const AboutPageContent = () => {
     )
 }
 
-export default AboutPageContent
+export default PageWrapper({WrappedComponent: AboutPageContent});

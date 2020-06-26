@@ -7,20 +7,9 @@ import {
 } from './states/states';
 
 import {
-    setLogout,
-    getArticles,
-    setBookmarks,
-    setUsername,
-    setAccessToken,
-    setEmail,
-    setProvider,
-    setFinishedArticles,
-    setUserId
-} from './actions/articlesAction';
-
-import {
     selectBookmarksState,
-    selectFinishedArticlessState
+    selectFinishedArticlessState,
+    selectLoginState
 } from './states/states';
 
 import '.././css/article.css'
@@ -34,6 +23,8 @@ import {
 
 import Footer from '../components/Footer';
 import Router, { useRouter } from 'next/router'
+import PageWrapper from '../components/PageWrapper'
+import { refreshToken } from '../components/account'
 
 const BookmarksContent = () => {
     const disPatch = useDispatch();
@@ -43,41 +34,9 @@ const BookmarksContent = () => {
     const [bookmarkedArticles, setBookmarkedArticles] = useState([]);
     const bookmarks = useSelector(selectBookmarksState)
     const finishedArticles = useSelector(selectFinishedArticlessState);
-
-    useEffect(()=> {
-        const refreshToken = async () => {
-            try {
-                const res = await axios.get('api/renew-token/');
-            } catch(error) {
-                console.log(error)
-                SetLogout();
-                SetLogoutForLocalSorage();
-                Router.push(`/signin`)
-            }
-        };
-        
-        refreshToken();
-        if (articles.length === 0) {
-            console.log('fetch articles')
-            disPatch(getArticles());
-        }
-
-        var bookmarksJson = localStorage.getItem("bookmarks");
-        if (bookmarksJson !== null) {
-            var bookmarks = bookmarksJson.split(',');
-            disPatch(setBookmarks(bookmarks))
-        }
-
-        var finishedAriclesJson = localStorage.getItem("finishedArticles");
-        if (finishedAriclesJson !== null) {
-            var finishedAricles = finishedAriclesJson.split(',');
-            disPatch(setFinishedArticles(finishedAricles))
-        }
-    }, [])
-
+    const isLogin = useSelector(selectLoginState);
     
     useEffect(()=> {
-        console.log((bookmarks as Number[]));
         var tmp = articles.filter(article => -1 !== bookmarks.map(Number).indexOf((article.id)))
         console.log(tmp)
         setBookmarkedArticles(tmp)
@@ -91,26 +50,12 @@ const BookmarksContent = () => {
         console.log(finishedArticles);
     }, [finishedArticles])
 
-    const SetLogoutForLocalSorage = () => {
-        localStorage.removeItem('login');
-        localStorage.removeItem('username');
-        localStorage.removeItem('email');
-        localStorage.removeItem('finishedArticles');
-        localStorage.removeItem('bookmarks');
-        localStorage.removeItem('token');
-        localStorage.removeItem('provider');
-    }
 
-    const SetLogout = () => {
-        disPatch(setLogout());
-        disPatch(setUsername(''));
-        disPatch(setEmail(''));
-        disPatch(setFinishedArticles([]));
-        disPatch(setAccessToken(''));
-        disPatch(setProvider(''));
-        disPatch(setBookmarks([]));
-        disPatch(setUserId(-1));
-    }
+    useEffect(()=> {
+       if (isLogin === false) {
+           Router.push(`/signin`)
+       }
+    }, [isLogin])
 
     return (
         <Fragment>
@@ -145,4 +90,4 @@ const BookmarksContent = () => {
     )
 }
 
-export default BookmarksContent
+export default PageWrapper({WrappedComponent: BookmarksContent});

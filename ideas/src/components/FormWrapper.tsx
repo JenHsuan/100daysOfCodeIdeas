@@ -26,8 +26,9 @@ import {
     setFinishedArticles
 } from './actions/articlesAction';
 import { useMediaPredicate } from "react-media-hook";
+import { FormWrapperProp } from '../components/types'
 
-const FormWrapper = (WrappedComponent) => ()=> {
+const FormWrapper = ({WrappedComponent}: FormWrapperProp) => ()=> {
     const disPatch = useDispatch();
     const isLogin = useSelector(selectLoginState);
     const articles = useSelector(selectArticlesState);
@@ -170,7 +171,7 @@ const FormWrapper = (WrappedComponent) => ()=> {
     const ResponseGithubOnFailure = response => console.error(response);  
 
     return (
-        <WrappedComponent passAccessToken = {passAccessToken}
+        <WrappedComponent 
             responseFacebook = {responseFacebook}
             ResponseGithubOnSuccess = {ResponseGithubOnSuccess}
             ResponseGithubOnFailure = {ResponseGithubOnFailure}

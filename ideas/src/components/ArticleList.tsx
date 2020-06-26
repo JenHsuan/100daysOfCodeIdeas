@@ -10,26 +10,14 @@ import {
     selectPageCountState,
     selectPerpageState,
     selectShowPlannerState,
-    selectProviderState,
-    selectUserIdState,
-    selectEmailState,
-    selectAccessTokenState,
     selectLoginState
 } from './states/states';
 
 import { 
-    getArticles,
     setPartialArticles,
     setOffset,
     setPageCount,
     setLogout,
-    setBookmarks,
-    setUserId,
-    setUsername,
-    setAccessToken,
-    setProvider,
-    setFinishedArticles,
-    setEmail
 } from './actions/articlesAction';
 
 import {
@@ -41,11 +29,12 @@ import {Spinner} from 'react-bootstrap';
 import Article from './Article'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Footer from '../components/Footer';
-import axios from 'axios';
 import Router, { useRouter } from 'next/router'
 import ArticleSearchBar from './ArticleSearchBar';
 import { useMediaPredicate } from "react-media-hook";
 import { ArticleType } from './types';
+import PageWrapper from '../components/PageWrapper'
+import { refreshToken } from '../components/account'
 
 const ArticleList = () => {
     const disPatch = useDispatch();
@@ -60,40 +49,6 @@ const ArticleList = () => {
     const showPlanner = useSelector(selectShowPlannerState);
     const smallerThan800 = useMediaPredicate("(max-width: 800px)");
     const isLogin = useSelector(selectLoginState);
-
-    useEffect(()=> {
-        //Refresh JWT token or logout
-        refreshToken();
-
-        //Fetch articles
-        if (articles.length === 0) {
-            console.log('fetch articles')
-            disPatch(getArticles());
-        }
-
-        //Fetch Load bookmarks and finished articles
-        var bookmarksJson = localStorage.getItem("bookmarks");
-        if (bookmarksJson !== null) {
-            var bookmarksList = bookmarksJson.split(',');
-            disPatch(setBookmarks(bookmarksList.filter(bookmark => bookmark !== '')))
-        }
-
-        var filterArticlesJson = localStorage.getItem("filterArticles");
-        if (filterArticlesJson !== null) {
-            var filterArticlesList = filterArticlesJson.split(',');
-            disPatch(setFinishedArticles(filterArticlesList.filter(filterArticle => filterArticle !== '')))
-        }
-    }, [])
-
-    const SetLogoutForLocalSorage = () => {
-        localStorage.removeItem('login');
-        localStorage.removeItem('username');
-        localStorage.removeItem('email');
-        localStorage.removeItem('finishedArticles');
-        localStorage.removeItem('bookmarks');
-        localStorage.removeItem('token');
-        localStorage.removeItem('provider');
-    }
 
     useEffect(()=> {
         console.log('articles updated')
@@ -119,27 +74,7 @@ const ArticleList = () => {
         window.scrollTo(0, 0)
     }, [offset])
     
-    const refreshToken = async () => {
-        try {
-            const res = await axios.get('api/renew-token/');
-        } catch(error) {
-            console.log(error)
-            SetLogout();
-            SetLogoutForLocalSorage();
-        }
-    };
     
-    const SetLogout = () => {
-        disPatch(setLogout());
-        disPatch(setUsername(''));
-        disPatch(setUserId(-1));
-        disPatch(setEmail(''));
-        disPatch(setFinishedArticles([]));
-        disPatch(setAccessToken(''));
-        disPatch(setProvider(''));
-        disPatch(setBookmarks([]));
-    }
-
     const setPartialData = () =>  {
         const partialData = filteredArticles.length === 0 ? 
         articles.slice(offset, offset + perpage) : filteredArticles.slice(offset, offset + perpage);
@@ -207,4 +142,4 @@ const ArticleList = () => {
         </Fragment>
     )
 }
-export default ArticleList;
+export default PageWrapper({WrappedComponent: ArticleList});

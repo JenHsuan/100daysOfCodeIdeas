@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import {
     selectShowPlannerState,
-    selectArticlesState
+    selectArticlesState,
+    selectLoginState
 } from './states/states';
 
 import {
@@ -28,6 +29,7 @@ import {Spinner} from 'react-bootstrap';
 import Footer from '../components/Footer';
 import Router, { useRouter } from 'next/router'
 import { VictoryPie } from 'victory';
+import PageWrapper from '../components/PageWrapper'
 
 const AchievementsContent = () => {
     const disPatch = useDispatch();
@@ -36,43 +38,15 @@ const AchievementsContent = () => {
     const articles = useSelector(selectArticlesState);
     const bookmarks = useSelector(selectBookmarksState);
     const finishedArticles = useSelector(selectFinishedArticlessState);
-    
+    const isLogin = useSelector(selectLoginState);
+
     useEffect(()=> {
-        //Fetch articles
-        if (articles.length === 0) {
-            console.log('fetch articles')
-            disPatch(getArticles());
+        if (isLogin === false) {
+            Router.push(`/signin`)
         }
+     }, [isLogin])
 
-        //Refresh JWT token or logout
-        const refreshToken = async () => {
-            try {
-                const res = await axios.get('api/renew-token/');
-            } catch(error) {
-                console.log(error)
-                SetLogout();
-                SetLogoutForLocalSorage();
-                Router.push(`/signin`)
-            }
-        };
-        
-        refreshToken();
-
-        var bookmarksJson = localStorage.getItem("bookmarks");
-        if (bookmarksJson !== null) {
-            var bookmarks = bookmarksJson.split(',');
-            console.log(bookmarks)
-            disPatch(setBookmarks(bookmarks))
-        }
-
-        var finishedAriclesJson = localStorage.getItem("finishedArticles");
-        if (finishedAriclesJson !== null) {
-            var finishedAricles = finishedAriclesJson.split(',');
-            console.log(finishedAricles)
-            disPatch(setFinishedArticles(finishedAricles))
-        }
-    }, [])
-
+    
     useEffect(()=> {
         //Fetch articles
         var dataList = []
@@ -88,27 +62,6 @@ const AchievementsContent = () => {
         setData(dataList)
 
     }, [articles, bookmarks, finishedArticles])
-
-    const SetLogoutForLocalSorage = () => {
-        localStorage.removeItem('login');
-        localStorage.removeItem('username');
-        localStorage.removeItem('email');
-        localStorage.removeItem('finishedArticles');
-        localStorage.removeItem('bookmarks');
-        localStorage.removeItem('token');
-        localStorage.removeItem('provider');
-    }
-
-    const SetLogout = () => {
-        disPatch(setLogout());
-        disPatch(setUsername(''));
-        disPatch(setUserId(-1));
-        disPatch(setEmail(''));
-        disPatch(setFinishedArticles([]));
-        disPatch(setAccessToken(''));
-        disPatch(setProvider(''));
-        disPatch(setBookmarks([]));
-    }
 
     return (
         <Fragment>
@@ -152,4 +105,4 @@ const AchievementsContent = () => {
     )
 }
 
-export default AchievementsContent
+export default PageWrapper({WrappedComponent: AchievementsContent});
