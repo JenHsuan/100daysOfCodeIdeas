@@ -1,2 +1,1 @@
-cd ideas
 npm build
