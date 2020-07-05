@@ -1,2 +1,2 @@
 cd ideas
-heroku run npm build
+npm build
