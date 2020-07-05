@@ -15,6 +15,9 @@ const CommonHead = ({title, url, description, keywords, jsonLd}: CommandHeadProp
             <meta property="og:description" content={description}/>
             <meta name="keywords" content={keywords}/>
             <meta name="author" content="Jen-Hsuan Hsieh (Sean Hsieh)"/>
+            <meta name="twitter:card" content="summary"></meta>
+            <meta name="twitter:site" content="@JenHsuanHsieh" />
+            <meta name="twitter:creator" content="@JenHsuanHsieh" />
             <link rel="dns-fetch" href="https://raw.githubusercontent.com/"/>
             <link rel="canonical" href={url}/>
             <script
