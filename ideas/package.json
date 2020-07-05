@@ -7,9 +7,9 @@
     "dev": "node server.js",
     "build": "next build && next export",
     "start": "NODE_ENV=production node server.js",
-    "watch": "npm-watch",
-    "postinstall": "npm run build"
+    "watch": "npm-watch"
   },
+  "heroku-run-build-script": true,
   "author": "",
   "license": "ISC",
   "dependencies": {
