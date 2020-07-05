@@ -1,6 +1,5 @@
 import React from 'react'
 import { Provider } from 'react-redux';
-import Head from 'next/head';
 import store from '../components/store/store'
 import NavBar from '../components/NavBar';
 import SignInForm from '../components/SignInForm';
@@ -10,9 +9,7 @@ import SignFooter from '../components/SignFooter';
 import SideBar from '../components/SideBar';
 import GaLayout from '../components/GaLayout';
 import CommonHead from '../components/CommonHead';
-import axios from 'axios';
-import {getJsonId} from '../components/jsonLd';
-import { sign } from 'crypto';
+import {getStatics} from '../components/getStatics';
 
 const signin = ({jsonLdData}) => {
     const title = "ALayman Daily Learning - Signin";
@@ -40,16 +37,8 @@ const signin = ({jsonLdData}) => {
     )
 }
 
-signin.getInitialProps = async (query) => {
-    let jsonLdData = {};
-    try {
-        var res = await axios.get('/api/articles');
-        jsonLdData = getJsonId(res);
-    } catch (err) {
-        console.log(err);
-    }
-    console.log(JSON.stringify(jsonLdData))
-    return {jsonLdData: JSON.stringify(jsonLdData)};
-  }
+export async function getStaticProps(){
+    return await getStatics();
+}
 
 export default signin

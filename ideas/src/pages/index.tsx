@@ -1,6 +1,5 @@
 import ArticleList from '../components/ArticleList'
 import { Provider } from 'react-redux';
-import Head from 'next/head';
 import store from '../components/store/store'
 import SideBar from '../components/SideBar';
 import NavBar from '../components/NavBar';
@@ -9,8 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/sidebar.css'
 import GaLayout from '../components/GaLayout';
 import CommonHead from '../components/CommonHead';
-import axios from 'axios';
-import {getJsonId} from '../components/jsonLd';
+import {getStatics} from '../components/getStatics';
 
 const Index = ({jsonLdData}) => {
     const title = "ALayman Daily Learning";
@@ -37,16 +35,8 @@ const Index = ({jsonLdData}) => {
     )
 }
 
-Index.getInitialProps = async(query) => {
-    let jsonLdData = {};
-    try {
-        var res = await axios.get('https://daily-learning.herokuapp.com/api/articles');
-        jsonLdData = getJsonId(res);
-    } catch (err) {
-        console.log(err);
-    }
-    //console.log(JSON.stringify(jsonLdData))
-    return {jsonLdData: JSON.stringify(jsonLdData)};
+export async function getStaticProps(){
+    return await getStatics();
   }
     
 export default Index;

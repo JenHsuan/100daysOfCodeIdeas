@@ -83,7 +83,7 @@ const ArticleList = () => {
 
     const handlePageSlected = e => {
         //Refresh JWT token or logout
-        refreshToken();
+        refreshToken(()=>{});
 
         disPatch(setOffset(e.selected * perpage));
     }

@@ -8,8 +8,8 @@ import Footer from '../components/Footer';
 import AboutPageContent from '../components/AboutPageContent';
 import GaLayout from '../components/GaLayout';
 import CommonHead from '../components/CommonHead';
-import axios from 'axios';
-import {getJsonId} from '../components/jsonLd';
+import {getStatics} from '../components/getStatics';
+
 
 const about = ({jsonLdData}) => {
     const title = "ALayman Daily Learning - About Daily Learning";
@@ -37,16 +37,8 @@ const about = ({jsonLdData}) => {
     )
 }
 
-about.getInitialProps = async (query) => {
-    let jsonLdData = {};
-    try {
-        var res = await axios.get('/api/articles');
-        jsonLdData = getJsonId(res);
-    } catch (err) {
-        console.log(err);
-    }
-    console.log(JSON.stringify(jsonLdData))
-    return {jsonLdData: JSON.stringify(jsonLdData)};
-  }
+export async function getStaticProps(){
+    return await getStatics();
+}
 
 export default about

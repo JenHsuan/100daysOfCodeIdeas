@@ -9,8 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import BookmarksContent from '../components/BookmarksContent';
 import GaLayout from '../components/GaLayout';
 import CommonHead from '../components/CommonHead';
-import axios from 'axios';
-import {getJsonId} from '../components/jsonLd';
+import {getStatics} from '../components/getStatics';
 
 const bookmarks = ({jsonLdData}) => {
     const title = "ALayman Daily Learning - Learning Plans";
@@ -37,16 +36,8 @@ const bookmarks = ({jsonLdData}) => {
     )
 }
 
-bookmarks.getInitialProps = async (query) => {
-    let jsonLdData = {};
-    try {
-        var res = await axios.get('/api/articles');
-        jsonLdData = getJsonId(res);
-    } catch (err) {
-        console.log(err);
-    }
-    console.log(JSON.stringify(jsonLdData))
-    return {jsonLdData: JSON.stringify(jsonLdData)};
-  }
+export async function getStaticProps(){
+    return await getStatics();
+}
 
 export default bookmarks
