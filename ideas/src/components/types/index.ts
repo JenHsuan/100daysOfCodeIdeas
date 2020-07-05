@@ -65,14 +65,20 @@ export interface SignInFormProp {
 }
 
 export interface FormWrapperProp{
-    WrappedComponent: FunctionComponent<{
-        responseFacebook: Function,
-        ResponseGithubOnSuccess: Function,
-        ResponseGithubOnFailure: Function,
-        SetLogin: Function }>
+    WrappedComponent: FunctionComponent<SignInFormProp>
 }
+
+export interface FormWrapperInterface {
+    <WrappedComponentInterface extends FormWrapperProp>({
+        WrappedComponent: WrappedComponentInterface}) : Function
+}
+
 
 export interface PageWrapperProp{
     WrappedComponent: FunctionComponent
 }
 
+export interface PageWrapperInterface {
+    <WrappedComponentInterface extends PageWrapperProp> ({
+        WrappedComponent}: WrappedComponentInterface): Function
+} 

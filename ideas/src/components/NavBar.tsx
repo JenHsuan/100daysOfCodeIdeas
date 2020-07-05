@@ -122,19 +122,19 @@ const NavBar = () => {
         <Nav className="mr-auto">
             <Nav.Link href="about"> 
                 <Link href="/about">
-                    <a href="/about">About</a>
+                    <a>About</a>
                 </Link>
             </Nav.Link>
             {isLogin && (
                 <Fragment>
                     <Nav.Link href="bookmarks"> 
                         <Link href="/bookmarks">
-                            <a href="/bookmarks">Plans</a>
+                            <a>Plans</a>
                         </Link>
                     </Nav.Link>
                     <Nav.Link href="achievements"> 
                         <Link href="/achievements">
-                            <a href="/achievements">Achievements</a>
+                            <a>Achievements</a>
                         </Link>
                     </Nav.Link>
                 </Fragment>

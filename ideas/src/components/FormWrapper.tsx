@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, FunctionComponent} from 'react'
 import Router from 'next/router'
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,9 +26,9 @@ import {
     setFinishedArticles
 } from './actions/articlesAction';
 import { useMediaPredicate } from "react-media-hook";
-import { FormWrapperProp } from '../components/types'
+import { FormWrapperInterface } from '../components/types'
 
-const FormWrapper = ({WrappedComponent}: FormWrapperProp) => ()=> {
+const FormWrapper: FormWrapperInterface= ({WrappedComponent}) => ({...props})=> {
     const disPatch = useDispatch();
     const isLogin = useSelector(selectLoginState);
     const articles = useSelector(selectArticlesState);
@@ -172,6 +172,7 @@ const FormWrapper = ({WrappedComponent}: FormWrapperProp) => ()=> {
 
     return (
         <WrappedComponent 
+            {...props}
             responseFacebook = {responseFacebook}
             ResponseGithubOnSuccess = {ResponseGithubOnSuccess}
             ResponseGithubOnFailure = {ResponseGithubOnFailure}

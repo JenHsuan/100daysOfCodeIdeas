@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, FunctionComponent} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types'
 import { Card} from 'react-bootstrap';
@@ -23,10 +23,11 @@ import {
 import Router, { useRouter } from 'next/router'
 import axios from 'axios';
 import { 
-    ArticleProp
+    ArticleProp,
+    ArticleType
  } from '../components/types'
  
-const Article = ({article}: ArticleProp) => {
+const Article: FunctionComponent<ArticleProp> = ({article}: ArticleProp) => {
     const router = useRouter();
     const disPatch = useDispatch();
     const [show, setShow] = useState(false);
@@ -234,8 +235,5 @@ const Article = ({article}: ArticleProp) => {
     )
 }
 
-Article.propTypes = {
-    article: PropTypes.object.isRequired
-}
 
 export default Article

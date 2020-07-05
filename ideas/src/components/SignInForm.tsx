@@ -1,4 +1,4 @@
-import React, {Fragment, useState, useEffect} from 'react'
+import React, {Fragment, useState, useEffect, FunctionComponent} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 //import { GoogleLogin } from 'react-google-login';
@@ -26,7 +26,7 @@ import {
 } from './actions/articlesAction';
 import { SignInFormProp } from '../components/types'
 
-const SignInForm = ({responseFacebook,
+const SignInForm: FunctionComponent<SignInFormProp> = ({responseFacebook,
     ResponseGithubOnSuccess,
     ResponseGithubOnFailure,
     SetLogin}: SignInFormProp) => {

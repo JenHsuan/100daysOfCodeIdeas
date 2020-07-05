@@ -33,9 +33,9 @@ import {
     setEmail
 } from './actions/articlesAction';
 import { refreshToken } from '../components/account'
-import { PageWrapperProp } from '../components/types'
+import { PageWrapperInterface } from '../components/types'
 
-const PageWrapper = ({WrappedComponent}: PageWrapperProp) => ()=> {
+const PageWrapper: PageWrapperInterface = ({WrappedComponent}) => ()=> {
     const disPatch = useDispatch();
     const articles = useSelector(selectArticlesState);
     

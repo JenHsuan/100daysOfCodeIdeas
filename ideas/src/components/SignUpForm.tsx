@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from 'react'
+import React, {Fragment, useEffect, useState, FunctionComponent} from 'react'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 //import { GoogleLogin } from 'react-google-login';
 import GitHubLogin from 'react-github-login';
@@ -26,7 +26,7 @@ import FormWrapper from '../components/FormWrapper'
 import PropTypes from 'prop-types'
 import { SignInFormProp } from '../components/types'
 
-const SignUpForm = ({responseFacebook,
+const SignUpForm: FunctionComponent<SignInFormProp> = ({responseFacebook,
     ResponseGithubOnSuccess,
     ResponseGithubOnFailure,
     SetLogin}: SignInFormProp) => {
@@ -181,4 +181,4 @@ SignUpForm.propTypes = {
     SetLogin: PropTypes.func.isRequired
 }
 
-export default FormWrapper({WrappedComponent: SignUpForm})
+export default FormWrapper({WrappedComponent:SignUpForm})
