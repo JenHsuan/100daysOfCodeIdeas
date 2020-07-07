@@ -1,2 +1,0 @@
-cd ideas
-npm build

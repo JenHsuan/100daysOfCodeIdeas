@@ -13,3 +13,4 @@ python-social-auth
 social-auth-app-django
 social-auth-core
 dj-database-url==0.5.0
+pynpm==0.1.2
