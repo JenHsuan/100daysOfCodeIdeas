@@ -144,6 +144,8 @@ WSGI_APPLICATION = 'CodeIdeas.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -159,7 +161,6 @@ DATABASES = {
 DATABASES = {
     'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
 }
-'''
 
 
 # Password validation
