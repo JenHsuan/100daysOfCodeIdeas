@@ -3,6 +3,6 @@ from os import listdir, walk
 for i,j,y in walk('.'):
     print(i) 
 
-pkg = NPMPackage('./CodeIdeas/ideas/package.json')
+pkg = NPMPackage('./ideas/package.json')
 pkg.install()
 pkg.run_script('build')
