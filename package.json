@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "next",
     "start": "next start",
-    "build": "cd ideas && npm install && npm run build"
+    "build": "npm run build",
+    "heroku-postbuild": "npm run build"
   },
-  "heroku-run-build-script": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JenHsuan/100daysOfCodeIdeas.git"
@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/JenHsuan/100daysOfCodeIdeas#readme",
   "dependencies": {
-    "next": "^9.4.4"
+    "next": "^9.4.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   }
 }
