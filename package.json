@@ -1,0 +1,20 @@
+{
+  "name": "100daysofcodeideas",
+  "version": "1.0.0",
+  "description": "## Description * The target of Django + Next.js + TS project is to create a learning boost. This site collects the articles I wrote before and I want to provide a service for users to learn programming easier.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "postinstall": "cd ideas && npm build",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JenHsuan/100daysOfCodeIdeas.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JenHsuan/100daysOfCodeIdeas/issues"
+  },
+  "homepage": "https://github.com/JenHsuan/100daysOfCodeIdeas#readme"
+}
