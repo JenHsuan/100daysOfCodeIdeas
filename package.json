@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "next",
-    "start": "cd ideas && npm run build",
-    "build": "next build",
+    "build": "cd ideas && npm run build",
     "heroku-postbuild": "npm run build"
   },
   "repository": {
