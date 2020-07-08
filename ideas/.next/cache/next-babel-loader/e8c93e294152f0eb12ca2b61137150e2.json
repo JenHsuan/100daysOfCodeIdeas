@@ -1,0 +1,1 @@
+{"ast":null,"code":"var __jsx = React.createElement;\nimport React from 'react';\n\nvar meterials = function meterials() {\n  return __jsx(\"div\", null);\n};\n\nexport default meterials;","map":null,"metadata":{},"sourceType":"module"}

@@ -1,0 +1,1 @@
+{"ast":null,"code":"var __jsx = React.createElement;\nimport React from 'react';\nimport { Modal } from 'react-bootstrap';\n\nconst ArticleModal = ({\n  show,\n  handleClose,\n  article\n}) => {\n  return __jsx(Modal, {\n    show: show,\n    onHide: handleClose\n  });\n};\n\nexport default ArticleModal;","map":null,"metadata":{},"sourceType":"module"}
