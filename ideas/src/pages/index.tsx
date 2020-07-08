@@ -36,6 +36,7 @@ const Index = ({jsonLdData}) => {
 }
 
 export async function getStaticProps(){
+    console.log(1)
     return await getStatics();
 }
     
