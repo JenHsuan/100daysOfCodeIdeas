@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "node server.js",
-    "build": "next build && next export",
+    "build": "npm install && next build && next export",
     "start": "NODE_ENV=production node server.js",
     "watch": "npm-watch"
   },
