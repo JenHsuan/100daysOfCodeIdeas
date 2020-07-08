@@ -1,1 +1,0 @@
-{"ast":null,"code":"import { combineReducers } from 'redux';\nimport articlesReducer from './articlesReducer';\nimport filteredArticlesReducer from './filteredArticlesReducer';\nexport default combineReducers({\n  articlesReducer: articlesReducer,\n  filteredArticlesReducer: filteredArticlesReducer\n});","map":null,"metadata":{},"sourceType":"module"}
