@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/JenHsuan/100daysOfCodeIdeas/issues"
   },
-  "homepage": "https://github.com/JenHsuan/100daysOfCodeIdeas#readme"
+  "homepage": "https://github.com/JenHsuan/100daysOfCodeIdeas#readme",
+  "dependencies": {
+    "next": "^9.4.4"
+  }
 }
