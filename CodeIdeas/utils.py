@@ -4,8 +4,6 @@ import requests
 import os
 from apiServer.models import Article
 
-dev_base_url = 'https://dev.to'    
-
 def my_jwt_response_handler(token, user=None, request=None):
     return {
         'token': token,
@@ -59,7 +57,7 @@ def getDevArtcles():
         'title': title.select('a')[3].text.split('\n')[1].split('        ')[1],
         'image': title.select('a')[3]['data-preload-image'],
         'time': title.select('time')[0]['datetime'].split('T')[0],
-        'url': title.select('a')[3]['href'],
+        'url': os.getenv("DEV_BASE_URL") + title.select('a')[3]['href'],
         'tags': [title.select('.crayons-tag')[0]["href"].split('/')[2],
                  title.select('.crayons-tag')[1]["href"].split('/')[2],
                  title.select('.crayons-tag')[2]["href"].split('/')[2],
