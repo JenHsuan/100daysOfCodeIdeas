@@ -1,12 +1,24 @@
 # Daily Learning (The final project for CS50 web)
 
 ## Description
-* The target of Django + Next.js + TS project is to create a learning boost. This site collects the articles I wrote before and I want to provide a service for users to learn programming easier.
+* The target of this project is to let users build a learning plan for themselves. The user can use this website to create a learning plan for improving programming skills. 
+* The skills of the technical stack of this project include Django, PostgreSQL, Next.js, Redux, and TypeScript.
+* The user can search for favorite articles by keywords or the dropdown box on the menu page. The current types of materials include programming articles and records of 100 Days of Code.
+* The first time the user visits here can signup a new account with social media. Then the system will notify the new user by sending an email. The user can bookmark favorite articles in the menu page after login. 
+* The user can see their todo list for unread articles. After the user opens the articles, the system will check the article.
+* The user can check the current progress form the achievement page. This site also supports mobile devices.
 
 ## Requirements
 * Your web application must be sufficiently distinct from the other projects in this course, and more complex than those.
 * Your web application must utilize at least two of Python, JavaScript, and SQL.
 * Your web application must be mobile-responsive.
+
+## Features
+1. Soical signin/signup for Github and Facebook
+2. Menu for technical articles form Medium ad dev.to
+3. Search and filter articles 
+4. Personal bookmarks, todo list, and achievements for users
+5. Progressive web application
 
 ## Technical stack
 ### Backend
