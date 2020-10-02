@@ -4,7 +4,20 @@ if (typeof importScripts === 'function') {
     if (workbox) {
       console.log('Workbox is loaded');
       /* injection point for manifest files.  */
-      workbox.precaching.precacheAndRoute(self.__WB_MANIFEST);
+      //console.log(self.__WB_MANIFEST)
+      var list = Array.from(self.__WB_MANIFEST)
+      console.log(list)
+      
+      list.forEach((num, index) => {
+        var tmpList = list[index].url.split('/')
+        tmpList.shift();
+        tmpList.shift();
+        list[index].url = tmpList.join('/')
+        return list[index]
+      });
+      
+      console.log(list)
+      workbox.precaching.precacheAndRoute(list);
       // control the uncontrolled client side
       workbox.core.clientsClaim();
       // transit the status from waiting to activate

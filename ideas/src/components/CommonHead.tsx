@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 const CommonHead = ({title, url, description, keywords, jsonLd}: CommandHeadProp) => {
     useEffect(()=> {
         
-        register('/_next/static/service-worker.js', {scope: '/'}) 
+        register('/_next/static/service-worker.js', {scope: '/_next/static/'}) 
 
         return () => {
             unregister();  
