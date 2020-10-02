@@ -1,0 +1,50 @@
+{
+    "short_name": "A Layman - Daily Learning",
+    "name": "A Layman - Daily Learning",
+    "description": "Version 1.0",
+    "icons": [
+      {
+        "src": "logo-icon-48x48.png",
+        "type": "image/png",
+        "sizes": "48x48"
+      },
+      {
+        "src": "logo-icon-96x96.png",
+        "type": "image/png",
+        "sizes": "96x96"
+      },
+      {
+        "src": "logo-icon-144x144.png",
+        "type": "image/png",
+        "sizes": "144x144"
+      },
+      {
+        "src": "logo-icon-192x192.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "logo-icon-256x256.png",
+        "type": "image/png",
+        "sizes": "256x256"
+      },
+      {
+        "src": "logo-icon-384x384.png",
+        "type": "image/png",
+        "sizes": "384x384"
+      },
+      {
+        "src": "logo-icon-512x512.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "dir": "ltr",
+    "lang": "en",
+    "start_url": "../index.html",
+    "orientation": "portrait",
+    "display": "standalone",
+    "theme_color": "#2874f0",
+    "background_color": "#2874f0"
+  }
+  

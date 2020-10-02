@@ -8,5 +8,9 @@
   },
   "heroku-run-build-script": true,
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "next-images": "^1.6.0",
+    "next-offline": "^5.0.2"
+  }
 }
