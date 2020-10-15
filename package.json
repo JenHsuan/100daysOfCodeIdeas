@@ -51,7 +51,8 @@
     "sass-loader": "^8.0.2",
     "save": "^2.4.0",
     "style-loader": "^1.2.1",
-    "victory": "^34.3.11"
+    "victory": "^34.3.11",
+    "wine": "^0.9.13"
   },
   "devDependencies": {
     "@types/node": "^13.13.5",
