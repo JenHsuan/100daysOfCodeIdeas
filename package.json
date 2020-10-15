@@ -1,7 +1,7 @@
 {
   "name": "100daysfcodeideas",
   "version": "1.0.1",
-  "description": "## Description * The target of Django + Next.js + TS project is to create a learning boost. This site collects the articles I wrote before and I want to provide a service for users to learn programming easier.",
+  "description": "## Description * The target of Django + NextJs + TS project is to create a learning boost. This site collects the articles I wrote before and I want to provide a service for users to learn programming easier.",
   "main": "./ideas/main.js",
   "scripts": {
     "start": "NODE_ENV=production node server.js",
