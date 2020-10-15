@@ -1,16 +1,28 @@
 {
-  "name": "ideas",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "100daysfcodeideas",
+  "version": "1.0.1",
+  "description": "## Description * The target of Django + Next.js + TS project is to create a learning boost. This site collects the articles I wrote before and I want to provide a service for users to learn programming easier.",
+  "main": "main.js",
+  "build": {
+    "appId": "your.id",
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": "dmg",
+      "icon": "./static/logo-icon-512x512.png"
+    },
+    "win": {
+      "target": "portable",
+      "icon": "./static/logo-icon-512x512.png"
+    }
+  },
   "scripts": {
-    "build": "next build && next export"
+    "build": "next build && next export",
+    "dev": "next"
   },
   "heroku-run-build-script": true,
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "next-images": "^1.6.0",
-    "next-offline": "^5.0.2"
+  "devDependencies": {
+    "electron": "^10.1.3"
   }
 }

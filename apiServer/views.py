@@ -19,6 +19,7 @@ from rest_framework_jwt.settings import api_settings
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 from django.core.exceptions import ImproperlyConfigured
+from django.shortcuts import HttpResponse
 from social_core.backends.oauth import BaseOAuth2
 from social_core.exceptions import MissingBackend, AuthTokenError, AuthForbidden
 from social_django.utils import load_strategy, load_backend
@@ -27,6 +28,7 @@ import json
 
 from CodeIdeas.utils import parse_articles
 import requests
+from cgi import parse_qs, escape
 
 from CodeIdeas.settings import EMAIL_HOST_USER
 from django.core.mail import send_mail
@@ -42,6 +44,8 @@ signup_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'signup.html')
 plans_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'bookmarks.html')
 about_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'about.html')
 achievement_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'achievement.html')
+downloads_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'downloads.html')
+downloads_file_base = '100daysfcodeideas'
 
 class RSSFeed(Feed):
     title = "Daily Learning"
@@ -71,7 +75,54 @@ class RSSFeed(Feed):
             'thumbnail_height': 150
         }
         return item
-         
+
+def download(request):
+    qs = parse_qs(request.META['QUERY_STRING'])
+    type_param = qs.get('type', [''])[0] # Returns the first age value
+    type_param = escape(type_param)
+    if type_param:
+        with open(os.path.join(settings.REACT_APP_DIR, 'package.json')) as f:
+            data = json.load(f)
+            if type_param == 'dmg':
+                file_name = "%s-%s.%s" % (downloads_file_base, data['version'], type_param)
+                file = open(os.path.join(settings.REACT_APP_DIR, 'dist', file_name), 'rb')
+                response = HttpResponse(file)
+                response['Content-Type'] = 'application/octet-stream'
+                response['Content-Disposition'] = 'attachment;filename = "%s"' % file_name
+                return response
+            elif type_param == 'exe':
+                file_name = "%s %s.%s" % (downloads_file_base, data['version'], type_param)
+                file = open(os.path.join(settings.REACT_APP_DIR, 'dist', file_name), 'rb')
+                response = HttpResponse(file)
+                response['Content-Type'] = 'application/octet-stream'
+                response['Content-Disposition'] = 'attachment;filename = "%s"' % file_name
+                return response
+            else:
+                return HttpResponse(
+                    """
+                    You need provide the file type. 
+                    """,
+                    status=400,
+                )
+    else:
+        return HttpResponse(
+            """
+                You need provide the file type. 
+                """,
+            status=400,
+        )
+
+
+def download_windows(request):
+    with open(os.path.join(settings.REACT_APP_DIR, 'package.json')) as f:
+        data = json.load(f)
+        mac_file = "100daysfcodeideas-%s.exe" % data['version']
+        file = open(os.path.join(settings.REACT_APP_DIR, 'dist', mac_file), 'rb')
+        response = HttpResponse(file)
+        response['Content-Type'] = 'application/octet-stream'
+        response['Content-Disposition'] = 'attachment;filename = "%s"' % mac_file
+        return response
+
 # Create your views here.
 def robot(request):
     return HttpResponse('User-agent: *\nAllow: /')
@@ -82,6 +133,21 @@ def googleValidation(request):
 def index(request):
     try:
         with open(index_file_path) as f:
+            return HttpResponse(f.read())
+    except FileNotFoundError:
+        logging.exception('Production build of app not found')
+        return HttpResponse(
+            """
+                This URL is only used when you have built the production
+                version of the app. Visit http://localhost:3000/ instead after
+                running `yarn start` on the frontend/ directory
+                """,
+            status=501,
+        )
+
+def downloads(request):
+    try:
+        with open(downloads_file_path) as f:
             return HttpResponse(f.read())
     except FileNotFoundError:
         logging.exception('Production build of app not found')

@@ -1,0 +1,100 @@
+.downloadspage-grid-box {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: 100px;
+  border-radius: 5px; }
+  .downloadspage-grid-box .footer {
+    grid-row-start: 10;
+    grid-column-start: 1;
+    grid-column-end: 7; }
+  .downloadspage-grid-box .downloads-column-top-grid-box {
+    grid-row-start: 1;
+    grid-row-end: 10;
+    grid-column-start: 1;
+    grid-column-end: 7;
+    background-color: #F2F2F2; }
+    .downloadspage-grid-box .downloads-column-top-grid-box img {
+      width: 100%; }
+  .downloadspage-grid-box .downloads-column-right-grid-box {
+    grid-row-start: 4;
+    grid-row-end: 10;
+    grid-column-start: 1;
+    grid-column-end: 7;
+    background-color: #F2F2F2;
+    grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: 50px;
+    display: grid; }
+    .downloadspage-grid-box .downloads-column-right-grid-box .downloads-title {
+      grid-row-start: 3;
+      grid-row-end: 5;
+      grid-column-start: 2;
+      grid-column-end: 7;
+      text-align: center;
+      font-size: 36px;
+      font-weight: 400;
+      color: cornflowerblue; }
+    .downloadspage-grid-box .downloads-column-right-grid-box .downloads-subtitle-1 {
+      grid-row-start: 5;
+      grid-row-end: 6;
+      grid-column-start: 3;
+      grid-column-end: 6;
+      text-align: center;
+      font-size: 26px;
+      font-weight: 300; }
+    .downloadspage-grid-box .downloads-column-right-grid-box .downloads-content-1 {
+      margin-top: 1%;
+      grid-row-start: 6;
+      grid-row-end: 8;
+      grid-column-start: 3;
+      grid-column-end: 6;
+      font-size: 18px;
+      font-weight: 200;
+      color: gray; }
+    .downloadspage-grid-box .downloads-column-right-grid-box .downloads-content-2 {
+      margin-top: 1%;
+      grid-row-start: 8;
+      grid-row-end: 10;
+      grid-column-start: 4;
+      grid-column-end: 6;
+      font-size: 18px;
+      font-weight: 200;
+      color: gray; }
+
+@media screen and (max-width: 500px) {
+  .downloadspage-grid-box .downloads-column-top-grid-box {
+    grid-row-start: 1;
+    grid-row-end: 10;
+    background-color: #F2F2F2; }
+  .downloadspage-grid-box .downloads-column-right-grid-box {
+    background-color: #F2F2F2; }
+    .downloadspage-grid-box .downloads-column-right-grid-box .downloads-title {
+      grid-row-start: 2;
+      grid-row-end: 4;
+      grid-column-start: 2;
+      grid-column-end: 7;
+      text-align: center;
+      font-size: 28px;
+      font-weight: 400;
+      color: cornflowerblue; }
+    .downloadspage-grid-box .downloads-column-right-grid-box .downloads-subtitle-1 {
+      grid-row-start: 4;
+      grid-row-end: 6;
+      grid-column-start: 1;
+      grid-column-end: 8;
+      font-size: 24px;
+      text-align: center; }
+      .downloadspage-grid-box .downloads-column-right-grid-box .downloads-subtitle-1 hr {
+        margin-top: 5%; }
+    .downloadspage-grid-box .downloads-column-right-grid-box .downloads-content-1 {
+      margin-top: 1%;
+      grid-row-start: 6;
+      grid-row-end: 10;
+      grid-column-start: 2;
+      grid-column-end: 7;
+      font-size: 16px;
+      font-weight: 200;
+      color: gray; }
+  .downloadspage-grid-box .footer {
+    grid-row-start: 10; } }
+
+/*# sourceMappingURL=downloadspage.css.map */

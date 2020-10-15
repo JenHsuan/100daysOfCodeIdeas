@@ -141,8 +141,10 @@ const NavBar = () => {
             )}
         </Nav>
         <Nav>
-            <Nav.Link href="feed"> 
-                <a href="/feed/">RSS</a>
+        <Nav.Link href="downloads"> 
+                <Link href="/downloads">
+                    <a>Downloads</a>
+                </Link>
             </Nav.Link>
         </Nav>
         <Nav>
@@ -153,6 +155,9 @@ const NavBar = () => {
                 </NavDropdown.Item>
                 <NavDropdown.Item href="/signup">
                     Sign up
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/feed">
+                    RSS
                 </NavDropdown.Item>
             </NavDropdown>
         )}

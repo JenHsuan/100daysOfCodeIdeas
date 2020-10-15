@@ -1,13 +1,15 @@
 {
-  "name": "100daysofcodeideas",
-  "version": "1.0.0",
+  "name": "100daysfcodeideas",
+  "version": "1.0.1",
   "description": "## Description * The target of Django + Next.js + TS project is to create a learning boost. This site collects the articles I wrote before and I want to provide a service for users to learn programming easier.",
-  "main": "index.js",
+  "main": "./ideas/main.js",
   "scripts": {
     "build": "cd ideas && npm run build",
-    "start": "NODE_ENV=production node server.js",
-    "dev": "cd ideas && node server.js",
-    "heroku-postbuild": "cd ideas && next build && next export"
+    "start": "cd ideas && node server.js",
+    "dev": "cd ideas && electron .",
+    "heroku-postbuild": "cd ideas && next build && next export && cd .. && npm run dist",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder --mac --win --project \"./ideas\" "
   },
   "repository": {
     "type": "git",
@@ -55,8 +57,12 @@
     "@types/node": "^13.13.5",
     "@types/react": "^16.9.35",
     "concurrently": "^5.2.0",
+    "electron": "^10.1.3",
+    "electron-builder": "^22.8.1",
+    "electron-is-dev": "^1.2.0",
     "npm-watch": "^0.6.0",
-    "typescript": "^3.8.3"
+    "typescript": "^3.8.3",
+    "wait-on": "^5.2.0"
   },
   "proxy": "http://localhost:8000"
 }
