@@ -7,7 +7,7 @@
     "build": "cd ideas && npm run build",
     "start": "cd ideas && node server.js",
     "dev": "cd ideas && electron .",
-    "heroku-postbuild": "cd ideas && next build && next export && cd .. && npm run dist",
+    "heroku-postbuild": "cd ideas && next build && next export",
     "pack": "electron-builder --dir",
     "dist": "electron-builder --mac --win --project \"./ideas\" "
   },
