@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.shortcuts import redirect
 from django.conf import settings
 import os
 import logging
@@ -31,7 +32,7 @@ import requests
 from cgi import parse_qs, escape
 
 from CodeIdeas.settings import EMAIL_HOST_USER
-from django.core.mail import send_mail
+#from django.core.mail import send_mail
 from datetime import datetime
 from django.forms.models import model_to_dict
 
@@ -46,6 +47,7 @@ about_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'about.html')
 achievement_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'achievement.html')
 downloads_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'downloads.html')
 downloads_file_base = '100daysfcodeideas'
+cdn_base_path = 'https://storage.googleapis.com/daily-learning/'
 
 class RSSFeed(Feed):
     title = "Daily Learning"
@@ -85,18 +87,10 @@ def download(request):
             data = json.load(f)
             if type_param == 'dmg':
                 file_name = "%s-%s.%s" % (downloads_file_base, data['version'], type_param)
-                file = open(os.path.join(settings.REACT_APP_DIR, 'dist', file_name), 'rb')
-                response = HttpResponse(file)
-                response['Content-Type'] = 'application/octet-stream'
-                response['Content-Disposition'] = 'attachment;filename = "%s"' % file_name
-                return response
+                return redirect("%s%s" % (cdn_base_path, file_name))
             elif type_param == 'exe':
                 file_name = "%s %s.%s" % (downloads_file_base, data['version'], type_param)
-                file = open(os.path.join(settings.REACT_APP_DIR, 'dist', file_name), 'rb')
-                response = HttpResponse(file)
-                response['Content-Type'] = 'application/octet-stream'
-                response['Content-Disposition'] = 'attachment;filename = "%s"' % file_name
-                return response
+                return redirect("%s%s" % (cdn_base_path, file_name))
             else:
                 return HttpResponse(
                     """
@@ -373,11 +367,11 @@ class ProfileViewSet(generics.GenericAPIView):
                 now = datetime.now()
                 dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
 
-                send_mail('[Daily Learning] Thanks for registration!', 
-                'You login to Daily Learning successfully on ' + dt_string, 
-                EMAIL_HOST_USER, 
-                [serializer.data['email']], 
-                fail_silently = False)
+                #send_mail('[Daily Learning] Thanks for registration!', 
+                #'You login to Daily Learning successfully on ' + dt_string, 
+                #EMAIL_HOST_USER, 
+                #[serializer.data['email']], 
+                #fail_silently = False)
             
                 #email = serializer.data.get('email', None)
                 #send_mail('Django mail', 'This e-mail was sent with Django.','alaymangogo@gmail.com', [email], fail_silently=False)
@@ -460,11 +454,11 @@ class ProfileSocialViewSet(generics.GenericAPIView):
                 now = datetime.now()
                 dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
 
-                send_mail('[Daily Learning] Thanks for registration!', 
-                'You login to Daily Learning successfully on ' + dt_string, 
-                EMAIL_HOST_USER, 
-                [serializer.data['email']], 
-                fail_silently = False)
+                #send_mail('[Daily Learning] Thanks for registration!', 
+                #'You login to Daily Learning successfully on ' + dt_string, 
+                #EMAIL_HOST_USER, 
+                #[serializer.data['email']], 
+                #fail_silently = False)
             
                 #email = serializer.data.get('email', None)
                 #send_mail('Django mail', 'This e-mail was sent with Django.','alaymangogo@gmail.com', [email], fail_silently=False)
@@ -609,11 +603,11 @@ class SocialLoginView(generics.GenericAPIView):
             now = datetime.now()
             dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
 
-            send_mail('[Daily Learning] Welcome Back!', 
-            'Hi ' + authenticated_user.username + ', you login to Daily Learning successfully on ' + dt_string, 
-            EMAIL_HOST_USER, 
-            [authenticated_user.email], 
-            fail_silently = False)
+            #send_mail('[Daily Learning] Welcome Back!', 
+            #'Hi ' + authenticated_user.username + ', you login to Daily Learning successfully on ' + dt_string, 
+            #EMAIL_HOST_USER, 
+            #[authenticated_user.email], 
+            #fail_silently = False)
 
             return response
 
