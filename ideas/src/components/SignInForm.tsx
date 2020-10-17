@@ -124,7 +124,7 @@ const SignInForm: FunctionComponent<SignInFormProp> = ({responseFacebook,
                             )}/>
                         <GitHubLogin 
                             className="github-btn"
-                            clientId="Iv1.ca8ab67c0ba860ab"
+                            clientId="51b1a8ee5b7cad1e6a85"
                             redirectUri={redirectUri}
                             onSuccess={ResponseGithubOnSuccess}
                             onFailure={ResponseGithubOnFailure}

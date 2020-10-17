@@ -19,10 +19,12 @@ function DownloadsPageContent() {
                 <div className="downloads-content-1">
                     You can feel free to download the dektop version of 100DaysOfCode. We support Windows and MacOS currently.
                 </div>
-                <div className="downloads-content-2">
+                <div className="downloads-content-2-l">
                 <Button variant="dark" >
                     <a href="https://daily-learning.herokuapp.com/download?type=dmg">_macOS_</a>
                 </Button>
+                </div>
+                <div className="downloads-content-2-r">
                 <Button variant="dark" >
                     <a href="https://daily-learning.herokuapp.com/download?type=exe">Windows</a>
                 </Button>
