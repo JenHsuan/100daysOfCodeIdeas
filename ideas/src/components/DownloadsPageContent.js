@@ -22,17 +22,12 @@ function DownloadsPageContent() {
             })}
         )
         .then(res => {
-            res.json()
-            console.log(res)
+            console.log(res.json())
         })
         .catch(error => console.error('Error:', error))
         .then(response => {
             console.log(response)
-            if (response === undefined || response.url === undefined) {
-                //Router.push(`/signin`) 
-                return
-            }
-
+            console.log(response.ok)
             var a = document.createElement('a');
             var url = response.url;
             a.href = url;
