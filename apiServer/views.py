@@ -78,33 +78,33 @@ class RSSFeed(Feed):
         }
         return item
 
-def download(request):
-    qs = parse_qs(request.META['QUERY_STRING'])
-    type_param = qs.get('type', [''])[0] # Returns the first age value
-    type_param = escape(type_param)
-    if type_param:
-        with open(os.path.join(settings.REACT_APP_DIR, 'package.json')) as f:
-            data = json.load(f)
-            if type_param == 'dmg':
-                file_name = "%s-%s.%s" % (downloads_file_base, data['version'], type_param)
-                return redirect("%s%s" % (cdn_base_path, file_name))
-            elif type_param == 'exe':
-                file_name = "%s %s.%s" % (downloads_file_base, data['version'], type_param)
-                return redirect("%s%s" % (cdn_base_path, file_name))
-            else:
-                return HttpResponse(
-                    """
+class Download(APIView):
+    def get(self, request, format=None):
+        type_param = self.request.query_params.get('type', None)
+        type_param = escape(type_param)
+        if type_param:
+            with open(os.path.join(settings.REACT_APP_DIR, 'package.json')) as f:
+                data = json.load(f)
+                if type_param == 'dmg':
+                    file_name = "%s-%s.%s" % (downloads_file_base, data['version'], type_param)
+                    return redirect("%s%s" % (cdn_base_path, file_name))
+                elif type_param == 'exe':
+                    file_name = "%s %s.%s" % (downloads_file_base, data['version'], type_param)
+                    return redirect("%s%s" % (cdn_base_path, file_name))
+                else:
+                    return HttpResponse(
+                        """
+                        You need provide the file type. 
+                        """,
+                        status=400,
+                    )
+        else:
+            return HttpResponse(
+                """
                     You need provide the file type. 
-                    """,
-                    status=400,
-                )
-    else:
-        return HttpResponse(
-            """
-                You need provide the file type. 
                 """,
-            status=400,
-        )
+                status=400,
+            )
 
 
 def download_windows(request):

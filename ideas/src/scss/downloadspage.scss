@@ -30,8 +30,8 @@
         .downloads-title{
             grid-row-start: 3;
             grid-row-end: 5;
-            grid-column-start: 7;
-            grid-column-end: 10;
+            grid-column-start: 6;
+            grid-column-end: 11;
             text-align: center;
             font-size: 36px;
             font-weight: 400;
@@ -40,8 +40,8 @@
         .downloads-subtitle-1{
             grid-row-start: 5;
             grid-row-end: 6;
-            grid-column-start: 7;
-            grid-column-end: 10;
+            grid-column-start: 5;
+            grid-column-end: 12;
             text-align: center;
             font-size: 26px;
             font-weight: 300;
@@ -50,8 +50,8 @@
             margin-top: 1%;
             grid-row-start: 6;
             grid-row-end: 8;
-            grid-column-start: 7;
-            grid-column-end: 10;
+            grid-column-start: 5;
+            grid-column-end: 12;
             font-size: 18px;
             font-weight: 200;
             color:gray;
@@ -97,8 +97,6 @@
             .downloads-title{
                 grid-row-start: 2;
                 grid-row-end: 4;
-                grid-column-start: 2;
-                grid-column-end: 7;
                 text-align: center;
                 font-size: 28px;
                 font-weight: 400;
@@ -107,8 +105,6 @@
             .downloads-subtitle-1{
                 grid-row-start: 4;
                 grid-row-end: 6;
-                grid-column-start: 1;
-                grid-column-end: 8;
                 font-size: 24px;
                 text-align: center;
                 hr{
@@ -119,8 +115,6 @@
                 margin-top: 1%;
                 grid-row-start: 6;
                 grid-row-end: 10;
-                grid-column-start: 2;
-                grid-column-end: 7;
                 font-size: 16px;
                 font-weight: 200;
                 color:gray;
