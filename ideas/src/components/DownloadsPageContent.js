@@ -11,28 +11,24 @@ function DownloadsPageContent() {
     const accessToken = useSelector(selectAccessTokenState);
     const handleDownload = async(type) => {
         console.log(type)
+        
         if (accessToken === '') {
             Router.push(`/signin`)
         }
-
+        
         fetch(`/api/download?type=${type}`, {
             method: 'GET',
             headers: new Headers({
                 'Authorization': `JWT ${accessToken}`
             })}
         )
-        .then(res => {
-            console.log(res)
-            console.log(res.json())
-        })
-        .then(res => {
-            console.log(res)
-            if (res.status !== 401) {
-                var a = document.createElement('a');
-                var url = res.url;
-                a.href = url;
-                a.click();
-            }
+        .then(res => res.json())
+        .catch(error => console.error('Error:', error))
+        .then(response => {
+            var a = document.createElement('a');
+            var url = response.url;
+            a.href = url;
+            a.click();
         });
     };
 
