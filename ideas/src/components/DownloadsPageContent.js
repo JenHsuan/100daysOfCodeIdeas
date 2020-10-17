@@ -24,8 +24,8 @@ function DownloadsPageContent() {
         .then(res => {
             res.json()
             console.log(res)
-            if (res.status !== 200) {
-                return Promise.reject(res)
+            if (res.status != 200) {
+                return 
             }
         })
         .catch(error => console.error('Error:', error))
@@ -33,7 +33,7 @@ function DownloadsPageContent() {
             console.log(response)
             if (response === undefined || response.url === undefined) {
                 //Router.push(`/signin`) 
-                return Promise.reject(response)
+                return
             }
 
             var a = document.createElement('a');
