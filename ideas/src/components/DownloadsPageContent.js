@@ -23,10 +23,10 @@ function DownloadsPageContent() {
         )
         .then(res => {
             console.log(res)
-            console.log(res.file)
+            console.log(res.data.url)
             if (res.status !== 401) {
                 var a = document.createElement('a');
-                var url = res.file;
+                var url = res.data.url;
                 a.href = url;
                 a.click();
             }
