@@ -11,7 +11,6 @@ function DownloadsPageContent() {
     const accessToken = useSelector(selectAccessTokenState);
     const handleDownload = async(type) => {
         console.log(type)
-        
         if (accessToken === '') {
             Router.push(`/signin`)
         }
@@ -22,12 +21,17 @@ function DownloadsPageContent() {
                 'Authorization': `JWT ${accessToken}`
             })}
         )
-        .then(res => res.json())
+        .then(res => {
+            if (res.status !== 200) {
+                return Promise.reject(res)
+            }
+            res.json()
+        })
         .catch(error => console.error('Error:', error))
         .then(response => {
-            console.log(response)
             if (response === undefined || response.url === undefined) {
-                Router.push(`/signin`)
+                Router.push(`/signin`) 
+                return Promise.reject(response)
             }
 
             var a = document.createElement('a');
