@@ -21,13 +21,13 @@ function DownloadsPageContent() {
                 'Authorization': `JWT ${accessToken}`
             })}
         )
-        .then(res => {
-            console.log(res.json())
-        })
+        .then(res => res.json())
         .catch(error => console.error('Error:', error))
         .then(response => {
             console.log(response)
-            console.log(response.ok)
+            if (!response.ok) {
+                Router.push(`/signin`)
+            }
             var a = document.createElement('a');
             var url = response.url;
             a.href = url;
