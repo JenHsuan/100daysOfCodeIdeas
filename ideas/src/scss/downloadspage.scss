@@ -89,7 +89,7 @@
     .downloadspage-grid-box {
         .downloads-column-top-grid-box{
             grid-row-start: 1;
-            grid-row-end: 10;
+            grid-row-end: 11;
             background-color: #F2F2F2;
         }
         .downloads-column-right-grid-box{
@@ -119,9 +119,17 @@
                 font-weight: 200;
                 color:gray;
             }
+            .downloads-content-2-l{
+                grid-row-start: 9;
+                grid-row-end: 10;
+            }
+            .downloads-content-2-r{
+                grid-row-start: 10;
+                grid-row-end: 11;
+            }
         }
         .footer{
-            grid-row-start: 10;
+            grid-row-start: 11;
         }
     }
     

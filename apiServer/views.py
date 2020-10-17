@@ -87,10 +87,14 @@ class Download(APIView):
                 data = json.load(f)
                 if type_param == 'dmg':
                     file_name = "%s-%s.%s" % (downloads_file_base, data['version'], type_param)
-                    return HttpResponse("%s%s" % (cdn_base_path, file_name))
+                    response = HttpResponse()
+                    response['file'] = "%s%s" % (cdn_base_path, file_name)
+                    return response
                 elif type_param == 'exe':
                     file_name = "%s %s.%s" % (downloads_file_base, data['version'], type_param)
-                    return HttpResponse("%s%s" % (cdn_base_path, file_name))
+                    response = HttpResponse()
+                    response['file'] = "%s%s" % (cdn_base_path, file_name)
+                    return response
                 else:
                     return HttpResponse(
                         """

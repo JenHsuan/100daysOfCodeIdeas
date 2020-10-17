@@ -22,10 +22,11 @@ function DownloadsPageContent() {
             })}
         )
         .then(res => {
-            console.log(res.body)
+            console.log(res)
+            console.log(res.file)
             if (res.status !== 401) {
                 var a = document.createElement('a');
-                var url = res.body;
+                var url = res.file;
                 a.href = url;
                 a.click();
             }
