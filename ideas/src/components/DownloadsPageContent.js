@@ -22,10 +22,11 @@ function DownloadsPageContent() {
             })}
         )
         .then(res => {
+            res.json()
+            console.log(res)
             if (res.status !== 200) {
                 return Promise.reject(res)
             }
-            res.json()
         })
         .catch(error => console.error('Error:', error))
         .then(response => {
