@@ -24,9 +24,9 @@ function DownloadsPageContent() {
         .then(res => res.json())
         .catch(error => console.error('Error:', error))
         .then(response => {
-            console.log(response)
-            if (!response.ok) {
+            if (response === undefined || response.url === undefined) {
                 Router.push(`/signin`)
+                return 
             }
             var a = document.createElement('a');
             var url = response.url;
