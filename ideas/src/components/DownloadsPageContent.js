@@ -10,7 +10,6 @@ import Router, { useRouter } from 'next/router'
 function DownloadsPageContent() {
     const accessToken = useSelector(selectAccessTokenState);
     const handleDownload = async(type) => {
-        console.log(accessToken)
         console.log(type)
         if (accessToken === '') {
             Router.push(`/signin`)
@@ -23,10 +22,10 @@ function DownloadsPageContent() {
             })}
         )
         .then(res => {
-            console.log(res)
+            console.log(res.body)
             if (res.status !== 401) {
                 var a = document.createElement('a');
-                var url = res.data.url;
+                var url = res.body;
                 a.href = url;
                 a.click();
             }
