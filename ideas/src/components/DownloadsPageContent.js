@@ -24,9 +24,6 @@ function DownloadsPageContent() {
         .then(res => {
             res.json()
             console.log(res)
-            if (res.status != 200) {
-                return 
-            }
         })
         .catch(error => console.error('Error:', error))
         .then(response => {
