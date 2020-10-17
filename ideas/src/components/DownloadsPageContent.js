@@ -24,10 +24,12 @@ function DownloadsPageContent() {
         .then(res => {
             console.log(res)
             console.log(res.json())
-            console.log(res.json().data.url)
+        })
+        .then(res => {
+            console.log(res)
             if (res.status !== 401) {
                 var a = document.createElement('a');
-                var url = res.json().data.url;
+                var url = res.url;
                 a.href = url;
                 a.click();
             }
