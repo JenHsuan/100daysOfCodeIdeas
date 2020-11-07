@@ -61,7 +61,7 @@ def getDevArtcles():
         'tags': [title.select('.crayons-tag')[0]["href"].split('/')[2],
                  title.select('.crayons-tag')[1]["href"].split('/')[2],
                  title.select('.crayons-tag')[2]["href"].split('/')[2],
-                 title.select('.crayons-tag')[3]["href"].split('/')[2]],
+                 title.select('.crayons-tag')[3]["href"].split('/')[2]] if title.select('.crayons-tag') else [],
         'name': title.select('a')[1].text.split('       ')[2].split('\n')[0],
         'readtime': title.select('.crayons-story__save')[0].select('small')[0].text.split('            ')[1].split('\n')[0]})
     
