@@ -1,4 +1,4 @@
-import React, {useEffect, useState, FunctionComponent} from 'react'
+import React, {useEffect, useState, FunctionComponent, useRef} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types'
 import { Card} from 'react-bootstrap';
@@ -33,12 +33,28 @@ const Article: FunctionComponent<ArticleProp> = ({article}: ArticleProp) => {
     const [show, setShow] = useState(false);
     const [isBookmarked, setBookmark] = useState(false);
     const [isChecked, setChecked] = useState(false);
+    const [articleImg, setArticleImg] = useState(null);
     const isLogin = useSelector(selectLoginState);
     const bookmarks = useSelector(selectBookmarksState);
     const userId = useSelector(selectUserIdState);
     const provider = useSelector(selectProviderState);
     const email = useSelector(selectEmailState);
     const finishedArticles = useSelector(selectFinishedArticlessState);
+    const articleRef = useRef();
+    const callback = entries => {
+        for (let entry of entries) {
+            if (entry.isIntersecting) {
+                setArticleImg(article.image);
+                observer.unobserve(articleRef.current);
+            }
+        }
+    };
+   
+    const observer = new IntersectionObserver(callback);
+
+    useEffect(() => {
+        observer.observe(articleRef.current)
+    }, []);
 
     useEffect(()=> {
 
@@ -218,7 +234,7 @@ const Article: FunctionComponent<ArticleProp> = ({article}: ArticleProp) => {
                 </div>
                 )}
                 <Card.Body className="article-card-body">
-                    <img className="article-card-img" src={`${article.image}`} alt={article.title} title={article.title}/>
+                    <img className="article-card-img" ref={articleRef} src={articleImg} alt={article.title} title={article.title}/>
                     <div className="title">{article.title}</div>
                     <div className="date">{article.name}</div>
                     <div className="date">
