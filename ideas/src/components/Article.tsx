@@ -234,7 +234,7 @@ const Article: FunctionComponent<ArticleProp> = ({article}: ArticleProp) => {
                 </div>
                 )}
                 <Card.Body className="article-card-body">
-                    <img className="article-card-img" ref={articleRef} src={articleImg} alt={article.title} title={article.title}/>
+                    <img className="article-card-img" ref={articleRef} src={articleImg} alt={article.title} title={article.title} onClick = {handleShow}/>
                     <div className="title">{article.title}</div>
                     <div className="date">{article.name}</div>
                     <div className="date">
