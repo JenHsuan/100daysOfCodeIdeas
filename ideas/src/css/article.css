@@ -35,8 +35,6 @@
   border: none;
   margin-top: 2%;
   margin-bottom: 20%;
-  padding-left: 5%;
-  margin-left: 5%;
   z-index: 1;
   position: relative; }
   .article-card .article-bookmark {
@@ -64,9 +62,29 @@
       color: white;
       opacity: 0.5; }
 
+.article-card-body:hover {
+  border: 1px solid #d0d0d0;
+  padding-right: 3px;
+  border-radius: 5px; }
+
 .article-card-img {
   width: 100%; }
 
+.article-card-img:hover {
+  opacity: 1;
+  -webkit-animation: flash 2.5s;
+  animation: flash 2.5s; }
+
+@-webkit-keyframes flash {
+  0% {
+    opacity: .2; }
+  100% {
+    opacity: 1; } }
+@keyframes flash {
+  0% {
+    opacity: .2; }
+  100% {
+    opacity: 1; } }
 .article-card-img-caption {
   font-size: 1px;
   color: whitesmoke; }

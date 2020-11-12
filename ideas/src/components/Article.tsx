@@ -45,7 +45,7 @@ const Article: FunctionComponent<ArticleProp> = ({article}: ArticleProp) => {
         for (let entry of entries) {
             if (entry.isIntersecting) {
                 setArticleImg(article.image);
-                observer.unobserve(articleRef.current);
+                observer.unobserve(articleRef.current)
             }
         }
     };
