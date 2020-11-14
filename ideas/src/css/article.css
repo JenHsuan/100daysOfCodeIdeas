@@ -65,9 +65,7 @@
       opacity: 0.5; }
 
 .article-card-body:hover {
-  border: 1px solid #d0d0d0;
-  padding-right: 3px;
-  border-radius: 5px; }
+  padding-right: 3px; }
 
 .article-card-img {
   width: 100%; }
