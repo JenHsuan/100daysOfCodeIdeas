@@ -1,11 +1,15 @@
 language: python
 python:
-  - 3.6
+- 3.6
 services:
-  - postgresql
+- postgresql
 before_script:
-  - psql -c 'create database codeideas;' -U postgres
+- psql -c 'create database codeideas;' -U postgres
 install:
-  - pip install -r requirements.txt
+- pip install -r requirements.txt
 script:
-  - python manage.py test
+- python manage.py test
+deploy:
+  provider: heroku
+  api_key:
+    secure: a769NIk2kayRsYfgRuiBE1+O+u2ppbSQVxaX77eRA3S1gLAthgucG6vs917PzQqn71uhyluLsPG+7xo+LKqHO19b7zHwjv4rgZGxIw4/P6DQCmZ6TJzcfdfhEzZEWNU082HGm2tDz+1SPRED2Kd1wzoQlZc9iIxjcqtP2B9qgg0r8xhQLMCOgiNVrrOCapjwbGI73/aM+5H0uRrslBiB09QSvh1SgZFxtnkQC8xQKBNfuvhg+F2p8MzB9Awk5NH9p6Dm4VTBwbJvA3X4jcKGHODDSuKP1MuxSBv8gZUZh/psPbYX+gKNVhHp+MQMdUqHx/1MvMcLGH/7Uz0p2v0QEXcwF/V+5OMCwGBEkgUB87e2syr9pqZyG8RfKWLma93o3zpI8hszjh2oNQ1dd8sHuYdAJosyU4OxxNOgT/cDvRJp+Blh+lbbAJ5ogYz/WON0tBaStpW7LqJ8EAtpvYvO6QggOflVe7pZpfjox6/P6vmEHlMa/4/cvBcIafWHBx0AW8RzkaNB/Nt8F2dwnE2TmRp7uVvGkKnQa0bENC2rcIExikN4MeHjZROYCLWboTxpA1OjunEVjWM9PGDm1lDRX1WIkv/r5PN//a+d7wj4mK3b0Cjt7QrTR1cN6zLRJsMkN5Vj9EdtOPkrkuhmDxWflY0iKguljkX7Q56APAfwxcw=
