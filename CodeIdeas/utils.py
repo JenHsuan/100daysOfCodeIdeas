@@ -18,10 +18,10 @@ def parse_articles(type):
                 obj = Article.objects.get(url = article['url'])
             except Article.DoesNotExist:
                 Article.objects.get_or_create(
-                    title = article['title'], 
-                    subtitle = '', 
-                    image = article['image'], 
-                    url = article['url'], 
+                    title = article['title'],
+                    subtitle = '',
+                    image = article['image'],
+                    url = article['url'],
                     name = article['name'],
                     time = article['time'],
                     readtime = article['readtime'],
@@ -34,10 +34,10 @@ def parse_articles(type):
             try:
                 obj = Article.objects.get(title = article['title'])
             except Article.DoesNotExist:
-                Article.objects.get_or_create(title = article['title'], 
-                subtitle = article['subtitle'], 
-                image = article['image'], 
-                url = article['url'], 
+                Article.objects.get_or_create(title = article['title'],
+                subtitle = article['subtitle'],
+                image = article['image'],
+                url = article['url'],
                 name = article['name'],
                 time = article['time'],
                 readtime = article['readtime'],
@@ -54,17 +54,17 @@ def getDevArtcles():
     title_list = soup.select('.crayons-story')
     for title in title_list:
         data.append({
-        'title': title.select('a')[3].text.split('\n')[1].split('        ')[1],
-        'image': title.select('a')[3]['data-preload-image'],
-        'time': title.select('time')[0]['datetime'].split('T')[0],
+        'title': title.select('a')[0].text,
+        'image': title.select('a')[4]['data-preload-image'],
+        'date': title.select('a')[3].text.split('\n')[0],
         'url': os.getenv("DEV_BASE_URL") + title.select('a')[3]['href'],
         'tags': [title.select('.crayons-tag')[0]["href"].split('/')[2],
                  title.select('.crayons-tag')[1]["href"].split('/')[2],
                  title.select('.crayons-tag')[2]["href"].split('/')[2],
                  title.select('.crayons-tag')[3]["href"].split('/')[2]] if title.select('.crayons-tag') else [],
-        'name': title.select('a')[1].text.split('       ')[2].split('\n')[0],
+        'name': title.select('a')[2].text.split(' ')[14] + ' ' + title.select('a')[2].text.split(' ')[15].split('\n')[0],
         'readtime': title.select('.crayons-story__save')[0].select('small')[0].text.split('            ')[1].split('\n')[0]})
-    
+
     return data
 
 def getMediumArtcles():
@@ -91,19 +91,19 @@ def getMediumArtcles():
             titles.append(title_list[i].text)
         else:
             subtitles.append(title_list[i].text)
-        
+
         i += 1
-    
+
     i=0
     while i < len(name_list):
         names.append(name_list[i].text)
         i+=1
-    
+
     i=0
     while i < len(readtime_list):
         readtime.append(readtime_list[i]['title'])
         i+=1
-    
+
     i=0
     while i < len(time_list):
         times.append(time_list[i]['datetime'].split('T')[0])
@@ -127,5 +127,5 @@ def getMediumArtcles():
             'readtime':readtime[i]
         })
         i += 1
-    
+
     return data
