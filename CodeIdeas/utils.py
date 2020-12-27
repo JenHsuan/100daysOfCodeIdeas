@@ -56,7 +56,7 @@ def getDevArtcles():
         data.append({
         'title': title.select('a')[0].text,
         'image': title.select('a')[4]['data-preload-image'],
-        'date': title.select('a')[3].text.split('\n')[0],
+        'time': title.select('time')[0]['datetime'].split('T')[0],
         'url': os.getenv("DEV_BASE_URL") + title.select('a')[3]['href'],
         'tags': [title.select('.crayons-tag')[0]["href"].split('/')[2],
                  title.select('.crayons-tag')[1]["href"].split('/')[2],
