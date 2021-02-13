@@ -1,14 +1,15 @@
 import React, {useEffect, Fragment} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Navbar, Nav, NavDropdown} from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, InputGroup} from 'react-bootstrap';
 import '../css/navbar.css'
 import {
     selectShowPlannerState,
     selectLoginState,
-    selectUsernameState
+    selectUsernameState,
+    selectLanguageState
 } from './states/states';
 
-import { 
+import {
     setPlanner,
     setLogout,
     setUsername,
@@ -18,12 +19,13 @@ import {
     setFinishedArticles,
     setBookmarks,
     setProvider,
-    setUserId
+    setUserId,
+    setLanguage
 } from './actions/articlesAction';
 import Link from 'next/link'
 
 import Router, { useRouter } from 'next/router'
-
+import { useTranslation } from 'react-i18next'
 
 const NavBar = () => {
     const router = useRouter();
@@ -31,6 +33,9 @@ const NavBar = () => {
     const showPlannerFlag = useSelector(selectShowPlannerState);
     const isLogin = useSelector(selectLoginState);
     const username = useSelector(selectUsernameState);
+    const language = useSelector(selectLanguageState);
+
+    const { t, i18n } = useTranslation()
 
     const showPlanner = () => {
         if (showPlannerFlag === true) {
@@ -74,7 +79,7 @@ const NavBar = () => {
             //local storage
             localStorage.setItem("username", username);
         }
-        
+
         disPatch(setLogin());
         //local storage
         localStorage.setItem("login", "true");
@@ -87,6 +92,10 @@ const NavBar = () => {
             const username = localStorage.getItem("username");
             SetLogin(email, username);
         }
+
+        let lang = localStorage.getItem("daily-learning-lang");
+        disPatch(setLanguage(lang));
+        i18n.changeLanguage(lang)
     }, [])
 
     useEffect(()=> {
@@ -106,6 +115,13 @@ const NavBar = () => {
         }
     }
 
+    const changeLanguage = e => {
+        let lang = e.target.value;
+        disPatch(setLanguage(lang));
+        i18n.changeLanguage(lang)
+        localStorage.setItem("daily-learning-lang", lang);
+    }
+
     return (
     <Navbar bg="dark" expand="lg" variant="dark" fixed="top">
     <Navbar.Brand href="/">
@@ -120,51 +136,75 @@ const NavBar = () => {
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-            <Nav.Link href="about"> 
+            <Nav.Link href="about">
                 <Link href="/about">
-                    <a>About</a>
+                    <a>{t('NavBar.about')}</a>
                 </Link>
             </Nav.Link>
             {isLogin && (
                 <Fragment>
-                    <Nav.Link href="bookmarks"> 
+                    <Nav.Link href="bookmarks">
                         <Link href="/bookmarks">
-                            <a>Plans</a>
+                            <a>{t('NavBar.plans')}</a>
                         </Link>
                     </Nav.Link>
-                    <Nav.Link href="achievements"> 
+                    <Nav.Link href="achievements">
                         <Link href="/achievements">
-                            <a>Achievements</a>
+                            <a>{t('NavBar.achievements')}</a>
                         </Link>
                     </Nav.Link>
                 </Fragment>
             )}
         </Nav>
         <Nav>
-        <Nav.Link href="downloads"> 
-                <Link href="/downloads">
-                    <a>Downloads</a>
-                </Link>
-            </Nav.Link>
+            <NavDropdown title={t('NavBar.language')} id="basic-nav-dropdown">
+                    <InputGroup className="language-dropdown">
+                        <InputGroup.Prepend>
+                            <InputGroup.Radio aria-label="Radio button for following text input" value = "en" onClick={e => changeLanguage(e)} checked={language.toLowerCase() === "en"}/>
+                            <InputGroup.Text className="language-dropdown-item">English - EN</InputGroup.Text>
+                        </InputGroup.Prepend>
+                        <InputGroup.Prepend>
+                            <InputGroup.Radio aria-label="Radio button for following text input" value = "ja" onClick={e => changeLanguage(e)} checked={language.toLowerCase() === "ja"}/>
+                            <InputGroup.Text className="language-dropdown-item">日本語 - JA</InputGroup.Text>
+                        </InputGroup.Prepend>
+                        <InputGroup.Prepend>
+                            <InputGroup.Radio aria-label="Radio button for following text input" value = "zh-TW" onClick={e => changeLanguage(e)} checked={language.toLowerCase() === "zh-tw"}/>
+                            <InputGroup.Text className="language-dropdown-item">繁體中文 - ZH</InputGroup.Text>
+                        </InputGroup.Prepend>
+                        <InputGroup.Prepend>
+                            <InputGroup.Radio aria-label="Radio button for following text input" value = "zh-CN" onClick={e => changeLanguage(e)} checked={language.toLowerCase() === "zh-cn"}/>
+                            <InputGroup.Text className="language-dropdown-item">簡體中文 - ZH</InputGroup.Text>
+                        </InputGroup.Prepend>
+                    </InputGroup>
+            </NavDropdown>
         </Nav>
         <Nav>
         {!isLogin && (
-            <NavDropdown title='Account' id="basic-nav-dropdown">
+            <NavDropdown title={t('NavBar.account')} id="basic-nav-dropdown">
                 <NavDropdown.Item href="/signin">
-                    Sign in
+                    {t('NavBar.signIn')}
                 </NavDropdown.Item>
                 <NavDropdown.Item href="/signup">
-                    Sign up
+                    {t('NavBar.signUp')}
                 </NavDropdown.Item>
                 <NavDropdown.Item href="/feed">
-                    RSS
+                    {t('NavBar.rss')}
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/downloads">
+                    {t('NavBar.download')}
                 </NavDropdown.Item>
             </NavDropdown>
         )}
         {isLogin && (
             <NavDropdown title={username} id="basic-nav-dropdown">
                 <NavDropdown.Item onSelect={handleLogout}>
-                    Sign out
+                    {t('NavBar.signOut')}
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/feed">
+                    {t('NavBar.rss')}
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/downloads">
+                    {t('NavBar.download')}
                 </NavDropdown.Item>
             </NavDropdown>
         )}

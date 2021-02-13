@@ -22,13 +22,14 @@ import {
     SetFinishedArticlesAction,
     RemoveFinishedArticleAction,
     SetUserIdAction,
-    SetProviderAction
-} 
+    SetProviderAction,
+    SetLanguageAction
+}
 from '../actions/articlesAction'
 import { RootState} from '../store/store'
 
 //Types
-import { 
+import {
     GET_ARTICLES,
     GET_FILTERED_ARTICLES,
     SET_PARTIAL_ARTICLES,
@@ -53,6 +54,7 @@ import {
     SET_UNMARKASFINISHED,
     SET_PROVIDER,
     SET_USERID,
+    SET_LANGUAGE,
     ArticleType } from '../types'
 
 //States
@@ -64,13 +66,14 @@ import {
 //Reducer
 const articlesReducer = (state: ArticlesState = initialState,
     action: GetArticlesAction | GetFilteredArticlesAction | ClearFilterAction |
-            SetCategoryAction | ClearCategoryAction | ResetLoadingAction | 
+            SetCategoryAction | ClearCategoryAction | ResetLoadingAction |
             SetPlannerAction | SetPartialArticlesAction | SetOffsetAction |
             SetPerpageAction | SetPageCountAction | SetLoadingAction |
             SetLoginAction | SetLogoutAction | SetAccessTokenAction |
             SetEmailAction | SetUsernameAction | SetErrorMessageAction |
             RemoveBookmarkAction | SetBookmarksAction | SetFinishedArticlesAction |
-            RemoveFinishedArticleAction | SetProviderAction | SetUserIdAction) => {
+            RemoveFinishedArticleAction | SetProviderAction | SetUserIdAction |
+            SetLanguageAction) => {
     switch(action.type) {
         case GET_ARTICLES:
             return {
@@ -215,8 +218,13 @@ const articlesReducer = (state: ArticlesState = initialState,
                 ...state,
                 userId: action.payload
             }
+        case SET_LANGUAGE:
+            return {
+                ...state,
+                language: action.payload
+            }
         default:
-            return state; 
+            return state;
     }
 };
 

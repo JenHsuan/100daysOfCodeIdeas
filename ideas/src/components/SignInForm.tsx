@@ -16,7 +16,7 @@ import {
 
 import FormWrapper from '../components/FormWrapper'
 import PropTypes from 'prop-types'
-import { 
+import {
     setErrorMessage,
     setLoading,
     setUserId,
@@ -26,11 +26,13 @@ import {
 } from './actions/articlesAction';
 import { SignInFormProp } from '../components/types'
 
+import { useTranslation } from 'react-i18next';
+
 const SignInForm: FunctionComponent<SignInFormProp> = ({responseFacebook,
     ResponseGithubOnSuccess,
     ResponseGithubOnFailure,
     SetLogin}: SignInFormProp) => {
-    
+
     const disPatch = useDispatch();
     const showPlanner = useSelector(selectShowPlannerState);
     const errorMessage = useSelector(selectErrorMessageState);
@@ -38,12 +40,13 @@ const SignInForm: FunctionComponent<SignInFormProp> = ({responseFacebook,
     const userId = useSelector(selectUserIdState);
     const login = useSelector(selectLoginState);
     const [redirectUri, setRedirectUri] = useState('')
-    
+    const { t, i18n } = useTranslation();
+
 
     useEffect(()=> {
         setRedirectUri(window.location.href)
     }, [])
-    
+
     const [value, setValue] = useState({
         username:'',
         password:''
@@ -83,17 +86,17 @@ const SignInForm: FunctionComponent<SignInFormProp> = ({responseFacebook,
                     const bookmarksList = res['data']['bookmarks'].split(',');
                     disPatch(setBookmarks(bookmarksList.filter(bookmark => bookmark !== '')))
                     localStorage.setItem("bookmarks", res['data']['bookmarks'].trim());
-                    
+
                     const finishedArticlesList = res['data']['finishedArticles'].split(',');
                     disPatch(setFinishedArticles(finishedArticlesList.filter(finishedArticle => finishedArticle !== '')))
                     localStorage.setItem("finishedArticles", res['data']['finishedArticles'].trim());
-                
+
                 }
             } catch(error) {
                 console.log(error)
             }
         };
-        
+
         if (login) {
             fetchProfile();
         }
@@ -112,7 +115,7 @@ const SignInForm: FunctionComponent<SignInFormProp> = ({responseFacebook,
                     </div>
                 ):(
                     <div className="signinform-grid-box">
-                        <div className="title">Welcome back!</div>
+                        <div className="title">{t('SignInForm.title')}</div>
                         <FacebookLogin
                             cssClass="fb-btn"
                             appId="240314257268798"
@@ -122,24 +125,24 @@ const SignInForm: FunctionComponent<SignInFormProp> = ({responseFacebook,
                             render={renderProps => (
                                 <button onClick={renderProps.onClick} className="fb-btn">Facebook</button>
                             )}/>
-                        <GitHubLogin 
+                        <GitHubLogin
                             className="github-btn"
                             clientId="51b1a8ee5b7cad1e6a85"
                             redirectUri={redirectUri}
                             onSuccess={ResponseGithubOnSuccess}
                             onFailure={ResponseGithubOnFailure}
                             buttonText="Github"/>
-                        <div className="split-line">Or signin by username</div>
+                        <div className="split-line">{t('SignInForm.alt')}</div>
                         <div className="signin-form">
                         <Form onSubmit = {handleSubmit}>
                             <Form.Group controlId="formBasicEmail">
-                            <Form.Control type="text" placeholder="Enter Username" className="username" onChange={handleChange('username')} />
+                            <Form.Control type="text" placeholder={t('SignInForm.placeHolderForName')} className="username" onChange={handleChange('username')} />
                         </Form.Group>
                         <Form.Group controlId="formBasicPassword">
-                            <Form.Control type="password" placeholder="Password" className="password" onChange={handleChange('password')}/>
+                            <Form.Control type="password" placeholder={t('SignInForm.placeHolderForPassword')} className="password" onChange={handleChange('password')}/>
                         </Form.Group>
                         <button className="btn-submit">
-                            Sign in
+                        {t('SignInForm.btn')}
                         </button>
                     </Form>
                 </div>
@@ -147,7 +150,7 @@ const SignInForm: FunctionComponent<SignInFormProp> = ({responseFacebook,
             </div>
                 )}
         </div>
-        </Fragment>    
+        </Fragment>
     )
 }
 

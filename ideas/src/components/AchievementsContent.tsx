@@ -31,6 +31,8 @@ import Router, { useRouter } from 'next/router'
 import { VictoryPie } from 'victory';
 import PageWrapper from '../components/PageWrapper'
 
+import { useTranslation } from 'react-i18next';
+
 const AchievementsContent = () => {
     const disPatch = useDispatch();
     const [data, setData] = useState([])
@@ -39,6 +41,7 @@ const AchievementsContent = () => {
     const bookmarks = useSelector(selectBookmarksState);
     const finishedArticles = useSelector(selectFinishedArticlessState);
     const isLogin = useSelector(selectLoginState);
+    const { t, i18n } = useTranslation();
 
     useEffect(()=> {
         if (isLogin === false) {
@@ -46,7 +49,7 @@ const AchievementsContent = () => {
         }
      }, [isLogin])
 
-    
+
     useEffect(()=> {
         //Fetch articles
         var dataList = []
@@ -67,23 +70,24 @@ const AchievementsContent = () => {
         <Fragment>
             <div className={`${showPlanner === true ? 'achievementspage-head' : 'achievementspage-head achievementspage-head-remove-left'}`}>
                 <div className="title">
-                    Your Achievements
+                {t('AchievementsContent.title')}
                 </div>
                 <div className="subtitle">
-                    Keep going!
+                {t('AchievementsContent.subtitle')}
                 </div>
             </div>
             <div className={`${showPlanner !== true ? 'achievementspage-hide-siderbar' : 'achievementspage-hide-siderbar articles-hide-siderbar-remove-left'}`}>
                 <div className="achievementspage-content-grid-box">
                     <div className="achievementspage-hide-siderbar-labels">
                         <div>
-                            <span className="bookmarks">{bookmarks.length}</span> Bookmarked
+                            <span className="bookmarks">{bookmarks.length}</span>
+                {t('AchievementsContent.bookmarked')}
                         </div>
                         <div>
-                            <span className="finished">{finishedArticles.length} </span> Completed 
+                            <span className="finished">{finishedArticles.length} </span> {t('AchievementsContent.completed')}
                         </div>
                         <div>
-                            <span className="unfinished">{articles.length - finishedArticles.length}</span> Unfinished 
+                            <span className="unfinished">{articles.length - finishedArticles.length}</span> {t('AchievementsContent.unfinished')}
                         </div>
                     </div>
                     <div className="achievementspage-piechart">

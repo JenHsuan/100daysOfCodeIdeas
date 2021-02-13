@@ -9,6 +9,7 @@ import AboutPageContent from '../components/AboutPageContent';
 import GaLayout from '../components/GaLayout';
 import CommonHead from '../components/CommonHead';
 import {getStatics} from '../components/getStatics';
+import '../components/i18n'
 
 
 const about = ({jsonLdData}) => {

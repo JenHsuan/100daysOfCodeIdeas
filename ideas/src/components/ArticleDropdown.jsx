@@ -1,7 +1,7 @@
 import React from 'react'
 import { Dropdown, DropdownButton} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { 
+import {
     setCategory,
     clearCategory,
     resetLoading
@@ -9,12 +9,14 @@ import {
 import {
     selectCategoryState
 } from './states/states';
-import Router, { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router';
+import { useTranslation } from 'react-i18next';
 
 const ArticleDropdown = () => {
     const disPatch = useDispatch();
     const router = useRouter()
     const category = useSelector(selectCategoryState);
+    const { t, i18n } = useTranslation();
     const handleSelect=(e)=>{
         if (e != "-1") {
             console.log(e);
@@ -29,19 +31,19 @@ const ArticleDropdown = () => {
 
     const getTitle = () => {
         if (category == -1) {
-            return 'All articles'
+            return t('SideBar.dropdownForCategories.all')
         } else if (category == 0) {
-            return 'Challenges'
+            return t('SideBar.dropdownForCategories.daysOfCode')
         }  else if (category == 1) {
-            return 'Programming'
-        } 
+            return t('SideBar.dropdownForCategories.programming')
+        }
     }
 
     return (
         <DropdownButton className='article-dropdown' id="dropdown-basic-button" title={getTitle()} onSelect={handleSelect}>
-            <Dropdown.Item eventKey="-1">All</Dropdown.Item>
-            <Dropdown.Item eventKey="0">100DaysOfCode</Dropdown.Item>
-            <Dropdown.Item eventKey="1">Programming</Dropdown.Item>
+            <Dropdown.Item eventKey="-1">{t('SideBar.dropdownForCategories.all')}</Dropdown.Item>
+            <Dropdown.Item eventKey="0">{t('SideBar.dropdownForCategories.daysOfCode')}</Dropdown.Item>
+            <Dropdown.Item eventKey="1">{t('SideBar.dropdownForCategories.programming')}</Dropdown.Item>
         </DropdownButton>
     )
 }

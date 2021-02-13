@@ -14,7 +14,7 @@ import {
     selectFinishedArticlessState
 } from './states/states';
 
-import { 
+import {
     setBookmarks,
     removeBookmark,
     setFinishedArticles,
@@ -22,11 +22,13 @@ import {
 } from './actions/articlesAction';
 import Router, { useRouter } from 'next/router'
 import axios from 'axios';
-import { 
+import {
     ArticleProp,
     ArticleType
  } from '../components/types'
- 
+
+import { useTranslation } from 'react-i18next';
+
 const Article: FunctionComponent<ArticleProp> = ({article}: ArticleProp) => {
     const router = useRouter();
     const disPatch = useDispatch();
@@ -41,6 +43,8 @@ const Article: FunctionComponent<ArticleProp> = ({article}: ArticleProp) => {
     const email = useSelector(selectEmailState);
     const finishedArticles = useSelector(selectFinishedArticlessState);
     const articleRef = useRef();
+    const { t, i18n } = useTranslation();
+
     const callback = entries => {
         for (let entry of entries) {
             if (entry.isIntersecting) {
@@ -49,7 +53,7 @@ const Article: FunctionComponent<ArticleProp> = ({article}: ArticleProp) => {
             }
         }
     };
-   
+
     const observer = new IntersectionObserver(callback);
 
     useEffect(() => {
@@ -144,10 +148,10 @@ const Article: FunctionComponent<ArticleProp> = ({article}: ArticleProp) => {
             setChecked(false);
         }
 
-        
+
     }
 
-    const setBookmarksState = async (bookmarksList) => { 
+    const setBookmarksState = async (bookmarksList) => {
         let newbookmarksString = bookmarksList.join();
         //set bookmarks to localStorage
         localStorage.setItem("bookmarks", newbookmarksString);
@@ -199,8 +203,8 @@ const Article: FunctionComponent<ArticleProp> = ({article}: ArticleProp) => {
                 Router.push(`/bookmarks`)
             }
         }
-        
-        
+
+
     }
 
     useEffect(()=> {
@@ -213,7 +217,7 @@ const Article: FunctionComponent<ArticleProp> = ({article}: ArticleProp) => {
                 <div className="article-bookmark">
                     <span className="btn-o">
                         <a href='#' onClick={()=>{onBookmarkClick(); return false;}}>
-                            {isBookmarked 
+                            {isBookmarked
                             ? <img src="https://raw.githubusercontent.com/JenHsuan/ALayman/master/views/images/bookmark-yellow.png" alt="Add this article to the bookmark" title="Add this article to the bookmark"/>
                             : <img src="https://raw.githubusercontent.com/JenHsuan/ALayman/master/views/images/bookmark-white.png" alt="Add this article to the bookmark" title="Add this article to the bookmark"/>
                             }
@@ -242,12 +246,12 @@ const Article: FunctionComponent<ArticleProp> = ({article}: ArticleProp) => {
                         <span> . </span>
                         <span className="readtime">{article.readtime}</span>
                     </div>
-                    <button className="article-btn" onClick = {handleShow}>Details</button>
+                    <button className="article-btn" onClick = {handleShow}>{t('Article.details')}</button>
                 </Card.Body>
             </Card>
             <ArticleModal show = {show} handleClose = {handleClose} article = {article} handleOpen={handleCheckingTrue}/>
         </div>
-    
+
     )
 }
 

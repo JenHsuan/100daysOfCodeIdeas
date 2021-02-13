@@ -15,7 +15,7 @@ import {
     selectLoadingState
 } from './states/states';
 
-import { 
+import {
     setErrorMessage,
     setLoading,
     setBookmarks,
@@ -25,6 +25,8 @@ import {
 import FormWrapper from '../components/FormWrapper'
 import PropTypes from 'prop-types'
 import { SignInFormProp } from '../components/types'
+
+import { useTranslation } from 'react-i18next';
 
 const SignUpForm: FunctionComponent<SignInFormProp> = ({responseFacebook,
     ResponseGithubOnSuccess,
@@ -36,6 +38,7 @@ const SignUpForm: FunctionComponent<SignInFormProp> = ({responseFacebook,
     const errorMessage = useSelector(selectErrorMessageState);
     const isLoading = useSelector(selectLoadingState);
     const [redirectUri, setRedirectUri] = useState('')
+    const { t, i18n } = useTranslation();
 
     useEffect(()=> {
         setRedirectUri(window.location.href)
@@ -58,10 +61,10 @@ const SignUpForm: FunctionComponent<SignInFormProp> = ({responseFacebook,
     const handleChange = name => e => {
       setValue({...value, [name]: e.target.value.trim()})
     }
-    
+
     const handleSubmit = async e => {
         // Check if the form is invalid
-        // null or empty 
+        // null or empty
         // email format
         e.preventDefault();
         try {
@@ -83,7 +86,7 @@ const SignUpForm: FunctionComponent<SignInFormProp> = ({responseFacebook,
                     email: email,
                     reader: id
                 });
-  
+
                 var err = updateProfileRes["data"]["error"]
                 if (err !== undefined) {
                     disPatch(setErrorMessage(`${Object.keys(err)[0]} : ${Object.values(err)[0]}`))
@@ -99,16 +102,16 @@ const SignUpForm: FunctionComponent<SignInFormProp> = ({responseFacebook,
                         const bookmarksList = updateProfileRes['data']['bookmarks'].split(',');
                         disPatch(setBookmarks(bookmarksList.filter(bookmark => bookmark !== '')))
                         localStorage.setItem("bookmarks", updateProfileRes['data']['bookmarks'].trim());
-                        
+
                         const finishedArticlesList = updateProfileRes['data']['finishedArticles'].split(',');
                         disPatch(setFinishedArticles(finishedArticlesList.filter(finishedArticle => finishedArticle !== '')))
                         localStorage.setItem("finishedArticles", updateProfileRes['data']['finishedArticles'].trim());
-                    
+
                     }
                 }
             }
             disPatch(setLoading(false));
-            
+
         } catch (error) {
             //res.data = error;
             disPatch(setLoading(false));
@@ -130,7 +133,7 @@ const SignUpForm: FunctionComponent<SignInFormProp> = ({responseFacebook,
             </div>
             ):(
                 <div className="signinform-grid-box">
-                    <div className="title">Create Your Free Account</div>
+                    <div className="title">{t('SignUpForm.title')}</div>
                 <FacebookLogin
                     cssClass="fb-btn"
                     appId="240314257268798"
@@ -140,7 +143,7 @@ const SignUpForm: FunctionComponent<SignInFormProp> = ({responseFacebook,
                     render={renderProps => (
                         <button onClick={renderProps.onClick} className="fb-btn">Facebook</button>
                       )}/>
-                <GitHubLogin 
+                <GitHubLogin
                     className="github-btn"
                     clientId="Iv1.ca8ab67c0ba860ab"
                     redirectUri={redirectUri}
@@ -148,21 +151,21 @@ const SignUpForm: FunctionComponent<SignInFormProp> = ({responseFacebook,
                     onFailure={ResponseGithubOnFailure}
                     buttonText="Github"/>
                     <div className="split-line">
-                        Or signup by email
+                    {t('SignUpForm.alt')}
                     </div>
                     <div className="signin-form">
                         <Form onSubmit = {handleSubmit}>
                             <Form.Group controlId="formBasicEmail">
-                                <Form.Control type="text" placeholder="Enter Username" className="username" onChange={handleChange('username')} />
+                                <Form.Control type="text" placeholder={t('SignUpForm.placeHolderForName')} className="username" onChange={handleChange('username')} />
                             </Form.Group>
                             <Form.Group controlId="formBasicPassword">
-                                <Form.Control type="text" placeholder="Enter Email" className="email" onChange={handleChange('email')}/>
+                                <Form.Control type="text" placeholder={t('SignUpForm.placeHolderForMail')} className="email" onChange={handleChange('email')}/>
                             </Form.Group>
                             <Form.Group controlId="formBasicPassword">
-                                <Form.Control type="password" placeholder="Password" className="password" onChange={handleChange('password')}/>
+                                <Form.Control type="password" placeholder={t('SignUpForm.placeHolderForPassword')} className="password" onChange={handleChange('password')}/>
                             </Form.Group>
                     <button className="btn-submit">
-                    Get Started
+                    {t('SignUpForm.btn')}
                     </button>
                         </Form>
                     </div>
@@ -170,7 +173,7 @@ const SignUpForm: FunctionComponent<SignInFormProp> = ({responseFacebook,
                 </div>
             )}
             </div>
-        </Fragment>    
+        </Fragment>
     )
 }
 

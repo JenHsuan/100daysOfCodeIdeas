@@ -25,6 +25,7 @@ import Footer from '../components/Footer';
 import Router, { useRouter } from 'next/router'
 import PageWrapper from '../components/PageWrapper'
 import { refreshToken } from '../components/account'
+import { useTranslation } from 'react-i18next';
 
 const BookmarksContent = () => {
     const disPatch = useDispatch();
@@ -35,7 +36,8 @@ const BookmarksContent = () => {
     const bookmarks = useSelector(selectBookmarksState)
     const finishedArticles = useSelector(selectFinishedArticlessState);
     const isLogin = useSelector(selectLoginState);
-    
+    const { t, i18n } = useTranslation();
+
     useEffect(()=> {
         var tmp = articles.filter(article => -1 !== bookmarks.map(Number).indexOf((article.id)))
         console.log(tmp)
@@ -61,10 +63,10 @@ const BookmarksContent = () => {
         <Fragment>
             <div className={`${showPlanner === true ? 'bookmarkspage-head' : 'bookmarkspage-head bookmarkspage-head-remove-left'}`}>
                 <div className="title">
-                    {`Your Bookmarks (${finishedArticles.length}/${bookmarks.length})`}
+                    {`${t('BookmarksContent.title')} (${finishedArticles.length}/${bookmarks.length})`}
                 </div>
                 <div className="subtitle">
-                    Read articles you have bookmarked. Open articles to clean your todo list!
+                {t('BookmarksContent.subtitle')}
                 </div>
             </div>
 

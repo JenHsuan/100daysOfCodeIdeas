@@ -3,7 +3,7 @@ import { RootState} from '../store/store'
 //Types
 import { ArticleType } from '../types'
 
-    
+
 //Initial state
 export interface ArticlesState {
     articles: Array<ArticleType>;
@@ -25,6 +25,7 @@ export interface ArticlesState {
     finishedArticles:Array<number>;
     provider: string;
     userId: number;
+    language: string;
 }
 
 export const initialState = {
@@ -46,7 +47,8 @@ export const initialState = {
     bookmarks: [],
     finishedArticles: [],
     provider: '',
-    userId: -1
+    userId: -1,
+    language: 'en',
 }
 
 //Selector functions
@@ -70,3 +72,4 @@ export const selectBookmarksState = (rootState: RootState) => rootState.articles
 export const selectFinishedArticlessState = (rootState: RootState) => rootState.articlesReducer.finishedArticles;
 export const selectProviderState = (rootState: RootState) => rootState.articlesReducer.provider;
 export const selectUserIdState = (rootState: RootState) => rootState.articlesReducer.userId;
+export const selectLanguageState = (rootState: RootState) => rootState.articlesReducer.language;

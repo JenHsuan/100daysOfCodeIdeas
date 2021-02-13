@@ -11,6 +11,7 @@ import '../css/sidebar.css'
 import GaLayout from '../components/GaLayout';
 import CommonHead from '../components/CommonHead';
 import {getStatics} from '../components/getStatics';
+import '../components/i18n'
 
 const signup = ({jsonLdData}) => {
     const title = "ALayman Daily Learning - Signup";

@@ -9,6 +9,7 @@ import '../css/sidebar.css'
 import GaLayout from '../components/GaLayout';
 import CommonHead from '../components/CommonHead';
 import {getStatics} from '../components/getStatics';
+import '../components/i18n'
 
 const Index = ({jsonLdData}) => {
     const title = "ALayman Daily Learning";
@@ -39,6 +40,6 @@ export async function getStaticProps(){
     console.log(1)
     return await getStatics();
 }
-    
+
 export default Index;
 

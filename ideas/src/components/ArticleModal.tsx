@@ -3,9 +3,11 @@ import { Modal, Button, Image } from 'react-bootstrap';
 import '.././css/articleModal.css'
 import { ArticleModalProp } from '../components/types'
 import PropTypes from 'prop-types'
+import { useTranslation } from 'react-i18next';
 
 const ArticleModal = ({show, handleClose, article, handleOpen}: ArticleModalProp) => {
-    const openArticle = () => {    
+    const { t, i18n } = useTranslation();
+    const openArticle = () => {
         handleOpen();
         window.open(article.url, '_blank');
         handleClose();
@@ -18,26 +20,26 @@ const ArticleModal = ({show, handleClose, article, handleOpen}: ArticleModalProp
                 <div className='article-modal-subtitle'>{`${article.subtitle}...`}</div>
                 <ul>
                     <li>
-                        <div className="article-modal-item d-flex">Author: {article.name}</div>
+                        <div className="article-modal-item d-flex">{t('ArticleModal.author')}: {article.name}</div>
                     </li>
                     <li>
-                        <div className="article-modal-item d-flex">Category: {Number(article.category) === 0 ? '100 days of code' : 'Learning materials'}</div>
+                        <div className="article-modal-item d-flex">{t('ArticleModal.category')}: {Number(article.category) === 0 ? '100 days of code' : 'Learning materials'}</div>
                     </li>
                     <li>
-                        <div className="article-modal-item d-flex">DateTime: {article.time}</div>
+                        <div className="article-modal-item d-flex">{t('ArticleModal.dateTime')}: {article.time}</div>
                     </li>
                     <li>
-                        <div className="article-modal-item d-flex">Read time: {article.readtime}</div>
+                        <div className="article-modal-item d-flex">{t('ArticleModal.readTime')}: {article.readtime}</div>
                     </li>
                 </ul>
-                    
+
             </Modal.Body>
             <Modal.Footer>
             <Button variant="secondary" onClick = {handleClose}>
-                Close
+                {t('ArticleModal.close')}
             </Button>
             <Button variant="primary" onClick = {openArticle}>
-                Open the article
+                {t('ArticleModal.open')}
             </Button>
             </Modal.Footer>
         </Modal>

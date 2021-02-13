@@ -1,6 +1,6 @@
 import axios from 'axios';
 //Types
-import { 
+import {
     GET_ARTICLES,
     GET_FILTERED_ARTICLES,
     SET_PARTIAL_ARTICLES,
@@ -25,7 +25,8 @@ import {
     SET_UNMARKASFINISHED,
     SET_PROVIDER,
     SET_USERID,
-    ArticleType 
+    SET_LANGUAGE,
+    ArticleType
 } from '../types'
 
 //Actions
@@ -144,47 +145,52 @@ export interface SetUserIdAction {
     readonly payload: number
 }
 
+export interface SetLanguageAction {
+    readonly type: typeof SET_LANGUAGE
+    readonly payload: string
+}
+
 export const getArticles = () => async dispatch => {
     var res = {data:[]};
     try {
         res = await axios.get('/api/articles');
         await dispatch({
-                type: GET_ARTICLES, 
+                type: GET_ARTICLES,
                 payload: res.data})
     } catch (error) {
         //res.data = error;
         console.log(error);
-    
+
     }
 }
 
 export const getFilteredArticles = text => dispatch => {
     dispatch({
-        type: GET_FILTERED_ARTICLES, 
+        type: GET_FILTERED_ARTICLES,
         payload: text})
 }
 
 export const setPartialArticles = articles => dispatch => {
     dispatch({
-        type: SET_PARTIAL_ARTICLES, 
+        type: SET_PARTIAL_ARTICLES,
         payload: articles})
 }
 
 export const setLoading = isLoading => dispatch => {
     dispatch({
-        type: SET_LOADING, 
+        type: SET_LOADING,
         payload: isLoading})
 }
 
 export const setOffset = offset => dispatch => {
     dispatch({
-        type: SET_OFFSET, 
+        type: SET_OFFSET,
         payload: offset})
 }
 
 export const setPageCount = pageCount => dispatch => {
     dispatch({
-        type: SET_PAPE_COUNT, 
+        type: SET_PAPE_COUNT,
         payload: pageCount})
 }
 
@@ -202,13 +208,13 @@ export const setLogout = () => dispatch => {
 
 export const setAccessToken = token => dispatch => {
     dispatch({
-        type: SET_ACCESS_TOKEN, 
+        type: SET_ACCESS_TOKEN,
         payload: token})
 }
 
 export const setCategory = category => dispatch => {
     dispatch({
-        type: SET_CATEGORY, 
+        type: SET_CATEGORY,
         payload: category})
 }
 
@@ -222,61 +228,67 @@ export const resetLoading = () => dispatch => {
 
 export const setPlanner = showPlanner => dispatch => {
     dispatch({
-        type: SET_PLANNER, 
+        type: SET_PLANNER,
         payload: showPlanner})
 }
 
 export const setEmail = email => dispatch => {
     dispatch({
-        type: SET_EMAIL, 
+        type: SET_EMAIL,
         payload: email})
 }
 
 export const setUsername = username => dispatch => {
     dispatch({
-        type: SET_USERNAME, 
+        type: SET_USERNAME,
         payload: username})
 }
 
 export const setErrorMessage = message => dispatch => {
     dispatch({
-        type: SET_ERRORMESSAGE, 
+        type: SET_ERRORMESSAGE,
         payload: message})
 }
 
 export const removeBookmark = id => dispatch => {
     dispatch({
-        type: REMOVE_BOOKMARK, 
+        type: REMOVE_BOOKMARK,
         payload: id})
 }
 
 export const setBookmarks = bookmarks => dispatch => {
     dispatch({
-        type: SET_BOOKMARKS, 
+        type: SET_BOOKMARKS,
         payload: bookmarks})
 }
 
 export const setFinishedArticles = finishedArticles => dispatch => {
     dispatch({
-        type: SET_MARKASFINISHED, 
+        type: SET_MARKASFINISHED,
         payload: finishedArticles})
 }
 
 export const removeFinishedArticle = finishedArticle => dispatch => {
     dispatch({
-        type: SET_UNMARKASFINISHED, 
+        type: SET_UNMARKASFINISHED,
         payload: finishedArticle})
 }
 
 export const setProvider = provider => dispatch => {
     dispatch({
-        type: SET_PROVIDER, 
+        type: SET_PROVIDER,
         payload: provider})
 }
 
 export const setUserId = userId => dispatch => {
     dispatch({
-        type: SET_USERID, 
+        type: SET_USERID,
         payload: userId})
+}
+
+export const setLanguage = language => dispatch => {
+    dispatch({
+        type: SET_LANGUAGE,
+        payload: language})
 }
 

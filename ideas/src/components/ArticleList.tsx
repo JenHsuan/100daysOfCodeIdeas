@@ -1,4 +1,4 @@
-import React, {useEffect, Fragment, useState} from 'react'
+import React, {useEffect, Fragment, useState, useRef} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import ReactPaginate from 'react-paginate';
 import {
@@ -13,7 +13,7 @@ import {
     selectLoginState
 } from './states/states';
 
-import { 
+import {
     setPartialArticles,
     setOffset,
     setPageCount,
@@ -35,6 +35,7 @@ import { useMediaPredicate } from "react-media-hook";
 import { ArticleType } from './types';
 import PageWrapper from '../components/PageWrapper'
 import { refreshToken } from '../components/account'
+import { useTranslation } from 'react-i18next';
 
 const ArticleList = () => {
     const disPatch = useDispatch();
@@ -49,6 +50,7 @@ const ArticleList = () => {
     const showPlanner = useSelector(selectShowPlannerState);
     const smallerThan800 = useMediaPredicate("(max-width: 800px)");
     const isLogin = useSelector(selectLoginState);
+    const { t, i18n } = useTranslation();
 
     useEffect(()=> {
         console.log('articles updated')
@@ -60,23 +62,23 @@ const ArticleList = () => {
 
     useEffect(()=> {
         console.log('filtered articles updated')
-        var count = filteredArticles.length === 0 ? 
+        var count = filteredArticles.length === 0 ?
         Math.ceil(articles.length / perpage) : Math.ceil(filteredArticles.length / perpage);
         disPatch(setPageCount(count));
         setPartialData();
     }, [filteredArticles])
 
-    useEffect(()=> { 
-        var count = filteredArticles.length === 0 ? 
+    useEffect(()=> {
+        var count = filteredArticles.length === 0 ?
         Math.ceil(articles.length / perpage) : Math.ceil(filteredArticles.length / perpage);
         disPatch(setPageCount(count));
         setPartialData();
         window.scrollTo(0, 0)
     }, [offset])
-    
-    
+
+
     const setPartialData = () =>  {
-        const partialData = filteredArticles.length === 0 ? 
+        const partialData = filteredArticles.length === 0 ?
         articles.slice(offset, offset + perpage) : filteredArticles.slice(offset, offset + perpage);
         disPatch(setPartialArticles(partialData));
     }
@@ -92,15 +94,15 @@ const ArticleList = () => {
         <Fragment>
         <div className={`${showPlanner === true ? 'articles-hide-siderbar-head' : 'articles-hide-siderbar-head articles-hide-siderbar-head-remove-left'}`}>
             <div className="title">
-                {`Learning materials (${filteredArticles.length === 0 ? articles.length : filteredArticles.length})`}
+                {`${t('ArticleList.learningMaterials')} (${filteredArticles.length === 0 ? articles.length : filteredArticles.length})`}
             </div>
             {isLogin ? (
                 <div className="subtitle">
-                    Click the details button to check the article.
+                    {t('ArticleList.title')}
                 </div>) : (
                 <div className="subtitle">
-                    <a href="/signin">Login </a>
-                    to add articles or skills in your learning plan or open them directly.
+                    <a href="/signin">{t('ArticleList.login')}</a>
+                    {t('ArticleList.subTitle')}
                 </div>)}
             {smallerThan800 && <ArticleSearchBar/>}
         </div>

@@ -7,14 +7,17 @@ import {
 } from './states/states';
 import Router, { useRouter } from 'next/router'
 
+import { useTranslation } from 'react-i18next';
+
 function DownloadsPageContent() {
     const accessToken = useSelector(selectAccessTokenState);
+    const { t, i18n } = useTranslation();
     const handleDownload = async(type) => {
         console.log(type)
         if (accessToken === '') {
             Router.push(`/signin`)
         }
-        
+
         fetch(`/api/download?type=${type}`, {
             method: 'GET',
             headers: new Headers({
@@ -26,7 +29,7 @@ function DownloadsPageContent() {
         .then(response => {
             if (response === undefined || response.url === undefined) {
                 Router.push(`/signin`)
-                return 
+                return
             }
             var a = document.createElement('a');
             var url = response.url;
@@ -42,14 +45,14 @@ function DownloadsPageContent() {
             </div>
             <div className="downloads-column-right-grid-box">
                 <div className="downloads-title">
-                    Downloads  
+                {t('DownloadsPageContent.title')}
                 <hr/>
                 </div>
                 <div className="downloads-subtitle-1">
-                    Desktop Version is available!
+                {t('DownloadsPageContent.subtitle1')}
                 </div>
                 <div className="downloads-content-1">
-                    You can feel free to download the dektop version of 100DaysOfCode! Please login for downloading.
+                {t('DownloadsPageContent.content1')}
                 </div>
                 <div className="downloads-content-2-l">
                 <Button variant="dark" onClick = {() => (handleDownload('dmg'))}>

@@ -1,4 +1,4 @@
-import {FunctionComponent} from 'react'
+import { FunctionComponent } from 'react'
 
 export const GET_ARTICLES = 'GET_ARTICLES';
 export const GET_FILTERED_ARTICLES = 'GET_FILTERED_ARTICLES';
@@ -24,6 +24,7 @@ export const SET_MARKASFINISHED = 'SET_MARKASFINISHED';
 export const SET_UNMARKASFINISHED = 'SET_UNMARKASFINISHED';
 export const SET_PROVIDER = 'SET_PROVIDER';
 export const SET_USERID = 'SET_USERID';
+export const SET_LANGUAGE = 'SET_LANGUAGE';
 
 export interface ArticleType {
     id: number;
@@ -81,4 +82,4 @@ export interface PageWrapperProp{
 export interface PageWrapperInterface {
     <WrappedComponentInterface extends PageWrapperProp> ({
         WrappedComponent}: WrappedComponentInterface): Function
-} 
+}

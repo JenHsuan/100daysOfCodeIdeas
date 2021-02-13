@@ -8,19 +8,21 @@ import {
     selectLoginState
 } from './states/states';
 
-import { 
+import {
     setPlanner
 } from './actions/articlesAction';
 
 import Link from 'next/link'
 import { useMediaPredicate } from "react-media-hook";
+import { useTranslation } from 'react-i18next'
 
 const SideBar = () => {
     const disPatch = useDispatch();
     const showPlannerFlag = useSelector(selectShowPlannerState);
     const isLogin = useSelector(selectLoginState);
     const smallerThan700 = useMediaPredicate("(max-width: 700px)");
-    
+    const { t, i18n } = useTranslation()
+
     useEffect(()=> {
         if (smallerThan700) {
             disPatch(setPlanner(false))
@@ -41,8 +43,8 @@ const SideBar = () => {
             <div className='sidebar-grid-box'>
                 {showPlannerFlag == true && (
                     <Fragment>
-                    <div className='sidebar-title'>Let's Create Your Learning Plan
-                        <div className="sidebar-subtitle">Choose the topics about Software development, Testing, DevOps, or 100DaysOfCode to build the personal learning plan</div>
+                    <div className='sidebar-title'>{t('SideBar.title')}
+                        <div className="sidebar-subtitle">{t('SideBar.description')}</div>
                     </div>
                     <div className='sidebar-dropdown'>
                         <div className='sidebar-dropdown-content'>
@@ -56,7 +58,7 @@ const SideBar = () => {
                     </div>
                     </Fragment>
                 )}
-                {showPlannerFlag == true ? (   
+                {showPlannerFlag == true ? (
                     <div className='sidebar-remove-left'>
                         <span className="btn-o" onClick = {showPlanner}>
                             <a href="#">
