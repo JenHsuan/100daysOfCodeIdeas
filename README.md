@@ -1,10 +1,10 @@
 # Daily Learning (The final project for CS50 web)
 
 ## Description
-* The target of this project is to let users build a learning plan for themselves. The user can use this website to create a learning plan for improving programming skills. 
+* The target of this project is to let users build a learning plan for themselves. The user can use this website to create a learning plan for improving programming skills.
 * The skills of the technical stack of this project include Django, PostgreSQL, Next.js, Redux, and TypeScript.
 * The user can search for favorite articles by keywords or the dropdown box on the menu page. The current types of materials include programming articles and records of 100 Days of Code.
-* The first time the user visits here can signup a new account with social media. Then the system will notify the new user by sending an email. The user can bookmark favorite articles in the menu page after login. 
+* The first time the user visits here can signup a new account with social media. Then the system will notify the new user by sending an email. The user can bookmark favorite articles in the menu page after login.
 * The user can see their todo list for unread articles. After the user opens the articles, the system will check the article.
 * The user can check the current progress form the achievement page. This site also supports mobile devices.
 
@@ -16,7 +16,7 @@
 ## Features
 1. Soical signin/signup for Github and Facebook
 2. Menu for technical articles form Medium ad dev.to
-3. Search and filter articles 
+3. Search and filter articles
 4. Personal bookmarks, todo list, and achievements for users
 5. Progressive web application
 
@@ -41,6 +41,7 @@
 * React-Bootstrap
 * react-facebook-login
 * react-paginate
+* react-i18next
 * Victory
 * concurrently
 * SASS
@@ -91,6 +92,10 @@ sass --watch src/scss:src/css
 ### ReactJS HOC
 * [React.js: Higher-Order Components (HOC)](https://cythilya.github.io/2018/05/20/react-hoc/?fbclid=IwAR0Gm1QWQ72CBEIdMII7rSoqvbHLQsIPYfGdO8y90_OlD24azemdrNT-nN8)
 
+### React i18next
+* [在React專案中引入React-i18next心得](https://ryanote.netlify.app/React-i18next)
+* [[Day24] 語言切換-1：沒有萬能的許願機](https://ithelp.ithome.com.tw/articles/10242495?sc=iThomeR)
+
 ### Next.js
 * [Next.js - import css file does not work](https://stackoverflow.com/questions/50149729/next-js-import-css-file-does-not-work)
 * [Next.js + CSS](https://github.com/zeit/next-plugins/tree/master/packages/next-css)
@@ -102,7 +107,7 @@ sass --watch src/scss:src/css
 * [SocialLoginView](https://pastebin.com/08iLNCJc)
 * [Django Authentication With Facebook, Instagram and LinkedIn](https://www.digitalocean.com/community/tutorials/django-authentication-with-facebook-instagram-and-linkedin)
 * [使用django-rest-framework-jwt及python-social-auth讓使用者用Facebook帳號登入](https://yichen0831.wordpress.com/2014/08/14/%E4%BD%BF%E7%94%A8django-rest-framework-jwt%E5%8F%8Apython-social-auth%E8%AE%93%E4%BD%BF%E7%94%A8%E8%80%85%E7%94%A8facebook%E5%B8%B3%E8%99%9F%E7%99%BB%E5%85%A5/)
-* [簡單方法：python-social-auth](https://riptutorial.com/zh-TW/django/example/16679/%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95-python-social-auth) 
+* [簡單方法：python-social-auth](https://riptutorial.com/zh-TW/django/example/16679/%E7%B0%A1%E5%96%AE%E6%96%B9%E6%B3%95-python-social-auth)
 
 ### OAuth2 [Frontend]: connect ReactJS to Facebook
 * [Login with Facebook and Google in reactjs](https://medium.com/recraftrelic/login-with-facebook-and-google-in-reactjs-990d818d5dab)
