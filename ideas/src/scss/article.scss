@@ -6,7 +6,7 @@
     background-color: #FFFFFF;
     margin-top: 1%;
  }
- 
+
  .articles-hide-siderbar-head {
   grid-column-start: 1;
   grid-column-end: 9;
@@ -17,23 +17,23 @@
   background-color: #FFFFFF;
   overflow-x: hidden;
   transition: 0.5s;
-    
+
   .title {
     font-size: 30px;
     font-weight: 400;
-    
+
   }
   .subtitle {
     font-size: 18px;
     font-weight: 300;
   }
- 
+
 }
 
 .articles-hide-siderbar-head-remove-left {
   padding-left: 5%;
 }
- 
+
  .articles-row {
     overflow-x: hidden;
     transition: 0.5s;
@@ -85,11 +85,13 @@
           }
         }
       }
-    }   
+    }
 }
 
 .article-card-body:hover {
-  padding-right:3px;
+  margin-right:20px;
+  border:1px black solid;
+  box-shadow: 0 5px 5px gray, 0 0 0 5px #ffffffeb;
 }
 
 .article-card-img {
@@ -165,7 +167,7 @@
 .remove-btn {
     margin-right: 0.5rem;
   }
-  
+
   .item-enter {
     opacity: 0;
   }
@@ -194,11 +196,11 @@
   }
   .pagination > .active > a{
     background-color: royalblue; ;
-    border-color: royalblue; 
+    border-color: royalblue;
     color: #fff;
   }
   .pagination > li > a{
-    border: 1px solid royalblue; 
+    border: 1px solid royalblue;
     padding: 5px 10px;
     font-size: 18px;
     outline: none;
@@ -219,19 +221,19 @@
 
   @media only screen and (min-width: 1500px){
     .articles-hide-siderbar-head {
-      padding-top: 5%; 
-    }    
+      padding-top: 5%;
+    }
   }
 
   @media only screen and (max-width: 1500px) and (min-width: 700px){
     .article-card {
         width: 350px;
-    }   
+    }
     .articles-hide-siderbar-head, .articles-hide-siderbar-head-remove-left  {
       .article-searchbar{
         display: none;
-      } 
-    }   
+      }
+    }
   }
 
   @media only screen and (max-width: 700px) and (min-width: 500px){
@@ -252,7 +254,7 @@
         border-radius: 5px;
         box-shadow: 0 5px 5px gray, 0 0 0 5px #ffffffeb;
      }
-    }    
+    }
   }
 
   @media only screen and (max-width: 500px){
