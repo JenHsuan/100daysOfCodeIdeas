@@ -160,19 +160,19 @@ const NavBar = () => {
             <NavDropdown title={t('NavBar.language')} id="basic-nav-dropdown">
                     <InputGroup className="language-dropdown">
                         <InputGroup.Prepend>
-                            <InputGroup.Radio aria-label="Radio button for following text input" value = "en" onClick={e => changeLanguage(e)} checked={language.toLowerCase() === "en"}/>
+                            <InputGroup.Radio aria-label="Radio button for following text input" value = "en" onClick={e => changeLanguage(e)} checked={language && language.toLowerCase() === "en"}/>
                             <InputGroup.Text className="language-dropdown-item">English - EN</InputGroup.Text>
                         </InputGroup.Prepend>
                         <InputGroup.Prepend>
-                            <InputGroup.Radio aria-label="Radio button for following text input" value = "ja" onClick={e => changeLanguage(e)} checked={language.toLowerCase() === "ja"}/>
+                            <InputGroup.Radio aria-label="Radio button for following text input" value = "ja" onClick={e => changeLanguage(e)} checked={language && language.toLowerCase() === "ja"}/>
                             <InputGroup.Text className="language-dropdown-item">日本語 - JA</InputGroup.Text>
                         </InputGroup.Prepend>
                         <InputGroup.Prepend>
-                            <InputGroup.Radio aria-label="Radio button for following text input" value = "zh-TW" onClick={e => changeLanguage(e)} checked={language.toLowerCase() === "zh-tw"}/>
+                            <InputGroup.Radio aria-label="Radio button for following text input" value = "zh-TW" onClick={e => changeLanguage(e)} checked={language && language.toLowerCase() === "zh-tw"}/>
                             <InputGroup.Text className="language-dropdown-item">繁體中文 - ZH</InputGroup.Text>
                         </InputGroup.Prepend>
                         <InputGroup.Prepend>
-                            <InputGroup.Radio aria-label="Radio button for following text input" value = "zh-CN" onClick={e => changeLanguage(e)} checked={language.toLowerCase() === "zh-cn"}/>
+                            <InputGroup.Radio aria-label="Radio button for following text input" value = "zh-CN" onClick={e => changeLanguage(e)} checked={language && language.toLowerCase() === "zh-cn"}/>
                             <InputGroup.Text className="language-dropdown-item">簡體中文 - ZH</InputGroup.Text>
                         </InputGroup.Prepend>
                     </InputGroup>
