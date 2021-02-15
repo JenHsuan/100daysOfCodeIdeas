@@ -109,7 +109,7 @@ const articlesReducer = (state: ArticlesState = initialState,
         case CLEAR_FILTER:
             return {
                 ...state,
-                category: -1,
+                category: "-1",
                 filteredArticles: []
             }
         case SET_CATEGORY:
