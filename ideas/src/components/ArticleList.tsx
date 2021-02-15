@@ -57,16 +57,6 @@ const ArticleList = () => {
     const { t, i18n } = useTranslation();
     const isFilterMode = filteredArticles.length !== 0 && showPlanner && !isLogin;
     const searchedArticle = useSelector(selectSearchedArticleState)
-    /*
-    const [searchedArticleTitle, SetSearchedArticleTitle] = useState(articles.length !== 0 ? articles[0].title : "")
-    const [searchedArticleUrl, SetSearchedArticleUrl] = useState(articles.length !== 0 ? articles[0].url : "")
-    const [searchedArticleCategory, SetSearchedArticleCategory] = useState(articles.length !== 0 ? articles[0].catogory : "")
-    const [searchedArticleDate, SetSearchedArticleDate] = useState(articles.length !== 0 ? articles[0].time : "")
-    const [searchedArticleAuthor, SetSearchedArticleAuthor] = useState(articles.length !== 0 ? articles[0].name : "")
-    const [searchedArticleReadTime, SetSearchedArticleReadTime] = useState(articles.length !== 0 ? articles[0].readtime : "")
-    const [searchedArticleSubtitle, SetSearchedArticleSubtitle] = useState(articles.length !== 0 ? articles[0].subtitle : "")
-    const [searchedArticleImage, SetSearchedArticleImage] = useState(articles.length !== 0 ? articles[0].image : "")
-*/
 
     useEffect(()=> {
         console.log('articles updated')
@@ -111,16 +101,6 @@ const ArticleList = () => {
 
     const handleClickForSearchArticle = (article) => {
         disPatch(setSearchedArticle(article))
-        /*
-        SetSearchedArticleTitle(article.title)
-        SetSearchedArticleUrl(article.url)
-        SetSearchedArticleCategory(article.category)
-        SetSearchedArticleDate(article.time)
-        SetSearchedArticleAuthor(article.name)
-        SetSearchedArticleReadTime(article.readtime)
-        SetSearchedArticleSubtitle(article.subtitle)
-        SetSearchedArticleImage(article.image)
-        */
     }
 
     return (
@@ -194,7 +174,7 @@ const ArticleList = () => {
                         <div>{`${t('ArticleModal.readTime')}: ${searchedArticle.readtime}`}</div>
                         <div>{`${t('ArticleModal.dateTime')}: ${searchedArticle.time}`}</div>
                         {searchedArticle.description && (
-                            <div>{`${t('ArticleModal.keyword')}: ${searchedArticle.description && searchedArticle.description.join(',')}`}</div>
+                            <div>{`${t('ArticleModal.keyword')}: ${searchedArticle.description}`}</div>
                         )}
                     </div>
                     <span>
