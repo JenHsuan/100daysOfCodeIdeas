@@ -193,6 +193,9 @@ const ArticleList = () => {
                     <div className="subtitle2">
                         <div>{`${t('ArticleModal.readTime')}: ${searchedArticle.readtime}`}</div>
                         <div>{`${t('ArticleModal.dateTime')}: ${searchedArticle.time}`}</div>
+                        {searchedArticle.description !== '' && (
+                            <div>{`${t('ArticleModal.keyword')}: ${searchedArticle.description.join(',')}`}</div>
+                        )}
                     </div>
                     <span>
                         <Button className = "navigate" variant="primary" onClick = {() => window.open(searchedArticle.url, '_blank')}>

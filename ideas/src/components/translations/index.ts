@@ -33,6 +33,7 @@ export const en: PageData = {
     learningMaterials: 'Learning materials',
     discoveredMaterials: 'Discovered materials',
     login: 'Login',
+    keyword: 'Keywords',
     title:'Click the details button to check the article.',
     subTitle:'to add articles or skills in your learning plan or open them directly.'
   },
@@ -130,6 +131,7 @@ export const zhTW: PageData = {
     learningMaterials: '學習資料',
     discoveredMaterials: '發現的資料',
     login: '登入',
+    keyword: '關鍵字',
     title:'單擊詳細信息按鈕以查看文章',
     subTitle:'在學習計劃中添加文章或技能或直接打開它們'
   },
@@ -227,6 +229,7 @@ export const zhCN: PageData = {
     learningMaterials: '学习资料',
     discoveredMaterials: '发现的资料',
     login: '登录',
+    keyword: '关键字',
     title:'单击详细信息按钮以查看文章',
     subTitle:'在学习计划中添加文章或技能或直接打开它们'
   },
@@ -324,6 +327,7 @@ export const ja: PageData = {
     learningMaterials: '学習教材',
     discoveredMaterials: '発見された教材',
     login: 'ログイン',
+    keyword: 'キーワード',
     title:'詳細ボタンをクリックして記事を確認してください',
     subTitle:'学習計画に記事やスキルを追加したり、直接開いたりする'
   },
