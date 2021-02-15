@@ -25,6 +25,7 @@ export const SET_UNMARKASFINISHED = 'SET_UNMARKASFINISHED';
 export const SET_PROVIDER = 'SET_PROVIDER';
 export const SET_USERID = 'SET_USERID';
 export const SET_LANGUAGE = 'SET_LANGUAGE';
+export const SET_SEARCHEDARTICLE = 'SET_SEARCHEDARTICLE';
 
 export interface ArticleType {
     id: number;

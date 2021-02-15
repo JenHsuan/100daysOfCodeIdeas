@@ -26,6 +26,7 @@ import {
     SET_PROVIDER,
     SET_USERID,
     SET_LANGUAGE,
+    SET_SEARCHEDARTICLE,
     ArticleType
 } from '../types'
 
@@ -147,6 +148,11 @@ export interface SetUserIdAction {
 
 export interface SetLanguageAction {
     readonly type: typeof SET_LANGUAGE
+    readonly payload: string
+}
+
+export interface SetSearchedArticleAction {
+    readonly type: typeof SET_SEARCHEDARTICLE
     readonly payload: string
 }
 
@@ -290,5 +296,11 @@ export const setLanguage = language => dispatch => {
     dispatch({
         type: SET_LANGUAGE,
         payload: language})
+}
+
+export const setSearchedArticle = searchedArticle=> dispatch => {
+    dispatch({
+        type: SET_SEARCHEDARTICLE,
+        payload: searchedArticle})
 }
 

@@ -26,6 +26,7 @@ export interface ArticlesState {
     provider: string;
     userId: number;
     language: string;
+    searchedArticle: ArticleType;
 }
 
 export const initialState = {
@@ -49,6 +50,18 @@ export const initialState = {
     provider: '',
     userId: -1,
     language: 'en',
+    searchedArticle: {
+        id: 0,
+        title: '',
+        subtitle: '',
+        image: '',
+        url: '',
+        time: '',
+        name: '',
+        readtime: '',
+        category: '',
+        descrption: ''
+    }
 }
 
 //Selector functions
@@ -73,3 +86,4 @@ export const selectFinishedArticlessState = (rootState: RootState) => rootState.
 export const selectProviderState = (rootState: RootState) => rootState.articlesReducer.provider;
 export const selectUserIdState = (rootState: RootState) => rootState.articlesReducer.userId;
 export const selectLanguageState = (rootState: RootState) => rootState.articlesReducer.language;
+export const selectSearchedArticleState = (rootState: RootState) => rootState.articlesReducer.searchedArticle;

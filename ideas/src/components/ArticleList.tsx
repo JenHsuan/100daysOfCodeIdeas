@@ -10,7 +10,8 @@ import {
     selectPageCountState,
     selectPerpageState,
     selectShowPlannerState,
-    selectLoginState
+    selectLoginState,
+    selectSearchedArticleState
 } from './states/states';
 
 import {
@@ -18,6 +19,7 @@ import {
     setOffset,
     setPageCount,
     setLogout,
+    setSearchedArticle
 } from './actions/articlesAction';
 
 import {
@@ -54,6 +56,8 @@ const ArticleList = () => {
     const isLogin = useSelector(selectLoginState);
     const { t, i18n } = useTranslation();
     const isFilterMode = filteredArticles.length !== 0 && showPlanner && !isLogin;
+    const searchedArticle = useSelector(selectSearchedArticleState)
+    /*
     const [searchedArticleTitle, SetSearchedArticleTitle] = useState(articles.length !== 0 ? articles[0].title : "")
     const [searchedArticleUrl, SetSearchedArticleUrl] = useState(articles.length !== 0 ? articles[0].url : "")
     const [searchedArticleCategory, SetSearchedArticleCategory] = useState(articles.length !== 0 ? articles[0].catogory : "")
@@ -62,6 +66,7 @@ const ArticleList = () => {
     const [searchedArticleReadTime, SetSearchedArticleReadTime] = useState(articles.length !== 0 ? articles[0].readtime : "")
     const [searchedArticleSubtitle, SetSearchedArticleSubtitle] = useState(articles.length !== 0 ? articles[0].subtitle : "")
     const [searchedArticleImage, SetSearchedArticleImage] = useState(articles.length !== 0 ? articles[0].image : "")
+*/
 
     useEffect(()=> {
         console.log('articles updated')
@@ -77,6 +82,9 @@ const ArticleList = () => {
         Math.ceil(articles.length / perpage) : Math.ceil(filteredArticles.length / perpage);
         disPatch(setPageCount(count));
         setPartialData();
+        if (filteredArticles.length !== 0) {
+            disPatch(setSearchedArticle(filteredArticles[0]))
+        }
     }, [filteredArticles])
 
     useEffect(()=> {
@@ -102,6 +110,8 @@ const ArticleList = () => {
     }
 
     const handleClickForSearchArticle = (article) => {
+        disPatch(setSearchedArticle(article))
+        /*
         SetSearchedArticleTitle(article.title)
         SetSearchedArticleUrl(article.url)
         SetSearchedArticleCategory(article.category)
@@ -110,6 +120,7 @@ const ArticleList = () => {
         SetSearchedArticleReadTime(article.readtime)
         SetSearchedArticleSubtitle(article.subtitle)
         SetSearchedArticleImage(article.image)
+        */
     }
 
     return (
@@ -166,29 +177,27 @@ const ArticleList = () => {
             )}
             {partialArticles.length > 0 && !isFilterMode && <Footer/>}
         </div>
-        {showPlanner && filteredArticles.length !== 0 && !isLogin && (
+        {showPlanner && filteredArticles.length !== 0 && !isLogin && searchedArticle && (
             <div className="searched-article-detail-border">
                 <div className="searched-article-detail">
                     <div className="title">
-                        {searchedArticleTitle}
+                        {searchedArticle.title}
                     </div>
                     <div className="subtitle1">
-                        <span>{searchedArticleAuthor}</span>
-                        <span> . </span>
-                        <span>{Number(searchedArticleCategory) === 0 ? '100 days of code' : 'Learning materials'}</span>
+                        <div>{`${t('ArticleModal.author')}: ${searchedArticle.name}`}</div>
+                        <div>{`${t('ArticleModal.category')}: ${Number(searchedArticle.category) === 0 ? '100 days of code' : 'Learning materials'}`}</div>
                     </div>
                     <div className="subtitle2">
-                        <span>{searchedArticleReadTime}</span>
-                        <span> . </span>
-                        <span>{searchedArticleDate}</span>
+                        <div>{`${t('ArticleModal.readTime')}: ${searchedArticle.readtime}`}</div>
+                        <div>{`${t('ArticleModal.dateTime')}: ${searchedArticle.time}`}</div>
                         <span>
-                            <Button className = "navigate" variant="primary" onClick = {() => window.open(searchedArticleUrl, '_blank')}>
+                            <Button className = "navigate" variant="primary" onClick = {() => window.open(searchedArticle.url, '_blank')}>
                         {t('ArticleModal.open')}
                             </Button>
                         </span>
                     </div>
                     <div className = "intro" >
-                        {searchedArticleSubtitle}
+                        {searchedArticle.subtitle}
                     </div>
                 </div>
             </div>
