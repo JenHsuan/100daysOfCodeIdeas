@@ -30,9 +30,9 @@ const ArticleDropdown = () => {
     }
 
     const getTitle = () => {
-        if (category == -1) {
+        if (category === -1) {
             return t('SideBar.dropdownForCategories.all')
-        } else if (category == 0) {
+        } else if (category === 0) {
             return t('SideBar.dropdownForCategories.daysOfCode')
         }  else if (category == 1) {
             return t('SideBar.dropdownForCategories.programming')
