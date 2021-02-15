@@ -193,8 +193,8 @@ const ArticleList = () => {
                     <div className="subtitle2">
                         <div>{`${t('ArticleModal.readTime')}: ${searchedArticle.readtime}`}</div>
                         <div>{`${t('ArticleModal.dateTime')}: ${searchedArticle.time}`}</div>
-                        {searchedArticle.descrption !== '' && (
-                            <div>{`${t('ArticleModal.keyword')}: ${searchedArticle.descrption && searchedArticle.descrption.join(',')}`}</div>
+                        {searchedArticle.descrption && (
+                            <div>{`${t('ArticleModal.keyword')}: ${searchedArticle.descrption}`}</div>
                         )}
                     </div>
                     <span>
