@@ -11,7 +11,9 @@ import {
     selectProviderState,
     selectUserIdState,
     selectEmailState,
-    selectFinishedArticlessState
+    selectFinishedArticlessState,
+    selectFilteredArticlesState,
+    selectShowPlannerState
 } from './states/states';
 
 import {
@@ -44,6 +46,9 @@ const Article: FunctionComponent<ArticleProp> = ({article}: ArticleProp) => {
     const finishedArticles = useSelector(selectFinishedArticlessState);
     const articleRef = useRef();
     const { t, i18n } = useTranslation();
+    const filteredArticles = useSelector(selectFilteredArticlesState);
+    const showPlannerFlag = useSelector(selectShowPlannerState);
+    const isFilterMode = filteredArticles.length !== 0 && showPlannerFlag && !isLogin;
 
     const callback = entries => {
         for (let entry of entries) {
@@ -212,7 +217,7 @@ const Article: FunctionComponent<ArticleProp> = ({article}: ArticleProp) => {
 
     return (
         <div className="articles-row">
-            <Card className="article-card" border="light">
+            <Card className={isFilterMode ? 'searched-article-card' : 'article-card'} border="light">
                 {isLogin && router.pathname !== '/bookmarks' && (
                 <div className="article-bookmark">
                     <span className="btn-o">
@@ -238,15 +243,19 @@ const Article: FunctionComponent<ArticleProp> = ({article}: ArticleProp) => {
                 </div>
                 )}
                 <Card.Body className="article-card-body">
-                    <img className="article-card-img" ref={articleRef} src={articleImg} alt={article.title} title={article.title} onClick = {handleShow}/>
+                    <img className="article-card-img" ref={articleRef} src={articleImg} alt={article.title} title={article.title}/>
                     <div className="title">{article.title}</div>
-                    <div className="date">{article.name}</div>
-                    <div className="date">
-                        <span className="date">{article.time}</span>
-                        <span> . </span>
-                        <span className="readtime">{article.readtime}</span>
-                    </div>
-                    <button className="article-btn" onClick = {handleShow}>{t('Article.details')}</button>
+                    {!isFilterMode && (
+                        <>
+                        <div className="date">{article.name}</div>
+                        <div className="date">
+                            <span className="date">{article.time}</span>
+                            <span> . </span>
+                            <span className="readtime">{article.readtime}</span>
+                        </div>
+                        <button className="article-btn" onClick = {handleShow}>{t('Article.details')}</button>
+                        </>
+                    )}
                 </Card.Body>
             </Card>
             <ArticleModal show = {show} handleClose = {handleClose} article = {article} handleOpen={handleCheckingTrue}/>

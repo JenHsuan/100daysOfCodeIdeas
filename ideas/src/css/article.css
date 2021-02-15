@@ -6,6 +6,13 @@
   background-color: #FFFFFF;
   margin-top: 1%; }
 
+.searched-article-card {
+  width: 100%; }
+  .searched-article-card .title {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400; }
+
 .articles-hide-siderbar-head {
   grid-column-start: 1;
   grid-column-end: 9;
@@ -31,7 +38,7 @@
   transition: 0.5s; }
 
 .article-card {
-  width: 400px;
+  width: 100%;
   border: none;
   margin-top: 2%;
   margin-bottom: 20%;

@@ -1,5 +1,4 @@
-
-.articles-hide-siderbar {
+.articles-hide-siderbar{
    grid-column-start: 1;
    grid-column-end: 9;
    grid-row-start: 2;
@@ -7,12 +6,74 @@
    margin-top: 1%;
    transition: 0.5s;
 }
- 
+
+.searched-articles {
+   margin-left: 5%;
+   grid-column-start: 2;
+   grid-column-end: 4;
+   grid-row-start: 2;
+   background-color: #FFFFFF;
+   margin-top: 1%;
+   transition: 0.5s;
+}
+
+.searched-article-detail {
+   position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+   left: 53%;
+   top: 25%;
+   bottom: 15%;
+   margin-right: 5%;
+   padding-top: 1%;
+   padding-left: 1%;
+   padding-right: 1%;
+   background-color: #FFFFFF;
+   transition: 0.5s;
+   border: 1px solid gray;
+   border-radius: 5px;
+   box-shadow: 0 5px 5px gray, 0 0 0 5px #ffffffeb;
+   .title {
+      margin-top: 5%;
+      margin-left: 5%;
+      font-size: 28px;
+      font-weight: 400;
+      font-family:Arial, Helvetica, sans-serif;
+   }
+   .navigate {
+      margin-left: 10%;
+      border-radius: 10px;
+      font-size: 16px;
+      box-shadow: 0 1px 1px gray, 0 0 0 1px #ffffffeb;
+   }
+   .subtitle1 {
+      margin-top: 5%;
+      margin-left: 10%;
+      span{
+         font-size: 16px;
+         font-weight: 200;
+         color: gray;
+      }
+   }
+   .subtitle2 {
+      margin-top: 2%;
+      margin-left: 10%;
+      span{
+         font-size: 16px;
+         font-weight: 200;
+         color: gray;
+      }
+   }
+   .intro {
+      margin-top: 5%;
+      margin-left: 5%;
+      font-size: 18px;
+   }
+}
+
 .articles-hide-siderbar-remove-left {
    padding-left: 23%;
    transition: 0.5s;
 }
-  
+
 .sidebar {
     grid-column-start: 1;
     grid-column-end: 3;
@@ -27,7 +88,7 @@
     transition: 0.5s;
     border-radius: 5px;
     box-shadow: 0 10px 40px gray
-    
+
  }
 
  .sidebar:hover{
@@ -38,7 +99,7 @@
     grid-template-columns: repeat(10, 1fr);
     grid-auto-rows: 100px;
  }
- 
+
  .sidebar-title {
     grid-row-start: 1;
     grid-row-end: 4;
@@ -63,7 +124,7 @@
    }
  }
 
- 
+
 
  .sidebar-getstarted{
    grid-row-start: 1;
@@ -236,6 +297,12 @@ input[type="password"]::placeholder
     color: #e16868;
 }
 
+@media only screen and (min-width: 1000px){
+   .articles-hide-siderbar-head {
+     padding-top: 5%;
+   }
+ }
+
 @media screen and (max-width: 1000px) and (min-width: 700px){
    .sidebar-title {
       margin-top: 15%;
@@ -244,10 +311,12 @@ input[type="password"]::placeholder
          font-size: 14px;
       }
    }
-} 
+}
 
 @media screen and (max-width: 700px){
    .sidebar {
       display:none;
+   }
+   .searched-articles {
    }
 }

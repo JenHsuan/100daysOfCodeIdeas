@@ -101,7 +101,7 @@
         margin-top: 10%;
     }
 
-    
+
  }
 
  .common-footer-grid-box-move-left{
@@ -167,12 +167,12 @@
             grid-column-start: 5;
             grid-column-end: 12;
         }
-    }    
+    }
   }
 
 
  @media screen and (max-width: 1000px) and (min-width: 500px){
-     
+
     .common-footer-grid-box, .common-footer-grid-box-move-left{
         .slogon {
             font-size: 24px;
@@ -227,7 +227,7 @@
 
  @media screen and (max-width: 500px){
     .common-footer-grid-box, .common-footer-grid-box-move-left{
-        
+
         grid-column-start: 1;
         grid-column-end: 15;
         .slogon {

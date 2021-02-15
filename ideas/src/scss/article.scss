@@ -7,6 +7,16 @@
     margin-top: 1%;
  }
 
+
+ .searched-article-card {
+  width: 100%;
+  .title {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+  }
+ }
+
  .articles-hide-siderbar-head {
   grid-column-start: 1;
   grid-column-end: 9;
@@ -40,7 +50,7 @@
  }
 
 .article-card {
-    width: 400px;
+    width: 100%;
     border: none;
     margin-top: 2%;
     margin-bottom: 20%;
@@ -255,6 +265,13 @@
         box-shadow: 0 5px 5px gray, 0 0 0 5px #ffffffeb;
      }
     }
+
+    .searched-article-card {
+      .article-card-img {
+      }
+      .title {
+      }
+    }
   }
 
   @media only screen and (max-width: 500px){
@@ -280,5 +297,11 @@
     }
     .article-card {
       width: 350px;
+    }
+    .searched-article-card {
+      .article-card-img {
+      }
+      .title {
+      }
     }
   }
