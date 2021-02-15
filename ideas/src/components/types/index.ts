@@ -37,7 +37,7 @@ export interface ArticleType {
     name: string;
     readtime: string;
     category: string;
-    descrption: string;
+    description: string;
 }
 
 export interface ArticleProp{

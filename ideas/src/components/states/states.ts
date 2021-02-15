@@ -60,7 +60,7 @@ export const initialState = {
         name: '',
         readtime: '',
         category: '',
-        descrption: ''
+        description: ''
     }
 }
 
