@@ -19,7 +19,7 @@ export interface ArticlesState {
     email: string;
     username: string;
     filterText: string;
-    category: number;
+    category: string;
     errorMessage: string;
     bookmarks:Array<number>;
     finishedArticles:Array<number>;
@@ -43,7 +43,7 @@ export const initialState = {
     email:'',
     username:'',
     filterText:'',
-    category: -1,
+    category: "-1",
     errorMessage: '',
     bookmarks: [],
     finishedArticles: [],
