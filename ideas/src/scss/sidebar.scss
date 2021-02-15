@@ -21,7 +21,7 @@
    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
    left: 53%;
    top: 28%;
-   bottom: 15%;
+   bottom: 10%;
    margin-right: 5%;
    padding-top: 1%;
    padding-left: 1%;
@@ -32,19 +32,18 @@
    border-radius: 5px;
    box-shadow: 0 5px 5px gray, 0 0 0 5px #ffffffeb;
    .title {
-      margin-top: 5%;
+      margin-top: 3%;
       margin-left: 5%;
       font-size: 28px;
       font-weight: 400;
       font-family:Arial, Helvetica, sans-serif;
    }
    .navigate {
-      margin-top: 10%;
+      margin-top: 7%;
       margin-left: 18%;
       border: 2px solid black;
       border-radius: 10px;
       font-size: 18px;
-      background-color: #4D4D4D;
       box-shadow: 0 1px 1px gray, 0 0 0 1px #ffffffeb;
    }
    .subtitle1 {
