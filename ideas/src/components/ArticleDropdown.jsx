@@ -18,24 +18,25 @@ const ArticleDropdown = () => {
     const category = useSelector(selectCategoryState);
     const { t, i18n } = useTranslation();
     const handleSelect=(e)=>{
-        if (e != "-1") {
+        if (e !== "-1") {
             console.log(e);
+            console.log(typeof e);
             disPatch(setCategory(e));
             if (router.pathname !== '/') {
                 Router.push(`/`)
             }
         } else {
             disPatch(clearCategory());
-            disPatch(setCategory(-1));
+            disPatch(setCategory("-1"));
         }
     }
 
     const getTitle = () => {
-        if (category === -1) {
+        if (category === "-1") {
             return t('SideBar.dropdownForCategories.all')
-        } else if (category === 0) {
+        } else if (category === "0") {
             return t('SideBar.dropdownForCategories.daysOfCode')
-        }  else if (category == 1) {
+        }  else if (category == "1") {
             return t('SideBar.dropdownForCategories.programming')
         }
     }
