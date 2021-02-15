@@ -18,14 +18,15 @@ const ArticleDropdown = () => {
     const category = useSelector(selectCategoryState);
     const { t, i18n } = useTranslation();
     const handleSelect=(e)=>{
-        console.log(e);
-        disPatch(setCategory(e));
         if (e != "-1") {
+            console.log(e);
+            disPatch(setCategory(e));
             if (router.pathname !== '/') {
                 Router.push(`/`)
             }
         } else {
             disPatch(clearCategory());
+            disPatch(setCategory(-1));
         }
     }
 
