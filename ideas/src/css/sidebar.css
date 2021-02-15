@@ -33,7 +33,7 @@
   .searched-article-detail .title {
     margin-top: 3%;
     margin-left: 5%;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 400;
     font-family: Arial, Helvetica, sans-serif; }
   .searched-article-detail .navigate {
@@ -41,7 +41,7 @@
     margin-left: 18%;
     border: 2px solid black;
     border-radius: 10px;
-    font-size: 18px;
+    font-size: 16px;
     box-shadow: 0 1px 1px gray, 0 0 0 1px #ffffffeb; }
   .searched-article-detail .subtitle1 {
     margin-top: 5%;
@@ -60,7 +60,8 @@
   .searched-article-detail .intro {
     margin-top: 5%;
     margin-left: 5%;
-    font-size: 18px; }
+    font-size: 18px;
+    color: #4D4D4D; }
 
 .articles-hide-siderbar-remove-left {
   padding-left: 23%;

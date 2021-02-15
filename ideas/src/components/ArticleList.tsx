@@ -190,15 +190,15 @@ const ArticleList = () => {
                     <div className="subtitle2">
                         <div>{`${t('ArticleModal.readTime')}: ${searchedArticle.readtime}`}</div>
                         <div>{`${t('ArticleModal.dateTime')}: ${searchedArticle.time}`}</div>
-                        <span>
-                            <Button className = "navigate" variant="primary" onClick = {() => window.open(searchedArticle.url, '_blank')}>
-                        {t('ArticleModal.open')}
-                            </Button>
-                        </span>
                     </div>
                     <div className = "intro" >
-                        {searchedArticle.subtitle}
-                    </div>
+                            {searchedArticle.subtitle}
+                        </div>
+                    <span>
+                        <Button className = "navigate" variant="primary" onClick = {() => window.open(searchedArticle.url, '_blank')}>
+                        {t('ArticleModal.open')}
+                        </Button>
+                    </span>
                 </div>
             </div>
         )}
