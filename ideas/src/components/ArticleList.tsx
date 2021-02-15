@@ -183,6 +183,9 @@ const ArticleList = () => {
                     <div className="title">
                         {searchedArticle.title}
                     </div>
+                    <div className = "intro" >
+                            {searchedArticle.subtitle}
+                    </div>
                     <div className="subtitle1">
                         <div>{`${t('ArticleModal.author')}: ${searchedArticle.name}`}</div>
                         <div>{`${t('ArticleModal.category')}: ${Number(searchedArticle.category) === 0 ? '100 days of code' : 'Learning materials'}`}</div>
@@ -191,9 +194,6 @@ const ArticleList = () => {
                         <div>{`${t('ArticleModal.readTime')}: ${searchedArticle.readtime}`}</div>
                         <div>{`${t('ArticleModal.dateTime')}: ${searchedArticle.time}`}</div>
                     </div>
-                    <div className = "intro" >
-                            {searchedArticle.subtitle}
-                        </div>
                     <span>
                         <Button className = "navigate" variant="primary" onClick = {() => window.open(searchedArticle.url, '_blank')}>
                         {t('ArticleModal.open')}
