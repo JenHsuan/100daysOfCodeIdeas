@@ -302,7 +302,7 @@ export const zhCN: PageData = {
 
 export const ja: PageData = {
   NavBar: {
-    about: 'ほど',
+    about: 'について',
     language:'言語',
     account: 'アカウント',
     signIn: 'ログイン',
@@ -371,14 +371,14 @@ export const ja: PageData = {
     btn:'はじめに'
   },
   AboutPageContent: {
-    title:'ほど Daily Learning',
+    title:'Daily Learning について',
     subtitle1:'1日記事を読む',
-    content1:'今日、私たちの周りにはたくさんの情報があります。自分自身を向上させるために、私たちは毎日さらに移動する必要があります。毎日の学習は、プログラミングの自己学習者でもある人々に記事、課題、またはビデオを提供します',
+    content1:'今日、私たちの周りにはたくさんの情報があります。自分自身を向上させるために、毎日少しずつ進歩が必要です。毎日の学習は、プログラミングの自己学習者でもある人々に記事、課題、またはビデオを提供します',
     subtitle2:'著者について',
-    content2:'Jen-Hsuan Hsieh (Sean Hsieh) 自己学習者、ライター、開発者でもあります。彼は、フロントエンドJavaScriptフレームワークの経験を持つシニアWeb開発者です。彼はReact.js、Knockout.js、NodeJSやASP.NETMVCなどのサーバー側言語に精通しています。',
+    content2:'Jen-Hsuan Hsieh (Sean Hsieh) は自己学習者、ライター、開発者でもあります。彼は、フロントエンドJavaScriptフレームワークの経験を持つシニアWeb開発者です。彼はReact.js、Knockout.js、NodeJSやASP.NETMVCなどのサーバー側言語に精通しています。',
     subtitle3:'連絡する',
     content3_1: '一般的な質問については',
-    content3_2: 'できるだけ早くご連絡いたします'
+    content3_2: 'で連絡お願い致します'
   },
   DownloadsPageContent: {
     title:'ダウンロード',
