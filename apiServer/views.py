@@ -44,6 +44,8 @@ signin_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'signin.html')
 signup_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'signup.html')
 plans_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'bookmarks.html')
 about_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'about.html')
+prog_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'filter', 'programming.html')
+days_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'filter', 'daysOfCode.html')
 achievement_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'achievement.html')
 downloads_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'downloads.html')
 downloads_file_base = '100daysfcodeideas'
@@ -65,7 +67,7 @@ class RSSFeed(Feed):
 
     def item_description(self, item):
         return item.subtitle
-    
+
     def item_link(self, item):
         return item.url
 
@@ -97,14 +99,14 @@ class Download(APIView):
                 else:
                     return HttpResponse(
                         """
-                        You need provide the file type. 
+                        You need provide the file type.
                         """,
                         status=400,
                     )
         else:
             return HttpResponse(
                 """
-                    You need provide the file type. 
+                    You need provide the file type.
                 """,
                 status=400,
             )
@@ -217,6 +219,36 @@ def about(request):
             status=501,
         )
 
+def prog(request):
+    try:
+        with open(prog_file_path) as f:
+            return HttpResponse(f.read())
+    except FileNotFoundError:
+        logging.exception('Production build of app not found')
+        return HttpResponse(
+            """
+                This URL is only used when you have built the production
+                version of the app. Visit http://localhost:3000/ instead after
+                running `yarn start` on the frontend/ directory
+                """,
+            status=501,
+        )
+
+def days(request):
+    try:
+        with open(days_file_path) as f:
+            return HttpResponse(f.read())
+    except FileNotFoundError:
+        logging.exception('Production build of app not found')
+        return HttpResponse(
+            """
+                This URL is only used when you have built the production
+                version of the app. Visit http://localhost:3000/ instead after
+                running `yarn start` on the frontend/ directory
+                """,
+            status=501,
+        )
+
 def achievements(request):
     try:
         with open(about_file_path) as f:
@@ -244,7 +276,7 @@ def current_user(request):
     """
     Determine the current user by their token, and return their data
     """
-    
+
     serializer = UserSerializer(request.user)
     return Response(serializer.data)
 
@@ -253,7 +285,7 @@ class UserList(APIView):
     Create a new user. It's called 'UserList' because normally we'd have a get
     method here too, for retrieving a list of all User objects.
     """
-    # use empty authentication classes 
+    # use empty authentication classes
     authentication_classes = []
     permission_classes = (permissions.AllowAny,)
 
@@ -264,7 +296,7 @@ class UserList(APIView):
             response = Response(serializer.data, status=status.HTTP_201_CREATED)
             response.set_cookie('token', serializer.data['token'], httponly=True)
             return response
-        
+
         msg = {"error": serializer.errors}
         return Response(data=msg)
 
@@ -294,7 +326,7 @@ class InsertDataDev(APIView):
         return HttpResponse('OK')
 
 class ArticleByCategoryViewSet(generics.ListAPIView):
-    # use empty authentication classes 
+    # use empty authentication classes
     authentication_classes = []
     permission_classes = (permissions.AllowAny,)
     serializer_class = ArticleSerializer
@@ -310,7 +342,7 @@ class ArticleByCategoryViewSet(generics.ListAPIView):
 class ProfileViewSet(generics.GenericAPIView):
     permission_classes = (permissions.AllowAny,)
     authentication_classes = []
-    # use default authentication classes 
+    # use default authentication classes
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
@@ -331,7 +363,7 @@ class ProfileViewSet(generics.GenericAPIView):
             if hasSubscribed != None:
                 if hasSubscribed != 'True' or hasSubscribed != 'False':
                     return Response(data={'error':'hasSubscribed is invalid'}, status=status.HTTP_400_BAD_REQUEST)
-            
+
                 p = Profile.objects.get(reader_id = reader_id)
                 p.hasSubscribed = hasSubscribed
                 p.save()
@@ -353,14 +385,14 @@ class ProfileViewSet(generics.GenericAPIView):
                 for finishedArticle in finishedArticleList:
                     if finishedArticle != '' and finishedArticle.isnumeric() == False:
                         return Response(data={'error':'finishedArticles is invalid'}, status=status.HTTP_400_BAD_REQUEST)
-                
+
                 p = Profile.objects.get(reader_id = reader_id)
                 p.finishedArticles = finishedArticles
                 p.save()
                 return Response(status=status.HTTP_200_OK)
 
         return Response(status=status.HTTP_200_OK)
-    
+
     def post(self, request):
         try:
             serializer = self.serializer_class(data=request.data)
@@ -370,30 +402,30 @@ class ProfileViewSet(generics.GenericAPIView):
                 now = datetime.now()
                 dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
 
-                #send_mail('[Daily Learning] Thanks for registration!', 
-                #'You login to Daily Learning successfully on ' + dt_string, 
-                #EMAIL_HOST_USER, 
-                #[serializer.data['email']], 
+                #send_mail('[Daily Learning] Thanks for registration!',
+                #'You login to Daily Learning successfully on ' + dt_string,
+                #EMAIL_HOST_USER,
+                #[serializer.data['email']],
                 #fail_silently = False)
-            
+
                 #email = serializer.data.get('email', None)
                 #send_mail('Django mail', 'This e-mail was sent with Django.','alaymangogo@gmail.com', [email], fail_silently=False)
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
-            
+
             msg = {"error": serializer.errors}
             return Response(data=msg)
         except ValidationError as e:
             msg = {"error": e.messages}
             print(msg)
-            return Response(data=msg) 
-        
+            return Response(data=msg)
 
-profile_view = ProfileViewSet.as_view()         
+
+profile_view = ProfileViewSet.as_view()
 
 class ProfileSocialViewSet(generics.GenericAPIView):
     permission_classes = (permissions.AllowAny,)
     authentication_classes = []
-    # use default authentication classes 
+    # use default authentication classes
     queryset = ProfileSocial.objects.all()
     serializer_class = ProfileSocialSerializer
 
@@ -405,7 +437,7 @@ class ProfileSocialViewSet(generics.GenericAPIView):
             return Response(data=model_to_dict(p), status=status.HTTP_200_OK)
         else:
             return Response(status=status.HTTP_200_OK)
-                
+
     def put(self, request):
         provider = self.request.query_params.get('provider', None)
         email = self.request.query_params.get('email', None)
@@ -416,7 +448,7 @@ class ProfileSocialViewSet(generics.GenericAPIView):
             if hasSubscribed != None:
                 if hasSubscribed != 'True' or hasSubscribed != 'False':
                     return Response(data={'error':'hasSubscribed is invalid'}, status=status.HTTP_400_BAD_REQUEST)
-            
+
                 p = ProfileSocial.objects.filter(email=email).filter(provider=provider).first()
                 p.hasSubscribed = hasSubscribed
                 p.save()
@@ -440,42 +472,42 @@ class ProfileSocialViewSet(generics.GenericAPIView):
                 for finishedArticle in finishedArticleList:
                     if finishedArticle != '' and finishedArticle.isnumeric() == False:
                         return Response(data={'error':'finishedArticles is invalid'}, status=status.HTTP_400_BAD_REQUEST)
-                
+
                 p = ProfileSocial.objects.filter(email=email).filter(provider=provider).first()
                 p.finishedArticles = finishedArticles
                 p.save()
                 return Response(status=status.HTTP_200_OK)
 
         return Response(status=status.HTTP_200_OK)
-    
+
     def post(self, request):
         try:
             serializer = self.serializer_class(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                
+
                 now = datetime.now()
                 dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
 
-                #send_mail('[Daily Learning] Thanks for registration!', 
-                #'You login to Daily Learning successfully on ' + dt_string, 
-                #EMAIL_HOST_USER, 
-                #[serializer.data['email']], 
+                #send_mail('[Daily Learning] Thanks for registration!',
+                #'You login to Daily Learning successfully on ' + dt_string,
+                #EMAIL_HOST_USER,
+                #[serializer.data['email']],
                 #fail_silently = False)
-            
+
                 #email = serializer.data.get('email', None)
                 #send_mail('Django mail', 'This e-mail was sent with Django.','alaymangogo@gmail.com', [email], fail_silently=False)
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
-            
+
             msg = {"error": serializer.errors}
             return Response(data=msg)
         except ValidationError as e:
             msg = {"error": e.messages}
             print(msg)
-            return Response(data=msg) 
-        
+            return Response(data=msg)
 
-profile_socail_view = ProfileSocialViewSet.as_view()         
+
+profile_socail_view = ProfileSocialViewSet.as_view()
 
 
 class RefreshTokenView(generics.GenericAPIView):
@@ -494,11 +526,11 @@ class RefreshTokenView(generics.GenericAPIView):
         else:
             return Response(status=res.status_code)
 
-renew_token= RefreshTokenView.as_view()   
-        
+renew_token= RefreshTokenView.as_view()
+
 class SocialGithubLoginView(generics.GenericAPIView):
     serializer_class = SocialAuthForGitihubSerializer
-    # use empty authentication classes 
+    # use empty authentication classes
     authentication_classes = []
     permission_classes = [permissions.AllowAny]
 
@@ -517,12 +549,12 @@ class SocialGithubLoginView(generics.GenericAPIView):
         else:
             return Response(status=res.status_code, data=res.text)
 
-social_auth_github = SocialGithubLoginView.as_view()    
+social_auth_github = SocialGithubLoginView.as_view()
 
 class SocialLoginView(generics.GenericAPIView):
     serializer_class = SocialAuthSerializer
 
-    # use empty authentication classes 
+    # use empty authentication classes
     authentication_classes = []
     permission_classes = [permissions.AllowAny]
 
@@ -536,7 +568,7 @@ class SocialLoginView(generics.GenericAPIView):
         try:
             backend = load_backend(strategy=strategy, name=provider,
             redirect_uri=None)
- 
+
         except MissingBackend:
             return Response({'error': 'Please provide a valid provider'},
             status=status.HTTP_400_BAD_REQUEST)
@@ -559,13 +591,13 @@ class SocialLoginView(generics.GenericAPIView):
 
         try:
             authenticated_user = backend.do_auth(access_token, user=user)
-        
+
         except HTTPError as error:
             return Response({
                 "error":"invalid token",
                 "details": str(error)
             }, status=status.HTTP_400_BAD_REQUEST)
-        
+
         except AuthForbidden as error:
             return Response({
                 "error":"invalid token",
@@ -592,7 +624,7 @@ class SocialLoginView(generics.GenericAPIView):
                     "provider": provider,
                     "email": authenticated_user.email
                 })
-			
+
             #customize the response to your needs
             response = {
                 "email": authenticated_user.email,
@@ -606,10 +638,10 @@ class SocialLoginView(generics.GenericAPIView):
             now = datetime.now()
             dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
 
-            #send_mail('[Daily Learning] Welcome Back!', 
-            #'Hi ' + authenticated_user.username + ', you login to Daily Learning successfully on ' + dt_string, 
-            #EMAIL_HOST_USER, 
-            #[authenticated_user.email], 
+            #send_mail('[Daily Learning] Welcome Back!',
+            #'Hi ' + authenticated_user.username + ', you login to Daily Learning successfully on ' + dt_string,
+            #EMAIL_HOST_USER,
+            #[authenticated_user.email],
             #fail_silently = False)
 
             return response

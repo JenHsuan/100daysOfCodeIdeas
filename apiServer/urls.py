@@ -3,7 +3,7 @@ from django.conf.urls import url
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import downloads, Download, RSSFeed, robot, googleValidation, achievements, profile_socail_view, InsertDataDev, about, renew_token, plans, signup, profile_view, social_auth_github,  social_auth, signin, index, react, InsertDataMedium, UserViewSet, current_user, UserList, UserViewSet, ArticleByCategoryViewSet, ProfileViewSet
+from .views import downloads, Download, RSSFeed, robot, googleValidation, achievements, profile_socail_view, InsertDataDev, about, renew_token, plans, signup, profile_view, social_auth_github,  social_auth, signin, index, react, InsertDataMedium, UserViewSet, current_user, UserList, UserViewSet, ArticleByCategoryViewSet, ProfileViewSet, prog, days
 from rest_framework.routers import DefaultRouter
 from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework_jwt.views import refresh_jwt_token
@@ -19,7 +19,7 @@ router = DefaultRouter()
 router.register(r'user', UserViewSet)
 #router.register(r'order', OrderViewSet)
 # router.register(r'articles', ArticleViewSet)
-#router.register(r'profile', ProfileViewSet) 
+#router.register(r'profile', ProfileViewSet)
 
 sitemaps = {
     'codeideas': GenericSitemap({'queryset': Entry.objects.get_queryset().order_by('id'), 'date_field': 'pub_date'}, priority=1.0),
@@ -34,14 +34,16 @@ def x_robots_tag(func):
 
 urlpatterns = [
     path('sitemap.xml', x_robots_tag(sitemap),
-    
+
          {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap'),
     path("", index, name = "index"),
     path("signin", signin, name = "signin"),
     path("signup", signup, name = "signup"),
     path("plans", plans, name = "plans"),
-    path("about", plans, name = "about"),
+    path("about", about, name = "about"),
+    path("filter/programming", prog, name = "prog"),
+    path("filter/daysOfCode", days, name = "days"),
     path("api/download", Download.as_view(), name = "download"),
     path("downloads", downloads, name = "downloads"),
     path("achievements", achievements, name="achievements"),
