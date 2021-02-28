@@ -13,10 +13,10 @@ import '../../components/i18n'
 import { useRouter } from 'next/router'
 
 const daysOfCode = ({jsonLdData}) => {
-    const title = "ALayman Daily Learning";
-    const keywords = "Software Development, Tesing, DveOps, SRE, Inteviews, Data Sciences";
+    const title = "100 Days of Code Challenges";
+    const keywords = "Software Development, 100DaysOf Code Challenges";
     const url = "https://daily-learning.herokuapp.com/";
-    const description = "Daily learning provides articles, challenges, or videos to people who are also self-learner for programming.";
+    const description = "It's a challenge of continous writing, programming, and sharing. Welcome to share if you like!";
 
     return (
     <GaLayout>

@@ -13,10 +13,10 @@ import '../../components/i18n'
 import { useRouter } from 'next/router'
 
 const programming = ({jsonLdData}) => {
-    const title = "ALayman Daily Learning";
+    const title = "A-Layman Blog";
     const keywords = "Software Development, Tesing, DveOps, SRE, Inteviews, Data Sciences";
     const url = "https://daily-learning.herokuapp.com/";
-    const description = "Daily learning provides articles, challenges, or videos to people who are also self-learner for programming.";
+    const description = "If you want to love your own value, you have to create value to the world.";
 
     return (
     <GaLayout>
