@@ -1,17 +1,18 @@
-import ArticleList from '../components/ArticleList'
+import ArticleList from '../../components/ArticleList'
 import { Provider } from 'react-redux';
-import store from '../components/store/store'
-import SideBar from '../components/SideBar';
-import NavBar from '../components/NavBar';
-import '../css/mainpage.css';
+import store from '../../components/store/store'
+import SideBar from '../../components/SideBar';
+import NavBar from '../../components/NavBar';
+import '../../css/mainpage.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../css/sidebar.css'
-import GaLayout from '../components/GaLayout';
-import CommonHead from '../components/CommonHead';
-import {getStatics} from '../components/getStatics';
-import '../components/i18n'
+import '../../css/sidebar.css'
+import GaLayout from '../../components/GaLayout';
+import CommonHead from '../../components/CommonHead';
+import {getStatics} from '../../components/getStatics';
+import '../../components/i18n'
+import { useRouter } from 'next/router'
 
-const Index = ({jsonLdData}) => {
+const programming = ({jsonLdData}) => {
     const title = "ALayman Daily Learning";
     const keywords = "Software Development, Tesing, DveOps, SRE, Inteviews, Data Sciences";
     const url = "https://daily-learning.herokuapp.com/";
@@ -40,5 +41,4 @@ export async function getStaticProps(){
     return await getStatics();
 }
 
-export default Index;
-
+export default programming

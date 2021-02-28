@@ -19,7 +19,8 @@ import {
     setOffset,
     setPageCount,
     setLogout,
-    setSearchedArticle
+    setSearchedArticle,
+    setCategory
 } from './actions/articlesAction';
 
 import {
@@ -40,6 +41,7 @@ import { refreshToken } from '../components/account'
 import { useTranslation } from 'react-i18next';
 
 import { Button, Image } from 'react-bootstrap';
+import { routingPathMap } from './configruration';
 
 const ArticleList = () => {
     const disPatch = useDispatch();
@@ -64,6 +66,7 @@ const ArticleList = () => {
         disPatch(setPartialArticles(partialData));
         var count = Math.ceil(articles.length / perpage);
         disPatch(setPageCount(count));
+        disPatch(setCategory(routingPathMap[router.pathname]));
     }, [articles])
 
     useEffect(()=> {
