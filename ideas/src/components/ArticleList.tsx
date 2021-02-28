@@ -171,7 +171,7 @@ const ArticleList = () => {
                     </div>
                     <div className="subtitle1">
                         <div>{`${t('ArticleModal.author')}: ${searchedArticle.name}`}</div>
-                        <div>{`${t('ArticleModal.category')}: ${Number(searchedArticle.category) === 0 ? '100 days of code' : 'Learning materials'}`}</div>
+                        <div>{`${t('ArticleModal.category')}: ${Number(searchedArticle.category) === 0 ? t("SideBar.dropdownForCategories.daysOfCode") : t("SideBar.dropdownForCategories.programming")}`}</div>
                     </div>
                     <div className="subtitle2">
                         <div>{`${t('ArticleModal.readTime')}: ${searchedArticle.readtime}`}</div>
