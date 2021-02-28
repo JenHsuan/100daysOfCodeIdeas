@@ -11,7 +11,7 @@ import {
 } from './states/states';
 import Router, { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
-import { dropdownItemsMap } from './configruration';
+import { dropdownItemsMap, routingPathMap } from './configruration';
 
 const ArticleDropdown = () => {
     const disPatch = useDispatch();
@@ -22,7 +22,7 @@ const ArticleDropdown = () => {
     const handleSelect=(e)=>{
         if (e !== "-1") {
             disPatch(setCategory(e));
-            Router.push(dropdownItemsMap[e])
+            Router.push(Object.keys(routingPathMap).find(key => routingPathMap[key] === e))
         } else {
             disPatch(clearCategory());
             disPatch(setCategory("-1"));
