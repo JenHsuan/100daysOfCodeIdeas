@@ -15,7 +15,7 @@ import { useRouter } from 'next/router'
 const daysOfCode = ({jsonLdData}) => {
     const title = "100 Days of Code Challenges";
     const keywords = "Software Development, 100DaysOf Code Challenges";
-    const url = "https://daily-learning.herokuapp.com/";
+    const url = "https://daily-learning.herokuapp.com/filter/daysOfCode";
     const description = "It's a challenge of continous writing, programming, and sharing. Welcome to share if you like!";
     const image = "https://raw.githubusercontent.com/JenHsuan/100daysOfCodeIdeas/master/Resources/100daysofcodecover.png";
 
