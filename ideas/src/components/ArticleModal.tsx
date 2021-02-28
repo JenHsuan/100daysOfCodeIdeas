@@ -23,7 +23,7 @@ const ArticleModal = ({show, handleClose, article, handleOpen}: ArticleModalProp
                         <div className="article-modal-item d-flex">{t('ArticleModal.author')}: {article.name}</div>
                     </li>
                     <li>
-                        <div className="article-modal-item d-flex">{t('ArticleModal.category')}: {Number(article.category) === 0 ? '100 days of code' : 'Learning materials'}</div>
+                        <div className="article-modal-item d-flex">{t('ArticleModal.category')}: {Number(article.category) === 0 ? t("SideBar.dropdownForCategories.daysOfCode") : t("SideBar.dropdownForCategories.programming")}</div>
                     </li>
                     <li>
                         <div className="article-modal-item d-flex">{t('ArticleModal.dateTime')}: {article.time}</div>
