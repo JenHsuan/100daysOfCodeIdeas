@@ -22,9 +22,7 @@ const ArticleDropdown = () => {
     const handleSelect=(e)=>{
         if (e !== "-1") {
             disPatch(setCategory(e));
-            if (router.pathname !== '/') {
-                Router.push(`/`)
-            }
+            Router.push(dropdownItemsMap[e])
         } else {
             disPatch(clearCategory());
             disPatch(setCategory("-1"));
