@@ -4,13 +4,13 @@ import Head from 'next/head';
 import {CommandHeadProp } from '../components/types'
 import PropTypes from 'prop-types'
 
-const CommonHead = ({title, url, description, keywords, jsonLd}: CommandHeadProp) => {
+const CommonHead = ({title, url, description, keywords, jsonLd, image = "https://raw.githubusercontent.com/JenHsuan/ALayman/master/views/images/ideas-getstarted-cover.png"}: CommandHeadProp) => {
     useEffect(()=> {
-        
-        register('/_next/static/service-worker.js', {scope: '/_next/static/'}) 
+
+        register('/_next/static/service-worker.js', {scope: '/_next/static/'})
 
         return () => {
-            unregister();  
+            unregister();
         };
     }, [])
 
@@ -24,7 +24,7 @@ const CommonHead = ({title, url, description, keywords, jsonLd}: CommandHeadProp
             <meta name="twitter:creator" content="@JenHsuanHsieh" />
             <meta property="og:title" content={title} />
             <meta property="og:url" content={url}/>
-            <meta property="og:image" content="https://raw.githubusercontent.com/JenHsuan/ALayman/master/views/images/ideas-getstarted-cover.png"/>
+            <meta property="og:image" content={image}/>
             <meta property="og:description" content={description}/>
             <meta name="keywords" content={keywords}/>
             <meta name="author" content="Jen-Hsuan Hsieh (Sean Hsieh)"/>
@@ -45,11 +45,12 @@ const CommonHead = ({title, url, description, keywords, jsonLd}: CommandHeadProp
 }
 
 CommonHead.propTypes ={
-    title: PropTypes.string.isRequired, 
+    title: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     keywords: PropTypes.string.isRequired,
-    jsonLd: PropTypes.string.isRequired
+    jsonLd: PropTypes.string.isRequired,
+    image: PropTypes.string
 }
 
 export default CommonHead

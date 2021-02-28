@@ -56,7 +56,8 @@ export interface CommandHeadProp{
     url: string;
     description: string;
     keywords: string;
-    jsonLd: string
+    jsonLd: string;
+    image?: string;
 }
 
 export interface SignInFormProp {

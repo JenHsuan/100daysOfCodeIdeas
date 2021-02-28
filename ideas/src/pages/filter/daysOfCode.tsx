@@ -17,6 +17,7 @@ const daysOfCode = ({jsonLdData}) => {
     const keywords = "Software Development, 100DaysOf Code Challenges";
     const url = "https://daily-learning.herokuapp.com/";
     const description = "It's a challenge of continous writing, programming, and sharing. Welcome to share if you like!";
+    const image = "https://raw.githubusercontent.com/JenHsuan/100daysOfCodeIdeas/master/Resources/100daysofcodecover.png";
 
     return (
     <GaLayout>
@@ -25,7 +26,8 @@ const daysOfCode = ({jsonLdData}) => {
                 keywords={keywords}
                 url={url}
                 description={description}
-                jsonLd={jsonLdData}/>
+                jsonLd={jsonLdData}
+                image={image}/>
         <Provider store = {store}>
             <NavBar></NavBar>
             <div className='mainpage-grid-box'>
