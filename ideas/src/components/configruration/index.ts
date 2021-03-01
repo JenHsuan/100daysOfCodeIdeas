@@ -13,5 +13,10 @@ export const routingPathMap = {
     "": "-1"
 }
 
+export const authorLinkMap = {
+    "Jen-Hsuan Hsieh": "https://www.linkedin.com/in/jen-hsuan-hsieh-6a13347a/",
+    "Sean HS": "https://www.linkedin.com/in/jen-hsuan-hsieh-6a13347a/"
+}
+
 
 

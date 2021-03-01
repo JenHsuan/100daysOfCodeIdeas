@@ -30,6 +30,7 @@ import {
  } from '../components/types'
 
 import { useTranslation } from 'react-i18next';
+import { authorLinkMap } from './configruration';
 
 const Article: FunctionComponent<ArticleProp> = ({article}: ArticleProp) => {
     const router = useRouter();
@@ -249,7 +250,9 @@ const Article: FunctionComponent<ArticleProp> = ({article}: ArticleProp) => {
                     <div className="title">{article.title}</div>
                     {!isFilterMode && (
                         <>
-                        <div className="date">{article.name}</div>
+                        <div className="date">
+                            <a href={authorLinkMap[article.name]}>{article.name}</a>
+                            </div>
                         <div className="date">
                             <span className="date">{article.time}</span>
                             <span> . </span>
