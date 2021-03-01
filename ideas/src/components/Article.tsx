@@ -254,7 +254,7 @@ const Article: FunctionComponent<ArticleProp> = ({article}: ArticleProp) => {
                             <a href={authorLinkMap[article.name]}>{article.name}</a>
                             </div>
                         <div className="date">
-                            <span className="date">{article.time}</span>
+                            <span className="date">{article.time.split("T")[0]}</span>
                             <span> . </span>
                             <span className="readtime">{`${article.readtime.split(" ")[0]}${t('Article.readTime')}`}</span>
                         </div>

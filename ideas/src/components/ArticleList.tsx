@@ -182,7 +182,7 @@ const ArticleList = () => {
                     </div>
                     <div className="subtitle2">
                         <div>{`${t('ArticleModal.readTime')}: ${searchedArticle.readtime.split(" ")[0]}${t('Article.readTime')}`}</div>
-                        <div>{`${t('ArticleModal.dateTime')}: ${searchedArticle.time}`}</div>
+                        <div>{`${t('ArticleModal.dateTime')}: ${searchedArticle.time.split("T")[0]}`}</div>
                         {searchedArticle.description && (
                             <div>{`${t('ArticleModal.keyword')}: ${searchedArticle.description}`}</div>
                         )}

@@ -33,7 +33,7 @@ const ArticleModal = ({show, handleClose, article, handleOpen}: ArticleModalProp
                         <div className="article-modal-item d-flex">{t('ArticleModal.category')}: {t(dropdownItemsMap[article.category])}</div>
                     </li>
                     <li>
-                        <div className="article-modal-item d-flex">{t('ArticleModal.dateTime')}: {article.time}</div>
+                        <div className="article-modal-item d-flex">{t('ArticleModal.dateTime')}: {article.time.split("T")[0]}</div>
                     </li>
                     <li>
                         <div className="article-modal-item d-flex">{t('ArticleModal.readTime')}: ${article.readtime.split(" ")[0]}${t('Article.readTime')}</div>
