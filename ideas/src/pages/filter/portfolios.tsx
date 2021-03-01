@@ -15,7 +15,7 @@ const portfolios = ({jsonLdData}) => {
     const title = "Sean Hsieh \'s Portfolios";
     const keywords = "Software Development, Tesing, DveOps, SRE, Inteviews, Data Sciences, Portfolios";
     const url = "https://daily-learning.herokuapp.com/filter/portfolios";
-    const description = "It's my portfolios for the software development. Feel free to visit if you like!";
+    const description = "Hello, I am Sean Hsieh. It's my portfolios for the software engineering. Feel free to visit if you like!";
     const image = "https://raw.githubusercontent.com/JenHsuan/100daysOfCodeIdeas/master/Resources/portfolioscover.png";
 
     return (
