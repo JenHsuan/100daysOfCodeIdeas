@@ -3,7 +3,7 @@ from django.conf.urls import url
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import downloads, Download, RSSFeed, robot, googleValidation, achievements, profile_socail_view, InsertDataDev, about, renew_token, plans, signup, profile_view, social_auth_github,  social_auth, signin, index, react, InsertDataMedium, UserViewSet, current_user, UserList, UserViewSet, ArticleByCategoryViewSet, ProfileViewSet, prog, days
+from .views import downloads, Download, RSSFeed, robot, googleValidation, achievements, profile_socail_view, InsertDataDev, about, renew_token, plans, signup, profile_view, social_auth_github,  social_auth, signin, index, react, InsertDataMedium, UserViewSet, current_user, UserList, UserViewSet, ArticleByCategoryViewSet, ProfileViewSet, prog, days, InsertPorfolio
 from rest_framework.routers import DefaultRouter
 from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework_jwt.views import refresh_jwt_token
@@ -51,6 +51,7 @@ urlpatterns = [
     path("google1f1b6096ed030c21.html", googleValidation, name="googleValidation"),
     path("robots.txt", robot, name='robot'),
     path("insertmedium", InsertDataMedium.as_view(), name="insertmedium"),
+    path("insertporfolio", InsertPorfolio.as_view(), name="insertporfolio"),
     path("insertdev", InsertDataDev.as_view(), name="insertdev"),
     url(r'^api/', include(router.urls)),
     path("api/articles", ArticleByCategoryViewSet.as_view(), name='articles'),

@@ -41,7 +41,7 @@ import { refreshToken } from '../components/account'
 import { useTranslation } from 'react-i18next';
 
 import { Button, Image } from 'react-bootstrap';
-import { routingPathMap } from './configruration';
+import { dropdownItemsMap, routingPathMap } from './configruration';
 
 const ArticleList = () => {
     const disPatch = useDispatch();
@@ -171,7 +171,7 @@ const ArticleList = () => {
                     </div>
                     <div className="subtitle1">
                         <div>{`${t('ArticleModal.author')}: ${searchedArticle.name}`}</div>
-                        <div>{`${t('ArticleModal.category')}: ${Number(searchedArticle.category) === 0 ? t("SideBar.dropdownForCategories.daysOfCode") : t("SideBar.dropdownForCategories.programming")}`}</div>
+                        <div>{`${t('ArticleModal.category')}: ${t(dropdownItemsMap[searchedArticle.category])}`}</div>
                     </div>
                     <div className="subtitle2">
                         <div>{`${t('ArticleModal.readTime')}: ${searchedArticle.readtime}`}</div>

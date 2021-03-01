@@ -4,6 +4,7 @@ import '.././css/articleModal.css'
 import { ArticleModalProp } from '../components/types'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next';
+import { dropdownItemsMap } from './configruration';
 
 const ArticleModal = ({show, handleClose, article, handleOpen}: ArticleModalProp) => {
     const { t, i18n } = useTranslation();
@@ -23,7 +24,7 @@ const ArticleModal = ({show, handleClose, article, handleOpen}: ArticleModalProp
                         <div className="article-modal-item d-flex">{t('ArticleModal.author')}: {article.name}</div>
                     </li>
                     <li>
-                        <div className="article-modal-item d-flex">{t('ArticleModal.category')}: {Number(article.category) === 0 ? t("SideBar.dropdownForCategories.daysOfCode") : t("SideBar.dropdownForCategories.programming")}</div>
+                        <div className="article-modal-item d-flex">{t('ArticleModal.category')}: {t(dropdownItemsMap[article.category])}</div>
                     </li>
                     <li>
                         <div className="article-modal-item d-flex">{t('ArticleModal.dateTime')}: {article.time}</div>

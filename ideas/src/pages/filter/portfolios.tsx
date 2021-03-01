@@ -11,11 +11,11 @@ import CommonHead from '../../components/CommonHead';
 import {getStatics} from '../../components/getStatics';
 import '../../components/i18n'
 
-const daysOfCode = ({jsonLdData}) => {
-    const title = "100 Days of Code Challenges";
-    const keywords = "Software Development, 100DaysOf Code Challenges";
-    const url = "https://daily-learning.herokuapp.com/filter/daysOfCode";
-    const description = "It's a challenge of continous writing, programming, and sharing. Welcome to share if you like!";
+const portfolios = ({jsonLdData}) => {
+    const title = "Sean Hsieh \'s Portfolios";
+    const keywords = "Software Development, Tesing, DveOps, SRE, Inteviews, Data Sciences, Portfolios";
+    const url = "https://daily-learning.herokuapp.com/filter/portfolios";
+    const description = "It's my portfolios for the software development. Feel free to visit if you like!";
     const image = "https://raw.githubusercontent.com/JenHsuan/100daysOfCodeIdeas/master/Resources/100daysofcodecover.png";
 
     return (
@@ -42,4 +42,4 @@ export async function getStaticProps(){
     return await getStatics();
 }
 
-export default daysOfCode;
+export default portfolios

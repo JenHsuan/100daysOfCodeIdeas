@@ -313,6 +313,12 @@ class ArticleViewSet(viewsets.ModelViewSet):
     http_method_names = ['get']
 '''
 
+class InsertPorfolio(APIView):
+
+    def get(self, request, format=None):
+        parse_articles('porfolio')
+        return HttpResponse('OK')
+
 class InsertDataMedium(APIView):
 
     def get(self, request, format=None):

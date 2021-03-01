@@ -26,7 +26,8 @@ export const en: PageData = {
     dropdownForCategories:{
       all: 'All',
       daysOfCode: '100DaysOfCode',
-      programming: 'Programming'
+      programming: 'Programming',
+      portfolios: 'Portfolios'
     }
   },
   ArticleList: {
@@ -124,7 +125,8 @@ export const zhTW: PageData = {
     dropdownForCategories:{
       all: '全部',
       daysOfCode: '100天的代碼',
-      programming: '程式設計'
+      programming: '程式設計',
+      portfolios: '作品集'
     }
   },
   ArticleList: {
@@ -222,7 +224,8 @@ export const zhCN: PageData = {
     dropdownForCategories:{
       all: '全部',
       daysOfCode: '100天的代码',
-      programming: '程式设计'
+      programming: '程式设计',
+      portfolios: '作品集'
     }
   },
   ArticleList: {
@@ -320,7 +323,8 @@ export const ja: PageData = {
     dropdownForCategories:{
       all: 'すべて',
       daysOfCode: '100日間のコード',
-      programming: 'プログラミング'
+      programming: 'プログラミング',
+      portfolios: 'ポートフォリオ'
     }
   },
   ArticleList: {
