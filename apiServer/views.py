@@ -46,6 +46,7 @@ plans_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'bookmarks.html')
 about_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'about.html')
 prog_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'filter', 'programming.html')
 days_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'filter', 'daysOfCode.html')
+portforlios_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'filter', 'portfolios.html')
 achievement_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'achievement.html')
 downloads_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'downloads.html')
 downloads_file_base = '100daysfcodeideas'
@@ -237,6 +238,21 @@ def prog(request):
 def days(request):
     try:
         with open(days_file_path) as f:
+            return HttpResponse(f.read())
+    except FileNotFoundError:
+        logging.exception('Production build of app not found')
+        return HttpResponse(
+            """
+                This URL is only used when you have built the production
+                version of the app. Visit http://localhost:3000/ instead after
+                running `yarn start` on the frontend/ directory
+                """,
+            status=501,
+        )
+
+def portforlios(request):
+    try:
+        with open(portforlios_file_path) as f:
             return HttpResponse(f.read())
     except FileNotFoundError:
         logging.exception('Production build of app not found')
