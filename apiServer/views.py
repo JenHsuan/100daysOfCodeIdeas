@@ -46,7 +46,7 @@ plans_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'bookmarks.html')
 about_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'about.html')
 prog_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'filter', 'programming.html')
 days_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'filter', 'daysOfCode.html')
-portforlios_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'filter', 'portfolios.html')
+portfolios_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'filter', 'portfolios.html')
 achievement_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'achievement.html')
 downloads_file_path = os.path.join(settings.REACT_APP_DIR, 'out', 'downloads.html')
 downloads_file_base = '100daysfcodeideas'
@@ -250,9 +250,9 @@ def days(request):
             status=501,
         )
 
-def portforlios(request):
+def portfolios(request):
     try:
-        with open(portforlios_file_path) as f:
+        with open(portfolios_file_path) as f:
             return HttpResponse(f.read())
     except FileNotFoundError:
         logging.exception('Production build of app not found')
