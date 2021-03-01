@@ -35,7 +35,8 @@ export const en: PageData = {
     discoveredMaterials: 'Discovered materials',
     login: 'Login',
     title:'Click the details button to check the article.',
-    subTitle:'to add articles or skills in your learning plan or open them directly.'
+    subTitle:'to add articles or skills in your learning plan or open them directly.',
+    item:'items'
   },
   Article: {
     details:'Details'
@@ -59,7 +60,7 @@ export const en: PageData = {
     dateTime: 'Time',
     readTime: 'Read time',
     close: 'Close',
-    open:'Open the article',
+    open:'Open the item',
     keyword: 'Keywords'
   },
   SignInForm: {
@@ -134,7 +135,8 @@ export const zhTW: PageData = {
     discoveredMaterials: '發現的資料',
     login: '登入',
     title:'單擊詳細信息按鈕以查看文章',
-    subTitle:'在學習計劃中添加文章或技能或直接打開它們'
+    subTitle:'在學習計劃中添加文章或技能或直接打開它們',
+    item:'項'
   },
   Article: {
     details:'詳細信息'
@@ -158,7 +160,7 @@ export const zhTW: PageData = {
     dateTime: '時間',
     readTime: '閱讀時間',
     close: '關閉',
-    open:'打開文章',
+    open:'打開項目',
     keyword: '關鍵字'
   },
   SignInForm: {
@@ -233,7 +235,8 @@ export const zhCN: PageData = {
     discoveredMaterials: '发现的资料',
     login: '登录',
     title:'单击详细信息按钮以查看文章',
-    subTitle:'在学习计划中添加文章或技能或直接打开它们'
+    subTitle:'在学习计划中添加文章或技能或直接打开它们',
+    item:'项'
   },
   Article: {
     details:'详细信息'
@@ -257,7 +260,7 @@ export const zhCN: PageData = {
     dateTime: '时间',
     readTime: '阅读时间',
     close: '关闭',
-    open:'打开文章',
+    open:'打开项目',
     keyword: '关键字'
   },
   SignInForm: {
@@ -332,7 +335,8 @@ export const ja: PageData = {
     discoveredMaterials: '発見された教材',
     login: 'ログイン',
     title:'詳細ボタンをクリックして記事を確認してください',
-    subTitle:'学習計画に記事やスキルを追加したり、直接開いたりする'
+    subTitle:'学習計画に記事やスキルを追加したり、直接開いたりする',
+    item:'項目'
   },
   Article: {
     details:'詳細'
@@ -356,7 +360,7 @@ export const ja: PageData = {
     dateTime: '時刻',
     readTime: '読み取り時間',
     close: '閉じる',
-    open:'記事を開く',
+    open:'アイテムを開く',
     keyword: 'キーワード'
   },
   SignInForm: {

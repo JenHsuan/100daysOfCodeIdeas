@@ -111,8 +111,8 @@ const ArticleList = () => {
         <div className={`${showPlanner === true ? 'articles-hide-siderbar-head' : 'articles-hide-siderbar-head articles-hide-siderbar-head-remove-left'}`}>
             <div className="title">
                 {!isFilterMode ?
-                    `${t('ArticleList.learningMaterials')} (${filteredArticles.length === 0 ? articles.length : filteredArticles.length})` :
-                    `${t('ArticleList.discoveredMaterials')} (${filteredArticles.length === 0 ? articles.length : filteredArticles.length})`}
+                    `${t('ArticleList.learningMaterials')} (${filteredArticles.length === 0 ? articles.length : filteredArticles.length} ${t('ArticleList.item')})` :
+                    `${t('ArticleList.discoveredMaterials')} (${filteredArticles.length === 0 ? articles.length : filteredArticles.length} ${t('ArticleList.item')})`}
             </div>
             {isLogin ? (
                 <div className="subtitle">
