@@ -4,7 +4,10 @@ import '.././css/articleModal.css'
 import { ArticleModalProp } from '../components/types'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next';
-import { dropdownItemsMap } from './configruration';
+import {
+    dropdownItemsMap,
+    authorLinkMap
+} from './configruration';
 
 const ArticleModal = ({show, handleClose, article, handleOpen}: ArticleModalProp) => {
     const { t, i18n } = useTranslation();
@@ -21,7 +24,10 @@ const ArticleModal = ({show, handleClose, article, handleOpen}: ArticleModalProp
                 <div className='article-modal-subtitle'>{`${article.subtitle}...`}</div>
                 <ul>
                     <li>
-                        <div className="article-modal-item d-flex">{t('ArticleModal.author')}: {article.name}</div>
+                        <div className="article-modal-item d-flex">
+                            {t('ArticleModal.author')}:
+                            <a href={authorLinkMap[article.name]}>{article.name}</a>
+                        </div>
                     </li>
                     <li>
                         <div className="article-modal-item d-flex">{t('ArticleModal.category')}: {t(dropdownItemsMap[article.category])}</div>
