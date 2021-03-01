@@ -181,7 +181,7 @@ const ArticleList = () => {
                         <div>{`${t('ArticleModal.category')}: ${t(dropdownItemsMap[searchedArticle.category])}`}</div>
                     </div>
                     <div className="subtitle2">
-                        <div>{`${t('ArticleModal.readTime')}: ${searchedArticle.readtime}`}</div>
+                        <div>{`${t('ArticleModal.readTime')}: ${searchedArticle.readtime.split(" ")[0]}${t('Article.readTime')}`}</div>
                         <div>{`${t('ArticleModal.dateTime')}: ${searchedArticle.time}`}</div>
                         {searchedArticle.description && (
                             <div>{`${t('ArticleModal.keyword')}: ${searchedArticle.description}`}</div>

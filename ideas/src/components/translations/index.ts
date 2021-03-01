@@ -39,7 +39,8 @@ export const en: PageData = {
     item:'items'
   },
   Article: {
-    details:'Details'
+    details:'Details',
+    readTime:'min read'
   },
   Footer: {
     logon:'Learn, Think, and Improve',
@@ -139,7 +140,8 @@ export const zhTW: PageData = {
     item:'項'
   },
   Article: {
-    details:'詳細信息'
+    details:'詳細信息',
+    readTime:'分鐘閱讀'
   },
   Footer: {
     logon:'學習，思考和改善',
@@ -239,7 +241,8 @@ export const zhCN: PageData = {
     item:'项'
   },
   Article: {
-    details:'详细信息'
+    details:'详细信息',
+    readTime:'分钟阅读'
   },
   Footer: {
     logon:'学习，思考和改善',
@@ -339,7 +342,8 @@ export const ja: PageData = {
     item:'項目'
   },
   Article: {
-    details:'詳細'
+    details:'詳細',
+    readTime:'分読む'
   },
   Footer: {
     logon:'学び、考え、そして改善する',

@@ -36,7 +36,7 @@ const ArticleModal = ({show, handleClose, article, handleOpen}: ArticleModalProp
                         <div className="article-modal-item d-flex">{t('ArticleModal.dateTime')}: {article.time}</div>
                     </li>
                     <li>
-                        <div className="article-modal-item d-flex">{t('ArticleModal.readTime')}: {article.readtime}</div>
+                        <div className="article-modal-item d-flex">{t('ArticleModal.readTime')}: ${article.readtime.split(" ")[0]}${t('Article.readTime')}</div>
                     </li>
                 </ul>
 

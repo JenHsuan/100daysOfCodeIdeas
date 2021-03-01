@@ -256,7 +256,7 @@ const Article: FunctionComponent<ArticleProp> = ({article}: ArticleProp) => {
                         <div className="date">
                             <span className="date">{article.time}</span>
                             <span> . </span>
-                            <span className="readtime">{article.readtime}</span>
+                            <span className="readtime">{`${article.readtime.split(" ")[0]}${t('Article.readTime')}`}</span>
                         </div>
                         <button className="article-btn" onClick = {handleShow}>{t('Article.details')}</button>
                         </>
