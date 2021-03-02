@@ -30,36 +30,49 @@
   border: 1px solid gray;
   border-radius: 5px;
   box-shadow: 0 5px 5px gray, 0 0 0 5px #ffffffeb; }
+  .searched-article-detail .detail-container {
+    display: flex;
+    flex-direction: row; }
+  .searched-article-detail .item {
+    flex: 2;
+    margin-top: 5%; }
+    .searched-article-detail .item .preview-img {
+      border: 2px solid black;
+      width: 120%;
+      border-radius: 5px; }
   .searched-article-detail .title {
-    margin-top: 3%;
+    margin-top: 5%;
     margin-left: 5%;
     font-size: 22px;
     font-weight: 400;
     font-family: Arial, Helvetica, sans-serif; }
   .searched-article-detail .navigate {
-    margin-top: 4%;
+    margin-top: 5%;
     margin-left: 35%;
     background-color: #4D4D4D;
     border: 2px solid black;
     border-radius: 10px;
     font-size: 16px;
     box-shadow: 0 1px 1px gray, 0 0 0 1px #ffffffeb; }
+  .searched-article-detail .navigate:hover {
+    color: black;
+    background-color: #ffffff; }
   .searched-article-detail .subtitle1 {
-    margin-top: 5%;
+    margin-top: 3%;
     margin-left: 30%; }
     .searched-article-detail .subtitle1 div {
       font-size: 14px;
       font-weight: 300;
       color: #4D4D4D; }
   .searched-article-detail .subtitle2 {
-    margin-top: 2%;
+    margin-top: 3%;
     margin-left: 30%; }
     .searched-article-detail .subtitle2 div {
       font-size: 14px;
       font-weight: 300;
       color: #4D4D4D; }
   .searched-article-detail .intro {
-    margin-top: 5%;
+    margin-top: 1%;
     margin-left: 5%;
     font-size: 18px;
     color: #4D4D4D; }

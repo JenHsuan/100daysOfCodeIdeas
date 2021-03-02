@@ -167,25 +167,29 @@ const ArticleList = () => {
         {showPlanner && filteredArticles.length !== 0 && !isLogin && searchedArticle && (
             <div className="searched-article-detail-border">
                 <div className="searched-article-detail">
+                    <div className="detail-container">
+                        <div className="item">
+                            <img className="preview-img" src={searchedArticle.image} alt=""/>
+                        </div>
+                        <ul className="item">
+                            <div className="subtitle1">
+                            <li>
+                                {`${t('ArticleModal.author')}: `}
+                                <a href={authorLinkMap[searchedArticle.name]}>{searchedArticle.name}</a>
+                            </li>
+                            <li>{`${t('ArticleModal.category')}: ${t(dropdownItemsMap[searchedArticle.category])}`}</li>
+                            </div>
+                            <div className="subtitle2">
+                                <li>{`${t('ArticleModal.readTime')}: ${searchedArticle.readtime.split(" ")[0]}${t('Article.readTime')}`}</li>
+                                <li>{`${t('ArticleModal.dateTime')}: ${searchedArticle.time.split("T")[0]}`}</li>
+                            </div>
+                        </ul>
+                    </div>
                     <div className="title">
                         {searchedArticle.title}
                     </div>
                     <div className = "intro" >
                             {searchedArticle.subtitle}
-                    </div>
-                    <div className="subtitle1">
-                        <div>
-                            {`${t('ArticleModal.author')}: `}
-                            <a href={authorLinkMap[searchedArticle.name]}>{searchedArticle.name}</a>
-                        </div>
-                        <div>{`${t('ArticleModal.category')}: ${t(dropdownItemsMap[searchedArticle.category])}`}</div>
-                    </div>
-                    <div className="subtitle2">
-                        <div>{`${t('ArticleModal.readTime')}: ${searchedArticle.readtime.split(" ")[0]}${t('Article.readTime')}`}</div>
-                        <div>{`${t('ArticleModal.dateTime')}: ${searchedArticle.time.split("T")[0]}`}</div>
-                        {searchedArticle.description && (
-                            <div>{`${t('ArticleModal.keyword')}: ${searchedArticle.description}`}</div>
-                        )}
                     </div>
                     <span>
                         <Button className = "navigate" variant="primary" onClick = {() => window.open(searchedArticle.url, '_blank')}>
